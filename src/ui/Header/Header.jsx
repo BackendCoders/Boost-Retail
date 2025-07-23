@@ -36,8 +36,8 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
 				</div>
 			</div>
 
-			<ul className='flex items-center gap-8 ml-4 px-4'>
-				<li>
+			<ul className='flex items-center gap-8 ml-4 px-4 py-4'>
+				<li className='hover:bg-primary-select'>
 					<Link>
 						<img src={HomeIcon} />
 					</Link>

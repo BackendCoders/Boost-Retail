@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Header from '../ui/Header/Header';
 import Sidebar from '../ui/Sidebar/Sidebar';
+import { Outlet } from 'react-router-dom';
 
 export default function AppLayout() {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -21,8 +22,7 @@ export default function AppLayout() {
 
 				{/* Main Content */}
 				<main className='flex-1 bg-white p-6'>
-					<h2 className='text-xl font-semibold'>Home</h2>
-					<p>Your content goes here.</p>
+					<Outlet />
 				</main>
 			</div>
 		</div>
