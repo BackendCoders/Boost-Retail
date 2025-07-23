@@ -102,7 +102,7 @@ const Product = () => {
   };
 
   return (
-    <div className="py-3 space-y-3">
+    <div className="py-1 space-y-1">
       <div className="py-3 border-b bg-white">
   {/* Top Row: PRODUCTS Title & Advanced Toggle */}
   <div className="flex items-center justify-between">

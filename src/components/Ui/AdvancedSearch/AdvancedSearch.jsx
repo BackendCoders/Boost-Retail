@@ -24,17 +24,17 @@ const ConditionGroup = ({ nested = false }) => {
       className={`border rounded-lg p-3`}
     >
       <div className="flex items-center gap-2 mb-3">
-        <button className="px-3 py-1 rounded bg-blue-500 text-white text-xs font-semibold">
+        <button className="px-3 py-1 rounded bg-primary-base text-white text-xs font-semibold">
           AND
         </button>
         <button className="px-3 py-1 rounded text-xs text-gray-600 hover:bg-gray-200 font-semibold">
           OR
         </button>
-        <button className="ml-auto text-green-600 hover:underline text-sm font-bold">
+        <button className="ml-auto text-black-600 hover:underline text-sm font-bold">
           +
         </button>
         {nested && (
-          <button className="ml-1 text-red-600 hover:underline text-sm font-bold">
+          <button className="ml-1 text-black-600 hover:underline text-sm font-bold">
             x
           </button>
         )}

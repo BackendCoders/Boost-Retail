@@ -60,7 +60,7 @@ const BatchEdit = () => {
 
         <button
           onClick={handleApply}
-          className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-3 py-[6px] rounded"
+          className="bg-primary-base hover:bg-primary-base text-white text-xs font-medium px-3 py-[6px] rounded"
         >
           APPLY
         </button>
@@ -72,7 +72,7 @@ const BatchEdit = () => {
             type="checkbox"
             checked={fields[key]}
             onChange={() => handleCheckboxChange(key)}
-            className="w-3.5 h-3.5 accent-blue-600"
+            className="w-3.5 h-3.5 accent-primary-base"
           />
           <input
             type="text"
@@ -90,7 +90,7 @@ const BatchEdit = () => {
                 type="checkbox"
                 checked={applyEnding}
                 onChange={() => setApplyEnding(!applyEnding)}
-                className="accent-blue-600"
+                className="accent-primary-base"
               />
               Apply £0.99 Ending
             </label>
