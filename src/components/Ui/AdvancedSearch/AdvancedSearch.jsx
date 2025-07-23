@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+// छोटे SVG आइकॉन
 const RuleIcon = () => (
   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
     <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
@@ -17,13 +18,11 @@ const ConditionRow = ({ field, operator, value, onRemove }) => (
     <select className="border rounded px-2 py-1 text-sm w-40" defaultValue={field}>
       <option>Category</option>
       <option>Price</option>
-      {/* … */}
     </select>
     <select className="border rounded px-2 py-1 text-sm w-36" defaultValue={operator}>
       <option>Equals</option>
       <option>Contains</option>
       <option>&gt;=</option>
-      {/* … */}
     </select>
     <input
       className="border rounded px-2 py-1 text-sm w-40"
@@ -64,14 +63,12 @@ const ConditionGroup = ({ nested = false, onRemoveGroup }) => {
   return (
     <div
       className={`rounded-lg p-3 mt-3 ${
-        nested ? "bg-white border border-gray-300" : "bg-gray-50 border"
+        nested ? "bg-white border border-gray-300 max-h-80 overflow-y-auto" : "bg-gray-50 border"
       }`}
     >
-      {/* Header with toggle + menu */}
       <div className="flex items-center gap-2 mb-3 relative">
-        {/* AND/OR Toggle */}
         <div className="flex border rounded-full overflow-hidden w-[76px] h-[26px]">
-          {["AND", "OR"].map((val) => (
+          {['AND', 'OR'].map((val) => (
             <button
               key={val}
               className={`w-1/2 text-xs font-bold transition duration-150 ${
@@ -85,16 +82,12 @@ const ConditionGroup = ({ nested = false, onRemoveGroup }) => {
             </button>
           ))}
         </div>
-
-        {/* + Button */}
         <button
           onClick={() => setMenuOpen((o) => !o)}
           className="ml-1 text-xl font-bold text-gray-500 hover:text-black"
         >
           +
         </button>
-
-        {/* Dropdown Menu */}
         {menuOpen && (
           <div className="absolute top-full left-16 mt-1 bg-white border border-gray-200 shadow-md rounded-sm z-10">
             <button
@@ -113,8 +106,6 @@ const ConditionGroup = ({ nested = false, onRemoveGroup }) => {
             </button>
           </div>
         )}
-
-        {/* Remove this entire group */}
         {nested && (
           <button
             onClick={onRemoveGroup}
@@ -125,7 +116,6 @@ const ConditionGroup = ({ nested = false, onRemoveGroup }) => {
         )}
       </div>
 
-      {/* Existing Conditions */}
       {conditions.map((cond) => (
         <ConditionRow
           key={cond.id}
@@ -136,7 +126,6 @@ const ConditionGroup = ({ nested = false, onRemoveGroup }) => {
         />
       ))}
 
-      {/* Nested Group */}
       {nestedGroup && (
         <div className="ml-6 border-l border-dashed border-gray-400 pl-4">
           <ConditionGroup
@@ -150,7 +139,7 @@ const ConditionGroup = ({ nested = false, onRemoveGroup }) => {
 };
 
 const AdvancedSearch = () => (
-  <div className="p-4 bg-gray-100 rounded-lg w-full border border-gray-300">
+  <div className="p-4 bg-gray-100 rounded-lg w-full border border-gray-300 max-h-[320px] overflow-y-auto">
     <h2 className="font-semibold text-base mb-4">Advanced Search</h2>
     <ConditionGroup />
   </div>
