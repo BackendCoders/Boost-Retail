@@ -24,14 +24,14 @@ const StockLocation = () => {
   const totals = calculateTotals();
 
   return (
-    <div className="p-4 border rounded-md bg-white shadow w-full max-w-md">
-      <h2 className="font-bold text-lg mb-4">Stock Location</h2>
+    <div className="p-4 rounded-md bg-gray-100 w-full max-w-sm border border-gray-300">
+      <h2 className="font-semibold text-base mb-3">Stock Location</h2>
       <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse">
+        <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="bg-blue-500 text-white text-sm">
+            <tr className="bg-primary-base text-white">
               {tableHeaders.map((header) => (
-                <th key={header} className="px-3 py-2 border text-left">
+                <th key={header} className="px-2 py-1 border border-white font-medium">
                   {header}
                 </th>
               ))}
@@ -39,18 +39,18 @@ const StockLocation = () => {
           </thead>
           <tbody>
             {tableData.map((row, idx) => (
-              <tr key={idx} className="text-center border-t">
+              <tr key={idx} className="text-center bg-white">
                 {tableHeaders.map((header) => (
-                  <td key={header} className="px-3 py-2 border">
+                  <td key={header} className="border px-2 py-1">
                     {row[header] ?? row[header.toUpperCase()]}
                   </td>
                 ))}
               </tr>
             ))}
-            <tr className="font-bold border-t">
-              <td className="px-3 py-2 border text-left">Total</td>
+            <tr className="bg-white font-bold">
+              <td className="border px-2 py-1 text-left">Total</td>
               {["QTY", "MIN", "MAX", "BO", "SOLD", "LA"].map((key) => (
-                <td key={key} className="px-3 py-2 border text-center">
+                <td key={key} className="border px-2 py-1 text-center">
                   {totals[key]}
                 </td>
               ))}

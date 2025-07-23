@@ -21,11 +21,11 @@ const BatchEdit = () => {
   const [saleReason, setSaleReason] = useState("");
 
   const handleCheckboxChange = (field) => {
-    setFields({ ...fields, [field]: !fields[field] });
+    setFields((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
   const handleApply = () => {
-    console.log("Applying batch edit with values:", {
+    console.log("Applying batch edit:", {
       selected,
       password,
       fields,
@@ -36,14 +36,14 @@ const BatchEdit = () => {
   };
 
   return (
-    <div className="p-4 border rounded-md bg-white shadow w-full max-w-md">
-      <h2 className="font-bold text-lg mb-4">Batch Edit</h2>
+    <div className="p-5 bg-gray-100 rounded-lg w-full max-w-md border border-gray-300">
+      <h2 className="font-semibold text-base mb-4">Batch Edit</h2>
 
-      <div className="flex gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-4">
         <select
           value={selected}
           onChange={(e) => setSelected(e.target.value)}
-          className="border p-2 rounded w-1/2"
+          className="border border-gray-300 p-2 rounded w-[120px] bg-white text-sm"
         >
           <option>Price</option>
           <option>Cost</option>
@@ -52,36 +52,36 @@ const BatchEdit = () => {
         <input
           type="password"
           placeholder="Enter Password"
-          className="border p-2 rounded flex-1"
+          className="border border-gray-300 p-2 rounded flex-1 text-sm"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
           onClick={handleApply}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-primary-base text-white px-4 py-2 rounded text-sm"
         >
           APPLY
         </button>
       </div>
 
       {Object.keys(fields).map((key) => (
-        <div className="flex items-center gap-2 mb-2" key={key}>
+        <div key={key} className="flex items-center gap-2 mb-3">
           <input
             type="checkbox"
             checked={fields[key]}
             onChange={() => handleCheckboxChange(key)}
+            className="w-4 h-4"
           />
           <input
             type="text"
             value={values[key]}
-            onChange={(e) =>
-              setValues({ ...values, [key]: e.target.value })
-            }
+            onChange={(e) => setValues({ ...values, [key]: e.target.value })}
             disabled={!fields[key]}
-            className="border p-2 rounded flex-1"
+            className="border border-gray-300 p-2 rounded w-[120px] text-sm bg-white"
           />
+
           {key === "Web" && (
-            <label className="flex items-center gap-1 ml-2">
+            <label className="flex items-center gap-2 ml-2 text-sm">
               <input
                 type="checkbox"
                 checked={applyEnding}
@@ -90,6 +90,7 @@ const BatchEdit = () => {
               Apply £0.99 Ending
             </label>
           )}
+
           {key === "Sale" && (
             <input
               type="text"
@@ -97,7 +98,7 @@ const BatchEdit = () => {
               value={saleReason}
               onChange={(e) => setSaleReason(e.target.value)}
               disabled={!fields["Sale"]}
-              className="border p-2 rounded flex-1"
+              className="border border-gray-300 p-2 rounded text-sm flex-1 bg-white"
             />
           )}
         </div>

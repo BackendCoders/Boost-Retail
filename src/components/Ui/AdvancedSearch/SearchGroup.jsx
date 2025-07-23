@@ -1,33 +1,70 @@
 import React, { useState } from "react";
-import SearchRow from "./SearchRow";
+import ConditionRow from "./ConditionRow";
 
 const SearchGroup = () => {
-  const [rows, setRows] = useState([{ id: 1 }]);
+  const [conditions, setConditions] = useState([
+    { id: 1, field: "", operator: "", value: "" },
+    { id: 2, field: "", operator: "", value: "" },
+  ]);
+  const [subGroup, setSubGroup] = useState(true);
 
-  const addRow = () => {
-    setRows([...rows, { id: rows.length + 1 }]);
+  const handleAdd = () => {
+    setConditions((prev) => [
+      ...prev,
+      { id: Date.now(), field: "", operator: "", value: "" },
+    ]);
   };
 
-  const removeRow = (id) => {
-    setRows(rows.filter((row) => row.id !== id));
+  const handleDelete = (id) => {
+    setConditions((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
-    <div className="space-y-3">
-      <div className="flex gap-2 mb-2">
-        <button className="px-3 py-1 bg-blue-500 text-white rounded">AND</button>
-        <button className="px-3 py-1 bg-gray-200 text-black rounded">OR</button>
+    <div className="bg-white border rounded-md p-4 space-y-3">
+      {/* AND / OR Buttons */}
+      <div className="flex items-center gap-2 mb-2">
+        <button className="bg-primary-base text-white px-3 py-1 rounded text-sm font-medium">
+          AND
+        </button>
+        <button className="bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm font-medium">
+          OR
+        </button>
         <button
-          onClick={addRow}
-          className="px-2 py-1 bg-gray-300 rounded text-sm"
+          onClick={handleAdd}
+          className="text-xl text-gray-600 hover:text-black"
         >
           +
         </button>
       </div>
 
-      {rows.map((row) => (
-        <SearchRow key={row.id} rowId={row.id} onRemove={removeRow} />
-      ))}
+      {/* List of Condition Rows */}
+      <div className="space-y-2">
+        {conditions.map((item) => (
+          <ConditionRow
+            key={item.id}
+            id={item.id}
+            onDelete={() => handleDelete(item.id)}
+          />
+        ))}
+
+        {/* Nested Group Example */}
+        {subGroup && (
+          <div className="border-l-4 border-dashed border-gray-300 pl-4 mt-3 space-y-2">
+            <div className="flex items-center gap-2 mb-1">
+              <button className="bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm font-medium">
+                AND
+              </button>
+              <button className="bg-primary-base text-white px-3 py-1 rounded text-sm font-medium">
+                OR
+              </button>
+              <button className="text-xl text-gray-600 hover:text-black">+</button>
+              <button className="text-xl text-gray-600 hover:text-black">×</button>
+            </div>
+
+            <ConditionRow id="nested-1" />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
