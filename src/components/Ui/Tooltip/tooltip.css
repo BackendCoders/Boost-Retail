@@ -1,0 +1,21 @@
+/**
+ * tooltip.css
+ *
+ * @format
+ */
+
+.tippy-box[data-theme~='custom'] {
+	background-color: white;
+	color: black;
+	border: 1px solid #ccc;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 6px;
+	font-size: 13px;
+	padding: 4px 8px;
+	font-weight: 500;
+}
+
+.tippy-box[data-theme~='custom'][data-placement^='right']
+	> .tippy-arrow::before {
+	border-right-color: white;
+}

@@ -10,8 +10,19 @@ import WarrantyIcon from '../../assets/whitesvgicons/warranty.svg';
 import WorkshopIcon from '../../assets/whitesvgicons/workshop.svg';
 import BackOfficeIcon from '../../assets/whitesvgicons/Back-Office-Thin.svg';
 import { Link } from 'react-router-dom';
+import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 
 export default function Header({ sidebarOpen, setSidebarOpen }) {
+	const iconItems = [
+		{ icon: HomeIcon, alt: 'Home', to: '/home' },
+		{ icon: PosIcon, alt: 'POS', to: '/pos' },
+		{ icon: EcommerceIcon, alt: 'E-commerce', to: '/ecommerce' },
+		{ icon: WorkshopIcon, alt: 'Workshop', to: '/workshop' },
+		{ icon: WarrantyIcon, alt: 'Warranty', to: '/warranty' },
+		{ icon: BackOfficeIcon, alt: 'Back Office', to: '/back-office' },
+		{ icon: ReportIcon, alt: 'Reports', to: '/reports' },
+		{ icon: SettingIcon, alt: 'Settings', to: '/settings' },
+	];
 	return (
 		<header className='bg-black text-white flex items-center justify-between'>
 			<div className='flex items-center gap-4'>
@@ -36,48 +47,31 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
 				</div>
 			</div>
 
-			<ul className='flex items-center gap-8 ml-4 px-4 py-4'>
-				<li className='hover:bg-primary-select'>
-					<Link>
-						<img src={HomeIcon} />
-					</Link>
-				</li>
-				<li>
-					<Link>
-						<img src={PosIcon} />
-					</Link>
-				</li>
-				<li>
-					<Link>
-						<img src={EcommerceIcon} />
-					</Link>
-				</li>
-				<li>
-					<Link>
-						<img src={WorkshopIcon} />
-					</Link>
-				</li>
-				<li>
-					<Link>
-						<img src={WarrantyIcon} />
-					</Link>
-				</li>
-				<li>
-					<Link>
-						<img src={BackOfficeIcon} />
-					</Link>
-				</li>
-				<li>
-					<Link>
-						<img src={ReportIcon} />
-					</Link>
-				</li>
-				<li>
-					<Link>
-						<img src={SettingIcon} />
-					</Link>
-				</li>
+			<ul className='flex items-center gap-2'>
+				{iconItems.map((item, index) => (
+					<SidebarIconItem
+						key={index}
+						icon={item.icon}
+						alt={item.alt}
+						to={item.to}
+					/>
+				))}
 			</ul>
 		</header>
+	);
+}
+
+function SidebarIconItem({ to = '#', icon, alt }) {
+	return (
+		<li className='hover:bg-primary-select py-4 px-4 transition-all duration-300'>
+			<Tooltip content={alt}>
+				<Link to={to}>
+					<img
+						src={icon}
+						alt={alt}
+					/>
+				</Link>
+			</Tooltip>
+		</li>
 	);
 }
