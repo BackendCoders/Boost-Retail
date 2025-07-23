@@ -6,7 +6,14 @@
 export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				primary: {
+					base: '#0080ff',
+					select: '#0070cc',
+				},
+			},
+		},
 	},
 	plugins: [],
 };

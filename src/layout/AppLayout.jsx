@@ -1,6 +1,7 @@
 /** @format */
-import React, { useState } from 'react';
-import MenuIcon from '@mui/icons-material/Menu'; // Optional: Material-UI Icon
+import { useState } from 'react';
+import Header from '../ui/Header/Header';
+import Sidebar from '../ui/Sidebar/Sidebar';
 
 export default function AppLayout() {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -8,30 +9,15 @@ export default function AppLayout() {
 	return (
 		<div className='min-h-screen flex flex-col'>
 			{/* Header */}
-			<header className='bg-black text-white p-4 flex items-center'>
-				<button
-					onClick={() => setSidebarOpen(!sidebarOpen)}
-					className='mr-4 text-white'
-				>
-					<MenuIcon />
-				</button>
-				<h1 className='text-lg font-bold'>Back Office</h1>
-			</header>
+			<Header
+				sidebarOpen={sidebarOpen}
+				setSidebarOpen={setSidebarOpen}
+			/>
 
 			{/* Main Layout */}
 			<div className='flex flex-1'>
 				{/* Sidebar */}
-				<div
-					className={`${
-						sidebarOpen ? 'w-16' : 'w-0'
-					} bg-blue-600 transition-all duration-300 overflow-hidden`}
-				>
-					<div className='flex flex-col items-center py-4 text-white space-y-6'>
-						<div className='rotate-90'>📁</div>
-						<div className='rotate-90'>📊</div>
-						<div className='rotate-90'>⚙️</div>
-					</div>
-				</div>
+				<Sidebar sidebarOpen={sidebarOpen} />
 
 				{/* Main Content */}
 				<main className='flex-1 bg-white p-6'>
