@@ -8,9 +8,9 @@ const MainTable = ({ columns, data, selectedRows, onRowSelect, onCheckboxToggle,
   return (
     <div className="overflow-x-auto rounded-md border border-gray-300">
       <table className="min-w-full table-auto text-sm">
-        <thead className="bg-gray-50">
+        <thead className="bg-white">
           <tr>
-            <th className="p-2 border text-center">
+            <th className="p-4 border text-center">
               <input type="checkbox" onChange={e => onRowSelect('all', e.target.checked)} />
             </th>
             {columns.map(col => (
@@ -27,7 +27,7 @@ const MainTable = ({ columns, data, selectedRows, onRowSelect, onCheckboxToggle,
           </tr>
           <tr className="bg-white">
             <td
-              className="p-2 text-blue-500 border text-center cursor-pointer bg-gray-200"
+              className="p-4 text-blue-500 border text-center cursor-pointer bg-gray-200"
               onClick={() => onFilterChange('clear')}
             >
               Clear
@@ -59,7 +59,7 @@ const MainTable = ({ columns, data, selectedRows, onRowSelect, onCheckboxToggle,
                 key={row.id}
                 className={`border text-sm ${isSelected ? 'text-black' : 'hover:bg-primary-base hover:text-white'}`}
               >
-                <td className="p-2 text-center border">
+                <td className="p-4 text-center border">
                   <input
                     type="checkbox"
                     checked={isSelected}
