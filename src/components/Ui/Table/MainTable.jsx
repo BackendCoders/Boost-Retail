@@ -1,35 +1,51 @@
-// File: Ui/Table/MainTable.jsx
 import React from 'react';
+import SortUp from '../../../assets/svgIcons/Sort-Up-Thin.svg';
+import SortDown from '../../../assets/svgIcons/Sort-Down-Thin.svg';
+import Funnel from '../../../assets/svgIcons/Funnel-Thin.svg';
+
 
 const MainTable = ({ columns, data, selectedRows, onRowSelect, onCheckboxToggle, onFilterChange }) => {
   return (
-    <div className="overflow-x-auto border rounded-md">
+    <div className="overflow-x-auto rounded-md border border-gray-300">
       <table className="min-w-full table-auto text-sm">
         <thead className="bg-gray-50">
           <tr>
-            <th className="p-2 border">
+            <th className="p-2 border text-center">
               <input type="checkbox" onChange={e => onRowSelect('all', e.target.checked)} />
             </th>
             {columns.map(col => (
               <th key={col.key} className="p-2 text-left border whitespace-nowrap">
                 <div className="flex items-center justify-between">
-                  {col.label}
-                  <span className="text-gray-400 text-xs">&#8597;</span>
+                  <span>{col.label}</span>
+                  <div className="flex flex-col items-center ml-2">
+                    <img src={SortUp} alt="Sort Up" className="w-3 h-3 cursor-pointer" />
+                    {/* <img src={SortDown} alt="Sort Down" className="w-3 h-3 cursor-pointer" /> */}
+                  </div>
                 </div>
               </th>
             ))}
           </tr>
           <tr className="bg-white">
-            <td className="p-2 text-blue-500 border cursor-pointer" onClick={() => onFilterChange('clear')}>Clear</td>
+            <td
+              className="p-2 text-blue-500 border text-center cursor-pointer bg-gray-200"
+              onClick={() => onFilterChange('clear')}
+            >
+              Clear
+            </td>
             {columns.map(col => (
-              <td key={col.key} className="p-1 border">
+              <td key={col.key} className="p-1 border bg-gray-200">
                 {col.type === 'checkbox' ? null : (
-                  <input
-                    type="text"
-                    className="w-full border px-2 py-1 text-xs rounded"
-                    placeholder=""
-                    onChange={e => onFilterChange(col.key, e.target.value)}
-                  />
+                  <div className="flex items-center gap-1 ">
+                    <input
+                      type="text"
+                      className="w-full border px-2 py-1 text-xs rounded"
+                      placeholder=""
+                      onChange={e => onFilterChange(col.key, e.target.value)}
+                    />
+                    <div className="bg-gray-200 p-1 rounded">
+                      <img src={Funnel} alt="Filter" className="w-5 h-5" />
+                    </div>
+                  </div>
                 )}
               </td>
             ))}
@@ -41,7 +57,7 @@ const MainTable = ({ columns, data, selectedRows, onRowSelect, onCheckboxToggle,
             return (
               <tr
                 key={row.id}
-                className={`border text-sm ${isSelected ? 'bg-blue-500 text-white' : 'hover:bg-blue-50'}`}
+                className={`border text-sm ${isSelected ? 'text-black' : 'hover:bg-primary-base hover:text-white'}`}
               >
                 <td className="p-2 text-center border">
                   <input
