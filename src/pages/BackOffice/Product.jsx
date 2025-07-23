@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import AdvancedSearch from '../../components/Ui/AdvancedSearch/AdvancedSearch';
 import BatchEdit from '../../components/Ui/BatchEdit/BatchEdit';
 import StockLocation from '../../components/Ui/Stock/StockLocation';
-import FilterBar from '../../components/Ui/Filters/FilterBar';
 import MainTable from '../../components/Ui/Table/MainTable';
 import TablePaginationBar from '../../components/Ui/Table/TablePaginationBar';
-import ToggleSwitch from '../../components/Ui/Input/ToggleSwitch';
+import ProductSearchBar from '../../components/Ui/search/ProductSearchBar';
+
 
 const Product = () => {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
@@ -132,57 +132,25 @@ const Product = () => {
     <p className="text-sm text-gray-500">Catalog Setup &gt; Manage Products</p>
   </div>
   
-
-
-
       {/* Search Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 w-full">
-        <div className="flex items-center gap-2 flex-grow">
-          <input
-            type="text"
-            placeholder="Enter Part Number / MPN / Barcode / Title"
-            className="flex-grow border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-base"
-          />
-          <button title="Reset" className="text-gray-500 hover:text-black text-xl">
-            ↺
-          </button>
-          <ToggleSwitch label="EPOS" />
-          <ToggleSwitch label="SIM" />
-        </div>
+      <div>
+        <ProductSearchBar ourStock={56} supplierStock={5} backOrder={12} />
 
-        <div className="flex items-center gap-4">
-          {[
-            { label: 'Our Stock', value: 56 },
-            { label: 'Supplier Stock', value: 5 },
-            { label: 'Back Order', value: 12 },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="text-center border border-primary-base px-2 py-1 rounded w-16"
-            >
-              <div className="font-semibold text-primary-base text-sm">{item.value}</div>
-              <div className="text-[11px] text-gray-500 leading-tight">{item.label}</div>
-            </div>
-          ))}
-          <div className="w-16 h-16 border border-gray-300 rounded flex items-center justify-center">
-            <span className="text-xs text-gray-400">Image</span>
-          </div>
-        </div>
       </div>
 
       {showAdvancedSearch && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div>
-            <AdvancedSearch />
-          </div>
-          <div >
-            <BatchEdit />
-          </div>
-          <div>
-            <StockLocation />
-          </div>
-        </div>
-      )}
+  <div className="flex flex-wrap gap-4 w-full">
+    <div className="flex-1 min-w-[320px] max-w-[40%]">
+      <AdvancedSearch />
+    </div>
+    <div className="flex-1 min-w-[280px] max-w-[30%]">
+      <BatchEdit />
+    </div>
+    <div className="flex-1 min-w-[260px] max-w-[30%]">
+      <StockLocation />
+    </div>
+  </div>
+)}
 
       <TablePaginationBar
         currentPage={currentPage}

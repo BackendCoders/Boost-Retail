@@ -25,7 +25,7 @@ const BatchEdit = () => {
   };
 
   const handleApply = () => {
-    console.log("Applying batch edit:", {
+    console.log("Batch Edit:", {
       selected,
       password,
       fields,
@@ -36,56 +36,61 @@ const BatchEdit = () => {
   };
 
   return (
-    <div className="p-5 bg-gray-100 rounded-lg w-full max-w-md border border-gray-300">
-      <h2 className="font-semibold text-base mb-4">Batch Edit</h2>
+    <div className="p-4 bg-gray-100 rounded-lg w-full border border-gray-300 min-h-[313px]">
+      <h2 className="font-medium text-sm mb-3">Batch Edit</h2>
 
       <div className="flex items-center gap-2 mb-4">
         <select
           value={selected}
           onChange={(e) => setSelected(e.target.value)}
-          className="border border-gray-300 p-2 rounded w-[120px] bg-white text-sm"
+          className="border border-gray-300 px-2 py-1 rounded text-xs bg-white w-[90px]"
         >
           <option>Price</option>
           <option>Cost</option>
           <option>RRP</option>
         </select>
+
         <input
           type="password"
           placeholder="Enter Password"
-          className="border border-gray-300 p-2 rounded flex-1 text-sm"
+          className="border border-gray-300 px-2 py-1 rounded text-xs flex-1 bg-white"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
         <button
           onClick={handleApply}
-          className="bg-primary-base text-white px-4 py-2 rounded text-sm"
+          className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-3 py-[6px] rounded"
         >
           APPLY
         </button>
       </div>
 
       {Object.keys(fields).map((key) => (
-        <div key={key} className="flex items-center gap-2 mb-3">
+        <div key={key} className="flex items-center gap-2 mb-2">
           <input
             type="checkbox"
             checked={fields[key]}
             onChange={() => handleCheckboxChange(key)}
-            className="w-4 h-4"
+            className="w-3.5 h-3.5 accent-blue-600"
           />
           <input
             type="text"
             value={values[key]}
             onChange={(e) => setValues({ ...values, [key]: e.target.value })}
             disabled={!fields[key]}
-            className="border border-gray-300 p-2 rounded w-[120px] text-sm bg-white"
+            className={`border border-gray-300 px-2 py-1 rounded text-xs w-[90px] bg-white ${
+              !fields[key] ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           />
 
           {key === "Web" && (
-            <label className="flex items-center gap-2 ml-2 text-sm">
+            <label className="flex items-center gap-2 text-xs ml-2">
               <input
                 type="checkbox"
                 checked={applyEnding}
                 onChange={() => setApplyEnding(!applyEnding)}
+                className="accent-blue-600"
               />
               Apply £0.99 Ending
             </label>
@@ -98,7 +103,9 @@ const BatchEdit = () => {
               value={saleReason}
               onChange={(e) => setSaleReason(e.target.value)}
               disabled={!fields["Sale"]}
-              className="border border-gray-300 p-2 rounded text-sm flex-1 bg-white"
+              className={`border border-gray-300 px-2 py-1 rounded text-xs flex-1 bg-white ${
+                !fields["Sale"] ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             />
           )}
         </div>

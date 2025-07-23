@@ -24,7 +24,7 @@ const StockLocation = () => {
   const totals = calculateTotals();
 
   return (
-    <div className="p-5 bg-gray-100 rounded-lg w-full max-w-md border border-gray-300">
+    <div className="p-5 bg-gray-100 rounded-lg w-full  border border-gray-300">
       <h2 className="font-semibold text-base mb-3">Stock Location</h2>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-sm">
