@@ -102,31 +102,38 @@ const Product = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
-      {/* Breadcrumb + Title */}
-      <div>
-        <p className="text-sm text-gray-500">Catalog Setup &gt; Manage Products</p>
-
-        {/* Advanced Mode Toggle */}
-        <div className="ml-auto flex items-center gap-2">
-          <span className="text-sm font-semibold text-gray-600">Advanced Mode</span>
-          <label className="inline-flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              className="sr-only"
-              checked={showAdvancedSearch}
-              onChange={() => setShowAdvancedSearch(!showAdvancedSearch)}
-            />
-            <div className="w-11 h-6 bg-gray-300 rounded-full relative transition duration-300">
-              <div
-                className={`absolute w-5 h-5 bg-white rounded-full top-0.5 transition-all duration-300 ${
-                  showAdvancedSearch ? 'left-5 bg-primary-base' : 'left-0.5'
-                }`}
-              />
-            </div>
-          </label>
+    <div className="py-3 space-y-3">
+      <div className="py-3 border-b bg-white">
+  {/* Top Row: PRODUCTS Title & Advanced Toggle */}
+  <div className="flex items-center justify-between">
+    <h2 className="text-lg font-bold text-black">PRODUCTS</h2>
+    <div className="flex items-center gap-2">
+      <span className="text-sm text-gray-700">Advanced Mode</span>
+      <label className="relative inline-flex items-center cursor-pointer">
+        <input
+          type="checkbox"
+          className="sr-only"
+          checked={showAdvancedSearch}
+          onChange={() => setShowAdvancedSearch(!showAdvancedSearch)}
+        />
+        <div className="w-11 h-6 bg-gray-300 rounded-full peer-focus:outline-none transition duration-300">
+          <div
+            className={`absolute top-0.5 w-5 h-5 rounded-full transition-all duration-300 ${
+              showAdvancedSearch ? 'left-5 bg-blue-600' : 'left-0.5 bg-white'
+            }`}
+          />
         </div>
-      </div>
+      </label>
+    </div>
+  </div>
+</div>
+  {/* Bottom Row: Breadcrumb */}
+  <div className='py-2 border-b bg-white'>
+    <p className="text-sm text-gray-500">Catalog Setup &gt; Manage Products</p>
+  </div>
+  
+
+
 
       {/* Search Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 w-full">
