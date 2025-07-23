@@ -108,7 +108,7 @@ const Product = () => {
   <div className="flex items-center justify-between">
     <h2 className="text-lg font-bold text-black">PRODUCTS</h2>
     <div className="flex items-center gap-2">
-      <span className="text-sm text-gray-700">Advanced Mode</span>
+      <span className="text-sm font-semibold text-gray-700">Advanced Mode</span>
       <label className="relative inline-flex items-center cursor-pointer">
         <input
           type="checkbox"
@@ -116,10 +116,10 @@ const Product = () => {
           checked={showAdvancedSearch}
           onChange={() => setShowAdvancedSearch(!showAdvancedSearch)}
         />
-        <div className="w-11 h-6 bg-gray-300 rounded-full peer-focus:outline-none transition duration-300">
+        <div className="w-11 h-6 bg-primary-base rounded-full peer-focus:outline-none transition duration-300">
           <div
             className={`absolute top-0.5 w-5 h-5 rounded-full transition-all duration-300 ${
-              showAdvancedSearch ? 'left-5 bg-blue-600' : 'left-0.5 bg-white'
+              showAdvancedSearch ? 'left-5 bg-white' : 'left-0.5 bg-white'
             }`}
           />
         </div>
@@ -129,7 +129,7 @@ const Product = () => {
 </div>
   {/* Bottom Row: Breadcrumb */}
   <div className='py-2 border-b bg-white'>
-    <p className="text-sm text-gray-500">Catalog Setup &gt; Manage Products</p>
+    <p className="text-sm font-semibold text-gray-700">Catalog Setup &gt; Manage Products</p>
   </div>
   
       {/* Search Bar */}
