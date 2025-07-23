@@ -10,8 +10,6 @@ export default function Tooltip({ content, children, ...props }) {
 			content={content}
 			animation='shift-away'
 			theme='custom'
-			placement='bottom'
-			offset={[15, 20]}
 			arrow={false}
 			{...props}
 		>

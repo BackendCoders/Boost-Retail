@@ -9,6 +9,7 @@ import SettingIcon from '../../assets/whitesvgicons/setting.svg';
 import WarrantyIcon from '../../assets/whitesvgicons/warranty.svg';
 import WorkshopIcon from '../../assets/whitesvgicons/workshop.svg';
 import BackOfficeIcon from '../../assets/whitesvgicons/Back-Office-Thin.svg';
+import ArrowLeftIcon from '../../assets/whitesvgicons/Arrow-Large-Left.svg';
 import { Link } from 'react-router-dom';
 import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 
@@ -28,18 +29,25 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
 			<div className='flex items-center gap-4'>
 				<button
 					onClick={() => setSidebarOpen(!sidebarOpen)}
-					className=' text-white p-4 bg-primary-base'
+					className={`text-white p-4 ${
+						sidebarOpen
+							? 'bg-transparent border border-gray-500'
+							: 'bg-primary-base'
+					} '`}
 				>
-					<img src={MenuIcon} />
+					{!sidebarOpen ? <img src={MenuIcon} /> : <img src={ArrowLeftIcon} />}
 				</button>
 				<Link
 					className='font-bold py-4 pr-2'
 					to='/back-office/product'
 				>
-					<h1 className='text-md tracking-wide'>Back Office</h1>
+					<h1 className='text-md tracking-wide '>Back Office</h1>
 				</Link>
-				<div className='ml-4 flex items-center gap-4'>
-					<img src={AccountIcon} />
+				<div className='ml-2 flex items-center gap-4 border-l border-l-gray-500'>
+					<img
+						src={AccountIcon}
+						className='ml-2'
+					/>
 					<div className='text-xs text-gray-200'>
 						<p>User - India</p>
 						<p>test@gamil.com</p>
@@ -64,7 +72,11 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
 function SidebarIconItem({ to = '#', icon, alt }) {
 	return (
 		<li className='hover:bg-primary-select py-4 px-4 transition-all duration-300'>
-			<Tooltip content={alt}>
+			<Tooltip
+				content={alt}
+				placement='bottom'
+				offset={[15, 20]}
+			>
 				<Link to={to}>
 					<img
 						src={icon}
