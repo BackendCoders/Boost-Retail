@@ -21,7 +21,7 @@ export default function AppLayout() {
 				<Sidebar sidebarOpen={sidebarOpen} />
 
 				{/* Main Content */}
-				<main className='flex-1 bg-white p-6'>
+				<main className='flex-1 bg-white p-4'>
 					<Outlet />
 				</main>
 			</div>
