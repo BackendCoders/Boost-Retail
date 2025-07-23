@@ -7,7 +7,7 @@ const ToggleSwitch = ({ label, checked = true }) => (
       type="checkbox"
       checked={checked}
       readOnly
-      className="accent-blue-600 w-4 h-4"
+      className="accent-primary-base w-4 h-4"
     />
     {label}
   </label>
@@ -26,7 +26,7 @@ const ProductSearchBar = () => {
         <input
           type="text"
           placeholder="Enter Part Number / MPN / Barcode / Title"
-          className="w-[360px] px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-[360px] px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:ring-1 focus:ring-primary-base"
         />
 
         {/* Refresh Icon */}
@@ -48,7 +48,7 @@ const ProductSearchBar = () => {
       <div className="flex items-center gap-3">
         {/* Our Stock */}
         <div>
-        <div className="w-16 h-16 border border-blue-500 rounded-md flex flex-col items-center justify-center text-xs text-blue-600 font-medium">
+        <div className="w-16 h-16 border border-primary-base rounded-md flex flex-col items-center justify-center text-xs text-primary-base font-medium">
           <span className="text-lg font-bold">56</span>
           
         </div>
@@ -57,7 +57,7 @@ const ProductSearchBar = () => {
 
         {/* Supplier Stock */}
         <div>
-        <div className="w-16 h-16 border border-blue-500 rounded-md flex flex-col items-center justify-center text-xs text-blue-600 font-medium">
+        <div className="w-16 h-16 border border-primary-base rounded-md flex flex-col items-center justify-center text-xs text-primary-base font-medium">
           <span className="text-lg font-bold">5</span>
         </div>
         <p className="text-sm">Supp Stock</p>
@@ -65,7 +65,7 @@ const ProductSearchBar = () => {
 
         {/* Back Order */}
         <div>
-        <div className="w-16 h-16 border border-blue-500 rounded-md flex flex-col items-center justify-center text-xs text-blue-600 font-medium">
+        <div className="w-16 h-16 border border-primary-base rounded-md flex flex-col items-center justify-center text-xs text-primary-base font-medium">
           <span className="text-lg font-bold">12</span>
         </div>
         <p className="text-sm">Back Order</p>

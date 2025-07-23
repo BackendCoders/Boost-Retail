@@ -13,7 +13,7 @@ const ConditionRow = ({ field = "Category 1", operator = "Equals", value = "E-Bi
         className="border rounded px-2 py-1 text-sm w-40"
         defaultValue={value}
       />
-      <button className="text-gray-500 hover:text-red-600 text-sm font-bold">x</button>
+      <button className="text-gray-500 hover:text-primary-base text-sm font-bold">x</button>
     </div>
   );
 };
@@ -56,7 +56,7 @@ const ConditionGroup = ({ nested = false }) => {
 
 const AdvancedSearch = () => {
   return (
-    <div className="p-6 bg-gray-100 rounded-lg border border-gray-300 w-full max-w-8xl mx-auto min-h-[313px]">
+    <div className="p-4 bg-gray-100 rounded-lg w-full border border-gray-300 min-h-[313px]">
       <h2 className="font-semibold text-base mb-4">Advanced Search</h2>
       <ConditionGroup />
     </div>

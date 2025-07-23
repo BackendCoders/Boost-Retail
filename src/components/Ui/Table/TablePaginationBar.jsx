@@ -1,12 +1,13 @@
 // File: Ui/Table/TablePaginationBar.jsx
 import React from 'react';
+import settingicons from '../../../assets/whitesvgicons/setting.svg'
 
 const TablePaginationBar = ({ currentPage, totalPages, productsPerPage, onPageChange, onPerPageChange }) => {
   return (
     <div className="flex items-center justify-between bg-white text-sm">
       <div className="flex items-center space-x-2">
         <button
-          className="bg-primary-base text-white px-3 py-1 rounded"
+          className="bg-primary-base text-white px-3 py-1 rounded-2xl"
           onClick={() => onPageChange('prev')}
           disabled={currentPage === 1}
         >
@@ -15,7 +16,7 @@ const TablePaginationBar = ({ currentPage, totalPages, productsPerPage, onPageCh
         <div className="border px-2 py-1 rounded">Page {currentPage}</div>
         <span className="text-gray-500">of {totalPages}</span>
         <button
-          className="bg-primary-base text-white px-3 py-1 rounded"
+          className="bg-primary-base text-white px-3 py-1 rounded-2xl"
           onClick={() => onPageChange('next')}
           disabled={currentPage === totalPages}
         >
@@ -34,10 +35,9 @@ const TablePaginationBar = ({ currentPage, totalPages, productsPerPage, onPageCh
           ))}
         </select>
         <button className="bg-primary-base text-white p-2 rounded">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-          </svg>
-        </button>
+  <img src={settingicons} alt="Settings" className="w-7 h-7" />
+</button>
+
       </div>
     </div>
   );
