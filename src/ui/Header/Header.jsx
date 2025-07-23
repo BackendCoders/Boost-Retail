@@ -20,7 +20,7 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
 		{ icon: EcommerceIcon, alt: 'E-commerce', to: '/ecommerce' },
 		{ icon: WorkshopIcon, alt: 'Workshop', to: '/workshop' },
 		{ icon: WarrantyIcon, alt: 'Warranty', to: '/warranty' },
-		{ icon: BackOfficeIcon, alt: 'Back Office', to: '/back-office' },
+		{ icon: BackOfficeIcon, alt: 'Back Office', to: '/back-office/product' },
 		{ icon: ReportIcon, alt: 'Reports', to: '/reports' },
 		{ icon: SettingIcon, alt: 'Settings', to: '/settings' },
 	];
