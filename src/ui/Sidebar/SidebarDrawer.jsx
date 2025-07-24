@@ -5,41 +5,16 @@ import { useEffect, useRef, useState } from 'react';
 import ArrowLeftIcon from '../../assets/svgIcons/Arrow-Large-Left-Thin.svg';
 import UpIcon from '../../assets/svgIcons/Up-Thin.svg';
 import DownIcon from '../../assets/svgIcons/Down-Thin.svg';
+import { menuData } from './menData.config';
 
 // components/SidebarDrawer.jsx
-const menuData = {
-	Products: [
-		{
-			label: 'Catalog Setup',
-			children: ['Manage Products', 'Uncategorized', 'Data Issues'],
-		},
-		{
-			label: 'Data Imports',
-			children: ['Product Feeds', 'Stock Feeds', 'EPOS Upload'],
-		},
-		{
-			label: 'Tools',
-			children: ['Print Labels', 'Price Match'],
-		},
-	],
-	Customers: [
-		{
-			label: 'Customer Maintenance',
-		},
-	],
-	// Parts: [
-	// 	{
-	// 		label: 'Customer Maintenance',
-	// 	},
-	// ],
-	// Settings: [
-	// 	{
-	// 		label: 'Customer Maintenance',
-	// 	},
-	// ],
-};
 
-export default function SidebarDrawer({ activeItem, onClose, sidebarOpen }) {
+export default function SidebarDrawer({
+	activeItem,
+	activeLabel,
+	onClose,
+	sidebarOpen,
+}) {
 	const drawerRef = useRef();
 	const [expandedSections, setExpandedSections] = useState({});
 
@@ -67,6 +42,7 @@ export default function SidebarDrawer({ activeItem, onClose, sidebarOpen }) {
 	};
 
 	const menuItems = activeItem ? menuData[activeItem] || [] : [];
+	console.log(activeItem);
 
 	return (
 		<div
@@ -78,7 +54,7 @@ export default function SidebarDrawer({ activeItem, onClose, sidebarOpen }) {
 			{activeItem && (
 				<>
 					<div className='flex items-center justify-between gap-2 p-4 border-b font-bold text-md'>
-						<span>{activeItem.toUpperCase()}</span>
+						<span>{activeLabel.toUpperCase()}</span>
 
 						<button
 							className='hover:bg-gray-100 p-2 rounded-lg'
@@ -92,7 +68,7 @@ export default function SidebarDrawer({ activeItem, onClose, sidebarOpen }) {
 					</div>
 
 					<ul className='p-4 space-y-2'>
-						{menuItems.map((section, index) => (
+						{menuItems?.map((section, index) => (
 							<li
 								key={index}
 								className='text-gray-800 rounded cursor-pointer'
@@ -110,9 +86,9 @@ export default function SidebarDrawer({ activeItem, onClose, sidebarOpen }) {
 										/>
 									)}
 								</div>
-								{expandedSections[section.label] && (
+								{expandedSections[section?.label] && (
 									<ul className='pt-1 space-y-1 text-sm'>
-										{section.children.map((child, childIndex) => (
+										{section?.children?.map((child, childIndex) => (
 											<li
 												key={childIndex}
 												className='hover:bg-gray-100 px-3 py-3 rounded cursor-pointer'

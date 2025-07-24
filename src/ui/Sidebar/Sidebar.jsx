@@ -1,12 +1,17 @@
 /** @format */
 
-import Tooltip from '../../components/Ui/Tooltip/Tooltip';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomersIcon from '../../assets/whitesvgicons/Customers.svg';
+import HomeIcon from '../../assets/whitesvgicons/Homeicon.svg';
 import ProductsIcon from '../../assets/whitesvgicons/Products.svg';
 import CustomiseIcon from '../../assets/whitesvgicons/Customise.svg';
+import WorkshopIcon from '../../assets/whitesvgicons/workshop.svg';
+import PosIcon from '../../assets/whitesvgicons/pos.svg';
 import SettingIcon from '../../assets/whitesvgicons/setting.svg';
+import WarrantyIcon from '../../assets/whitesvgicons/warranty.svg';
+import ReportIcon from '../../assets/whitesvgicons/report.svg';
+import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 import SidebarDrawer from './SidebarDrawer';
-import { useDispatch, useSelector } from 'react-redux';
 import { setActiveMiniMenu } from '../../slice/sidebarSlice';
 
 export default function Sidebar() {
@@ -15,27 +20,35 @@ export default function Sidebar() {
 		(state) => state.sidebar
 	);
 
+	console.log(activeTopNavigation);
+
 	const sideMenus = {
-		BackOffice: [
-			{ icon: CustomersIcon, alt: 'Customers' },
-			{ icon: ProductsIcon, alt: 'Products' },
-			{ icon: CustomiseIcon, alt: 'Part Orderings' },
-			{ icon: SettingIcon, alt: 'Settings' },
-		],
-		Warranty: [
-			{ icon: CustomersIcon, alt: 'Customers' },
-			{ icon: ProductsIcon, alt: 'Products' },
-			{ icon: CustomiseIcon, alt: 'Part Orderings' },
-			{ icon: SettingIcon, alt: 'Settings' },
-		],
+		Home: [{ icon: HomeIcon, alt: 'Home', label: 'Dashboard' }],
+		POS: [{ icon: PosIcon, alt: 'Pos', label: 'POS' }],
 		Ecommerce: [
-			{ icon: ProductsIcon, alt: 'E-Products' },
-			{ icon: SettingIcon, alt: 'E-Settings' },
+			{ icon: ProductsIcon, alt: 'Processing', label: 'Processing' },
+			{ icon: SettingIcon, alt: 'Marketing', label: 'Marketing' },
+			{ icon: SettingIcon, alt: 'Customize', label: 'Customize' },
+			{ icon: SettingIcon, alt: 'Setups', label: 'Setups' },
 		],
+		Workshop: [{ icon: WorkshopIcon, alt: 'Workshop', label: 'Workshop' }],
+		Warranty: [{ icon: WarrantyIcon, alt: 'Warranty', label: 'Warranty' }],
+		BackOffice: [
+			{ icon: CustomersIcon, alt: 'Customers', label: 'Customers' },
+			{ icon: ProductsIcon, alt: 'Products', label: 'Products' },
+			{ icon: CustomiseIcon, alt: 'PartOrderings', label: 'Part Orderings' },
+			{ icon: SettingIcon, alt: 'Settings', label: 'Settings' },
+		],
+		Reports: [{ icon: ReportIcon, alt: 'Reports', label: 'Reports' }],
+		Settings: [{ icon: SettingIcon, alt: 'Setup', label: 'Setup' }],
+
 		// Add more top nav sections as needed
 	};
 
 	const miniSideMenu = sideMenus[activeTopNavigation] || [];
+	const activeLabel = Object.values(sideMenus)
+		.flat()
+		.find((menuItem) => menuItem.alt === activeMiniMenu)?.label;
 
 	return (
 		<>
@@ -65,6 +78,7 @@ export default function Sidebar() {
 			</div>
 			<SidebarDrawer
 				activeItem={activeMiniMenu}
+				activeLabel={activeLabel}
 				onClose={() => dispatch(setActiveMiniMenu(null))}
 				sidebarOpen={sidebarOpen}
 			/>
