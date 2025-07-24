@@ -10,25 +10,34 @@ import WarrantyIcon from '../../assets/whitesvgicons/warranty.svg';
 import WorkshopIcon from '../../assets/whitesvgicons/workshop.svg';
 import BackOfficeIcon from '../../assets/whitesvgicons/Back-Office-Thin.svg';
 import ArrowLeftIcon from '../../assets/whitesvgicons/Arrow-Large-Left.svg';
-import { Link } from 'react-router-dom';
 import Tooltip from '../../components/Ui/Tooltip/Tooltip';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeSidebar, setActiveTopNavigation } from '../../slice/sidebarSlice';
 
-export default function Header({ sidebarOpen, setSidebarOpen }) {
+export default function Header() {
+	const dispatch = useDispatch();
+	const { activeTopNavigation, sidebarOpen } = useSelector(
+		(state) => state.sidebar
+	);
 	const iconItems = [
-		{ icon: HomeIcon, alt: 'Home', to: '/home' },
-		{ icon: PosIcon, alt: 'POS', to: '/pos' },
-		{ icon: EcommerceIcon, alt: 'E-commerce', to: '/ecommerce' },
-		{ icon: WorkshopIcon, alt: 'Workshop', to: '/workshop' },
-		{ icon: WarrantyIcon, alt: 'Warranty', to: '/warranty' },
-		{ icon: BackOfficeIcon, alt: 'Back Office', to: '/back-office/product' },
-		{ icon: ReportIcon, alt: 'Reports', to: '/reports' },
-		{ icon: SettingIcon, alt: 'Settings', to: '/settings' },
+		{ icon: HomeIcon, alt: 'Home', label: 'Home' },
+		{ icon: PosIcon, alt: 'POS', label: 'POS' },
+		{ icon: EcommerceIcon, alt: 'Ecommerce', label: 'E-Commerce' },
+		{ icon: WorkshopIcon, alt: 'Workshop', label: 'Workshop' },
+		{ icon: WarrantyIcon, alt: 'Warranty', label: 'Warranty' },
+		{ icon: BackOfficeIcon, alt: 'BackOffice', label: 'Back Office' },
+		{ icon: ReportIcon, alt: 'Reports', label: 'Reports' },
+		{ icon: SettingIcon, alt: 'Settings', label: 'Settings' },
 	];
+
+	const activeLabel =
+		iconItems.find((item) => item.alt === activeTopNavigation)?.label || '';
+
 	return (
 		<header className='bg-black text-white flex items-center justify-between'>
 			<div className='flex items-center gap-4'>
 				<button
-					onClick={() => setSidebarOpen(!sidebarOpen)}
+					onClick={() => dispatch(closeSidebar(!sidebarOpen))}
 					className={`text-white p-4 ${
 						sidebarOpen
 							? 'bg-transparent border border-gray-500'
@@ -37,12 +46,9 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
 				>
 					{!sidebarOpen ? <img src={MenuIcon} /> : <img src={ArrowLeftIcon} />}
 				</button>
-				<Link
-					className='font-bold py-4 pr-2'
-					to='/back-office/product'
-				>
-					<h1 className='text-md tracking-wide '>Back Office</h1>
-				</Link>
+				<div className='font-bold py-4 pr-2'>
+					<h1 className='text-md tracking-wide '>{activeLabel}</h1>
+				</div>
 				<div className='ml-2 flex items-center gap-4 border-l border-l-gray-500'>
 					<img
 						src={AccountIcon}
@@ -61,7 +67,8 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
 						key={index}
 						icon={item.icon}
 						alt={item.alt}
-						to={item.to}
+						onclick={() => dispatch(setActiveTopNavigation(item.alt))}
+						active={activeTopNavigation === item.alt}
 					/>
 				))}
 			</ul>
@@ -69,20 +76,25 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
 	);
 }
 
-function SidebarIconItem({ to = '#', icon, alt }) {
+function SidebarIconItem({ icon, alt, onclick, active }) {
 	return (
-		<li className='hover:bg-primary-select py-4 px-4 transition-all duration-300'>
+		<li
+			className={`${
+				active ? 'bg-primary-select' : 'hover:bg-primary-select'
+			} py-4 px-4 transition-all duration-300`}
+			onClick={onclick}
+		>
 			<Tooltip
 				content={alt}
 				placement='bottom'
 				offset={[15, 20]}
 			>
-				<Link to={to}>
+				<button>
 					<img
 						src={icon}
 						alt={alt}
 					/>
-				</Link>
+				</button>
 			</Tooltip>
 		</li>
 	);

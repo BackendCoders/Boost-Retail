@@ -5,17 +5,38 @@ import CustomersIcon from '../../assets/whitesvgicons/Customers.svg';
 import ProductsIcon from '../../assets/whitesvgicons/Products.svg';
 import CustomiseIcon from '../../assets/whitesvgicons/Customise.svg';
 import SettingIcon from '../../assets/whitesvgicons/setting.svg';
-import { useState } from 'react';
 import SidebarDrawer from './SidebarDrawer';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveMiniMenu } from '../../slice/sidebarSlice';
 
-export default function Sidebar({ sidebarOpen }) {
-	const [activeItem, setActiveItem] = useState(null);
-	const miniSideMenu = [
-		{ icon: CustomersIcon, alt: 'Customers' },
-		{ icon: ProductsIcon, alt: 'Products' },
-		{ icon: CustomiseIcon, alt: 'Customize' },
-		{ icon: SettingIcon, alt: 'Settings' },
-	];
+export default function Sidebar() {
+	const dispatch = useDispatch();
+	const { activeTopNavigation, sidebarOpen, activeMiniMenu } = useSelector(
+		(state) => state.sidebar
+	);
+
+	const sideMenus = {
+		BackOffice: [
+			{ icon: CustomersIcon, alt: 'Customers' },
+			{ icon: ProductsIcon, alt: 'Products' },
+			{ icon: CustomiseIcon, alt: 'Part Orderings' },
+			{ icon: SettingIcon, alt: 'Settings' },
+		],
+		Warranty: [
+			{ icon: CustomersIcon, alt: 'Customers' },
+			{ icon: ProductsIcon, alt: 'Products' },
+			{ icon: CustomiseIcon, alt: 'Part Orderings' },
+			{ icon: SettingIcon, alt: 'Settings' },
+		],
+		Ecommerce: [
+			{ icon: ProductsIcon, alt: 'E-Products' },
+			{ icon: SettingIcon, alt: 'E-Settings' },
+		],
+		// Add more top nav sections as needed
+	};
+
+	const miniSideMenu = sideMenus[activeTopNavigation] || [];
+
 	return (
 		<>
 			<div
@@ -29,30 +50,33 @@ export default function Sidebar({ sidebarOpen }) {
 							key={index}
 							icon={item.icon}
 							alt={item.alt}
-							activeItem={activeItem}
+							activeItem={activeMiniMenu}
 							onClick={(e) => {
 								e.stopPropagation();
-								setActiveItem(activeItem === item.alt ? null : item.alt);
+								dispatch(
+									setActiveMiniMenu(
+										item.alt === activeMiniMenu ? null : item.alt
+									)
+								);
 							}}
-							item={item}
 						/>
 					))}
 				</div>
 			</div>
 			<SidebarDrawer
-				activeItem={activeItem}
-				onClose={() => setActiveItem(null)}
+				activeItem={activeMiniMenu}
+				onClose={() => dispatch(setActiveMiniMenu(null))}
 				sidebarOpen={sidebarOpen}
 			/>
 		</>
 	);
 }
 
-function SidebarIconItem({ icon, alt, onClick, activeItem, item }) {
+function SidebarIconItem({ icon, alt, onClick, activeItem }) {
 	return (
 		<div
 			className={`sidebar-icon ${
-				activeItem === item.alt ? 'bg-primary-select' : 'bg-transparent'
+				activeItem === alt ? 'bg-primary-select' : 'bg-transparent'
 			} hover:bg-primary-select transition-all duration-300 px-4 py-4`}
 			onClick={onClick}
 		>

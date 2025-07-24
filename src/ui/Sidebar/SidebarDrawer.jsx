@@ -22,6 +22,21 @@ const menuData = {
 			children: ['Print Labels', 'Price Match'],
 		},
 	],
+	Customers: [
+		{
+			label: 'Customer Maintenance',
+		},
+	],
+	// Parts: [
+	// 	{
+	// 		label: 'Customer Maintenance',
+	// 	},
+	// ],
+	// Settings: [
+	// 	{
+	// 		label: 'Customer Maintenance',
+	// 	},
+	// ],
 };
 
 export default function SidebarDrawer({ activeItem, onClose, sidebarOpen }) {
@@ -64,6 +79,7 @@ export default function SidebarDrawer({ activeItem, onClose, sidebarOpen }) {
 				<>
 					<div className='flex items-center justify-between gap-2 p-4 border-b font-bold text-md'>
 						<span>{activeItem.toUpperCase()}</span>
+
 						<button
 							className='hover:bg-gray-100 p-2 rounded-lg'
 							onClick={onClose}
@@ -86,11 +102,13 @@ export default function SidebarDrawer({ activeItem, onClose, sidebarOpen }) {
 									onClick={() => toggleSection(section.label)}
 								>
 									<span>{section.label}</span>
-									<img
-										src={expandedSections[section.label] ? UpIcon : DownIcon}
-										alt='toggle'
-										className='w-4 h-4'
-									/>
+									{section?.children?.length > 0 && (
+										<img
+											src={expandedSections[section.label] ? UpIcon : DownIcon}
+											alt='toggle'
+											className='w-4 h-4'
+										/>
+									)}
 								</div>
 								{expandedSections[section.label] && (
 									<ul className='pt-1 space-y-1 text-sm'>
