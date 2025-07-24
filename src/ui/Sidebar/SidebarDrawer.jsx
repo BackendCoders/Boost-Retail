@@ -6,6 +6,7 @@ import ArrowLeftIcon from '../../assets/svgIcons/Arrow-Large-Left-Thin.svg';
 import UpIcon from '../../assets/svgIcons/Up-Thin.svg';
 import DownIcon from '../../assets/svgIcons/Down-Thin.svg';
 import { menuData } from './menData.config';
+import { Link } from 'react-router-dom';
 
 // components/SidebarDrawer.jsx
 
@@ -89,12 +90,14 @@ export default function SidebarDrawer({
 								{expandedSections[section?.label] && (
 									<ul className='pt-1 space-y-1 text-sm'>
 										{section?.children?.map((child, childIndex) => (
-											<li
-												key={childIndex}
-												className='hover:bg-gray-100 px-3 py-3 rounded cursor-pointer'
-											>
-												{child}
-											</li>
+											<Link to={child?.path}>
+												<li
+													key={childIndex}
+													className='hover:bg-gray-100 px-3 py-3 rounded cursor-pointer'
+												>
+													{child?.label}
+												</li>
+											</Link>
 										))}
 									</ul>
 								)}

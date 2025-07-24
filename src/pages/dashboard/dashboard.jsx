@@ -1,5 +1,5 @@
 /** @format */
 
-export default function dashboard() {
-	return <div>dashboard</div>;
+export default function Dashboard() {
+	return <div>Dashboard</div>;
 }

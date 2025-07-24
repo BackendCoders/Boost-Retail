@@ -3,6 +3,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Product from '../pages/BackOffice/Product';
 import AppLayout from '../layout/AppLayout';
+import Dashboard from '../pages/dashboard/dashboard';
 
 export default function AppRoutes() {
 	return (
@@ -11,10 +12,10 @@ export default function AppRoutes() {
 				<Route
 					path='/'
 					index
-					element={<Product />}
+					element={<Dashboard />}
 				/>
 				<Route
-					path='/back-office/product'
+					path='/back-office/catalog/manage-product'
 					element={<Product />}
 				/>
 			</Route>
