@@ -55,7 +55,9 @@ export default function SidebarDrawer({
 			{activeItem && (
 				<>
 					<div className='flex items-center justify-between gap-2 p-4 border-b font-bold text-md'>
-						<span>{activeLabel.toUpperCase()}</span>
+						<span className='text-section-heading'>
+							{activeLabel.toUpperCase()}
+						</span>
 
 						<button
 							className='hover:bg-gray-100 p-2 rounded-lg'
@@ -75,10 +77,10 @@ export default function SidebarDrawer({
 								className='text-gray-800 rounded cursor-pointer'
 							>
 								<div
-									className='flex justify-between items-center px-3 py-3 font-semibold hover:bg-gray-100 rounded cursor-pointer'
+									className='flex justify-between items-center px-3 py-3 hover:bg-gray-100 rounded cursor-pointer'
 									onClick={() => toggleSection(section.label)}
 								>
-									<span>{section.label}</span>
+									<span className='text-breadcrumb'>{section.label}</span>
 									{section?.children?.length > 0 && (
 										<img
 											src={expandedSections[section.label] ? UpIcon : DownIcon}
@@ -88,7 +90,7 @@ export default function SidebarDrawer({
 									)}
 								</div>
 								{expandedSections[section?.label] && (
-									<ul className='pt-1 space-y-1 text-sm'>
+									<ul className='pt-1 space-y-1 text-breadcrumb font-normal'>
 										{section?.children?.map((child, childIndex) => (
 											<Link to={child?.path}>
 												<li

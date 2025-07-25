@@ -34,11 +34,11 @@ export default function Header() {
 		iconItems.find((item) => item.alt === activeTopNavigation)?.label || '';
 
 	return (
-		<header className='bg-black text-white flex items-center justify-between'>
-			<div className='flex items-center gap-4'>
+		<header className='bg-black text-white flex items-center justify-between h-[3.75rem]'>
+			<div className='flex items-center gap-4 h-full'>
 				<button
 					onClick={() => dispatch(closeSidebar(!sidebarOpen))}
-					className={`text-white p-4 ${
+					className={`text-white flex justify-center items-center h-full w-[60px] ${
 						sidebarOpen
 							? 'bg-transparent border border-gray-500'
 							: 'bg-primary-base'
@@ -47,21 +47,21 @@ export default function Header() {
 					{!sidebarOpen ? <img src={MenuIcon} /> : <img src={ArrowLeftIcon} />}
 				</button>
 				<div className='font-bold py-4 pr-2'>
-					<h1 className='text-md tracking-wide '>{activeLabel}</h1>
+					<h1 className='text-page-title tracking-wide'>{activeLabel}</h1>
 				</div>
-				<div className='ml-2 flex items-center gap-4 border-l border-l-gray-500'>
+				<div className='ml-2 flex items-center gap-4 border-l border-l-gray-500 h-full'>
 					<img
 						src={AccountIcon}
 						className='ml-2'
 					/>
-					<div className='text-xs text-gray-200'>
+					<div className='text-xs text-gray-200 font-normal'>
 						<p>User - India</p>
 						<p>test@gamil.com</p>
 					</div>
 				</div>
 			</div>
 
-			<ul className='flex items-center gap-2'>
+			<ul className='flex items-center h-full'>
 				{iconItems.map((item, index) => (
 					<SidebarIconItem
 						key={index}
@@ -81,7 +81,7 @@ function SidebarIconItem({ icon, alt, onclick, active }) {
 		<li
 			className={`${
 				active ? 'bg-primary-select' : 'hover:bg-primary-select'
-			} py-4 px-4 transition-all duration-300`}
+			} flex justify-center items-center py-4 px-4 transition-all duration-300 h-full w-[3.75rem] cursor-pointer`}
 			onClick={onclick}
 		>
 			<Tooltip
