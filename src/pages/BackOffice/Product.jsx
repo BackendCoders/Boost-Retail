@@ -6,6 +6,7 @@ import BatchEdit from '../../components/Ui/BatchEdit/BatchEdit';
 import StockLocation from '../../components/Ui/Stock/StockLocation';
 import MainTable from '../../components/Ui/Table/MainTable';
 import TablePaginationBar from '../../components/Ui/Table/TablePaginationBar';
+import BottomTablePagination from '../../components/Ui/Table/BottomTablePagination';
 import ProductSearchBar from '../../components/Ui/search/ProductSearchBar';
 
 
@@ -107,9 +108,9 @@ const Product = () => {
       <div className="py-3 border-b bg-white">
   {/* Top Row: PRODUCTS Title & Advanced Toggle */}
   <div className="flex items-center justify-between">
-  <h2 className="section-heading font-bold text-black">PRODUCTS</h2>
+  <h2 className="text-section-heading font-bold text-black">PRODUCTS</h2>
   <div className="flex items-center gap-2">
-    <span className="section-heading font-semibold text-gray-700">Advanced Mode</span>
+    <span className="text-section-heading font-semibold text-gray-700">Advanced Mode</span>
     <label className="relative inline-flex items-center cursor-pointer">
       <input
         type="checkbox"
@@ -135,7 +136,7 @@ const Product = () => {
 </div>
   {/* Bottom Row: Breadcrumb */}
   <div className='py-2 border-b bg-white'>
-    <p className="breadcrumb font-semibold text-gray-700">Catalog Setup &gt; Manage Products</p>
+    <p className="text-breadcrumb font-semibold text-gray-700">Catalog Setup &gt; Manage Products</p>
   </div>
   
       {/* Search Bar */}
@@ -179,7 +180,7 @@ const Product = () => {
         onFilterChange={handleFilterChange}
       />
 
-      <TablePaginationBar
+      <BottomTablePagination
         currentPage={currentPage}
         totalPages={100}
         productsPerPage={perPage}

@@ -15,7 +15,6 @@ const TablePaginationBar = ({
   const [showFilters, setShowFilters] = useState(false);
   const btnWrapperRef = useRef(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (btnWrapperRef.current && !btnWrapperRef.current.contains(e.target)) {
@@ -32,20 +31,25 @@ const TablePaginationBar = ({
   };
 
   return (
-    <div className="flex items-center justify-between bg-white text-sm p-2 border-t">
+    <div className="flex items-center justify-between bg-white text-data-body font-inter text-text-body px-4 py-2">
       {/* Pagination Controls */}
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center gap-2">
         <button
-          className="bg-primary-base text-white px-3 py-1 rounded-2xl disabled:opacity-50"
+          className="bg-primary-base text-white px-3 py-1 rounded-full disabled:opacity-50"
           onClick={() => onPageChange('prev')}
           disabled={currentPage === 1}
         >
           ‹ PREV
         </button>
-        <div className="border px-2 py-1 rounded">Page {currentPage}</div>
-        <span className="text-gray-500">of {totalPages}</span>
+
+        <div className="border border-border-grid px-3 py-1 rounded-md text-text-body">
+          Page {currentPage}
+        </div>
+
+        <span className="text-text-placeholder">of {totalPages}</span>
+
         <button
-          className="bg-primary-base text-white px-3 py-1 rounded-2xl disabled:opacity-50"
+          className="bg-primary-base text-white px-3 py-1 rounded-full disabled:opacity-50"
           onClick={() => onPageChange('next')}
           disabled={currentPage === totalPages}
         >
@@ -54,10 +58,11 @@ const TablePaginationBar = ({
       </div>
 
       {/* Per-Page Selector & Settings */}
-      <div className="flex items-center space-x-3">
-        <label className="text-gray-700">Products Per Page</label>
+      <div className="flex items-center gap-4">
+        <label className="text-text-body font-inter">Products Per Page</label>
+
         <select
-          className="border px-2 py-1 rounded"
+          className="border border-border-input px-2 py-1 rounded-md text-text-body outline-none focus:ring-1 focus:ring-primary-base"
           value={productsPerPage}
           onChange={(e) => onPerPageChange(+e.target.value)}
         >
@@ -66,17 +71,17 @@ const TablePaginationBar = ({
           ))}
         </select>
 
-        {/* Gear + Dropdown */}
+        {/* Gear Icon + Dropdown */}
         <div className="relative" ref={btnWrapperRef}>
           <button
-            className="bg-primary-base text-white p-2 rounded"
+            className="bg-primary-base p-2 rounded-md flex items-center justify-center"
             onClick={() => setShowFilters((prev) => !prev)}
           >
-            <img src={settingIcon} alt="Settings" className="w-6 h-6" />
+            <img src={settingIcon} alt="Settings" className="w-5 h-5" />
           </button>
 
           {showFilters && (
-            <div className="absolute right-0 top-12 z-30">
+            <div className="absolute right-0 top-12 z-30 bg-white shadow-lg border border-border-grid rounded-md">
               <FilterDropdown
                 availableColumns={availableColumns}
                 initialSelected={selectedColumns}
