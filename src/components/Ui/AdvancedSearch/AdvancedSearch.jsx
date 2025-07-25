@@ -92,7 +92,7 @@ const ConditionGroup = ({ group, onChange, nested = false, onRemoveGroup }) => {
             <button
               key={val}
               className={`w-1/2 text-xs font-bold ${
-                group.logic === val ? "bg-blue-600 text-white" : "text-black hover:bg-gray-100"
+                group.logic === val ? "bg-primary-base text-white" : "text-black hover:bg-gray-100"
               }`}
               onClick={() => changeLogic(val)}
             >
@@ -204,7 +204,7 @@ const AdvancedSearch = () => {
       <ConditionGroup group={rootGroup} onChange={setRootGroup} />
       <button
         onClick={handleSearch}
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="mt-4 px-2 py-1 bg-primary-base text-white rounded hover:bg-primary-base"
       >
         Search
       </button>
