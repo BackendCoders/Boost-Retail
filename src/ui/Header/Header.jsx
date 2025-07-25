@@ -54,7 +54,7 @@ export default function Header() {
 						src={AccountIcon}
 						className='ml-2'
 					/>
-					<div className='text-small-detail text-gray-200 font-normal'>
+					<div className='text-small-detail text-text-body font-normal'>
 						<p>User - India</p>
 						<p>test@gamil.com</p>
 					</div>
