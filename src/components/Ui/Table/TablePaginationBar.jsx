@@ -34,7 +34,7 @@ const TablePaginationBar = ({
   };
 
   return (
-    <div className="flex items-center justify-between bg-white text-data-body font-inter text-text-body px-4 py-2">
+    <div className="flex items-center justify-between bg-white px-4 py-2">
       {/* Pagination Controls */}
       <div className="flex items-center gap-2">
   <button
