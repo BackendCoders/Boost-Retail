@@ -3,12 +3,22 @@ import SortUp from '../../../assets/svgIcons/Sort-Up-Thin.svg';
 import SortDown from '../../../assets/svgIcons/Sort-Down-Thin.svg';
 import Funnel from '../../../assets/svgIcons/Funnel-Thin.svg';
 
-const filterOptions = [
+// Filter options by column type
+const textFilterOptions = [
   'Contains',
   'Starts with',
   'Equals',
   'Ends with',
   'Not contain',
+  'Not equal'
+];
+
+const numberFilterOptions = [
+  'Equals',
+  'Greater than',
+  'Less than',
+  'Greater or equal',
+  'Less or equal',
   'Not equal'
 ];
 
@@ -25,6 +35,7 @@ const MainTable = ({
   const [activeFilterCol, setActiveFilterCol] = useState(null);
   const wrapperRef = useRef(null);
 
+  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
@@ -136,9 +147,10 @@ const MainTable = ({
                       <img src={Funnel} alt="Filter" className="w-5 h-5" />
                     </div>
 
+                    {/* Filter options dropdown */}
                     {activeFilterCol === col.key && (
-                      <ul className="absolute top-full right-5 mt-1 bg-white rounded shadow-md z-10 text-xs">
-                        {filterOptions.map(opt => (
+                      <ul className="absolute top-full right-5 mt-1 bg-white rounded shadow-md z-10 text-xs max-h-52 overflow-y-auto">
+                        {(col.type === 'number' ? numberFilterOptions : textFilterOptions).map(opt => (
                           <li
                             key={opt}
                             className="px-3 py-1 cursor-pointer hover:bg-gray-300"
@@ -156,6 +168,7 @@ const MainTable = ({
           </tr>
         </thead>
 
+        {/* Table body */}
         <tbody>
           {data.map(row => {
             const isSelected = selectedRows.includes(row.id);
@@ -164,7 +177,7 @@ const MainTable = ({
                 key={row.id}
                 className={`border text-sm ${
                   isSelected
-                    ? 'text-black'
+                    ? 'text-black bg-yellow-100'
                     : 'hover:bg-primary-base hover:text-white'
                 }`}
               >
@@ -184,11 +197,7 @@ const MainTable = ({
                         type="checkbox"
                         checked={row[col.key]}
                         onChange={e =>
-                          onCheckboxToggle(
-                            row.id,
-                            col.key,
-                            e.target.checked
-                          )
+                          onCheckboxToggle(row.id, col.key, e.target.checked)
                         }
                       />
                     ) : (
