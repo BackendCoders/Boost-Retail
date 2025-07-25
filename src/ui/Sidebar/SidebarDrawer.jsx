@@ -36,10 +36,15 @@ export default function SidebarDrawer({
 	}, [onClose]);
 
 	const toggleSection = (section) => {
-		setExpandedSections((prev) => ({
-			...prev,
-			[section]: !prev[section],
-		}));
+		setExpandedSections((prev) => {
+			const isCurrentlyExpanded = !!prev[section];
+
+			if (isCurrentlyExpanded) {
+				return { [section]: false };
+			}
+
+			return { [section]: true };
+		});
 	};
 
 	const menuItems = activeItem ? menuData[activeItem] || [] : [];
@@ -80,7 +85,9 @@ export default function SidebarDrawer({
 									className='flex justify-between items-center px-3 py-3 hover:bg-gray-100 rounded cursor-pointer'
 									onClick={() => toggleSection(section.label)}
 								>
-									<span className='text-breadcrumb'>{section.label}</span>
+									<Link to={section?.link || '#'}>
+										<span className='text-breadcrumb'>{section.label}</span>
+									</Link>
 									{section?.children?.length > 0 && (
 										<img
 											src={expandedSections[section.label] ? UpIcon : DownIcon}
