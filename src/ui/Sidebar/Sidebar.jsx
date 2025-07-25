@@ -7,6 +7,7 @@ import ProductsIcon from '../../assets/whitesvgicons/Products.svg';
 import CustomiseIcon from '../../assets/whitesvgicons/Customise.svg';
 import WorkshopIcon from '../../assets/whitesvgicons/workshop.svg';
 import PosIcon from '../../assets/whitesvgicons/pos.svg';
+import MarketingIcon from '../../assets/whitesvgicons/Marketing.svg';
 import SettingIcon from '../../assets/whitesvgicons/setting.svg';
 import WarrantyIcon from '../../assets/whitesvgicons/warranty.svg';
 import ReportIcon from '../../assets/whitesvgicons/report.svg';
@@ -27,8 +28,8 @@ export default function Sidebar() {
 		POS: [{ icon: PosIcon, alt: 'Pos', label: 'POS' }],
 		Ecommerce: [
 			{ icon: ProductsIcon, alt: 'Processing', label: 'Processing' },
-			{ icon: SettingIcon, alt: 'Marketing', label: 'Marketing' },
-			{ icon: SettingIcon, alt: 'Customize', label: 'Customize' },
+			{ icon: MarketingIcon, alt: 'Marketing', label: 'Marketing' },
+			{ icon: CustomiseIcon, alt: 'Customize', label: 'Customize' },
 			{ icon: SettingIcon, alt: 'Setups', label: 'Setups' },
 		],
 		Workshop: [{ icon: WorkshopIcon, alt: 'Workshop', label: 'Workshop' }],
