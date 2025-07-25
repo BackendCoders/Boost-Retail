@@ -9,7 +9,6 @@ import TablePaginationBar from '../../components/Ui/Table/TablePaginationBar';
 import BottomTablePagination from '../../components/Ui/Table/BottomTablePagination';
 import ProductSearchBar from '../../components/Ui/search/ProductSearchBar';
 
-
 const Product = () => {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -66,130 +65,108 @@ const Product = () => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   const columns = [
-  { key: 'partNumber', label: 'Part Number', type: 'text' },
-  { key: 'mpn', label: 'MPN', type: 'text' },
-  { key: 'title', label: 'Title', type: 'text' },
-  { key: 'make', label: 'Make', type: 'text' },
-  { key: 'size', label: 'Size', type: 'text' },
-  { key: 'colour', label: 'Colour', type: 'text' },
-  { key: 'year', label: 'Year', type: 'number' },
-  { key: 'price', label: 'Price', type: 'number' },
-  { key: 'promo', label: 'Promo', type: 'number' },
-  { key: 'stock', label: 'Stock', type: 'number' },
-  { key: 'current', label: 'Current', type: 'checkbox' },
-  { key: 'web', label: 'Web', type: 'checkbox' }
-];
+    { key: 'partNumber', label: 'Part Number', type: 'text' },
+    { key: 'mpn', label: 'MPN', type: 'text' },
+    { key: 'title', label: 'Title', type: 'text' },
+    { key: 'make', label: 'Make', type: 'text' },
+    { key: 'size', label: 'Size', type: 'text' },
+    { key: 'colour', label: 'Colour', type: 'text' },
+    { key: 'year', label: 'Year', type: 'number' },
+    { key: 'price', label: 'Price', type: 'number' },
+    { key: 'promo', label: 'Promo', type: 'number' },
+    { key: 'stock', label: 'Stock', type: 'number' },
+    { key: 'current', label: 'Current', type: 'checkbox' },
+    { key: 'web', label: 'Web', type: 'checkbox' },
+  ];
 
+  // Column visibility state
+  const allLabels = columns.map(col => col.label);
+  const [selectedColumns, setSelectedColumns] = useState(allLabels);
+  const displayCols = columns.filter(col => selectedColumns.includes(col.label));
 
   const handleRowSelect = (id, isSelected) => {
-    const updatedSelection = isSelected
-      ? [...selectedRows, id]
-      : selectedRows.filter(rowId => rowId !== id);
-    setSelectedRows(updatedSelection);
+    if (id === 'all') {
+      const allIds = isSelected ? data.map(r => r.id) : [];
+      setSelectedRows(allIds);
+    } else {
+      setSelectedRows(prev =>
+        isSelected ? [...prev, id] : prev.filter(i => i !== id)
+      );
+    }
   };
 
   const handleCheckboxToggle = (id, key, checked) => {
-    const updated = data.map(row =>
-      row.id === id ? { ...row, [key]: checked } : row
+    setData(prev =>
+      prev.map(r => (r.id === id ? { ...r, [key]: checked } : r))
     );
-    setData(updated);
-  };
-
-  const handleFilterChange = (key, value) => {
-    if (key === 'clear') {
-      // Clear filters logic here
-    } else {
-      // Handle filtering logic here
-    }
   };
 
   return (
     <div className="py-1 space-y-2">
-      <div className="py-3 border-b bg-white">
-  {/* Top Row: PRODUCTS Title & Advanced Toggle */}
-  <div className="flex items-center justify-between">
-  <h2 className="text-section-heading font-bold text-black">PRODUCTS</h2>
-  <div className="flex items-center gap-2">
-    <span className="text-lg font-semibold text-gray-700">Advanced Mode</span>
-    <label className="relative inline-flex items-center cursor-pointer">
-      <input
-        type="checkbox"
-        className="sr-only"
-        checked={showAdvancedSearch}
-        onChange={() => setShowAdvancedSearch(!showAdvancedSearch)}
-      />
-      <div
-        className={`w-11 h-6 rounded-full transition duration-300 ${
-          showAdvancedSearch ? 'bg-primary-base' : 'bg-gray-400'
-        }`}
-      >
-        <div
-          className={`absolute top-0.5 w-5 h-5 rounded-full transition-all duration-300 ${
-            showAdvancedSearch ? 'left-5 bg-white' : 'left-0.5 bg-white'
-          }`}
-        />
+      {/* Header */}
+      <div className="py-3 border-b bg-white px-4 flex items-center justify-between">
+        <h2 className="text-section-heading font-bold">PRODUCTS</h2>
+        <div className="flex items-center gap-2">
+          <span>Advanced Mode</span>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only"
+              checked={showAdvancedSearch}
+              onChange={() => setShowAdvancedSearch(p => !p)}
+            />
+            <div className={`w-11 h-6 rounded-full transition ${showAdvancedSearch ? 'bg-primary-base' : 'bg-gray-400'}`}>
+              <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transition ${showAdvancedSearch ? 'left-5' : 'left-0.5'}`}/>
+            </div>
+          </label>
+        </div>
       </div>
-    </label>
-  </div>
-</div>
 
-</div>
-  {/* Bottom Row: Breadcrumb */}
-  <div className='py-2 border-b bg-white'>
-    <p className="text-breadcrumb font-semibold text-gray-700">Catalog Setup &gt; Manage Products</p>
-  </div>
-  
-      {/* Search Bar */}
-      <div>
+      {/* Breadcrumb */}
+      <div className="py-2 border-b bg-white px-4">
+        <p className="text-breadcrumb">Catalog Setup &gt; Manage Products</p>
+      </div>
+
+      {/* Search */}
+      <div className="px-4">
         <ProductSearchBar ourStock={56} supplierStock={5} backOrder={12} />
-
       </div>
 
+      {/* Advanced Tools */}
       {showAdvancedSearch && (
-  <div className="flex flex-wrap gap-4 w-full">
-    <div className="flex-1 min-w-[320px] max-w-[40%]">
-      <AdvancedSearch />
-    </div>
-    <div className="flex-1 min-w-[280px] max-w-[30%]">
-      <BatchEdit />
-    </div>
-    <div className="flex-1 min-w-[260px] max-w-[30%]">
-      <StockLocation />
-    </div>
-  </div>
-)}
+        <div className="flex flex-wrap gap-4 px-4">
+          <div className="flex-1 min-w-[320px]"><AdvancedSearch /></div>
+          <div className="flex-1 min-w-[280px]"><BatchEdit /></div>
+          <div className="flex-1 min-w-[260px]"><StockLocation /></div>
+        </div>
+      )}
 
+      {/* Pagination & Column Settings */}
       <TablePaginationBar
         currentPage={currentPage}
         totalPages={100}
         productsPerPage={perPage}
-        onPageChange={(direction) =>
-          setCurrentPage(prev =>
-            direction === 'prev' ? Math.max(prev - 1, 1) : Math.min(prev + 1, 100)
-          )
-        }
-        onPerPageChange={(count) => setPerPage(count)}
+        onPageChange={dir => setCurrentPage(p => (dir === 'prev' ? Math.max(p-1,1) : Math.min(p+1,100)))}
+        onPerPageChange={setPerPage}
+        availableColumns={allLabels}
+        selectedColumns={selectedColumns}
+        onColumnsChange={setSelectedColumns}
       />
 
+      {/* Data Table */}
       <MainTable
-        columns={columns}
+        columns={displayCols}
         data={data}
         selectedRows={selectedRows}
         onRowSelect={handleRowSelect}
         onCheckboxToggle={handleCheckboxToggle}
-        onFilterChange={handleFilterChange}
       />
 
+      {/* Bottom Pagination */}
       <BottomTablePagination
         currentPage={currentPage}
         totalPages={100}
-        productsPerPage={perPage}
-        onPageChange={(direction) =>
-          setCurrentPage(prev =>
-            direction === 'prev' ? Math.max(prev - 1, 1) : Math.min(prev + 1, 100)
-          )
-        }
-        onPerPageChange={(count) => setPerPage(count)}
+        onPageChange={dir => setCurrentPage(p => (dir === 'prev' ? Math.max(p-1,1) : Math.min(p+1,100)))}
       />
     </div>
   );
