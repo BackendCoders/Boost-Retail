@@ -40,7 +40,7 @@ export default function Header() {
 					onClick={() => dispatch(closeSidebar(!sidebarOpen))}
 					className={`text-white flex justify-center items-center h-full w-[60px] ${
 						sidebarOpen
-							? 'bg-transparent border border-gray-500'
+							? 'bg-transparent border border-border-input'
 							: 'bg-primary-base'
 					} '`}
 				>
@@ -49,7 +49,7 @@ export default function Header() {
 				<div className='font-bold min-w-[13.37rem]'>
 					<h1 className='text-page-title tracking-wide'>{activeLabel}</h1>
 				</div>
-				<div className='ml-2 flex items-center gap-4 border-l border-l-gray-500 h-full'>
+				<div className='ml-2 flex items-center gap-4 border-l border-l-border-input h-full'>
 					<img
 						src={AccountIcon}
 						className='ml-2'

@@ -354,8 +354,8 @@ export const menuData = {
 			link: '#',
 			children: [
 				{
-					label: 'Product Feeds',
-					path: '/back-office/products/data-import/product-feeds',
+					label: 'SIM Products',
+					path: '/back-office/products/data-import/sim-products',
 				},
 				{
 					label: 'Stock Feeds',
