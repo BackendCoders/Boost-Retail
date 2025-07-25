@@ -110,7 +110,7 @@ const Product = () => {
   <div className="flex items-center justify-between">
   <h2 className="text-section-heading font-bold text-black">PRODUCTS</h2>
   <div className="flex items-center gap-2">
-    <span className="text-section-heading font-semibold text-gray-700">Advanced Mode</span>
+    <span className="text-lg font-semibold text-gray-700">Advanced Mode</span>
     <label className="relative inline-flex items-center cursor-pointer">
       <input
         type="checkbox"
