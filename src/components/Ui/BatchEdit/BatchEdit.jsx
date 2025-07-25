@@ -20,12 +20,11 @@ const BatchEdit = () => {
   const [applyEnding, setApplyEnding] = useState(false);
   const [saleReason, setSaleReason] = useState("");
 
-  const handleCheckboxChange = (field) => {
+  const handleCheckboxChange = (field) =>
     setFields((prev) => ({ ...prev, [field]: !prev[field] }));
-  };
 
   const handleApply = () => {
-    console.log("Batch Edit:", {
+    console.log({
       selected,
       password,
       fields,
@@ -35,81 +34,98 @@ const BatchEdit = () => {
     });
   };
 
-  return (
-    <div className="p-4 bg-gray-100 rounded-lg w-full border border-gray-300 min-h-[313px]">
-      <h2 className="font-medium text-sm mb-3">Batch Edit</h2>
+  const priceTypes = Object.keys(fields);
 
-      <div className="flex items-center gap-2 mb-4">
+  return (
+    <div className="p-4 bg-gray-100 rounded-lg border border-gray-320 w-full">
+      {/* Heading */}
+      <h2 className="font-semibold text-base mb-4">Batch Edit</h2>
+
+      {/* Top bar: dropdown, password, button */}
+      <div className="flex items-center gap-2 mb-6">
         <select
           value={selected}
           onChange={(e) => setSelected(e.target.value)}
-          className="border border-gray-300 px-2 py-1 rounded text-xs bg-white w-[90px]"
+          className="border border-gray-300 px-3 py-1 rounded text-xs bg-white"
         >
-          <option>Price</option>
-          <option>Cost</option>
-          <option>RRP</option>
+          {priceTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
         </select>
 
         <input
           type="password"
           placeholder="Enter Password"
-          className="border border-gray-300 px-2 py-1 rounded text-xs flex-1 bg-white"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="border border-gray-300 px-3 py-1 rounded text-xs flex-1 bg-white"
         />
 
         <button
           onClick={handleApply}
-          className="bg-primary-base hover:bg-primary-base text-white text-xs font-medium px-3 py-[6px] rounded-2xl"
+          className="bg-primary-base hover:bg-blue-600 text-white text-xs font-medium px-4 py-1 rounded-2xl"
         >
           APPLY
         </button>
       </div>
 
-      {Object.keys(fields).map((key) => (
-        <div key={key} className="flex items-center gap-2 mb-2">
-          <input
-            type="checkbox"
-            checked={fields[key]}
-            onChange={() => handleCheckboxChange(key)}
-            className="w-3.5 h-3.5 accent-primary-base"
-          />
-          <input
-            type="text"
-            value={values[key]}
-            onChange={(e) => setValues({ ...values, [key]: e.target.value })}
-            disabled={!fields[key]}
-            className={`border border-gray-300 px-2 py-1 rounded text-xs w-[90px] bg-white ${
-              !fields[key] ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          />
+      {/* Single‐column list of all price types */}
+      <div className="space-y-3">
+        {priceTypes.map((key) => (
+          <div key={key} className="flex items-center gap-2">
+            {/* checkbox + label */}
+            <input
+              type="checkbox"
+              checked={fields[key]}
+              onChange={() => handleCheckboxChange(key)}
+              className="w-4 h-4 accent-blue-500"
+            />
+            <span className="text-xs w-16">{key}</span>
 
-          {key === "Web" && (
-            <label className="flex items-center gap-2 text-xs ml-2">
-              <input
-                type="checkbox"
-                checked={applyEnding}
-                onChange={() => setApplyEnding(!applyEnding)}
-                className="accent-primary-base"
-              />
-              Apply £0.99 Ending
-            </label>
-          )}
-
-          {key === "Sale" && (
+            {/* main value input */}
             <input
               type="text"
-              placeholder="Enter Sale Reason"
-              value={saleReason}
-              onChange={(e) => setSaleReason(e.target.value)}
-              disabled={!fields["Sale"]}
-              className={`border border-gray-300 px-2 py-1 rounded text-xs flex-1 bg-white ${
-                !fields["Sale"] ? "opacity-50 cursor-not-allowed" : ""
+              value={values[key]}
+              onChange={(e) =>
+                setValues((prev) => ({ ...prev, [key]: e.target.value }))
+              }
+              disabled={!fields[key]}
+              className={`border border-gray-300 px-2 py-1 rounded text-xs w-[90px] bg-white ${
+                !fields[key] ? "opacity-50 cursor-not-allowed" : ""
               }`}
             />
-          )}
-        </div>
-      ))}
+
+            {/* Web: .99 ending */}
+            {key === "Web" && (
+              <label className="ml-4 flex items-center gap-1 text-xs">
+                <input
+                  type="checkbox"
+                  checked={applyEnding}
+                  onChange={() => setApplyEnding((v) => !v)}
+                  className="accent-blue-500"
+                />
+                Apply £0.99 Ending
+              </label>
+            )}
+
+            {/* Sale: show reason input */}
+            {key === "Sale" && (
+              <input
+                type="text"
+                placeholder="Enter Sale Reason"
+                value={saleReason}
+                onChange={(e) => setSaleReason(e.target.value)}
+                disabled={!fields.Sale}
+                className={`border border-gray-300 px-2 py-1 rounded text-xs flex-1 bg-white ${
+                  !fields.Sale ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              />
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

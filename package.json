@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
+    "@syncfusion/ej2-react-buttons": "^30.1.37",
+    "@syncfusion/ej2-react-popups": "^30.1.40",
+    "@syncfusion/ej2-react-querybuilder": "^30.1.41",
     "@tippyjs/react": "^4.2.6",
+    "codemirror": "^6.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
