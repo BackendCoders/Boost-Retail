@@ -8,8 +8,6 @@ import MainTable from '../../components/Ui/Table/MainTable';
 import TablePaginationBar from '../../components/Ui/Table/TablePaginationBar';
 import ProductSearchBar from '../../components/Ui/search/ProductSearchBar';
 
-import Repeat from '../../assets/svgIcons/Repeat-Thin.svg'
-
 
 const Product = () => {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
