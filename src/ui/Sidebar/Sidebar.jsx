@@ -57,7 +57,7 @@ export default function Sidebar() {
 					sidebarOpen ? 'w-[3.75rem]' : 'w-0'
 				} bg-primary-base transition-all duration-300 overflow-hidden`}
 			>
-				<div className='flex flex-col items-center py-4 text-white space-y-2 w-full'>
+				<div className='flex flex-col items-center w-full'>
 					{miniSideMenu.map((item, index) => (
 						<SidebarIconItem
 							key={index}

@@ -49,7 +49,7 @@ export default function SidebarDrawer({
 		<div
 			ref={drawerRef}
 			className={`fixed left-[3.75rem] top-[3.75rem] bottom-0 ${
-				activeItem && sidebarOpen ? 'w-[16rem]' : 'w-0 overflow-hidden'
+				activeItem && sidebarOpen ? 'w-[15.79rem]' : 'w-0 overflow-hidden'
 			}  bg-white shadow-lg z-40 transition-all duration-300`}
 		>
 			{activeItem && (

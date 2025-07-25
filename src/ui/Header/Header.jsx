@@ -46,7 +46,7 @@ export default function Header() {
 				>
 					{!sidebarOpen ? <img src={MenuIcon} /> : <img src={ArrowLeftIcon} />}
 				</button>
-				<div className='font-bold py-4 pr-2'>
+				<div className='font-bold min-w-[13.37rem]'>
 					<h1 className='text-page-title tracking-wide'>{activeLabel}</h1>
 				</div>
 				<div className='ml-2 flex items-center gap-4 border-l border-l-gray-500 h-full'>
