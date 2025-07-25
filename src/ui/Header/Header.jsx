@@ -6,9 +6,9 @@ import PosIcon from '../../assets/whitesvgicons/pos.svg';
 import EcommerceIcon from '../../assets/whitesvgicons/Ecommerce-Thin.svg';
 import ReportIcon from '../../assets/whitesvgicons/report.svg';
 import SettingIcon from '../../assets/whitesvgicons/setting.svg';
-import WarrantyIcon from '../../assets/whitesvgicons/warranty.svg';
+import WarrantyIcon from '../../assets/svgStanderedWhiteIcon/WarrantyStd.svg';
 import WorkshopIcon from '../../assets/whitesvgicons/workshop.svg';
-import BackOfficeIcon from '../../assets/whitesvgicons/Back-Office-Thin.svg';
+import BackOfficeIcon from '../../assets/svgStanderedWhiteIcon/BackOfficeStd.svg';
 import ArrowLeftIcon from '../../assets/whitesvgicons/Arrow-Large-Left.svg';
 import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,7 +54,7 @@ export default function Header() {
 						src={AccountIcon}
 						className='ml-2'
 					/>
-					<div className='text-xs text-gray-200 font-normal'>
+					<div className='text-small-detail text-gray-200 font-normal'>
 						<p>User - India</p>
 						<p>test@gamil.com</p>
 					</div>
@@ -80,7 +80,7 @@ function SidebarIconItem({ icon, alt, onclick, active }) {
 	return (
 		<li
 			className={`${
-				active ? 'bg-primary-select' : 'hover:bg-primary-select'
+				active ? 'bg-primary-base' : 'hover:bg-primary-base'
 			} flex justify-center items-center py-4 px-4 transition-all duration-300 h-full w-[3.75rem] cursor-pointer`}
 			onClick={onclick}
 		>
