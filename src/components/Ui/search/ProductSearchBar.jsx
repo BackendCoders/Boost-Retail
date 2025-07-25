@@ -1,4 +1,5 @@
 import React from "react";
+import RepeatIcon from "../../../assets/svgIcons/Repeat-Thin.svg";
 
 // ✅ Reusable Toggle Component
 const ToggleSwitch = ({ label, checked = true }) => (
@@ -15,60 +16,58 @@ const ToggleSwitch = ({ label, checked = true }) => (
 
 const ProductSearchBar = () => {
   return (
-    <div className="flex items-center justify-between bg-white gap-4">
+    <div className="flex items-center justify-between bg-white gap-4 px-3 py-3">
       {/* Left: Search + Filters */}
-     <div className="flex flex-col gap-1 px-1 py-3 bg-white">
-      <p className="text-sm font-bold text-black">Search</p>
+      <div className="flex flex-col gap-1">
+        <p className="text-sm font-bold text-black">Search</p>
 
-      {/* Search Row */}
-      <div className="flex items-center gap-3">
-        {/* Input */}
-        <input
-          type="text"
-          placeholder="Enter Part Number / MPN / Barcode / Title"
-          className="w-[360px] px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:ring-1 focus:ring-primary-base"
-        />
+        <div className="flex items-center gap-3">
+          {/* Search Input */}
+          <input
+            type="text"
+            placeholder="Enter Part Number / MPN / Barcode / Title"
+            className="w-[360px] px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:ring-1 focus:ring-primary-base"
+          />
 
-        {/* Refresh Icon */}
-        <button
-          type="button"
-          className="text-gray-500 hover:text-black text-lg"
-          title="Refresh"
-        >
-          ↻
-        </button>
+          {/* Refresh Icon */}
+          <button
+            type="button"
+            title="Refresh"
+            className="p-2 rounded-md text-gray-500 hover:text-black hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center"
+          >
+            <img src={RepeatIcon} alt="Refresh" className="w-5 h-5" />
+          </button>
 
-        {/* Checkboxes */}
-        <ToggleSwitch label="EPOS" />
-        <ToggleSwitch label="SIM" />
+          {/* Toggle Switches */}
+          <ToggleSwitch label="EPOS" />
+          <ToggleSwitch label="SIM" />
+        </div>
       </div>
-    </div>
 
       {/* Right: Stock Summary Cards */}
       <div className="flex items-center gap-3">
         {/* Our Stock */}
-        <div>
-        <div className="w-16 h-16 border border-primary-base rounded-md flex flex-col items-center justify-center text-xs text-primary-base font-medium">
-          <span className="text-lg font-bold">56</span>
-          
-        </div>
-        <p className="text-sm">Our Stock</p>
+        <div className="flex flex-col items-center gap-1">
+          <div className="w-16 h-16 border border-primary-base rounded-md flex items-center justify-center text-lg font-bold text-primary-base">
+            56
+          </div>
+          <p className="text-sm text-black">Our Stock</p>
         </div>
 
         {/* Supplier Stock */}
-        <div>
-        <div className="w-16 h-16 border border-primary-base rounded-md flex flex-col items-center justify-center text-xs text-primary-base font-medium">
-          <span className="text-lg font-bold">5</span>
-        </div>
-        <p className="text-sm">Supp Stock</p>
+        <div className="flex flex-col items-center gap-1">
+          <div className="w-16 h-16 border border-primary-base rounded-md flex items-center justify-center text-lg font-bold text-primary-base">
+            5
+          </div>
+          <p className="text-sm text-black">Supp Stock</p>
         </div>
 
         {/* Back Order */}
-        <div>
-        <div className="w-16 h-16 border border-primary-base rounded-md flex flex-col items-center justify-center text-xs text-primary-base font-medium">
-          <span className="text-lg font-bold">12</span>
-        </div>
-        <p className="text-sm">Back Order</p>
+        <div className="flex flex-col items-center gap-1">
+          <div className="w-16 h-16 border border-primary-base rounded-md flex items-center justify-center text-lg font-bold text-primary-base">
+            12
+          </div>
+          <p className="text-sm text-black">Back Order</p>
         </div>
 
         {/* Image Placeholder */}

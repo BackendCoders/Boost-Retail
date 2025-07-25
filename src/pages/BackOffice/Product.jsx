@@ -8,6 +8,8 @@ import MainTable from '../../components/Ui/Table/MainTable';
 import TablePaginationBar from '../../components/Ui/Table/TablePaginationBar';
 import ProductSearchBar from '../../components/Ui/search/ProductSearchBar';
 
+import Repeat from '../../assets/svgIcons/Repeat-Thin.svg'
+
 
 const Product = () => {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
@@ -65,19 +67,20 @@ const Product = () => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   const columns = [
-    { key: 'partNumber', label: 'Part Number' },
-    { key: 'mpn', label: 'MPN' },
-    { key: 'title', label: 'Title' },
-    { key: 'make', label: 'Make' },
-    { key: 'size', label: 'Size' },
-    { key: 'colour', label: 'Colour' },
-    { key: 'year', label: 'Year' },
-    { key: 'price', label: 'Price' },
-    { key: 'promo', label: 'Promo' },
-    { key: 'stock', label: 'Stock' },
-    { key: 'current', label: 'Current', type: 'checkbox' },
-    { key: 'web', label: 'Web', type: 'checkbox' },
-  ];
+  { key: 'partNumber', label: 'Part Number', type: 'text' },
+  { key: 'mpn', label: 'MPN', type: 'text' },
+  { key: 'title', label: 'Title', type: 'text' },
+  { key: 'make', label: 'Make', type: 'text' },
+  { key: 'size', label: 'Size', type: 'text' },
+  { key: 'colour', label: 'Colour', type: 'text' },
+  { key: 'year', label: 'Year', type: 'number' },
+  { key: 'price', label: 'Price', type: 'number' },
+  { key: 'promo', label: 'Promo', type: 'number' },
+  { key: 'stock', label: 'Stock', type: 'number' },
+  { key: 'current', label: 'Current', type: 'checkbox' },
+  { key: 'web', label: 'Web', type: 'checkbox' }
+];
+
 
   const handleRowSelect = (id, isSelected) => {
     const updatedSelection = isSelected
@@ -108,7 +111,7 @@ const Product = () => {
   <div className="flex items-center justify-between">
   <h2 className="text-lg font-bold text-black">PRODUCTS</h2>
   <div className="flex items-center gap-2">
-    <span className="text-sm font-semibold text-gray-700">Advanced Mode</span>
+    <span className="section-heading font-semibold text-gray-700">Advanced Mode</span>
     <label className="relative inline-flex items-center cursor-pointer">
       <input
         type="checkbox"
