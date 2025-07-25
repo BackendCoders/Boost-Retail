@@ -108,9 +108,9 @@ const MainTable = ({
           </tr>
 
           {/* Filter row */}
-          <tr className="bg-gray-200">
+          <tr className="bg-gray-300">
             <td
-              className="p-4 text-blue-500 border text-center cursor-pointer"
+              className="p-4 text-blue-500 font-semibold border text-center cursor-pointer"
               onClick={handleClearFilters}
             >
               Clear
@@ -126,7 +126,7 @@ const MainTable = ({
                       onChange={e => handleFilterChange(col.key, e.target.value)}
                     />
                     <div
-                      className="p-1 rounded cursor-pointer bg-gray-200 hover:bg-gray-300"
+                      className="p-1 rounded cursor-pointer hover:bg-gray-300"
                       onClick={() =>
                         setActiveFilterCol(
                           activeFilterCol === col.key ? null : col.key

@@ -106,26 +106,31 @@ const Product = () => {
       <div className="py-3 border-b bg-white">
   {/* Top Row: PRODUCTS Title & Advanced Toggle */}
   <div className="flex items-center justify-between">
-    <h2 className="text-lg font-bold text-black">PRODUCTS</h2>
-    <div className="flex items-center gap-2">
-      <span className="text-sm font-semibold text-gray-700">Advanced Mode</span>
-      <label className="relative inline-flex items-center cursor-pointer">
-        <input
-          type="checkbox"
-          className="sr-only"
-          checked={showAdvancedSearch}
-          onChange={() => setShowAdvancedSearch(!showAdvancedSearch)}
+  <h2 className="text-lg font-bold text-black">PRODUCTS</h2>
+  <div className="flex items-center gap-2">
+    <span className="text-sm font-semibold text-gray-700">Advanced Mode</span>
+    <label className="relative inline-flex items-center cursor-pointer">
+      <input
+        type="checkbox"
+        className="sr-only"
+        checked={showAdvancedSearch}
+        onChange={() => setShowAdvancedSearch(!showAdvancedSearch)}
+      />
+      <div
+        className={`w-11 h-6 rounded-full transition duration-300 ${
+          showAdvancedSearch ? 'bg-primary-base' : 'bg-gray-400'
+        }`}
+      >
+        <div
+          className={`absolute top-0.5 w-5 h-5 rounded-full transition-all duration-300 ${
+            showAdvancedSearch ? 'left-5 bg-white' : 'left-0.5 bg-white'
+          }`}
         />
-        <div className="w-11 h-6 bg-primary-base rounded-full peer-focus:outline-none transition duration-300">
-          <div
-            className={`absolute top-0.5 w-5 h-5 rounded-full transition-all duration-300 ${
-              showAdvancedSearch ? 'left-5 bg-white' : 'left-0.5 bg-white'
-            }`}
-          />
-        </div>
-      </label>
-    </div>
+      </div>
+    </label>
   </div>
+</div>
+
 </div>
   {/* Bottom Row: Breadcrumb */}
   <div className='py-2 border-b bg-white'>
