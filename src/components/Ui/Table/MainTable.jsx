@@ -83,7 +83,7 @@ const MainTable = ({
       ref={wrapperRef}
       className="overflow-x-auto rounded-md border border-gray-300 relative"
     >
-      <table className="min-w-full table-auto text-sm">
+      <table className="min-w-full table-auto data-header">
         <thead className="bg-white">
           {/* Sortable headers */}
           <tr>
@@ -175,7 +175,7 @@ const MainTable = ({
             return (
               <tr
                 key={row.id}
-                className={`border text-sm ${
+                className={`border data-body ${
                   isSelected
                     ? 'text-white bg-primary-base'
                     : 'hover:bg-primary-base hover:text-white'
@@ -195,6 +195,7 @@ const MainTable = ({
                     {col.type === 'checkbox' ? (
                       <input
                         type="checkbox"
+                        className=''
                         checked={row[col.key]}
                         onChange={e =>
                           onCheckboxToggle(row.id, col.key, e.target.checked)
