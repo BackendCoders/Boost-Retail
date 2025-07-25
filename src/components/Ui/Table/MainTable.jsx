@@ -177,7 +177,7 @@ const MainTable = ({
                 key={row.id}
                 className={`border text-sm ${
                   isSelected
-                    ? 'text-black bg-yellow-100'
+                    ? 'text-white bg-primary-base'
                     : 'hover:bg-primary-base hover:text-white'
                 }`}
               >
