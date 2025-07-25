@@ -332,8 +332,8 @@ export default function AppRoutes() {
 				/>
 				{/* Product - Data Imports */}
 				<Route
-					path='/back-office/products/data-import/product-feeds'
-					element={<div>Product Feeds</div>}
+					path='/back-office/products/data-import/sim-products'
+					element={<div>Sim Products</div>}
 				/>
 				<Route
 					path='/back-office/products/data-import/stock-feeds'
