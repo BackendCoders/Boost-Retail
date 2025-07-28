@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "name": "Category 1 - Electronics",
+    "count": 6000,
+    "children": [
+      {
+        "id": 11,
+        "name": "Category 2 - Mobile Phones",
+        "count": 2000,
+        "children": [
+          {
+            "id": 111,
+            "name": "Category 3 - Android Phones",
+            "count": 1200,
+            "children": []
+          },
+          {
+            "id": 112,
+            "name": "Category 3 - iPhones",
+            "count": 800,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "name": "Category 2 - Laptops",
+        "count": 1500,
+        "children": [
+          {
+            "id": 121,
+            "name": "Category 3 - Gaming Laptops",
+            "count": 700,
+            "children": []
+          },
+          {
+            "id": 122,
+            "name": "Category 3 - Business Laptops",
+            "count": 800,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "name": "Category 2 - Televisions",
+        "count": 2500,
+        "children": [
+          {
+            "id": 131,
+            "name": "Category 3 - LED TVs",
+            "count": 1200,
+            "children": []
+          },
+          {
+            "id": 132,
+            "name": "Category 3 - Smart TVs",
+            "count": 1300,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Category 1 - Fashion",
+    "count": 8000,
+    "children": [
+      {
+        "id": 21,
+        "name": "Category 2 - Men's Clothing",
+        "count": 4000,
+        "children": [
+          {
+            "id": 211,
+            "name": "Category 3 - Shirts",
+            "count": 2000,
+            "children": []
+          },
+          {
+            "id": 212,
+            "name": "Category 3 - Jeans",
+            "count": 2000,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "name": "Category 2 - Women's Clothing",
+        "count": 3000,
+        "children": [
+          {
+            "id": 221,
+            "name": "Category 3 - Dresses",
+            "count": 1500,
+            "children": []
+          },
+          {
+            "id": 222,
+            "name": "Category 3 - Tops",
+            "count": 1500,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "name": "Category 2 - Footwear",
+        "count": 1000,
+        "children": [
+          {
+            "id": 231,
+            "name": "Category 3 - Sneakers",
+            "count": 500,
+            "children": []
+          },
+          {
+            "id": 232,
+            "name": "Category 3 - Sandals",
+            "count": 500,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Category 1 - Home & Kitchen",
+    "count": 5000,
+    "children": [
+      {
+        "id": 31,
+        "name": "Category 2 - Furniture",
+        "count": 2000,
+        "children": [
+          {
+            "id": 311,
+            "name": "Category 3 - Sofas",
+            "count": 1000,
+            "children": []
+          },
+          {
+            "id": 312,
+            "name": "Category 3 - Beds",
+            "count": 1000,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 32,
+        "name": "Category 2 - Kitchen Appliances",
+        "count": 2000,
+        "children": [
+          {
+            "id": 321,
+            "name": "Category 3 - Microwaves",
+            "count": 1000,
+            "children": []
+          },
+          {
+            "id": 322,
+            "name": "Category 3 - Mixer Grinders",
+            "count": 1000,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 33,
+        "name": "Category 2 - Decor",
+        "count": 1000,
+        "children": [
+          {
+            "id": 331,
+            "name": "Category 3 - Wall Art",
+            "count": 500,
+            "children": []
+          },
+          {
+            "id": 332,
+            "name": "Category 3 - Clocks",
+            "count": 500,
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
