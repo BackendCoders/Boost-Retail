@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Maintainsupplierfeeds = () => {
+const MaintainSupplierFeeds = () => {
   return (
     <div>Maintainsupplierfeeds</div>
   )
 }
 
-export default Maintainsupplierfeeds
+export default MaintainSupplierFeeds

@@ -1,10 +1,14 @@
 /** @format */
 
 import { Route, Routes } from 'react-router-dom';
-import Product from '../pages/BackOffice/Product';
-import SimProduct from '../pages/BackOffice/DataImports/SimProduct'
+import Product from '../pages/BackOffice/CatalogSetup/Product';
+import SimProduct from '../pages/BackOffice/DataImports/SimProduct';
 import AppLayout from '../layout/AppLayout';
 import Dashboard from '../pages/dashboard/dashboard';
+import MaintainCategory from '../pages/SIM/Categorization/MaintainCategory';
+import MaintainLookupTables from '../pages/SIM/Categorization/MaintainLookupTables';
+import MaintainSimProducts from '../pages/SIM/SimProducts/MaintainSimProducts';
+import MaintainSupplierFeeds from '../pages/SIM/SupplierFeeds/Maintainsupplierfeeds';
 
 export default function AppRoutes() {
 	return (
@@ -435,22 +439,22 @@ export default function AppRoutes() {
 				{/* Supplier Feeds - Maintain Supplier Feeds */}
 				<Route
 					path='/sim/supplier-feeds/maintain-supplier-feeds'
-					element={<div>Maintain Supplier Feeds</div>}
+					element={<MaintainSupplierFeeds />}
 				/>
 				{/* Categorization - Maintain Categories */}
 				<Route
 					path='/sim/categorization/maintain-categories'
-					element={<div>Maintain Categories</div>}
+					element={<MaintainCategory />}
 				/>
 				{/* Categorization - Maintain Lookup Tables */}
 				<Route
 					path='/sim/categorization/maintain-lookup-tables'
-					element={<div>Maintain Lookup Tables</div>}
+					element={<MaintainLookupTables />}
 				/>
 				{/* SimProducts - Maintain Sim Products */}
 				<Route
 					path='/sim/sim-products/maintain-sim-products'
-					element={<div>Maintain Sim Products</div>}
+					element={<MaintainSimProducts />}
 				/>
 				{/* MissingData - Missing Categories */}
 				<Route
