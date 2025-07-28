@@ -3,14 +3,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 import SidebarDrawer from './SidebarDrawer';
-import { setActiveMiniMenu } from '../../slice/sidebarSlice';
+import { setActiveItem, setActiveMiniMenu } from '../../slice/sidebarSlice';
 import { sideMenus } from './sideMenu.config';
 
 export default function Sidebar() {
 	const dispatch = useDispatch();
-	const { activeTopNavigation, sidebarOpen, activeMiniMenu } = useSelector(
-		(state) => state.sidebar
-	);
+	const {
+		activeTopNavigation,
+		sidebarOpen,
+		activeMiniMenu,
+		activeItem,
+	} = useSelector((state) => state.sidebar);
 
 	const miniSideMenu = sideMenus[activeTopNavigation] || [];
 
@@ -31,7 +34,7 @@ export default function Sidebar() {
 							key={index}
 							icon={item.icon}
 							alt={item.alt}
-							activeItem={activeMiniMenu}
+							activeItem={activeItem}
 							onClick={(e) => {
 								e.stopPropagation();
 								dispatch(
@@ -39,6 +42,7 @@ export default function Sidebar() {
 										item.alt === activeMiniMenu ? null : item.alt
 									)
 								);
+								dispatch(setActiveItem(item.alt));
 							}}
 						/>
 					))}

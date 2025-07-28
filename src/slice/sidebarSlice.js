@@ -5,6 +5,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	activeTopNavigation: 'Home',
 	activeMiniMenu: null,
+	activeItem: null,
 	sidebarOpen: false,
 };
 
@@ -19,13 +20,20 @@ const sidebarSlice = createSlice({
 		setActiveMiniMenu(state, action) {
 			state.activeMiniMenu = action.payload;
 		},
+		setActiveItem(state, action) {
+			state.activeItem = action.payload;
+		},
 		closeSidebar(state, action) {
 			state.sidebarOpen = action.payload;
 		},
 	},
 });
 
-export const { setActiveTopNavigation, setActiveMiniMenu, closeSidebar } =
-	sidebarSlice.actions;
+export const {
+	setActiveTopNavigation,
+	setActiveMiniMenu,
+	closeSidebar,
+	setActiveItem,
+} = sidebarSlice.actions;
 
 export default sidebarSlice.reducer;
