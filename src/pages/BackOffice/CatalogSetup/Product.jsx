@@ -1,13 +1,13 @@
 /** @format */
 
 import React, { useState } from 'react';
-import AdvancedSearch from '../../components/Ui/AdvancedSearch/AdvancedSearch';
-import BatchEdit from '../../components/Ui/BatchEdit/BatchEdit';
-import StockLocation from '../../components/Ui/Stock/StockLocation';
-import MainTable from '../../components/Ui/Table/MainTable';
-import TablePaginationBar from '../../components/Ui/Table/TablePaginationBar';
-import BottomTablePagination from '../../components/Ui/Table/BottomTablePagination';
-import ProductSearchBar from '../../components/Ui/search/ProductSearchBar';
+import AdvancedSearch from '../../../components/Ui/AdvancedSearch/AdvancedSearch';
+import BatchEdit from '../../../components/Ui/BatchEdit/BatchEdit';
+import StockLocation from '../../../components/Ui/Stock/StockLocation';
+import MainTable from '../../../components/Ui/Table/MainTable';
+import TablePaginationBar from '../../../components/Ui/Table/TablePaginationBar';
+import BottomTablePagination from '../../../components/Ui/Table/BottomTablePagination';
+import ProductSearchBar from '../../../components/Ui/search/ProductSearchBar';
 
 const Product = () => {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
