@@ -2,6 +2,7 @@
 
 import { Route, Routes } from 'react-router-dom';
 import Product from '../pages/BackOffice/Product';
+import SimProduct from '../pages/BackOffice/DataImports/SimProduct'
 import AppLayout from '../layout/AppLayout';
 import Dashboard from '../pages/dashboard/dashboard';
 
@@ -333,7 +334,7 @@ export default function AppRoutes() {
 				{/* Product - Data Imports */}
 				<Route
 					path='/back-office/products/data-import/sim-products'
-					element={<div>Sim Products</div>}
+					element={<SimProduct />}
 				/>
 				<Route
 					path='/back-office/products/data-import/stock-feeds'
