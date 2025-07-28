@@ -11,15 +11,15 @@ const CategoryEditPanel = () => {
         <input
           type="text"
           placeholder="Category Name"
-          className="rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+          className="rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 border-2"
+        /> 
       </div>
 
       {/* Parent Category Dropdown */}
       <div className="mb-5">
         <label className="block text-sm font-medium text-gray-700 mb-1">Parent category:</label>
         <select
-          className="rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 border-2 focus:ring-blue-500"
         >
           <option>Parent Name</option>
         </select>
