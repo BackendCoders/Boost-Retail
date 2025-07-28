@@ -1,5 +1,4 @@
 /** @format */
-
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
@@ -26,19 +25,19 @@ const numberFilterOptions = [
 ];
 
 const applyTextFilter = (value, filterValue, type) => {
-	const val = String(value)?.toLowerCase();
-	const filt = String(filterValue)?.toLowerCase();
+	const val = String(value ?? '')?.toLowerCase();
+	const filt = String(filterValue ?? '')?.toLowerCase();
 	switch (type) {
 		case 'Contains':
-			return val?.includes(filt);
+			return val.includes(filt);
 		case 'Starts with':
-			return val?.startsWith(filt);
+			return val.startsWith(filt);
 		case 'Equals':
 			return val === filt;
 		case 'Ends with':
-			return val?.endsWith(filt);
+			return val.endsWith(filt);
 		case 'Not contain':
-			return !val?.includes(filt);
+			return !val.includes(filt);
 		case 'Not equal':
 			return val !== filt;
 		default:
@@ -68,12 +67,15 @@ const applyNumberFilter = (value, filterValue, type) => {
 	}
 };
 
-const MainTable = ({
+const Table = ({
 	columns,
 	data,
-	selectedRows,
+	selectedRow = 0,
 	onRowSelect,
+	onRowClick,
 	onCheckboxToggle,
+	enableRowSelection = true,
+	showFilterRow = true,
 }) => {
 	const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
 	const [filters, setFilters] = useState({});
@@ -89,7 +91,6 @@ const MainTable = ({
 		const reordered = Array.from(columnsState);
 		const [moved] = reordered.splice(source.index, 1);
 		reordered.splice(destination.index, 0, moved);
-
 		setColumnsState(reordered);
 	};
 
@@ -129,21 +130,22 @@ const MainTable = ({
 
 	const filteredAndSortedData = useMemo(() => {
 		let rows = [...data];
-		// Apply filters
-		rows = rows.filter((row) => {
-			return columns.every((col) => {
-				const key = col.key;
-				if (col.type === 'checkbox') return true;
-				const filterVal = filters[key];
-				if (!filterVal) return true;
-				const type =
-					filterTypes[key] || (col.type === 'number' ? 'Equals' : 'Contains');
-				return col.type === 'number'
-					? applyNumberFilter(row[key], filterVal, type)
-					: applyTextFilter(row[key], filterVal, type);
-			});
-		});
-		// Apply sort
+		rows = showFilterRow
+			? rows.filter((row) => {
+					return columnsState.every((col) => {
+						const key = col.key;
+						if (col.type === 'checkbox') return true;
+						const filterVal = filters[key];
+						if (!filterVal) return true;
+						const type =
+							filterTypes[key] ||
+							(col.type === 'number' ? 'Equals' : 'Contains');
+						return col.type === 'number'
+							? applyNumberFilter(row[key], filterVal, type)
+							: applyTextFilter(row[key], filterVal, type);
+					});
+			  })
+			: rows;
 		if (sortConfig.key && sortConfig.direction) {
 			rows.sort((a, b) => {
 				const aVal = a[sortConfig.key];
@@ -154,7 +156,15 @@ const MainTable = ({
 			});
 		}
 		return rows;
-	}, [data, filters, filterTypes, sortConfig, columns]);
+	}, [
+		data,
+		showFilterRow,
+		sortConfig.key,
+		sortConfig.direction,
+		columnsState,
+		filters,
+		filterTypes,
+	]);
 
 	return (
 		<div
@@ -173,12 +183,14 @@ const MainTable = ({
 									ref={provided.innerRef}
 									{...provided.droppableProps}
 								>
-									<th className='p-4 border text-center'>
-										<input
-											type='checkbox'
-											onChange={(e) => onRowSelect('all', e.target.checked)}
-										/>
-									</th>
+									{enableRowSelection && (
+										<th className='p-4 border text-center'>
+											<input
+												type='checkbox'
+												onChange={(e) => onRowSelect?.('all', e.target.checked)}
+											/>
+										</th>
+									)}
 									{columnsState.map((col, index) => (
 										<Draggable
 											key={col.key}
@@ -220,108 +232,122 @@ const MainTable = ({
 						</Droppable>
 					</DragDropContext>
 
-					<tr className='bg-gray-300'>
-						<td
-							className='p-4 text-blue-500 font-semibold border text-center cursor-pointer'
-							onClick={handleClearFilters}
-						>
-							Clear
-						</td>
-						{columns.map((col) => (
-							<td
-								key={col.key}
-								className='p-1 border relative'
-							>
-								{col.type !== 'checkbox' && (
-									<div className='flex items-center gap-1'>
-										<input
-											type='text'
-											value={filters[col.key] || ''}
-											className='w-full border px-2 py-1 text-xs rounded'
-											onChange={(e) =>
-												handleFilterChange(col.key, e.target.value)
-											}
-										/>
+					{showFilterRow && (
+						<tr className='bg-gray-300'>
+							{enableRowSelection && <td className='p-4 border'></td>}
+							{columnsState.map((col, index) => (
+								<td
+									key={col.key}
+									className='p-2 border relative'
+								>
+									{index === 0 ? (
 										<div
-											className='p-1 rounded cursor-pointer hover:bg-gray-300'
-											onClick={() =>
-												setActiveFilterCol(
-													activeFilterCol === col.key ? null : col.key
-												)
-											}
+											className='text-blue-500 font-semibold text-center cursor-pointer'
+											onClick={handleClearFilters}
 										>
-											<img
-												src={Funnel}
-												alt='Filter'
-												className='w-6 h-6'
-											/>
+											Clear
 										</div>
-										{activeFilterCol === col.key && (
-											<ul className='absolute top-full right-5 bg-white rounded shadow-md z-10 text-sm max-h-52'>
-												{(col.type === 'number'
-													? numberFilterOptions
-													: textFilterOptions
-												).map((opt) => (
-													<li
-														key={opt}
-														className='px-1 py-1 cursor-pointer hover:bg-gray-300'
-														onClick={() =>
-															handleFilterOptionSelect(col.key, opt)
-														}
-													>
-														{opt}
-													</li>
-												))}
-											</ul>
-										)}
-									</div>
-								)}
-							</td>
-						))}
-					</tr>
+									) : (
+										col.type !== 'checkbox' && (
+											<div className='flex items-center gap-1'>
+												<input
+													type='text'
+													value={filters[col.key] || ''}
+													className='w-full border px-2 py-1 text-xs rounded'
+													onChange={(e) =>
+														handleFilterChange(col.key, e.target.value)
+													}
+												/>
+												<div
+													className='p-1 rounded cursor-pointer hover:bg-gray-300'
+													onClick={() =>
+														setActiveFilterCol(
+															activeFilterCol === col.key ? null : col.key
+														)
+													}
+												>
+													<img
+														src={Funnel}
+														alt='Filter'
+														className='w-6 h-6'
+													/>
+												</div>
+												{activeFilterCol === col.key && (
+													<ul className='absolute top-full right-5 bg-white rounded shadow-md z-10 text-sm max-h-52'>
+														{(col.type === 'number'
+															? numberFilterOptions
+															: textFilterOptions
+														).map((opt) => (
+															<li
+																key={opt}
+																className='px-1 py-1 cursor-pointer hover:bg-gray-300'
+																onClick={() =>
+																	handleFilterOptionSelect(col.key, opt)
+																}
+															>
+																{opt}
+															</li>
+														))}
+													</ul>
+												)}
+											</div>
+										)
+									)}
+								</td>
+							))}
+						</tr>
+					)}
 				</thead>
 				<tbody>
 					{filteredAndSortedData.map((row) => {
-						const isSelected = selectedRows?.includes(row.id);
+						const isSelected = selectedRow === row.id;
 						return (
 							<tr
 								key={row.id}
-								className={`border data-body group ${
+								onClick={() => {
+									console.log('Row clicked:', row.id);
+									onRowClick?.(row.id);
+								}}
+								className={`border data-body cursor-pointer group ${
 									isSelected
-										? 'text-white bg-primary-base'
+										? 'bg-primary-base text-white'
 										: 'hover:bg-primary-base hover:text-white'
 								}`}
 							>
-								<td className='p-4 text-center border'>
-									<input
-										className={`${
-											isSelected ? 'accent-white' : 'group-hover:accent-white'
-										} `}
-										type='checkbox'
-										checked={isSelected}
-										onChange={(e) => onRowSelect(row.id, e.target.checked)}
-									/>
-								</td>
+								{enableRowSelection && (
+									<td className='p-4 text-center border'>
+										<input
+											className={`${
+												isSelected ? 'accent-white' : 'group-hover:accent-white'
+											}`}
+											type='checkbox'
+											checked={isSelected}
+											onChange={(e) => onRowSelect?.(row.id, e.target.checked)}
+										/>
+									</td>
+								)}
 								{columnsState.map((col) => (
 									<td
 										key={col.key}
-										className='p-2 border text-center'
+										className='p-2 border text-center text-black group-hover:text-black'
 									>
-										{col.type === 'checkbox' ? (
+										{col.Cell ? (
+											col.Cell({ row, value: row[col.key] })
+										) : col.type === 'checkbox' ? (
 											<input
 												type='checkbox'
 												checked={row[col.key]}
+												onChange={(e) =>
+													onCheckboxToggle?.(row.id, col.key, e.target.checked)
+												}
 												className={`${
 													isSelected
 														? 'accent-white'
 														: 'group-hover:accent-white'
-												} `}
-												onChange={(e) =>
-													onCheckboxToggle(row.id, col.key, e.target.checked)
-												}
+												}`}
 											/>
 										) : (
-											row[col.key]
+											row[col.key] ?? '-'
 										)}
 									</td>
 								))}
@@ -334,4 +360,4 @@ const MainTable = ({
 	);
 };
 
-export default MainTable;
+export default Table;
