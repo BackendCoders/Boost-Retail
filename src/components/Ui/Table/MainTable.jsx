@@ -1,11 +1,7 @@
 /** @format */
 
 import { useState, useRef, useEffect, useMemo } from 'react';
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-} from '@hello-pangea/dnd';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
 import SortUp from '../../../assets/svgIcons/Sort-Up-Thin.svg';
 import SortDown from '../../../assets/svgIcons/Sort-Down-Thin.svg';
@@ -30,9 +26,6 @@ const numberFilterOptions = [
 ];
 
 const applyTextFilter = (value, filterValue, type) => {
-	
-
-
 	const val = String(value).toLowerCase();
 	const filt = String(filterValue).toLowerCase();
 	switch (type) {
@@ -87,18 +80,18 @@ const MainTable = ({
 	const [filterTypes, setFilterTypes] = useState({});
 	const [activeFilterCol, setActiveFilterCol] = useState(null);
 	const wrapperRef = useRef(null);
-    const [columnsState, setColumnsState] = useState(columns);
+	const [columnsState, setColumnsState] = useState(columns);
 
 	const handleDragEnd = (result) => {
-  const { source, destination } = result;
-  if (!destination || source.index === destination.index) return;
+		const { source, destination } = result;
+		if (!destination || source.index === destination.index) return;
 
-  const reordered = Array.from(columnsState);
-  const [moved] = reordered.splice(source.index, 1);
-  reordered.splice(destination.index, 0, moved);
+		const reordered = Array.from(columnsState);
+		const [moved] = reordered.splice(source.index, 1);
+		reordered.splice(destination.index, 0, moved);
 
-  setColumnsState(reordered);
-};
+		setColumnsState(reordered);
+	};
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -171,50 +164,61 @@ const MainTable = ({
 			<table className='min-w-full table-auto data-header'>
 				<thead className='bg-white'>
 					<DragDropContext onDragEnd={handleDragEnd}>
-  <Droppable droppableId="columns" direction="horizontal">
-    {(provided) => (
-      <tr ref={provided.innerRef} {...provided.droppableProps}>
-        <th className='p-4 border text-center'>
-          <input
-            type='checkbox'
-            onChange={(e) => onRowSelect('all', e.target.checked)}
-          />
-        </th>
-        {columnsState.map((col, index) => (
-          <Draggable key={col.key} draggableId={col.key} index={index}>
-            {(provided, snapshot) => (
-              <th
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className={`p-2 text-left border whitespace-nowrap bg-white ${
-                  snapshot.isDragging ? 'shadow-md' : ''
-                }`}
-              >
-                <div
-                  className='flex items-center justify-between cursor-pointer'
-                  onClick={() => handleSort(col.key)}
-                >
-                  <span>{col.label}</span>
-                  <img
-                    src={
-                      sortConfig.key === col.key && sortConfig.direction === 'desc'
-                        ? SortDown
-                        : SortUp
-                    }
-                    alt='Sort'
-                    className='w-4 h-4 ml-2'
-                  />
-                </div>
-              </th>
-            )}
-          </Draggable>
-        ))}
-        {provided.placeholder}
-      </tr>
-    )}
-  </Droppable>
-</DragDropContext>
+						<Droppable
+							droppableId='columns'
+							direction='horizontal'
+						>
+							{(provided) => (
+								<tr
+									ref={provided.innerRef}
+									{...provided.droppableProps}
+								>
+									<th className='p-4 border text-center'>
+										<input
+											type='checkbox'
+											onChange={(e) => onRowSelect('all', e.target.checked)}
+										/>
+									</th>
+									{columnsState.map((col, index) => (
+										<Draggable
+											key={col.key}
+											draggableId={col.key}
+											index={index}
+										>
+											{(provided, snapshot) => (
+												<th
+													ref={provided.innerRef}
+													{...provided.draggableProps}
+													{...provided.dragHandleProps}
+													className={`p-2 text-left border whitespace-nowrap bg-white ${
+														snapshot.isDragging ? 'shadow-md' : ''
+													}`}
+												>
+													<div
+														className='flex items-center justify-between cursor-pointer'
+														onClick={() => handleSort(col.key)}
+													>
+														<span>{col.label}</span>
+														<img
+															src={
+																sortConfig.key === col.key &&
+																sortConfig.direction === 'desc'
+																	? SortDown
+																	: SortUp
+															}
+															alt='Sort'
+															className='w-4 h-4 ml-2'
+														/>
+													</div>
+												</th>
+											)}
+										</Draggable>
+									))}
+									{provided.placeholder}
+								</tr>
+							)}
+						</Droppable>
+					</DragDropContext>
 
 					<tr className='bg-gray-300'>
 						<td
@@ -299,24 +303,28 @@ const MainTable = ({
 									/>
 								</td>
 								{columnsState.map((col) => (
-  <td key={col.key} className='p-2 border text-center'>
-    {col.type === 'checkbox' ? (
-      <input
-        type='checkbox'
-        checked={row[col.key]}
-        className={`${
-          isSelected ? 'accent-white' : 'group-hover:accent-white'
-        } `}
-        onChange={(e) =>
-          onCheckboxToggle(row.id, col.key, e.target.checked)
-        }
-      />
-    ) : (
-      row[col.key]
-    )}
-  </td>
-))}
-
+									<td
+										key={col.key}
+										className='p-2 border text-center'
+									>
+										{col.type === 'checkbox' ? (
+											<input
+												type='checkbox'
+												checked={row[col.key]}
+												className={`${
+													isSelected
+														? 'accent-white'
+														: 'group-hover:accent-white'
+												} `}
+												onChange={(e) =>
+													onCheckboxToggle(row.id, col.key, e.target.checked)
+												}
+											/>
+										) : (
+											row[col.key]
+										)}
+									</td>
+								))}
 							</tr>
 						);
 					})}
