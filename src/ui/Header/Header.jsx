@@ -4,6 +4,8 @@ import AccountIcon from '../../assets/whitesvgicons/Account-Thin.svg';
 import HomeIcon from '../../assets/whitesvgicons/Homeicon.svg';
 import PosIcon from '../../assets/whitesvgicons/pos.svg';
 import EcommerceIcon from '../../assets/whitesvgicons/Ecommerce-Thin.svg';
+import CustomersIcon from '../../assets/whitesvgicons/Customers.svg';
+import SIMIcon from '../../assets/whitesvgicons/SIM-Thin.svg';
 import ReportIcon from '../../assets/whitesvgicons/report.svg';
 import SettingIcon from '../../assets/whitesvgicons/setting.svg';
 import WarrantyIcon from '../../assets/svgStanderedWhiteIcon/WarrantyStd.svg';
@@ -26,6 +28,8 @@ export default function Header() {
 		{ icon: WorkshopIcon, alt: 'Workshop', label: 'Workshop' },
 		{ icon: WarrantyIcon, alt: 'Warranty', label: 'Warranty' },
 		{ icon: BackOfficeIcon, alt: 'BackOffice', label: 'Back Office' },
+		{ icon: SIMIcon, alt: 'Sim', label: 'SIM' },
+		{ icon: CustomersIcon, alt: 'Users', label: 'Users' },
 		{ icon: ReportIcon, alt: 'Reports', label: 'Reports' },
 		{ icon: SettingIcon, alt: 'Settings', label: 'Settings' },
 	];

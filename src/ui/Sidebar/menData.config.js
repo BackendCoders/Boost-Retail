@@ -456,6 +456,58 @@ export const menuData = {
 			link: '#',
 		},
 	],
+	// SIM
+	SupplierFeeds: [
+		{
+			label: 'Maintain Supplier Feeds',
+			link: '/sim/supplier-feeds/maintain-supplier-feeds',
+		},
+	],
+	Categorization: [
+		{
+			label: 'Maintain Categories',
+			link: '/sim/categorization/maintain-categories',
+		},
+		{
+			label: 'Maintain Lookup Tables',
+			link: '/sim/categorization/maintain-lookup-tables',
+		},
+	],
+	SimProducts: [
+		{
+			label: 'Maintain SIM Products',
+			link: '/sim/sim-products/maintain-sim-products',
+		},
+	],
+	MissingData: [
+		{
+			label: 'Missing Categories',
+			link: '/sim/missing-data/missing-categories',
+		},
+		{
+			label: 'Missing Categories Visual Mode',
+			link: '/sim/missing-data/missing-categories-visual-mode',
+		},
+		{
+			label: 'Conflicting Categories',
+			link: '/sim/missing-data/conflicting-categories',
+		},
+		{
+			label: 'Missing Product Data',
+			link: '/sim/missing-data/missing-product-data',
+		},
+		{
+			label: 'Missing Images',
+			link: '/sim/missing-data/missing-images',
+		},
+	],
+	// Users
+	Users: [
+		{
+			label: 'Users',
+			link: '/users/users',
+		},
+	],
 	// Reports
 	Reports: [
 		{ label: 'Product Sales Analysis', link: '#' },

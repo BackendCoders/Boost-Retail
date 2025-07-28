@@ -431,6 +431,63 @@ export default function AppRoutes() {
 
 				{/* BackOffice Ends */}
 
+				{/* Sim Starts */}
+				{/* Supplier Feeds - Maintain Supplier Feeds */}
+				<Route
+					path='/sim/supplier-feeds/maintain-supplier-feeds'
+					element={<div>Maintain Supplier Feeds</div>}
+				/>
+				{/* Categorization - Maintain Categories */}
+				<Route
+					path='/sim/categorization/maintain-categories'
+					element={<div>Maintain Categories</div>}
+				/>
+				{/* Categorization - Maintain Lookup Tables */}
+				<Route
+					path='/sim/categorization/maintain-lookup-tables'
+					element={<div>Maintain Lookup Tables</div>}
+				/>
+				{/* SimProducts - Maintain Sim Products */}
+				<Route
+					path='/sim/sim-products/maintain-sim-products'
+					element={<div>Maintain Sim Products</div>}
+				/>
+				{/* MissingData - Missing Categories */}
+				<Route
+					path='/sim/missing-data/missing-categories'
+					element={<div>Missing Categories</div>}
+				/>
+				{/* MissingData - Missing Categories Visual Mode */}
+				<Route
+					path='/sim/missing-data/missing-categories-visual-mode'
+					element={<div>Missing Categories Visual Mode</div>}
+				/>
+				{/* MissingData - Conflicting Categories */}
+				<Route
+					path='/sim/missing-data/conflicting-categories'
+					element={<div>Conflicting Categories</div>}
+				/>
+				{/* MissingData - Missing Product Data */}
+				<Route
+					path='/sim/missing-data/missing-product-data'
+					element={<div>Missing Product Data</div>}
+				/>
+				{/* MissingData - Missing Images */}
+				<Route
+					path='/sim/missing-data/missing-images'
+					element={<div>Missing Images</div>}
+				/>
+				{/* Sim Ends */}
+
+				{/* Users Starts */}
+				{/* Users - Users */}
+				<Route
+					path='/users/users'
+					element={<div>Users</div>}
+				/>
+
+				{/* Users - Ends */}
+
 				{/* Reports Starts */}
 				{/* Reports Ends */}
 
