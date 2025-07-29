@@ -1,0 +1,7 @@
+export default function ArrowLargeLeftStandardIcon({ className }) {
+    return (
+        <svg className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="19.299" height="16.24" viewBox="0 0 19.299 16.24">
+            <path d="M8.15 16.12a.502.502 0 0 1-.354-.146L.297 8.475l-.011-.012H.284a.511.511 0 0 1-.135-.327H.15v-.029a.495.495 0 0 1 .135-.327H.284l.011-.012L7.796.267a.5.5 0 0 1 .707.707L1.857 7.62H18.65a.5.5 0 0 1 0 1H1.857l6.646 6.646a.5.5 0 0 1-.354.853Z"/>
+        </svg>
+    );
+}

@@ -1,0 +1,7 @@
+export default function CloseSmallThinIcon({ className }) {
+    return (
+        <svg className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="15.998" height="15.996" viewBox="0 0 15.998 15.996">
+            <path d="m8.583 7.998 5.248-5.248a.413.413 0 0 0-.583-.584L8 7.414 2.751 2.166a.413.413 0 0 0-.583.584l5.248 5.248-5.248 5.248a.413.413 0 0 0 .584.584L8 8.582l5.248 5.248a.413.413 0 0 0 .584-.584L8.584 7.998Z"/>
+        </svg>
+    );
+}

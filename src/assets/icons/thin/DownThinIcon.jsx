@@ -1,0 +1,7 @@
+export default function DownThinIcon({ className }) {
+    return (
+        <svg className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="15.998" height="15.996" viewBox="0 0 15.998 15.996">
+            <path d="M7.999 11.015a.415.415 0 0 1-.292-.12l-5.21-5.21a.413.413 0 0 1 .583-.584l4.918 4.919 4.919-4.919a.413.413 0 0 1 .583.584l-5.21 5.21a.413.413 0 0 1-.292.12Z"/>
+        </svg>
+    );
+}

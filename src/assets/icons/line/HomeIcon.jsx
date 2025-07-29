@@ -1,0 +1,7 @@
+export default function HomeIcon({ className }) {
+    return (
+        <svg className={className} stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m4.011 12.116 7.337-7.338a.922.922 0 0 1 1.304 0l7.338 7.338M5.855 10.273v8.296c0 .509.413.922.922.922h3.38v-3.994c0-.509.413-.922.922-.922h1.844c.509 0 .922.413.922.922v3.994h3.38a.922.922 0 0 0 .922-.922v-8.296m-9.22 9.218h6.76"/>
+        </svg>
+    );
+}

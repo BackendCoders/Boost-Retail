@@ -1,0 +1,7 @@
+export default function SortDownThinIcon({ className }) {
+    return (
+        <svg className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="15.998" height="15.996" viewBox="0 0 15.998 15.996">
+            <path d="M7.999.141c.228 0 .413.185.413.412v13.894l2.398-2.398a.413.413 0 0 1 .583.584l-3.1 3.101-.002.002a.41.41 0 0 1-.27.12h-.042a.425.425 0 0 1-.27-.12l-.002-.002-3.1-3.101a.413.413 0 0 1 .583-.584l2.398 2.398V.553c0-.228.185-.412.413-.412Z"/>
+        </svg>
+    );
+}

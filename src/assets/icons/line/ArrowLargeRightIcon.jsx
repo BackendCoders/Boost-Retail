@@ -1,0 +1,7 @@
+export default function ArrowLargeRightIcon({ className }) {
+    return (
+        <svg className={className} stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.493 4.536 20.957 12m0 0-7.464 7.464M20.957 12H3.043"/>
+        </svg>
+    );
+}

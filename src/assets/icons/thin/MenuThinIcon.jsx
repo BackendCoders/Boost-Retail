@@ -1,0 +1,7 @@
+export default function MenuThinIcon({ className }) {
+    return (
+        <svg className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="22" height="17.7" viewBox="0 0 22 17.7">
+            <path d="M2.2 1.151h17.6v2.854H2.2zm0 12.544h17.6v2.854H2.2zm0-6.272h17.6v2.854H2.2z"/>
+        </svg>
+    );
+}

@@ -1,0 +1,7 @@
+export default function MenuStandardIcon({ className }) {
+    return (
+        <svg className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="22" height="17.7" viewBox="0 0 22 17.7">
+            <path d="M2 .951h18v3.254H2zm0 12.544h18v3.254H2zm0-6.272h18v3.254H2z"/>
+        </svg>
+    );
+}
