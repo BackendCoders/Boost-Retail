@@ -13,7 +13,13 @@ export default function LookupTable({
 	setSelectedTableId,
 }) {
 	const [showModal, setShowModal] = useState(false);
+	const highLightRef = useRef(null);
 	const plusButtonRef = useRef(null);
+
+	const handleRowClick = (id) => {
+		highLightRef.current = id;
+		setSelectedTableId(id);
+	};
 
 	const columns = [
 		{
@@ -41,39 +47,48 @@ export default function LookupTable({
 			label: 'Action',
 			key: 'action',
 			type: 'checkbox',
-			Cell: ({ row }) => (
-				<div className='flex justify-center items-center space-x-2 gap-2'>
-					<Tooltip
-						content='Edit Row'
-						placement='left'
-						offset={[0, 10]}
-					>
-						<EditIcon
-							className='w-4 h-4 cursor-pointer opacity-70 hover:opacity-100'
-							// onClick={() => onEdit(row.id)}
-						/>
-					</Tooltip>
+			Cell: ({ row }) => {
+				return (
+					<div className='flex justify-center items-center space-x-2 gap-2'>
+						<Tooltip
+							content='Edit Row'
+							placement='left'
+							offset={[0, 10]}
+						>
+							<EditIcon
+								className={`w-4 h-4 cursor-pointer ${
+									row.id === highLightRef?.current
+										? 'text-white'
+										: 'text-text-body group-hover:text-white'
+								}`}
+								// onClick={() => onEdit(row.id)}
+							/>
+						</Tooltip>
 
-					<Tooltip
-						content='Delete Row'
-						placement='left'
-						offset={[0, 10]}
-					>
-						<TrashIcon
-							className='w-4 h-4 cursor-pointer opacity-70 hover:opacity-100'
-							// onClick={() => onDelete(row.id)}
-						/>
-					</Tooltip>
-				</div>
-			),
+						<Tooltip
+							content='Delete Row'
+							placement='left'
+							offset={[0, 10]}
+						>
+							<TrashIcon
+								className={`w-4 h-4 cursor-pointer ${
+									row.id === highLightRef?.current
+										? 'text-white'
+										: 'text-text-body group-hover:text-white'
+								}`}
+								// onClick={() => onDelete(row.id)}
+							/>
+						</Tooltip>
+					</div>
+				);
+			},
 		},
 	];
 
-	console.log('LookupTable rendered with selectedTableId:', selectedTableId);
 	return (
 		<div>
-			<div className='flex items-center justify-between'>
-				<h2 className='p-2 font-semibold'>Create Lookup Tables</h2>
+			<div className='flex items-start justify-between'>
+				<h2 className='font-semibold'>Create Lookup Tables</h2>
 				{/* Add Button */}
 
 				<Tooltip
@@ -84,7 +99,7 @@ export default function LookupTable({
 					<button
 						ref={plusButtonRef}
 						onClick={() => setShowModal(true)}
-						className='w-10 h-10 bg-primary-base hover:bg-primary-select rounded text-white flex items-center justify-center'
+						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-white flex items-center justify-center'
 					>
 						<PlusIcon className='w-4 h-4' />
 					</button>
@@ -95,7 +110,7 @@ export default function LookupTable({
 				columns={columns}
 				data={lookupTables}
 				enableRowSelection={false}
-				onRowClick={setSelectedTableId}
+				onRowClick={handleRowClick}
 				selectedRow={selectedTableId}
 				showFilterRow={false}
 			/>

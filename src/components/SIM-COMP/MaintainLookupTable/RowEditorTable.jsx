@@ -23,7 +23,7 @@ export default function RowEditorTable({
 			Cell: ({ row, value }) => (
 				<div className='flex justify-center w-full'>
 					<input
-						className='border p-1 text-sm w-full'
+						className='border p-1 text-sm w-full text-black group-hover:text-black'
 						value={value}
 						onChange={(e) =>
 							onChange(
@@ -37,7 +37,6 @@ export default function RowEditorTable({
 			),
 		})) || [];
 
-	console.log('Dynamic Columns:', { dynamicCols, rows });
 
 	const columns = [
 		{
@@ -49,6 +48,19 @@ export default function RowEditorTable({
 			label: 'Active',
 			key: 'active',
 			type: 'checkbox',
+			Cell: ({ row }) => (
+				<div className='flex justify-center'>
+					<input
+						type='checkbox'
+						checked={row?.active}
+						defaultValue={true}
+						onChange={(e) =>
+							console.log('Checkbox toggled:', row.id, e.target.checked)
+						}
+						className='accent-primary-base group-hover:accent-white transition-colors'
+					/>
+				</div>
+			),
 		},
 		{
 			label: 'Delete',
@@ -62,7 +74,7 @@ export default function RowEditorTable({
 						offset={[0, 10]}
 					>
 						<TrashIcon
-							className='w-4 h-4 cursor-pointer opacity-70 hover:opacity-100'
+							className='w-4 h-4 cursor-pointer opacity-70 group-hover:text-white'
 							onClick={() => onDelete(row.id)}
 						/>
 					</Tooltip>
@@ -73,8 +85,8 @@ export default function RowEditorTable({
 
 	return (
 		<div>
-			<div className='flex items-center justify-between'>
-				<h2 className='p-2 font-semibold'>{title} Bikes</h2>
+			<div className='flex items-start justify-between'>
+				<h2 className='font-semibold'>{title} Bikes</h2>
 				{/* Add Button */}
 
 				<Tooltip
@@ -84,7 +96,7 @@ export default function RowEditorTable({
 				>
 					<button
 						onClick={onAdd}
-						className='w-10 h-10 bg-primary-base hover:bg-primary-select rounded text-white flex items-center justify-center'
+						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-white flex items-center justify-center'
 					>
 						<PlusIcon className='w-4 h-4' />
 					</button>

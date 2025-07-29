@@ -202,7 +202,7 @@ const Table = ({
 													ref={provided.innerRef}
 													{...provided.draggableProps}
 													{...provided.dragHandleProps}
-													className={`p-2 text-left border whitespace-nowrap bg-white ${
+													className={`p-4 text-left border whitespace-nowrap bg-white ${
 														snapshot.isDragging ? 'shadow-md' : ''
 													}`}
 												>
@@ -212,11 +212,13 @@ const Table = ({
 													>
 														<span>{col.label}</span>
 														{sortConfig.key === col.key &&
-														sortConfig.direction === 'desc' ? (
-															<SortDown className='w-4 h-4 ml-2' />
-														) : (
-															<SortUp className='w-4 h-4 ml-2' />
-														)}
+														sortConfig.direction === 'desc'
+															? col.type !== 'checkbox' && (
+																	<SortDown className='w-4 h-4 ml-2' />
+															  )
+															: col.type !== 'checkbox' && (
+																	<SortUp className='w-4 h-4 ml-2' />
+															  )}
 													</div>
 												</th>
 											)}
@@ -234,7 +236,7 @@ const Table = ({
 							{columnsState.map((col, index) => (
 								<td
 									key={col.key}
-									className='p-2 border relative'
+									className='p-4 border relative'
 								>
 									{index === 0 ? (
 										<div
@@ -297,7 +299,6 @@ const Table = ({
 							<tr
 								key={row.id}
 								onClick={() => {
-									console.log('Row clicked:', row.id);
 									onRowClick?.(row.id);
 								}}
 								className={`border data-body cursor-pointer group ${
@@ -321,7 +322,7 @@ const Table = ({
 								{columnsState.map((col) => (
 									<td
 										key={col.key}
-										className='p-2 border text-center text-black group-hover:text-black'
+										className='p-4 border text-center'
 									>
 										{col.Cell ? (
 											col.Cell({ row, value: row[col.key] })
