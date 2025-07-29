@@ -56,7 +56,7 @@ const BrandSelector = () => {
 					placeholder='Search brands'
 					value={brandSearch}
 					onChange={(e) => setBrandSearch(e.target.value)}
-					className='border border-gray-300 rounded px-2 py-1 text-sm w-full focus:outline-none'
+					className='border border-text-body rounded px-2 py-1 text-sm w-full focus:outline-none'
 				/>
 				<div className='space-y-1 max-h-[300px] overflow-auto'>
 					{filteredBrands.map((brand) => (
@@ -93,7 +93,7 @@ const BrandSelector = () => {
 							placeholder='Search categories'
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
-							className='border border-gray-300 rounded px-2 py-1 text-sm w-1/2 focus:outline-none'
+							className='border border-text-body rounded px-2 py-1 text-sm w-1/2 focus:outline-none'
 						/>
 						<select
 							value={filterOption}

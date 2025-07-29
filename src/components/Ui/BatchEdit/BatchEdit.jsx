@@ -46,7 +46,7 @@ const BatchEdit = () => {
         <select
           value={selected}
           onChange={(e) => setSelected(e.target.value)}
-          className="border border-gray-300 px-3 py-1 rounded text-xs bg-white"
+          className="border border-text-body px-3 py-1 rounded text-xs bg-white"
         >
           {priceTypes.map((type) => (
             <option key={type} value={type}>
@@ -60,7 +60,7 @@ const BatchEdit = () => {
           placeholder="Enter Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border border-gray-300 px-3 py-1 rounded text-xs flex-1 bg-white"
+          className="border border-text-body px-3 py-1 rounded text-xs flex-1 bg-white"
         />
 
         <button
@@ -92,7 +92,7 @@ const BatchEdit = () => {
                 setValues((prev) => ({ ...prev, [key]: e.target.value }))
               }
               disabled={!fields[key]}
-              className={`border border-gray-300 px-2 py-1 rounded text-xs w-[90px] bg-white ${
+              className={`border border-text-body px-2 py-1 rounded text-xs w-[90px] bg-white ${
                 !fields[key] ? "opacity-50 cursor-not-allowed" : ""
               }`}
             />
@@ -118,7 +118,7 @@ const BatchEdit = () => {
                 value={saleReason}
                 onChange={(e) => setSaleReason(e.target.value)}
                 disabled={!fields.Sale}
-                className={`border border-gray-300 px-2 py-1 rounded text-xs flex-1 bg-white ${
+                className={`border border-text-body px-2 py-1 rounded text-xs flex-1 bg-white ${
                   !fields.Sale ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               />

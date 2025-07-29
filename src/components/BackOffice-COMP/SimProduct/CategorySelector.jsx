@@ -120,12 +120,12 @@ const CategorySelector = () => {
 								placeholder='Search brands'
 								value={searchTerm}
 								onChange={(e) => setSearchTerm(e.target.value)}
-								className='border border-gray-300 rounded px-2 py-1 text-sm w-1/2 focus:outline-none'
+								className='border border-text-body rounded px-2 py-1 text-sm w-1/2 focus:outline-none'
 							/>
 							<select
 								value={filterOption}
 								onChange={(e) => setFilterOption(e.target.value)}
-								className='border border-gray-300 rounded px-2 py-1 text-sm'
+								className='border border-text-body rounded px-2 py-1 text-sm'
 							>
 								<option value='all'>Show all</option>
 								<option value='selected'>Selected</option>
