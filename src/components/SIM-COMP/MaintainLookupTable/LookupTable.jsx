@@ -1,8 +1,8 @@
 /** @format */
 import { useState, useRef } from 'react';
-import PlusIcon from '../../../assets/whitesvgicons/Plus-Large-Thin.svg';
-import EditIcon from '../../../assets/svgIcons/edit.svg';
-import TrashIcon from '../../../assets/svgIcons/Delete-Bin-Thin.svg'; // Replace with your trash icon
+import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
+import EditIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
+import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon'; // Replace with your trash icon
 import Table from './Table';
 import Tooltip from '../../Ui/Tooltip/Tooltip';
 import AddLookupModal from './AddLookupModal';
@@ -90,7 +90,11 @@ export default function LookupTable({
 						onClick={() => setShowModal(true)}
 						className='w-10 h-10 bg-blue-500 hover:bg-blue-600 rounded text-white flex items-center justify-center'
 					>
-						<img src={PlusIcon} alt='Add Row' className='w-4 h-4' />
+						<img
+							src={PlusIcon}
+							alt='Add Row'
+							className='w-4 h-4'
+						/>
 					</button>
 				</Tooltip>
 			</div>

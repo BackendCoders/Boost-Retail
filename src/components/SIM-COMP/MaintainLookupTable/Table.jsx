@@ -2,9 +2,9 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
-import SortUp from '../../../assets/svgIcons/Sort-Up-Thin.svg';
-import SortDown from '../../../assets/svgIcons/Sort-Down-Thin.svg';
-import Funnel from '../../../assets/svgIcons/Funnel-Thin.svg';
+import SortUp from '../../../assets/icons/thin/SortUpThinIcon';
+import SortDown from '../../../assets/icons/thin/SortDownThinIcon';
+import Funnel from '../../../assets/icons/thin/FunnelThinIcon';
 
 const textFilterOptions = [
 	'Contains',
