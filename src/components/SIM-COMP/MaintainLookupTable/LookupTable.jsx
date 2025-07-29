@@ -1,15 +1,20 @@
 /** @format */
+import { useState, useRef } from 'react';
 import PlusIcon from '../../../assets/whitesvgicons/Plus-Large-Thin.svg';
 import EditIcon from '../../../assets/svgIcons/edit.svg';
 import TrashIcon from '../../../assets/svgIcons/Delete-Bin-Thin.svg'; // Replace with your trash icon
 import Table from './Table';
 import Tooltip from '../../Ui/Tooltip/Tooltip';
+import AddLookupModal from './AddLookupModal';
 
 export default function LookupTable({
 	lookupTables,
 	selectedTableId,
 	setSelectedTableId,
 }) {
+	const [showModal, setShowModal] = useState(false);
+	const plusButtonRef = useRef(null);
+
 	const columns = [
 		{
 			label: 'Table Name',
@@ -81,14 +86,11 @@ export default function LookupTable({
 					offset={[0, 10]}
 				>
 					<button
-						// onClick={onAdd}
+						ref={plusButtonRef}
+						onClick={() => setShowModal(true)}
 						className='w-10 h-10 bg-blue-500 hover:bg-blue-600 rounded text-white flex items-center justify-center'
 					>
-						<img
-							src={PlusIcon}
-							alt='Add Row'
-							className='w-4 h-4'
-						/>
+						<img src={PlusIcon} alt='Add Row' className='w-4 h-4' />
 					</button>
 				</Tooltip>
 			</div>
@@ -100,6 +102,13 @@ export default function LookupTable({
 				onRowClick={setSelectedTableId}
 				selectedRow={selectedTableId}
 				showFilterRow={false}
+			/>
+
+			{/* Modal */}
+			<AddLookupModal
+				isOpen={showModal}
+				onClose={() => setShowModal(false)}
+				anchorRef={plusButtonRef}
 			/>
 		</div>
 	);
