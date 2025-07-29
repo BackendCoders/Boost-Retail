@@ -297,7 +297,6 @@ const Table = ({
 							<tr
 								key={row.id}
 								onClick={() => {
-									console.log('Row clicked:', row.id);
 									onRowClick?.(row.id);
 								}}
 								className={`border data-body cursor-pointer group ${
@@ -321,7 +320,7 @@ const Table = ({
 								{columnsState.map((col) => (
 									<td
 										key={col.key}
-										className='p-2 border text-center text-black group-hover:text-black'
+										className='p-2 border text-center'
 									>
 										{col.Cell ? (
 											col.Cell({ row, value: row[col.key] })

@@ -13,7 +13,13 @@ export default function LookupTable({
 	setSelectedTableId,
 }) {
 	const [showModal, setShowModal] = useState(false);
+	const highLightRef = useRef(null);
 	const plusButtonRef = useRef(null);
+
+	const handleRowClick = (id) => {
+		highLightRef.current = id;
+		setSelectedTableId(id);
+	};
 
 	const columns = [
 		{
@@ -41,35 +47,44 @@ export default function LookupTable({
 			label: 'Action',
 			key: 'action',
 			type: 'checkbox',
-			Cell: ({ row }) => (
-				<div className='flex justify-center items-center space-x-2 gap-2'>
-					<Tooltip
-						content='Edit Row'
-						placement='left'
-						offset={[0, 10]}
-					>
-						<EditIcon
-							className='w-4 h-4 cursor-pointer opacity-70 hover:opacity-100'
-							// onClick={() => onEdit(row.id)}
-						/>
-					</Tooltip>
+			Cell: ({ row }) => {
+				return (
+					<div className='flex justify-center items-center space-x-2 gap-2'>
+						<Tooltip
+							content='Edit Row'
+							placement='left'
+							offset={[0, 10]}
+						>
+							<EditIcon
+								className={`w-4 h-4 cursor-pointer ${
+									row.id === highLightRef?.current
+										? 'text-white'
+										: 'text-text-body group-hover:text-white'
+								}`}
+								// onClick={() => onEdit(row.id)}
+							/>
+						</Tooltip>
 
-					<Tooltip
-						content='Delete Row'
-						placement='left'
-						offset={[0, 10]}
-					>
-						<TrashIcon
-							className='w-4 h-4 cursor-pointer opacity-70 hover:opacity-100'
-							// onClick={() => onDelete(row.id)}
-						/>
-					</Tooltip>
-				</div>
-			),
+						<Tooltip
+							content='Delete Row'
+							placement='left'
+							offset={[0, 10]}
+						>
+							<TrashIcon
+								className={`w-4 h-4 cursor-pointer ${
+									row.id === highLightRef?.current
+										? 'text-white'
+										: 'text-text-body group-hover:text-white'
+								}`}
+								// onClick={() => onDelete(row.id)}
+							/>
+						</Tooltip>
+					</div>
+				);
+			},
 		},
 	];
 
-	console.log('LookupTable rendered with selectedTableId:', selectedTableId);
 	return (
 		<div>
 			<div className='flex items-center justify-between'>
@@ -95,7 +110,7 @@ export default function LookupTable({
 				columns={columns}
 				data={lookupTables}
 				enableRowSelection={false}
-				onRowClick={setSelectedTableId}
+				onRowClick={handleRowClick}
 				selectedRow={selectedTableId}
 				showFilterRow={false}
 			/>

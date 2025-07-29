@@ -23,7 +23,7 @@ export default function RowEditorTable({
 			Cell: ({ row, value }) => (
 				<div className='flex justify-center w-full'>
 					<input
-						className='border p-1 text-sm w-full'
+						className='border p-1 text-sm w-full text-black group-hover:text-black'
 						value={value}
 						onChange={(e) =>
 							onChange(
@@ -49,6 +49,19 @@ export default function RowEditorTable({
 			label: 'Active',
 			key: 'active',
 			type: 'checkbox',
+			Cell: ({ row }) => (
+				<div className='flex justify-center'>
+					<input
+						type='checkbox'
+						checked={row?.active}
+						defaultValue={true}
+						onChange={(e) =>
+							console.log('Checkbox toggled:', row.id, e.target.checked)
+						}
+						className='accent-primary-base group-hover:accent-white transition-colors'
+					/>
+				</div>
+			),
 		},
 		{
 			label: 'Delete',
@@ -62,7 +75,7 @@ export default function RowEditorTable({
 						offset={[0, 10]}
 					>
 						<TrashIcon
-							className='w-4 h-4 cursor-pointer opacity-70 hover:opacity-100'
+							className='w-4 h-4 cursor-pointer opacity-70 group-hover:text-white'
 							onClick={() => onDelete(row.id)}
 						/>
 					</Tooltip>
