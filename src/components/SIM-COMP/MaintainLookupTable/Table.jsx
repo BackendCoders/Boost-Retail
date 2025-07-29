@@ -211,16 +211,12 @@ const Table = ({
 														onClick={() => handleSort(col.key)}
 													>
 														<span>{col.label}</span>
-														<img
-															src={
-																sortConfig.key === col.key &&
-																sortConfig.direction === 'desc'
-																	? SortDown
-																	: SortUp
-															}
-															alt='Sort'
-															className='w-4 h-4 ml-2'
-														/>
+														{sortConfig.key === col.key &&
+														sortConfig.direction === 'desc' ? (
+															<SortDown className='w-4 h-4 ml-2' />
+														) : (
+															<SortUp className='w-4 h-4 ml-2' />
+														)}
 													</div>
 												</th>
 											)}
@@ -266,11 +262,7 @@ const Table = ({
 														)
 													}
 												>
-													<img
-														src={Funnel}
-														alt='Filter'
-														className='w-6 h-6'
-													/>
+													<Funnel className='w-6 h-6' />
 												</div>
 												{activeFilterCol === col.key && (
 													<ul className='absolute top-full right-5 bg-white rounded shadow-md z-10 text-sm max-h-52'>

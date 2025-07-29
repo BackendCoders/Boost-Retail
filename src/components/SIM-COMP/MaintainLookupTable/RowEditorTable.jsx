@@ -61,9 +61,7 @@ export default function RowEditorTable({
 						placement='left'
 						offset={[0, 10]}
 					>
-						<img
-							src={TrashIcon}
-							alt='Delete'
+						<TrashIcon
 							className='w-4 h-4 cursor-pointer opacity-70 hover:opacity-100'
 							onClick={() => onDelete(row.id)}
 						/>
@@ -86,13 +84,9 @@ export default function RowEditorTable({
 				>
 					<button
 						onClick={onAdd}
-						className='w-10 h-10 bg-blue-500 hover:bg-blue-600 rounded text-white flex items-center justify-center'
+						className='w-10 h-10 bg-primary-base hover:bg-primary-select rounded text-white flex items-center justify-center'
 					>
-						<img
-							src={PlusIcon}
-							alt='Add Row'
-							className='w-4 h-4'
-						/>
+						<PlusIcon className='w-4 h-4' />
 					</button>
 				</Tooltip>
 			</div>

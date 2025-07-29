@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import categoryData from '../../../data/dummyCategories.json';
 
-import plusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
-import editIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
-import deleteIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
-import downArrow from '../../../assets/icons/thin/DownThinIcon';
+import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
+import EditIcon from '../../../assets/icons/line/EditPenIcon';
+import DeleteIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
+import DownArrow from '../../../assets/icons/thin/DownThinIcon';
 
 const CategoryTree = () => {
 	const [expandedIds, setExpandedIds] = useState({});
@@ -33,9 +33,7 @@ const CategoryTree = () => {
 				>
 					{/* Toggle Arrow */}
 					{hasChildren && (
-						<img
-							src={downArrow}
-							alt='toggle'
+						<DownArrow
 							className={`w-3 h-3 transform transition-transform duration-200 cursor-pointer ${
 								isExpanded ? '' : '-rotate-90'
 							}`}
@@ -57,20 +55,11 @@ const CategoryTree = () => {
 
 					{/* Icons: Now inline */}
 					<div className='flex items-center gap-2 ml-2'>
-						<img
-							src={plusIcon}
-							alt='Add'
-							className='w-4 h-4 cursor-pointer hover:scale-110'
-						/>
-						<img
-							src={editIcon}
-							alt='Edit'
-							className='w-4 h-4 cursor-pointer hover:scale-110'
-						/>
-						<img
-							src={deleteIcon}
+						<PlusIcon className='w-4 h-4 cursor-pointer text-primary-base hover:scale-110' />
+						<EditIcon className='w-4 h-4 cursor-pointer text-primary-base hover:scale-110' />
+						<DeleteIcon
 							alt='Delete'
-							className='w-4 h-4 cursor-pointer hover:scale-110'
+							className='w-4 h-4 cursor-pointer text-primary-base hover:scale-110'
 						/>
 					</div>
 				</div>

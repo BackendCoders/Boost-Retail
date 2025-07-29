@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState, useRef, useEffect } from 'react';
-import settingIcon from '../../../assets/icons/thin/SettingsThinIcon';
+import SettingIcon from '../../../assets/icons/thin/SettingsThinIcon';
 import LeftArrow from '../../../assets/icons/line/ArrowLeftIcon';
 import RightArrow from '../../../assets/icons/line/ArrowRightIcon';
 import DownThin from '../../../assets/icons/thin/DownThinIcon';
@@ -104,11 +104,7 @@ const TablePaginationBar = ({
 						className='bg-primary-base p-2 rounded-md flex items-center justify-center'
 						onClick={() => setShowFilters((prev) => !prev)}
 					>
-						<img
-							src={settingIcon}
-							alt='Settings'
-							className='w-7 h-7'
-						/>
+						<SettingIcon className='w-7 h-7 text-white' />
 					</button>
 
 					{showFilters && (

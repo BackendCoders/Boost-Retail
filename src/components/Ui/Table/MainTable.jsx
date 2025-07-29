@@ -3,10 +3,9 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
-import SortUpIcon from '../../../assets/icons/line/SortUpIcon.jsx';
-import SortDownIcon from '../../../assets/icons/line/SortDownIcon.jsx';
-import FunnelIcon from '../../../assets/icons/line/FunnelIcon.jsx';
-
+import SortUpIcon from '../../../assets/icons/thin/SortUpThinIcon.jsx';
+import SortDownIcon from '../../../assets/icons/thin/SortDownThinIcon.jsx';
+import FunnelIcon from '../../../assets/icons/thin/FunnelThinIcon.jsx';
 
 const textFilterOptions = [
 	'Contains',
@@ -196,17 +195,17 @@ const MainTable = ({
 													}`}
 												>
 													<div
-	className='flex items-center justify-between cursor-pointer'
-	onClick={() => handleSort(col.key)}
->
-	<span>{col.label}</span>
-	{sortConfig.key === col.key && sortConfig.direction === 'desc' ? (
-		<SortDownIcon className='w-4 h-4 ml-2' />
-	) : (
-		<SortUpIcon className='w-4 h-4 ml-2' />
-	)}
-</div>
-
+														className='flex items-center justify-between cursor-pointer'
+														onClick={() => handleSort(col.key)}
+													>
+														<span>{col.label}</span>
+														{sortConfig.key === col.key &&
+														sortConfig.direction === 'desc' ? (
+															<SortDownIcon className='w-4 h-4 ml-2' />
+														) : (
+															<SortUpIcon className='w-4 h-4 ml-2' />
+														)}
+													</div>
 												</th>
 											)}
 										</Draggable>
@@ -240,13 +239,15 @@ const MainTable = ({
 											}
 										/>
 										<div
-	className='p-1 rounded cursor-pointer hover:bg-gray-300'
-	onClick={() =>
-		setActiveFilterCol(activeFilterCol === col.key ? null : col.key)
-	}
->
-	<FunnelIcon className='w-6 h-6' />
-</div>
+											className='p-1 rounded cursor-pointer hover:bg-gray-300'
+											onClick={() =>
+												setActiveFilterCol(
+													activeFilterCol === col.key ? null : col.key
+												)
+											}
+										>
+											<FunnelIcon className='w-6 h-6' />
+										</div>
 
 										{activeFilterCol === col.key && (
 											<ul className='absolute top-full right-5 bg-white rounded shadow-md z-10 text-sm max-h-52'>
