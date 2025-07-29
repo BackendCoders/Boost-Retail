@@ -1,7 +1,7 @@
 /** @format */
 
-import PlusIcon from '../../../assets/whitesvgicons/Plus-Large-Thin.svg';
-import TrashIcon from '../../../assets/svgIcons/Delete-Bin-Thin.svg'; // Replace with your trash icon
+import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
+import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon'; // Replace with your trash icon
 import Tooltip from '../../Ui/Tooltip/Tooltip';
 import Table from './Table';
 
