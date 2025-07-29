@@ -38,7 +38,6 @@ export default function Header() {
 
 	return (
 		<header className='bg-black text-white flex items-center justify-between h-[3.75rem]'>
-			<TestIcon className='text-red-500 w-8 h-8' />
 			<div className='flex items-center gap-4 h-full'>
 				<button
 					onClick={() => dispatch(closeSidebar(!sidebarOpen))}

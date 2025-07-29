@@ -66,10 +66,7 @@ export default function SidebarDrawer({
 							className='hover:bg-gray-100 p-2 rounded-lg'
 							onClick={onClose}
 						>
-							<img
-								src={ArrowLeftIcon}
-								alt='close drawer'
-							/>
+							<ArrowLeftIcon />
 						</button>
 					</div>
 
@@ -88,13 +85,12 @@ export default function SidebarDrawer({
 											{section.label}
 										</span>
 									</Link>
-									{section?.children?.length > 0 && (
-										<img
-											src={expandedSections[section.label] ? UpIcon : DownIcon}
-											alt='toggle'
-											className='w-4 h-4'
-										/>
-									)}
+									{section?.children?.length > 0 &&
+										(expandedSections[section.label] ? (
+											<UpIcon />
+										) : (
+											<DownIcon />
+										))}
 								</div>
 								{expandedSections[section?.label] && (
 									<ul className='space-y-1 text-md font-normal'>

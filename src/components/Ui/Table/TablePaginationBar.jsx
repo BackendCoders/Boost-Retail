@@ -1,10 +1,10 @@
 /** @format */
 
 import React, { useState, useRef, useEffect } from 'react';
-import settingIcon from '../../../assets/whitesvgicons/setting.svg';
-import leftArrow from '../../../assets/whitesvgicons/leftarrow.svg';
-import rightArrow from '../../../assets/whitesvgicons/rightarrow.svg';
-import DownThin from '../../../assets/svgIcons/Down-Thin.svg';
+import settingIcon from '../../../assets/icons/thin/SettingsThinIcon';
+import LeftArrow from '../../../assets/icons/line/ArrowLeftIcon';
+import RightArrow from '../../../assets/icons/line/ArrowRightIcon';
+import DownThin from '../../../assets/icons/thin/DownThinIcon';
 import FilterDropdown from './FilterDropdown';
 
 const TablePaginationBar = ({
@@ -53,11 +53,7 @@ const TablePaginationBar = ({
 					onClick={() => onPageChange('prev')}
 					disabled={currentPage === 1}
 				>
-					<img
-						src={leftArrow}
-						alt='Previous'
-						className='w-5 h-6'
-					/>
+					<LeftArrow className='w-5 h-6' />
 					<span>PREV</span>
 				</button>
 
@@ -73,11 +69,7 @@ const TablePaginationBar = ({
 					disabled={currentPage === totalPages}
 				>
 					<span>NEXT</span>
-					<img
-						src={rightArrow}
-						alt='Next'
-						className='w-5 h-6'
-					/>
+					<RightArrow className='w-5 h-6' />
 				</button>
 			</div>
 
@@ -100,11 +92,7 @@ const TablePaginationBar = ({
 							</option>
 						))}
 					</select>
-					<img
-						src={DownThin}
-						alt='Dropdown'
-						className='absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none w-5 h-6'
-					/>
+					<DownThin className='absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none w-5 h-6' />
 				</div>
 
 				{/* Gear Icon + Dropdown */}

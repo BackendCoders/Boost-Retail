@@ -8,12 +8,8 @@ import { sideMenus } from './sideMenu.config';
 
 export default function Sidebar() {
 	const dispatch = useDispatch();
-	const {
-		activeTopNavigation,
-		sidebarOpen,
-		activeMiniMenu,
-		activeItem,
-	} = useSelector((state) => state.sidebar);
+	const { activeTopNavigation, sidebarOpen, activeMiniMenu, activeItem } =
+		useSelector((state) => state.sidebar);
 
 	const miniSideMenu = sideMenus[activeTopNavigation] || [];
 
@@ -58,7 +54,7 @@ export default function Sidebar() {
 	);
 }
 
-function SidebarIconItem({ icon, alt, onClick, activeItem }) {
+function SidebarIconItem({ icon: IconComponent, alt, onClick, activeItem }) {
 	return (
 		<div
 			className={`sidebar-icon ${
@@ -71,9 +67,9 @@ function SidebarIconItem({ icon, alt, onClick, activeItem }) {
 				placement='right'
 				offset={[8, 10]}
 			>
-				<img
-					src={icon}
+				<IconComponent
 					alt={alt}
+					className='text-white'
 				/>
 			</Tooltip>
 		</div>
