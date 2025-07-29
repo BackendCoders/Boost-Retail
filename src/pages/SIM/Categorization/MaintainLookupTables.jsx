@@ -93,7 +93,7 @@ const MaintainLookupTables = () => {
 				</div>
 				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
 					<p className='text-sm mt-1'>Maintain Lookup Tables</p>
-					<span className='text-sm'>Lookup Tables: {lookupTables.length}</span>
+					<span className='text-sm font-semibold'>Lookup Tables: {lookupTables.length}</span>
 				</div>
 			</div>
 			{/* Top Grid */}

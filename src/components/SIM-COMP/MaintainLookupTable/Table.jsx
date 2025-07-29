@@ -212,11 +212,13 @@ const Table = ({
 													>
 														<span>{col.label}</span>
 														{sortConfig.key === col.key &&
-														sortConfig.direction === 'desc' ? (
-															<SortDown className='w-4 h-4 ml-2' />
-														) : (
-															<SortUp className='w-4 h-4 ml-2' />
-														)}
+														sortConfig.direction === 'desc'
+															? col.type !== 'checkbox' && (
+																	<SortDown className='w-4 h-4 ml-2' />
+															  )
+															: col.type !== 'checkbox' && (
+																	<SortUp className='w-4 h-4 ml-2' />
+															  )}
 													</div>
 												</th>
 											)}
