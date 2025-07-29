@@ -1,5 +1,5 @@
 import React from "react";
-import RepeatIcon from "../../../assets/svgIcons/Repeat-Thin.svg";
+import RepeatIcon from "../../../assets/icons/thin/RepeatThinIcon.jsx";
 
 // ✅ Reusable Toggle Component
 const ToggleSwitch = ({ label, checked = true }) => (
@@ -33,12 +33,12 @@ const ProductSearchBar = () => {
 
           {/* Refresh Icon */}
           <button
-            type="button"
-            title="Refresh"
-            className="p-2 rounded-md text-text-body hover:text-text-title hover:bg-background-light transition-colors duration-200 flex items-center justify-center"
-          >
-            <img src={RepeatIcon} alt="Refresh" className="w-5 h-5" />
-          </button>
+  type="button"
+  title="Refresh"
+  className="p-2 rounded-md text-text-body hover:text-text-title hover:bg-background-light transition-colors duration-200 flex items-center justify-center"
+>
+  <RepeatIcon className="w-5 h-5" />
+</button>
 
           {/* Toggle Switches */}
           <ToggleSwitch label="EPOS" />
