@@ -11,22 +11,22 @@ import MaintainSimProducts from '../pages/SIM/SimProducts/MaintainSimProducts';
 import MaintainSupplierFeeds from '../pages/SIM/SupplierFeeds/Maintainsupplierfeeds';
 
 /** Auth page */
-import Loginpage from '../pages/Auth/Login';
+// import Loginpage from '../pages/Auth/Login';
 
 
 export default function AppRoutes() {
 	return (
 		<Routes>
-			<Route
+			{/* <Route
 					path='/'
 					index
 					element={<Loginpage />}
-				/>
+				/> */}
 			<Route element={<AppLayout />}>
 				
 				{/** Dashboard */}
                  <Route
-					path='/dashboard'
+					path='/'
 					index
 					element={<Dashboard />}
 				/>
