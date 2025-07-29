@@ -10,15 +10,27 @@ import MaintainLookupTables from '../pages/SIM/Categorization/MaintainLookupTabl
 import MaintainSimProducts from '../pages/SIM/SimProducts/MaintainSimProducts';
 import MaintainSupplierFeeds from '../pages/SIM/SupplierFeeds/Maintainsupplierfeeds';
 
+/** Auth page */
+import Loginpage from '../pages/Auth/Login';
+
+
 export default function AppRoutes() {
 	return (
 		<Routes>
-			<Route element={<AppLayout />}>
-				<Route
+			<Route
 					path='/'
+					index
+					element={<Loginpage />}
+				/>
+			<Route element={<AppLayout />}>
+				
+				{/** Dashboard */}
+                 <Route
+					path='/dashboard'
 					index
 					element={<Dashboard />}
 				/>
+
 				{/* Pos */}
 
 				{/* E-commerce Starts */}
