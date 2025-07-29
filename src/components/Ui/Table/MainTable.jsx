@@ -3,9 +3,9 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
-import SortUpIcon from '../../../assets/icons/thin/SortUpIcon.jsx';
-import SortDownIcon from '../../../assets/icons/thin/SortDownIcon.jsx';
-import FunnelIcon from '../../../assets/icons/thin/FunnelIcon.jsx';
+import SortUpIcon from '../../../assets/icons/line/SortUpIcon.jsx';
+import SortDownIcon from '../../../assets/icons/line/SortDownIcon.jsx';
+import FunnelIcon from '../../../assets/icons/line/FunnelIcon.jsx';
 
 
 const textFilterOptions = [
