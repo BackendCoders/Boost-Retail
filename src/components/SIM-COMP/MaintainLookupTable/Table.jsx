@@ -169,7 +169,7 @@ const Table = ({
 	return (
 		<div
 			ref={wrapperRef}
-			className='overflow-x-auto rounded-md border border-gray-300 relative'
+			className='overflow-x-auto rounded-md border border-border-grid relative'
 		>
 			<table className='min-w-full table-auto data-header'>
 				<thead className='bg-white'>
