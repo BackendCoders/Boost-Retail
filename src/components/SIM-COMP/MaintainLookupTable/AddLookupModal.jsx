@@ -1,4 +1,6 @@
-import  { useEffect, useState } from 'react';
+/** @format */
+
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
@@ -27,73 +29,73 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 		<>
 			{/* Overlay background */}
 			<div
-				className="fixed inset-0 bg-black bg-opacity-30 z-40"
+				className='fixed inset-0 bg-black bg-opacity-30 z-40'
 				onClick={onClose}
 			/>
 
 			{/* Floating Modal */}
 			<div
-				className="fixed z-50 w-96 bg-white border border-gray-300 rounded-xl shadow-2xl p-5"
+				className='fixed z-50 w-96 bg-white border border-gray-300 rounded-xl shadow-2xl p-5'
 				style={{
 					top: `${position.top}px`,
 					left: `${position.left}px`,
 				}}
 			>
-				<h2 className="text-lg font-semibold mb-4">New Lookup Table</h2>
+				<h2 className='text-lg font-semibold mb-4'>New Lookup Table</h2>
 
-				<div className="flex flex-col gap-3 text-sm">
-					<label className="font-medium">Table Name:</label>
+				<div className='flex flex-col gap-3 text-sm'>
+					<label className='font-medium'>Table Name:</label>
 					<input
-						type="text"
-						placeholder="Enter Table Name"
-						className="border rounded px-3 py-2"
+						type='text'
+						placeholder='Enter Table Name'
+						className='border rounded px-3 py-2'
 					/>
 
-					<label className="font-medium">Supplier Feed:</label>
-					<select className="border rounded px-3 py-2">
+					<label className='font-medium'>Supplier Feed:</label>
+					<select className='border rounded px-3 py-2'>
 						<option>Supplier Feed Name</option>
 						<option>Giant</option>
 						<option>Trek</option>
 					</select>
 
-					<label className="font-medium">Categorisation:</label>
-					<select className="border rounded px-3 py-2">
+					<label className='font-medium'>Categorisation:</label>
+					<select className='border rounded px-3 py-2'>
 						<option>Categories</option>
 					</select>
 
-					<label className="font-medium">Columns:</label>
+					<label className='font-medium'>Columns:</label>
 					<input
-						type="text"
-						placeholder="Enter Column Name"
-						className="border rounded px-3 py-2"
+						type='text'
+						placeholder='Enter Column Name'
+						className='border rounded px-3 py-2'
 					/>
 					<input
-						type="text"
-						placeholder="Enter Column Name"
-						className="border rounded px-3 py-2"
+						type='text'
+						placeholder='Enter Column Name'
+						className='border rounded px-3 py-2'
 					/>
-					<select className="border rounded px-3 py-2">
+					<select className='border rounded px-3 py-2'>
 						<option>Select Supplier Column</option>
 					</select>
 
-					<div className="flex gap-3 mt-2">
-						<button className="bg-blue-600 text-white px-4 py-1.5 rounded hover:bg-blue-700 transition text-sm">
+					<div className='flex gap-3 mt-2'>
+						<button className='bg-primary-base text-white px-4 py-1.5 rounded hover:bg-primary-select transition text-sm'>
 							+ Column
 						</button>
-						<button className="border border-blue-600 text-blue-600 px-4 py-1.5 rounded hover:bg-blue-50 transition text-sm">
+						<button className='border border-primary-base text-primary-base px-4 py-1.5 rounded hover:bg-blue-50 transition text-sm'>
 							+ Supplier Column
 						</button>
 					</div>
 
 					{/* Footer Buttons */}
-					<div className="flex justify-end gap-3 mt-5">
+					<div className='flex justify-end gap-3 mt-5'>
 						<button
 							onClick={onClose}
-							className="text-gray-700 px-4 py-1.5 border rounded hover:bg-gray-100 transition text-sm"
+							className='text-gray-700 px-4 py-1.5 border rounded hover:bg-gray-100 transition text-sm'
 						>
 							CANCEL
 						</button>
-						<button className="bg-blue-600 text-white px-4 py-1.5 rounded hover:bg-blue-700 transition text-sm">
+						<button className='bg-primary-base text-white px-4 py-1.5 rounded hover:bg-primary-select transition text-sm'>
 							CREATE
 						</button>
 					</div>
