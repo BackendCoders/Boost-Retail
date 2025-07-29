@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import ArrowLeftIcon from '../../assets/svgIcons/Arrow-Large-Left-Thin.svg';
-import UpIcon from '../../assets/svgIcons/Up-Thin.svg';
-import DownIcon from '../../assets/svgIcons/Down-Thin.svg';
+import ArrowLeftIcon from '../../assets/icons/thin/ArrowLargeLeftThinIcon';
+import UpIcon from '../../assets/icons/thin/UpThinIcon';
+import DownIcon from '../../assets/icons/thin/DownThinIcon';
 import { menuData } from './menData.config';
 import { Link } from 'react-router-dom';
 

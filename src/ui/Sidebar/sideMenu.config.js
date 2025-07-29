@@ -1,17 +1,16 @@
 /** @format */
 
-import CustomersIcon from '../../assets/whitesvgicons/Customers.svg';
-import HomeIcon from '../../assets/whitesvgicons/Homeicon.svg';
-import ProductsIcon from '../../assets/whitesvgicons/Products.svg';
-import SIMIcon from '../../assets/whitesvgicons/SIM-Thin.svg';
-import CategorizationIcon from '../../assets/whitesvgicons/Catigorisation-Thin.svg';
-import CustomiseIcon from '../../assets/whitesvgicons/Customise.svg';
-import WorkshopIcon from '../../assets/whitesvgicons/workshop.svg';
-import PosIcon from '../../assets/whitesvgicons/pos.svg';
-import MarketingIcon from '../../assets/whitesvgicons/Marketing.svg';
-import SettingIcon from '../../assets/whitesvgicons/setting.svg';
-import WarrantyIcon from '../../assets/whitesvgicons/warranty.svg';
-import ReportIcon from '../../assets/whitesvgicons/report.svg';
+import CustomersIcon from '../../assets/icons/thin/CustomersThinIcon';
+import HomeIcon from '../../assets/icons/thin/HomeThinIcon';
+import ProductsIcon from '../../assets/icons/thin/ProductsThinIcon';
+import SIMIcon from '../../assets/icons/thin/SimThinIcon';
+import CustomiseIcon from '../../assets/icons/thin/CustomiseThinIcon';
+import WorkshopIcon from '../../assets/icons/thin/WorkshopThinIcon';
+import PosIcon from '../../assets/icons/thin/PosThinIcon';
+import MarketingIcon from '../../assets/icons/thin/MarketingThinIcon';
+import SettingIcon from '../../assets/icons/thin/SettingsThinIcon';
+import WarrantyIcon from '../../assets/icons/thin/WarrantyThinIcon';
+import ReportIcon from '../../assets/icons/thin/ReportsThinIcon';
 
 export const sideMenus = {
 	Home: [{ icon: HomeIcon, alt: 'Home', label: 'Dashboard', path: '/' }],
