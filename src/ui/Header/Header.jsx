@@ -71,6 +71,7 @@ export default function Header() {
 						key={index}
 						icon={item.icon}
 						alt={item.alt}
+						label={item.label}
 						onclick={() => dispatch(setActiveTopNavigation(item.alt))}
 						active={activeTopNavigation === item.alt}
 					/>
@@ -80,7 +81,7 @@ export default function Header() {
 	);
 }
 
-function SidebarIconItem({ icon: IconComponent, alt, onclick, active }) {
+function SidebarIconItem({ icon: IconComponent, label, onclick, active }) {
 	return (
 		<li
 			className={`${
@@ -89,7 +90,7 @@ function SidebarIconItem({ icon: IconComponent, alt, onclick, active }) {
 			onClick={onclick}
 		>
 			<Tooltip
-				content={alt}
+				content={label}
 				placement='bottom'
 				offset={[15, 20]}
 			>
