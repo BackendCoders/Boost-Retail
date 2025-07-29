@@ -27,7 +27,7 @@ export default function Header() {
 		{ icon: WorkshopIcon, alt: 'Workshop', label: 'Workshop' },
 		{ icon: WarrantyIcon, alt: 'Warranty', label: 'Warranty' },
 		{ icon: BackOfficeIcon, alt: 'BackOffice', label: 'Back Office' },
-		{ icon: AccountIcon, alt: 'retailAdmin', label: 'Retail Admin' },
+		{ icon: AccountIcon, alt: 'retailAdmin', label: 'Super Admin' },
 		{ icon: CustomersIcon, alt: 'Users', label: 'Users' },
 		{ icon: ReportIcon, alt: 'Reports', label: 'Reports' },
 		{ icon: SettingIcon, alt: 'Settings', label: 'Settings' },
