@@ -37,7 +37,6 @@ export default function RowEditorTable({
 			),
 		})) || [];
 
-	console.log('Dynamic Columns:', { dynamicCols, rows });
 
 	const columns = [
 		{
@@ -86,8 +85,8 @@ export default function RowEditorTable({
 
 	return (
 		<div>
-			<div className='flex items-center justify-between'>
-				<h2 className='p-2 font-semibold'>{title} Bikes</h2>
+			<div className='flex items-start justify-between'>
+				<h2 className='font-semibold'>{title} Bikes</h2>
 				{/* Add Button */}
 
 				<Tooltip
@@ -97,7 +96,7 @@ export default function RowEditorTable({
 				>
 					<button
 						onClick={onAdd}
-						className='w-10 h-10 bg-primary-base hover:bg-primary-select rounded text-white flex items-center justify-center'
+						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-white flex items-center justify-center'
 					>
 						<PlusIcon className='w-4 h-4' />
 					</button>

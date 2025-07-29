@@ -202,7 +202,7 @@ const Table = ({
 													ref={provided.innerRef}
 													{...provided.draggableProps}
 													{...provided.dragHandleProps}
-													className={`p-2 text-left border whitespace-nowrap bg-white ${
+													className={`p-4 text-left border whitespace-nowrap bg-white ${
 														snapshot.isDragging ? 'shadow-md' : ''
 													}`}
 												>
@@ -234,7 +234,7 @@ const Table = ({
 							{columnsState.map((col, index) => (
 								<td
 									key={col.key}
-									className='p-2 border relative'
+									className='p-4 border relative'
 								>
 									{index === 0 ? (
 										<div
@@ -320,7 +320,7 @@ const Table = ({
 								{columnsState.map((col) => (
 									<td
 										key={col.key}
-										className='p-2 border text-center'
+										className='p-4 border text-center'
 									>
 										{col.Cell ? (
 											col.Cell({ row, value: row[col.key] })

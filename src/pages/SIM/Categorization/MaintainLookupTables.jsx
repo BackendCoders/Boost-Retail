@@ -85,14 +85,16 @@ const MaintainLookupTables = () => {
 	const selectedTable = lookupTables.find((t) => t.id === selectedTableId);
 
 	return (
-		<div className='p-4 space-y-4'>
+		<div className='space-y-4'>
 			{/* Header Section */}
-			<div className='border-b pb-2'>
-				<div className='flex justify-between items-center'>
+			<div className=''>
+				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
 					<h1 className='text-xl font-bold'>CATEGORIZATION</h1>
+				</div>
+				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
+					<p className='text-sm mt-1'>Maintain Lookup Tables</p>
 					<span className='text-sm'>Lookup Tables: {lookupTables.length}</span>
 				</div>
-				<p className='text-sm mt-1'>Maintain Lookup Tables</p>
 			</div>
 			{/* Top Grid */}
 			<LookupTable
