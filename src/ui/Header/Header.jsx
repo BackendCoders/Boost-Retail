@@ -28,7 +28,7 @@ export default function Header() {
 		{ icon: WorkshopIcon, alt: 'Workshop', label: 'Workshop' },
 		{ icon: WarrantyIcon, alt: 'Warranty', label: 'Warranty' },
 		{ icon: BackOfficeIcon, alt: 'BackOffice', label: 'Back Office' },
-		{ icon: SIMIcon, alt: 'Sim', label: 'SIM' },
+		{ icon: AccountIcon, alt: 'retailAdmin', label: 'Retail Admin' },
 		{ icon: CustomersIcon, alt: 'Users', label: 'Users' },
 		{ icon: ReportIcon, alt: 'Reports', label: 'Reports' },
 		{ icon: SettingIcon, alt: 'Settings', label: 'Settings' },
@@ -51,16 +51,16 @@ export default function Header() {
 					{!sidebarOpen ? <img src={MenuIcon} /> : <img src={ArrowLeftIcon} />}
 				</button>
 				<div className='font-bold min-w-[13.37rem]'>
-					<h1 className='text-page-title tracking-wide'>{activeLabel}</h1>
+					<h1 className='text-xl tracking-wide'>{activeLabel}</h1>
 				</div>
 				<div className='ml-2 flex items-center gap-4 border-l border-l-border-input h-full'>
 					<img
 						src={AccountIcon}
 						className='ml-2'
 					/>
-					<div className='text-small-detail text-text-body font-normal'>
+					<div className='text-md text-text-body font-normal'>
 						<p>User - India</p>
-						<p>test@gamil.com</p>
+						<p>test@gmail.com</p>
 					</div>
 				</div>
 			</div>

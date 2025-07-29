@@ -3,6 +3,7 @@
 import CustomersIcon from '../../assets/whitesvgicons/Customers.svg';
 import HomeIcon from '../../assets/whitesvgicons/Homeicon.svg';
 import ProductsIcon from '../../assets/whitesvgicons/Products.svg';
+import SIMIcon from '../../assets/whitesvgicons/SIM-Thin.svg';
 import CategorizationIcon from '../../assets/whitesvgicons/Catigorisation-Thin.svg';
 import CustomiseIcon from '../../assets/whitesvgicons/Customise.svg';
 import WorkshopIcon from '../../assets/whitesvgicons/workshop.svg';
@@ -83,31 +84,40 @@ export const sideMenus = {
 			path: '/back-office/settings',
 		},
 	],
-	Sim: [
-		{
-			icon: CustomersIcon,
-			alt: 'SupplierFeeds',
-			label: 'Supplier Feeds',
-			path: '/sim/supplier-feeds',
-		},
-		{
-			icon: CategorizationIcon,
-			alt: 'Categorization',
-			label: 'Categorization',
-			path: '/sim/categorization',
-		},
-		{
-			icon: ProductsIcon,
-			alt: 'SimProducts',
-			label: 'Sim Products',
-			path: '/sim/sim-products',
-		},
+	retailAdmin: [
+		{ icon: HomeIcon, alt: 'Home', label: 'Dashboard', path: '/' },
+		{ icon: SIMIcon, alt: 'Sim', label: 'SIM', path: '/sim' },
+		{ icon: CustomersIcon, alt: 'Users', label: 'Users', path: '/users' },
 		{
 			icon: SettingIcon,
-			alt: 'MissingData',
-			label: 'Missing Data',
-			path: '/sim/missing-data',
+			alt: 'RetailSetups',
+			label: 'Settings',
+			path: '/settings',
 		},
+		// {
+		// 	icon: CustomersIcon,
+		// 	alt: 'SupplierFeeds',
+		// 	label: 'Supplier Feeds',
+		// 	path: '/sim/supplier-feeds',
+		// },
+		// {
+		// 	icon: CategorizationIcon,
+		// 	alt: 'Categorization',
+		// 	label: 'Categorization',
+		// 	path: '/sim/categorization',
+		// },
+		// {
+		// 	icon: ProductsIcon,
+		// 	alt: 'SimProducts',
+		// 	label: 'Sim Products',
+		// 	path: '/sim/sim-products',
+		// },
+		// {
+		// 	icon: SettingIcon,
+		// 	alt: 'MissingData',
+		// 	label: 'Missing Data',
+		// 	path: '/sim/missing-data',
+		// },
 	],
 	Users: [
 		{ icon: CustomersIcon, alt: 'Users', label: 'Users', path: '/users' },

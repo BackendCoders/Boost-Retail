@@ -491,6 +491,13 @@ export default function AppRoutes() {
 				/>
 
 				{/* Users - Ends */}
+				{/* Admin - Start */}
+				<Route
+					path='/admin/settings'
+					element={<div>Settings</div>}
+				/>
+
+				{/* Admin - Ends */}
 
 				{/* Reports Starts */}
 				{/* Reports Ends */}

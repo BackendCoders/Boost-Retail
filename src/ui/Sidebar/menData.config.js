@@ -457,48 +457,66 @@ export const menuData = {
 		},
 	],
 	// SIM
-	SupplierFeeds: [
+	Sim: [
 		{
-			label: 'Maintain Supplier Feeds',
-			link: '/sim/supplier-feeds/maintain-supplier-feeds',
-		},
-	],
-	Categorization: [
-		{
-			label: 'Maintain Categories',
-			link: '/sim/categorization/maintain-categories',
-		},
-		{
-			label: 'Maintain Lookup Tables',
-			link: '/sim/categorization/maintain-lookup-tables',
-		},
-	],
-	SimProducts: [
-		{
-			label: 'Maintain SIM Products',
-			link: '/sim/sim-products/maintain-sim-products',
-		},
-	],
-	MissingData: [
-		{
-			label: 'Missing Categories',
-			link: '/sim/missing-data/missing-categories',
+			label: 'Supplier Feeds',
+			link: '#',
+			children: [
+				{
+					label: 'Maintain Supplier Feeds',
+					path: '/sim/supplier-feeds/maintain-supplier-feeds',
+				},
+			],
 		},
 		{
-			label: 'Missing Categories Visual Mode',
-			link: '/sim/missing-data/missing-categories-visual-mode',
+			label: 'Categorization',
+			link: '#',
+			children: [
+				{
+					label: 'Maintain Categories',
+					path: '/sim/categorization/maintain-categories',
+				},
+				{
+					label: 'Maintain Lookup Tables',
+					path: '/sim/categorization/maintain-lookup-tables',
+				},
+			],
 		},
 		{
-			label: 'Conflicting Categories',
-			link: '/sim/missing-data/conflicting-categories',
+			label: 'Sim Products',
+			link: '#',
+			children: [
+				{
+					label: 'Maintain SIM Products',
+					path: '/sim/sim-products/maintain-sim-products',
+				},
+			],
 		},
 		{
-			label: 'Missing Product Data',
-			link: '/sim/missing-data/missing-product-data',
-		},
-		{
-			label: 'Missing Images',
-			link: '/sim/missing-data/missing-images',
+			label: 'Missing Data',
+			link: '#',
+			children: [
+				{
+					label: 'Missing Categories',
+					path: '/sim/missing-data/missing-categories',
+				},
+				{
+					label: 'Missing Categories Visual Mode',
+					path: '/sim/missing-data/missing-categories-visual-mode',
+				},
+				{
+					label: 'Conflicting Categories',
+					path: '/sim/missing-data/conflicting-categories',
+				},
+				{
+					label: 'Missing Product Data',
+					path: '/sim/missing-data/missing-product-data',
+				},
+				{
+					label: 'Missing Images',
+					path: '/sim/missing-data/missing-images',
+				},
+			],
 		},
 	],
 	// Users
@@ -506,6 +524,12 @@ export const menuData = {
 		{
 			label: 'Users',
 			link: '/users/users',
+		},
+	],
+	RetailSetups: [
+		{
+			label: 'Settings',
+			link: '/admin/settings',
 		},
 	],
 	// Reports
