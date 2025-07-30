@@ -6,10 +6,10 @@ import SimProduct from '../pages/BackOffice/DataImports/SimProduct';
 import AppLayout from '../layout/AppLayout';
 import Dashboard from '../pages/dashboard/dashboard';
 import { Dashboard as SuperAdminDashboard } from '../pages/SuperAdmin/Dashboard/Dashboard';
-import MaintainCategory from '../pages/SIM/Categorization/MaintainCategory';
-import MaintainLookupTables from '../pages/SIM/Categorization/MaintainLookupTables';
-import MaintainSimProducts from '../pages/SIM/SimProducts/MaintainSimProducts';
-import MaintainSupplierFeeds from '../pages/SIM/SupplierFeeds/Maintainsupplierfeeds';
+import MaintainCategory from '../pages/SuperAdmin/SIM/Categorization/MaintainCategory';
+import MaintainLookupTables from '../pages/SuperAdmin/SIM/Categorization/MaintainLookupTables';
+import MaintainSimProducts from '../pages/SuperAdmin/SIM/SimProducts/MaintainSimProducts';
+import MaintainSupplierFeeds from '../pages/SuperAdmin/SIM/SupplierFeeds/Maintainsupplierfeeds';
 
 /** Auth page */
 import LoginPage from '../pages/Auth/Login';
