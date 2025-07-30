@@ -1,8 +1,8 @@
 /** @format */
 
 import { useState } from 'react';
-import SupplierFeedsTable from '../../../components/SIM-COMP/MaintainSupplierFeeds/SupplierFeedsTable';
-import SelectedFeedOverview from '../../../components/SIM-COMP/MaintainSupplierFeeds/SelectedFeedOverview';
+import SupplierFeedsTable from '../../../../components/SIM-COMP/MaintainSupplierFeeds/SupplierFeedsTable';
+import SelectedFeedOverview from '../../../../components/SIM-COMP/MaintainSupplierFeeds/SelectedFeedOverview';
 
 const initialFeeds = [
 	{
