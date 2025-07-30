@@ -1,23 +1,17 @@
 /** @format */
 
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { adminMenuData } from './adminmenuData';
-import ArrowLeftIcon from '../../../assets/icons/thin/ArrowLargeLeftThinIcon';
-import ArrowRightIcon from '../../../assets/icons/thin/ArrowLargeRightThinIcon'; // Create or import this for toggle
+import { useSelector } from 'react-redux';
 
 export default function SuperAdminSidebar() {
-	const [sidebarOpen, setSidebarOpen] = useState(true);
+	const { sidebarOpen } = useSelector((state) => state.sidebar);
 	const menuItems = adminMenuData?.AdminLogin || [];
-
-	const toggleSidebar = () => {
-		setSidebarOpen((prev) => !prev);
-	};
 
 	return (
 		<div
 			className={`${
-				sidebarOpen ? 'w-[19.7rem]' : 'w-[4rem]'
+				sidebarOpen ? 'w-[19.7rem] visible' : 'w-0 hidden'
 			} bg-white shadow-xl border-r h-screen p-4 overflow-y-auto transition-all duration-300 ease-in-out`}
 		>
 			{/* Header */}
@@ -25,7 +19,7 @@ export default function SuperAdminSidebar() {
 				{sidebarOpen && (
 					<h2 className='text-xl font-bold text-gray-800'>Super Admin</h2>
 				)}
-				<button
+				{/* <button
 					className='p-2 hover:bg-gray-100 rounded'
 					onClick={toggleSidebar}
 				>
@@ -34,7 +28,7 @@ export default function SuperAdminSidebar() {
 					) : (
 						<ArrowRightIcon className='w-5 h-5 text-gray-600' />
 					)}
-				</button>
+				</button> */}
 			</div>
 
 			{/* Menu Items */}
