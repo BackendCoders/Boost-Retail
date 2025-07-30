@@ -37,7 +37,7 @@ export const sideMenus = {
 		{
 			icon: SettingIcon,
 			alt: 'Setups',
-			label: 'Setups',
+			label: 'Setup',
 			path: '/e-commerce/setups',
 		},
 	],
@@ -79,7 +79,7 @@ export const sideMenus = {
 		{
 			icon: SettingIcon,
 			alt: 'Settings',
-			label: 'Settings',
+			label: 'Setup',
 			path: '/back-office/settings',
 		},
 	],
@@ -95,7 +95,7 @@ export const sideMenus = {
 		{
 			icon: SettingIcon,
 			alt: 'RetailSetups',
-			label: 'Settings',
+			label: 'Setup',
 			path: '/settings',
 		},
 	],
