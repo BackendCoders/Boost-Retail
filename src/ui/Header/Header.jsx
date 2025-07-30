@@ -56,7 +56,7 @@ export default function Header() {
 		{
 			icon: SettingIcon,
 			key: 'Settings',
-			label: 'Settings',
+			label: 'Setup',
 			link: 'settings/setup/business-profile',
 		},
 	];
