@@ -24,12 +24,12 @@ const Login = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const { role } = formData;
+		const role = Number(formData.role);
 
 		// Simple login logic
 		if (role === 1 || role === 2) {
 			dispatch(setLoginUser(role));
-			setSuccess(`Welcome ${role}!`);
+			setSuccess(`Welcome ${role === 1 ? 'Super Admin' : 'Retail Admin'}!`);
 			setTimeout(() => {
 				navigate('/dashboard');
 			}, 1000); // Optional: short delay to show success message
