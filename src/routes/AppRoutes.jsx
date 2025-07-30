@@ -5,6 +5,7 @@ import Product from '../pages/BackOffice/CatalogSetup/Product';
 import SimProduct from '../pages/BackOffice/DataImports/SimProduct';
 import AppLayout from '../layout/AppLayout';
 import Dashboard from '../pages/dashboard/dashboard';
+import { Dashboard as SuperAdminDashboard } from '../pages/SuperAdmin/Dashboard/Dashboard';
 import MaintainCategory from '../pages/SIM/Categorization/MaintainCategory';
 import MaintainLookupTables from '../pages/SIM/Categorization/MaintainLookupTables';
 import MaintainSimProducts from '../pages/SIM/SimProducts/MaintainSimProducts';
@@ -25,8 +26,12 @@ export default function AppRoutes() {
 				{/** Dashboard */}
 				<Route
 					path='/dashboard'
-					index
 					element={<Dashboard />}
+				/>
+
+				<Route
+					path='/admin/dashboard'
+					element={<SuperAdminDashboard />}
 				/>
 
 				{/* Pos */}

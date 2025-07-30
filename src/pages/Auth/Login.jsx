@@ -31,7 +31,7 @@ const Login = () => {
 			dispatch(setLoginUser(role));
 			setSuccess(`Welcome ${role === 1 ? 'Super Admin' : 'Retail Admin'}!`);
 			setTimeout(() => {
-				navigate('/dashboard');
+				navigate(`${role === 1 ? '/admin/dashboard' : '/dashboard'} `);
 			}, 1000); // Optional: short delay to show success message
 		} else {
 			setError('Invalid credentials. Try again.');
