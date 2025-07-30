@@ -34,7 +34,11 @@ export default function AppRoutes() {
 					element={<SuperAdminDashboard />}
 				/>
 
-				{/* Pos */}
+				{/* POS Start */}
+				<Route
+					path='/pos/payments'
+					element={<div>Payments</div>}
+				/>
 
 				{/* E-commerce Starts */}
 				{/* Processing - Orders */}
@@ -325,9 +329,17 @@ export default function AppRoutes() {
 				{/* Ecommerce Ends */}
 
 				{/* Workshop Starts */}
+				<Route
+					path='/workshop'
+					element={<div>Workshop</div>}
+				/>
 				{/* Workshop Ends */}
 
 				{/* Warranty Starts */}
+				<Route
+					path='/warranty'
+					element={<div>Warranty</div>}
+				/>
 				{/* Warranty Ends */}
 
 				{/* BackOffice Starts */}
@@ -506,6 +518,15 @@ export default function AppRoutes() {
 				/>
 
 				{/* Users - Ends */}
+
+				{/* Reports - Starts */}
+				<Route
+					path='/reports'
+					element={<div>Reports</div>}
+				/>
+
+				{/* Reports - Ends */}
+
 				{/* Admin - Start */}
 				<Route
 					path='/admin/settings'

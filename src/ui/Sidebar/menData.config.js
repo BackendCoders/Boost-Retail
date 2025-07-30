@@ -5,14 +5,14 @@ export const menuData = {
 	Home: [
 		{
 			label: 'Dashboard',
-			link: '/',
+			link: '/dashboard',
 		},
 	],
 	// Pos
 	Pos: [
 		{
 			label: 'Payments',
-			link: '#',
+			link: '/pos/payments',
 		},
 		{
 			label: 'Deposit',
@@ -313,14 +313,14 @@ export const menuData = {
 	Workshop: [
 		{
 			label: 'Workshop',
-			link: '#',
+			link: '/workshop',
 		},
 	],
 	// Warranty
 	Warranty: [
 		{
 			label: 'Warranty',
-			link: '#',
+			link: '/warranty',
 		},
 	],
 	// Back office

@@ -14,6 +14,7 @@ import ArrowLeftIcon from '../../assets/icons/thin/ArrowLargeLeftThinIcon';
 import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeSidebar, setActiveTopNavigation } from '../../slice/sidebarSlice';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
 	const dispatch = useDispatch();
@@ -22,16 +23,41 @@ export default function Header() {
 	);
 	const { loginUser } = useSelector((state) => state.auth);
 	const iconItems = [
-		{ icon: HomeIcon, key: 'Home', label: 'Home' },
-		{ icon: PosIcon, key: 'POS', label: 'POS' },
-		{ icon: EcommerceIcon, key: 'Ecommerce', label: 'E-Commerce' },
-		{ icon: WorkshopIcon, key: 'Workshop', label: 'Workshop' },
-		{ icon: WarrantyIcon, key: 'Warranty', label: 'Warranty' },
-		{ icon: BackOfficeIcon, key: 'BackOffice', label: 'Back Office' },
+		{ icon: HomeIcon, key: 'Home', label: 'Home', link: '/dashboard' },
+		{ icon: PosIcon, key: 'POS', label: 'POS', link: '/pos/payments' },
+		{
+			icon: EcommerceIcon,
+			key: 'Ecommerce',
+			label: 'E-Commerce',
+			link: '/e-commerce/processing/orders/cycle-to-work',
+		},
+		{
+			icon: WorkshopIcon,
+			key: 'Workshop',
+			label: 'Workshop',
+			link: '/workshop',
+		},
+		{
+			icon: WarrantyIcon,
+			key: 'Warranty',
+			label: 'Warranty',
+			link: '/warranty',
+		},
+		{
+			icon: BackOfficeIcon,
+			key: 'BackOffice',
+			label: 'Back Office',
+			link: '/back-office/customer/customer-maintenance',
+		},
 		// { icon: AccountIcon, key: 'superAdmin', label: 'Super Admin' },
-		{ icon: CustomersIcon, key: 'Users', label: 'Users' },
-		{ icon: ReportIcon, key: 'Reports', label: 'Reports' },
-		{ icon: SettingIcon, key: 'Settings', label: 'Settings' },
+		{ icon: CustomersIcon, key: 'Users', label: 'Users', link: '/users/users' },
+		{ icon: ReportIcon, key: 'Reports', label: 'Reports', link: '/reports' },
+		{
+			icon: SettingIcon,
+			key: 'Settings',
+			label: 'Settings',
+			link: 'settings/setup/business-profile',
+		},
 	];
 
 	const activeLabel =
@@ -54,7 +80,11 @@ export default function Header() {
 						<ArrowLeftIcon className='text-white' />
 					)}
 				</button>
-				<div className={`font-bold ${loginUser === 1 ? "min-w-[9.37rem]" : "min-w-[13.37rem]"} `}>
+				<div
+					className={`font-bold ${
+						loginUser === 1 ? 'min-w-[9.37rem]' : 'min-w-[13.37rem]'
+					} `}
+				>
 					<h1 className='text-xl tracking-wide'>
 						{loginUser === 1 ? 'Super Admin' : activeLabel}
 					</h1>
@@ -73,6 +103,7 @@ export default function Header() {
 					iconItems.map((item) => (
 						<SidebarIconItem
 							icon={item.icon}
+							link={item.link}
 							key={item.key}
 							label={item.label}
 							onclick={() => dispatch(setActiveTopNavigation(item.key))}
@@ -84,7 +115,7 @@ export default function Header() {
 	);
 }
 
-function SidebarIconItem({ icon: Icon, label, onclick, active }) {
+function SidebarIconItem({ icon: Icon, link, label, onclick, active }) {
 	return (
 		<li
 			className={`${
@@ -97,9 +128,9 @@ function SidebarIconItem({ icon: Icon, label, onclick, active }) {
 				placement='bottom'
 				offset={[15, 20]}
 			>
-				<button>
+				<Link to={link}>
 					<Icon className='text-white' />
-				</button>
+				</Link>
 			</Tooltip>
 		</li>
 	);
