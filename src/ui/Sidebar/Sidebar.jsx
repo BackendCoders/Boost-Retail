@@ -74,10 +74,12 @@ function SidebarIconItem({
 				placement='right'
 				offset={[8, 10]}
 			>
-				<IconComponent
-					alt={alt}
-					className='text-white'
-				/>
+				<button>
+					<IconComponent
+						alt={alt}
+						className='text-white'
+					/>
+				</button>
 			</Tooltip>
 		</div>
 	);
