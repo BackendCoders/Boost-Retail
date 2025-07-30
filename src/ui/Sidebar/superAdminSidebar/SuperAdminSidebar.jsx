@@ -8,7 +8,7 @@ export default function SuperAdminSidebar() {
 	const menuItems = adminMenuData?.AdminLogin || [];
 
 	return (
-		<div className='w-[16rem] bg-white shadow-xl h-screen p-4 overflow-y-auto'>
+		<div className='w-[19.7rem] bg-white shadow-xl border-2 h-screen p-4 overflow-y-auto'>
 			<div className='flex items-center justify-between mb-6'>
 				<h2 className='text-xl font-bold text-gray-800'>Super Admin</h2>
 				<button className='p-2 hover:bg-gray-100 rounded'>
