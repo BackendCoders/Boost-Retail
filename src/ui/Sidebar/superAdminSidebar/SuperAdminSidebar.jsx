@@ -31,17 +31,17 @@ export default function SuperAdminSidebar() {
 	return (
 		<div
 			className={`${
-				sidebarOpen ? 'w-[19.7rem] visible' : 'w-0'
+				sidebarOpen ? 'w-[15.7rem] visible' : 'w-0'
 			} bg-[#f9f9f9] shadow-xl h-screen overflow-y-auto transition-all duration-300 ease-in-out`}
 		>
 			{/* Sidebar Header */}
-			<div className='flex items-center justify-between p-4 border-b'>
+			{/* <div className='flex items-center justify-between p-4 border-b'>
 				{sidebarOpen && (
 					<h2 className='text-[17px] font-extrabold text-gray-800 uppercase tracking-wide'>
 						Super Admin
 					</h2>
 				)}
-			</div>
+			</div> */}
 
 			{/* Menu Items */}
 			<ul className='p-3 space-y-2'>
