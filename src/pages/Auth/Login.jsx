@@ -1,47 +1,52 @@
+/** @format */
+
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setLoginUser } from '../../slice/authSlice';
 
 const Login = () => {
-  const navigate = useNavigate();
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const [formData, setFormData] = useState({
+		// username: '',
+		// password: '',
+		role: 1,
+	});
+	const [error, setError] = useState('');
+	const [success, setSuccess] = useState('');
 
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    role: 'admin',
-  });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+		setError('');
+		setSuccess('');
+	};
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError('');
-    setSuccess('');
-  };
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const { role } = formData;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { username, password, role } = formData;
+		// Simple login logic
+		if (role === 1 || role === 2) {
+			dispatch(setLoginUser(role));
+			setSuccess(`Welcome ${role}!`);
+			setTimeout(() => {
+				navigate('/dashboard');
+			}, 1000); // Optional: short delay to show success message
+		} else {
+			setError('Invalid credentials. Try again.');
+		}
+	};
 
-    // Simple login logic
-    if (
-      (role === 'admin' && username === 'admin' && password === 'admin123') ||
-      (role === 'dev' && username === 'dev' && password === 'dev123')
-    ) {
-      setSuccess(`Welcome ${role}!`);
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1000); // Optional: short delay to show success message
-    } else {
-      setError('Invalid credentials. Try again.');
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4">
-      <div className="w-full max-w-md border border-gray-200 rounded-xl shadow-md p-6">
-        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+	return (
+		<div className='min-h-screen bg-white flex items-center justify-center px-4'>
+			<div className='w-full max-w-md border border-gray-200 rounded-xl shadow-md p-6'>
+				<h2 className='text-2xl font-bold mb-4 text-center'>Login</h2>
+				<form
+					onSubmit={handleSubmit}
+					className='space-y-4'
+				>
+					{/* <div>
             <label className="block mb-1 font-medium text-gray-700">Username</label>
             <input
               type="text"
@@ -62,31 +67,31 @@ const Login = () => {
               required
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
-          </div>
-          <div>
-            <label className="block mb-1 font-medium text-gray-700">Role</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              <option value="admin">Admin</option>
-              <option value="dev">Dev</option>
-            </select>
-          </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-          {success && <p className="text-green-500 text-sm">{success}</p>}
-          <button
-            type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition"
-          >
-            Login
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+          </div> */}
+					<div>
+						<label className='block mb-1 font-medium text-gray-700'>Role</label>
+						<select
+							name='role'
+							value={formData.role}
+							onChange={handleChange}
+							className='w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400'
+						>
+							<option value={1}>Super Admin</option>
+							<option value={2}>Retail Admin</option>
+						</select>
+					</div>
+					{error && <p className='text-red-500 text-sm'>{error}</p>}
+					{success && <p className='text-green-500 text-sm'>{success}</p>}
+					<button
+						type='submit'
+						className='w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition'
+					>
+						Login
+					</button>
+				</form>
+			</div>
+		</div>
+	);
 };
 
 export default Login;
