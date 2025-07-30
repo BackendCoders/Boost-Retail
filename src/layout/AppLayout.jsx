@@ -9,7 +9,7 @@ export default function AppLayout() {
 	const { loginUser } = useSelector((state) => state.auth);
 
 	return (
-		<div className='min-h-screen flex flex-col font-inter overflow-x-hidden'>
+		<div className='min-h-screen flex flex-col font-inter overflow-hidden'>
 			{/* Header */}
 			<Header />
 

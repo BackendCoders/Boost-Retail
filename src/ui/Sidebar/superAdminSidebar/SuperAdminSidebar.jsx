@@ -32,7 +32,7 @@ export default function SuperAdminSidebar() {
 		<div
 			className={`${
 				sidebarOpen ? 'w-[15.7rem] visible' : 'w-0'
-			} bg-[#f9f9f9] shadow-xl h-screen overflow-y-auto transition-all duration-300 ease-in-out`}
+			} bg-[#f9f9f9] shadow-xl h-auto overflow-y-auto transition-all duration-300 ease-in-out`}
 		>
 			{/* Sidebar Header */}
 			{/* <div className='flex items-center justify-between p-4 border-b'>
