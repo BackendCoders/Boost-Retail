@@ -20,21 +20,22 @@ export default function Header() {
 	const { activeTopNavigation, sidebarOpen } = useSelector(
 		(state) => state.sidebar
 	);
+	const { loginUser } = useSelector((state) => state.auth);
 	const iconItems = [
-		{ icon: HomeIcon, alt: 'Home', label: 'Home' },
-		{ icon: PosIcon, alt: 'POS', label: 'POS' },
-		{ icon: EcommerceIcon, alt: 'Ecommerce', label: 'E-Commerce' },
-		{ icon: WorkshopIcon, alt: 'Workshop', label: 'Workshop' },
-		{ icon: WarrantyIcon, alt: 'Warranty', label: 'Warranty' },
-		{ icon: BackOfficeIcon, alt: 'BackOffice', label: 'Back Office' },
-		{ icon: AccountIcon, alt: 'retailAdmin', label: 'Super Admin' },
-		{ icon: CustomersIcon, alt: 'Users', label: 'Users' },
-		{ icon: ReportIcon, alt: 'Reports', label: 'Reports' },
-		{ icon: SettingIcon, alt: 'Settings', label: 'Settings' },
+		{ icon: HomeIcon, key: 'Home', label: 'Home' },
+		{ icon: PosIcon, key: 'POS', label: 'POS' },
+		{ icon: EcommerceIcon, key: 'Ecommerce', label: 'E-Commerce' },
+		{ icon: WorkshopIcon, key: 'Workshop', label: 'Workshop' },
+		{ icon: WarrantyIcon, key: 'Warranty', label: 'Warranty' },
+		{ icon: BackOfficeIcon, key: 'BackOffice', label: 'Back Office' },
+		// { icon: AccountIcon, key: 'superAdmin', label: 'Super Admin' },
+		{ icon: CustomersIcon, key: 'Users', label: 'Users' },
+		{ icon: ReportIcon, key: 'Reports', label: 'Reports' },
+		{ icon: SettingIcon, key: 'Settings', label: 'Settings' },
 	];
 
 	const activeLabel =
-		iconItems.find((item) => item.alt === activeTopNavigation)?.label || '';
+		iconItems.find((item) => item.key === activeTopNavigation)?.label || '';
 
 	return (
 		<header className='bg-black text-white flex items-center justify-between h-[3.75rem]'>
@@ -54,7 +55,9 @@ export default function Header() {
 					)}
 				</button>
 				<div className='font-bold min-w-[13.37rem]'>
-					<h1 className='text-xl tracking-wide'>{activeLabel}</h1>
+					<h1 className='text-xl tracking-wide'>
+						{loginUser === 1 ? 'Super Admin' : activeLabel}
+					</h1>
 				</div>
 				<div className='ml-2 flex items-center gap-4 border-l border-l-border-input h-full'>
 					<AccountIcon className='ml-2 text-text-body' />
@@ -66,22 +69,22 @@ export default function Header() {
 			</div>
 
 			<ul className='flex items-center h-full'>
-				{iconItems.map((item, index) => (
-					<SidebarIconItem
-						key={index}
-						icon={item.icon}
-						alt={item.alt}
-						label={item.label}
-						onclick={() => dispatch(setActiveTopNavigation(item.alt))}
-						active={activeTopNavigation === item.alt}
-					/>
-				))}
+				{loginUser !== 1 &&
+					iconItems.map((item) => (
+						<SidebarIconItem
+							icon={item.icon}
+							key={item.key}
+							label={item.label}
+							onclick={() => dispatch(setActiveTopNavigation(item.key))}
+							active={activeTopNavigation === item.key}
+						/>
+					))}
 			</ul>
 		</header>
 	);
 }
 
-function SidebarIconItem({ icon: IconComponent, label, onclick, active }) {
+function SidebarIconItem({ icon: Icon, label, onclick, active }) {
 	return (
 		<li
 			className={`${
@@ -95,7 +98,7 @@ function SidebarIconItem({ icon: IconComponent, label, onclick, active }) {
 				offset={[15, 20]}
 			>
 				<button>
-					<IconComponent className='text-white' />
+					<Icon className='text-white' />
 				</button>
 			</Tooltip>
 		</li>
