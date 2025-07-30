@@ -54,7 +54,7 @@ export default function Header() {
 						<ArrowLeftIcon className='text-white' />
 					)}
 				</button>
-				<div className='font-bold min-w-[13.37rem]'>
+				<div className={`font-bold ${loginUser === 1 ? "min-w-[9.37rem]" : "min-w-[13.37rem]"} `}>
 					<h1 className='text-xl tracking-wide'>
 						{loginUser === 1 ? 'Super Admin' : activeLabel}
 					</h1>
