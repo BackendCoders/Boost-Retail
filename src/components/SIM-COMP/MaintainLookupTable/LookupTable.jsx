@@ -33,6 +33,17 @@ export default function LookupTable({
 		{
 			label: 'Columns',
 			key: 'columns',
+			Cell: ({ row }) => (
+				<div
+					className={`flex items-center ${
+						row.id === highLightRef?.current
+							? 'text-white'
+							: 'text-text-body group-hover:text-white'
+					}`}
+				>
+					{row?.columns?.join(', ')}
+				</div>
+			),
 		},
 		{
 			label: 'Categorization',
