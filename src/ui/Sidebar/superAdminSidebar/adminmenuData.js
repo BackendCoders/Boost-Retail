@@ -20,15 +20,15 @@ export const adminMenuData = {
           ],
         },
         {
-          label: 'Categorisation',
+          label: 'Categorization',
           children: [
             {
               label: 'Maintain Categories',
-              path: '/admin/sim/categorisation/maintain-categories',
+              path: '/admin/sim/categorization/maintain-categories',
             },
             {
               label: 'Maintain Lookup Tables',
-              path: '/admin/sim/categorisation/maintain-lookup-tables',
+              path: '/admin/sim/categorization/maintain-lookup-tables',
             },
           ],
         },

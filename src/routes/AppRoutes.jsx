@@ -453,47 +453,47 @@ export default function AppRoutes() {
 				{/* Sim Starts */}
 				{/* Supplier Feeds - Maintain Supplier Feeds */}
 				<Route
-					path='/sim/supplier-feeds/maintain-supplier-feeds'
+					path='/admin/sim/supplier-feeds/maintain'
 					element={<MaintainSupplierFeeds />}
 				/>
 				{/* Categorization - Maintain Categories */}
 				<Route
-					path='/sim/categorization/maintain-categories'
+					path='/admin/sim/categorization/maintain-categories'
 					element={<MaintainCategory />}
 				/>
 				{/* Categorization - Maintain Lookup Tables */}
 				<Route
-					path='/sim/categorization/maintain-lookup-tables'
+					path='/admin/sim/categorization/maintain-lookup-tables'
 					element={<MaintainLookupTables />}
 				/>
 				{/* SimProducts - Maintain Sim Products */}
 				<Route
-					path='/sim/sim-products/maintain-sim-products'
+					path='/admin/sim/products/maintain'
 					element={<MaintainSimProducts />}
 				/>
 				{/* MissingData - Missing Categories */}
 				<Route
-					path='/sim/missing-data/missing-categories'
+					path='/admin/sim/missing-data/missing-categories'
 					element={<div>Missing Categories</div>}
 				/>
 				{/* MissingData - Missing Categories Visual Mode */}
 				<Route
-					path='/sim/missing-data/missing-categories-visual-mode'
+					path='/admin/sim/missing-data/missing-categories-visual-mode'
 					element={<div>Missing Categories Visual Mode</div>}
 				/>
 				{/* MissingData - Conflicting Categories */}
 				<Route
-					path='/sim/missing-data/conflicting-categories'
+					path='/admin/sim/missing-data/conflicting-categories'
 					element={<div>Conflicting Categories</div>}
 				/>
 				{/* MissingData - Missing Product Data */}
 				<Route
-					path='/sim/missing-data/missing-product-data'
+					path='/admin/sim/missing-data/missing-product-data'
 					element={<div>Missing Product Data</div>}
 				/>
 				{/* MissingData - Missing Images */}
 				<Route
-					path='/sim/missing-data/missing-images'
+					path='/admin/sim/missing-data/missing-images'
 					element={<div>Missing Images</div>}
 				/>
 				{/* Sim Ends */}
