@@ -29,7 +29,8 @@ export default function Sidebar() {
 						<SidebarIconItem
 							key={index}
 							icon={item.icon}
-							alt={item.label}
+							alt={item.alt}
+							label={item.label}
 							activeItem={activeItem}
 							onClick={(e) => {
 								e.stopPropagation();
@@ -54,8 +55,13 @@ export default function Sidebar() {
 	);
 }
 
-function SidebarIconItem({ icon: IconComponent, alt, onClick, activeItem }) {
-	console.log(alt);
+function SidebarIconItem({
+	icon: IconComponent,
+	alt,
+	label,
+	onClick,
+	activeItem,
+}) {
 	return (
 		<div
 			className={`sidebar-icon ${
@@ -64,7 +70,7 @@ function SidebarIconItem({ icon: IconComponent, alt, onClick, activeItem }) {
 			onClick={onClick}
 		>
 			<Tooltip
-				content={alt}
+				content={label}
 				placement='right'
 				offset={[8, 10]}
 			>
