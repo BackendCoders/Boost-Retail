@@ -83,17 +83,22 @@ export const sideMenus = {
 			path: '/back-office/settings',
 		},
 	],
-	// superAdmin: [
-	// 	{ icon: HomeIcon, alt: 'Home', label: 'Dashboard', path: '/' },
-	// 	{ icon: SIMIcon, alt: 'Sim', label: 'SIM', path: '/sim' },
-	// 	{ icon: CustomersIcon, alt: 'Users', label: 'Users', path: '/users' },
-	// 	{
-	// 		icon: SettingIcon,
-	// 		alt: 'RetailSetups',
-	// 		label: 'Settings',
-	// 		path: '/settings',
-	// 	},
-	// ],
+	superAdmin: [
+		{
+			icon: HomeIcon,
+			alt: 'adminHome',
+			label: 'Dashboard',
+			path: '/admin/dashboard',
+		},
+		{ icon: SIMIcon, alt: 'Sim', label: 'SIM', path: '/sim' },
+		{ icon: CustomersIcon, alt: 'Users', label: 'Users', path: '/users' },
+		{
+			icon: SettingIcon,
+			alt: 'RetailSetups',
+			label: 'Settings',
+			path: '/settings',
+		},
+	],
 	Users: [
 		{ icon: CustomersIcon, alt: 'Users', label: 'Users', path: '/users' },
 	],

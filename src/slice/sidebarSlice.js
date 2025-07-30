@@ -3,7 +3,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-	activeTopNavigation: 'Home',
+	activeTopNavigation: null,
 	activeMiniMenu: null,
 	activeItem: null,
 	sidebarOpen: false,

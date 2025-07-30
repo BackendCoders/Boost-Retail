@@ -456,6 +456,7 @@ export const menuData = {
 			link: '#',
 		},
 	],
+	adminHome: [{ label: 'Dashboard', link: '/admin/dashboard' }],
 	// SIM
 	Sim: [
 		{
@@ -464,7 +465,7 @@ export const menuData = {
 			children: [
 				{
 					label: 'Maintain Supplier Feeds',
-					path: '/sim/supplier-feeds/maintain-supplier-feeds',
+					path: '/admin/sim/supplier-feeds/maintain',
 				},
 			],
 		},
@@ -474,11 +475,11 @@ export const menuData = {
 			children: [
 				{
 					label: 'Maintain Categories',
-					path: '/sim/categorization/maintain-categories',
+					path: '/admin/sim/categorization/maintain-categories',
 				},
 				{
 					label: 'Maintain Lookup Tables',
-					path: '/sim/categorization/maintain-lookup-tables',
+					path: '/admin/sim/categorization/maintain-lookup-tables',
 				},
 			],
 		},
@@ -488,7 +489,7 @@ export const menuData = {
 			children: [
 				{
 					label: 'Maintain SIM Products',
-					path: '/sim/sim-products/maintain-sim-products',
+					path: '/admin/sim/products/maintain',
 				},
 			],
 		},
@@ -498,23 +499,23 @@ export const menuData = {
 			children: [
 				{
 					label: 'Missing Categories',
-					path: '/sim/missing-data/missing-categories',
+					path: '/admin/sim/missing-data/missing-categories',
 				},
 				{
 					label: 'Missing Categories Visual Mode',
-					path: '/sim/missing-data/missing-categories-visual-mode',
+					path: '/admin/sim/missing-data/missing-categories-visual-mode',
 				},
 				{
 					label: 'Conflicting Categories',
-					path: '/sim/missing-data/conflicting-categories',
+					path: '/admin/sim/missing-data/conflicting-categories',
 				},
 				{
 					label: 'Missing Product Data',
-					path: '/sim/missing-data/missing-product-data',
+					path: '/admin/sim/missing-data/missing-product-data',
 				},
 				{
 					label: 'Missing Images',
-					path: '/sim/missing-data/missing-images',
+					path: '/admin/sim/missing-data/missing-images',
 				},
 			],
 		},

@@ -15,6 +15,7 @@ import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeSidebar, setActiveTopNavigation } from '../../slice/sidebarSlice';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Header() {
 	const dispatch = useDispatch();
@@ -59,6 +60,11 @@ export default function Header() {
 			link: 'settings/setup/business-profile',
 		},
 	];
+
+	useEffect(() => {
+		if (loginUser === 1) dispatch(setActiveTopNavigation('superAdmin'));
+		else dispatch(setActiveTopNavigation('Home'));
+	}, [dispatch, loginUser]);
 
 	const activeLabel =
 		iconItems.find((item) => item.key === activeTopNavigation)?.label || '';
