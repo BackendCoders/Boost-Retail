@@ -13,7 +13,7 @@ const PrimaryButton = ({
 		<button
 			onClick={onClick}
 			disabled={disabled}
-			className={`px-4 py-2 rounded text-offWhite bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all ${className}`}
+			className={`px-4 py-2 rounded text-light bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all ${className}`}
 		>
 			{children}
 		</button>

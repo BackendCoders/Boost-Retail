@@ -56,7 +56,7 @@ export default function RowEditorTable({
 						onChange={(e) =>
 							console.log('Checkbox toggled:', row.id, e.target.checked)
 						}
-						className='accent-primary-base group-hover:accent-offWhite transition-colors'
+						className='accent-primary-base group-hover:accent-light transition-colors'
 					/>
 				</div>
 			),
@@ -73,7 +73,7 @@ export default function RowEditorTable({
 						offset={[0, 10]}
 					>
 						<TrashIcon
-							className='w-4 h-4 cursor-pointer opacity-70 group-hover:text-offWhite'
+							className='w-4 h-4 cursor-pointer opacity-70 group-hover:text-light'
 							onClick={() => onDelete(row.id)}
 						/>
 					</Tooltip>
@@ -95,7 +95,7 @@ export default function RowEditorTable({
 				>
 					<button
 						onClick={onAdd}
-						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-offWhite flex items-center justify-center'
+						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-light flex items-center justify-center'
 					>
 						<PlusIcon className='w-4 h-4' />
 					</button>

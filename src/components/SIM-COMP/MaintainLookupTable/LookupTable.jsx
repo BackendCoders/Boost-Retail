@@ -37,8 +37,8 @@ export default function LookupTable({
 				<div
 					className={`flex items-center ${
 						row.id === highLightRef?.current
-							? 'text-offWhite'
-							: 'text-text-body group-hover:text-offWhite'
+							? 'text-light'
+							: 'text-text-body group-hover:text-light'
 					}`}
 				>
 					{row?.columns?.join(', ')}
@@ -69,8 +69,8 @@ export default function LookupTable({
 							<EditIcon
 								className={`w-4 h-4 cursor-pointer ${
 									row.id === highLightRef?.current
-										? 'text-offWhite'
-										: 'text-text-body group-hover:text-offWhite'
+										? 'text-light'
+										: 'text-text-body group-hover:text-light'
 								}`}
 								// onClick={() => onEdit(row.id)}
 							/>
@@ -84,8 +84,8 @@ export default function LookupTable({
 							<TrashIcon
 								className={`w-4 h-4 cursor-pointer ${
 									row.id === highLightRef?.current
-										? 'text-offWhite'
-										: 'text-text-body group-hover:text-offWhite'
+										? 'text-light'
+										: 'text-text-body group-hover:text-light'
 								}`}
 								// onClick={() => onDelete(row.id)}
 							/>
@@ -110,7 +110,7 @@ export default function LookupTable({
 					<button
 						ref={plusButtonRef}
 						onClick={() => setShowModal(true)}
-						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-offWhite flex items-center justify-center'
+						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-light flex items-center justify-center'
 					>
 						<PlusIcon className='w-4 h-4' />
 					</button>

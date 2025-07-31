@@ -172,7 +172,7 @@ const Table = ({
 			className='overflow-x-auto rounded-md border border-border-grid relative'
 		>
 			<table className='min-w-full table-auto data-header'>
-				<thead className='bg-offWhite'>
+				<thead className='bg-light'>
 					<DragDropContext onDragEnd={handleDragEnd}>
 						<Droppable
 							droppableId='columns'
@@ -202,7 +202,7 @@ const Table = ({
 													ref={provided.innerRef}
 													{...provided.draggableProps}
 													{...provided.dragHandleProps}
-													className={`p-4 text-left border offWhitespace-nowrap bg-offWhite ${
+													className={`p-4 text-left border lightspace-nowrap bg-light ${
 														snapshot.isDragging ? 'shadow-md' : ''
 													}`}
 												>
@@ -267,7 +267,7 @@ const Table = ({
 													<Funnel className='w-6 h-6' />
 												</div>
 												{activeFilterCol === col.key && (
-													<ul className='absolute top-full right-5 bg-offWhite rounded shadow-md z-10 text-sm max-h-52'>
+													<ul className='absolute top-full right-5 bg-light rounded shadow-md z-10 text-sm max-h-52'>
 														{(col.type === 'number'
 															? numberFilterOptions
 															: textFilterOptions
@@ -303,17 +303,15 @@ const Table = ({
 								}}
 								className={`border data-body cursor-pointer group ${
 									isSelected
-										? 'bg-primary-base text-offWhite'
-										: 'hover:bg-primary-base hover:text-offWhite'
+										? 'bg-primary-base text-light'
+										: 'hover:bg-primary-base hover:text-light'
 								}`}
 							>
 								{enableRowSelection && (
 									<td className='p-4 text-center border'>
 										<input
 											className={`${
-												isSelected
-													? 'accent-offWhite'
-													: 'group-hover:accent-offWhite'
+												isSelected ? 'accent-light' : 'group-hover:accent-light'
 											}`}
 											type='checkbox'
 											checked={isSelected}
@@ -337,8 +335,8 @@ const Table = ({
 												}
 												className={`${
 													isSelected
-														? 'accent-offWhite'
-														: 'group-hover:accent-offWhite'
+														? 'accent-light'
+														: 'group-hover:accent-light'
 												}`}
 											/>
 										) : (

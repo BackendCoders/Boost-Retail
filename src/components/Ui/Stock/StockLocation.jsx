@@ -31,11 +31,11 @@ const StockLocation = () => {
 			<div className='overflow-x-auto'>
 				<table className='w-full border-collapse text-sm'>
 					<thead>
-						<tr className='bg-primary-base text-offWhite'>
+						<tr className='bg-primary-base text-light'>
 							{tableHeaders.map((header) => (
 								<th
 									key={header}
-									className='px-2 py-1 border border-offWhite font-medium'
+									className='px-2 py-1 border border-light font-medium'
 								>
 									{header}
 								</th>
@@ -46,7 +46,7 @@ const StockLocation = () => {
 						{tableData.map((row, idx) => (
 							<tr
 								key={idx}
-								className='text-center bg-offWhite'
+								className='text-center bg-light'
 							>
 								{tableHeaders.map((header) => (
 									<td
@@ -58,7 +58,7 @@ const StockLocation = () => {
 								))}
 							</tr>
 						))}
-						<tr className='bg-offWhite font-bold'>
+						<tr className='bg-light font-bold'>
 							<td className='border px-2 py-1 text-left'>Total</td>
 							{['QTY', 'MIN', 'MAX', 'BO', 'SOLD', 'LA'].map((key) => (
 								<td

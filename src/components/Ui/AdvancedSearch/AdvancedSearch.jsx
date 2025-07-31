@@ -122,7 +122,7 @@ const ConditionGroup = ({ group, onChange, nested = false, onRemoveGroup }) => {
 	return (
 		<div
 			className={`rounded-lg p-3 mt-3 ${
-				nested ? 'bg-offWhite border border-gray-300' : 'bg-gray-50 border'
+				nested ? 'bg-light border border-gray-300' : 'bg-gray-50 border'
 			}`}
 		>
 			<div className='flex items-center gap-2 mb-3 relative'>
@@ -133,7 +133,7 @@ const ConditionGroup = ({ group, onChange, nested = false, onRemoveGroup }) => {
 							key={val}
 							className={`w-1/2 text-xs font-bold ${
 								group.logic === val
-									? 'bg-primary-base text-offWhite'
+									? 'bg-primary-base text-light'
 									: 'text-black hover:bg-gray-100'
 							}`}
 							onClick={() => changeLogic(val)}
@@ -151,7 +151,7 @@ const ConditionGroup = ({ group, onChange, nested = false, onRemoveGroup }) => {
 					+
 				</button>
 				{group.menuOpen && (
-					<div className='absolute top-full left-16 mt-1 bg-offWhite border border-gray-200 shadow-md rounded-sm z-10'>
+					<div className='absolute top-full left-16 mt-1 bg-light border border-gray-200 shadow-md rounded-sm z-10'>
 						<button
 							onClick={addRule}
 							className='flex items-center w-full px-3 py-2 text-sm hover:bg-gray-100'
@@ -273,7 +273,7 @@ const AdvancedSearch = () => {
 			/>
 			<button
 				onClick={handleSearch}
-				className='mt-4 px-2 py-1 bg-primary-base text-offWhite rounded hover:bg-primary-base'
+				className='mt-4 px-2 py-1 bg-primary-base text-light rounded hover:bg-primary-base'
 			>
 				Search
 			</button>

@@ -96,7 +96,7 @@ export default function Header() {
 			<div className='flex items-center gap-4 h-full'>
 				<button
 					onClick={() => dispatch(closeSidebar(!sidebarOpen))}
-					className={`text-offWhite flex justify-center items-center h-full w-[60px] ${
+					className={`text-light flex justify-center items-center h-full w-[60px] ${
 						sidebarOpen
 							? 'bg-transparent border border-border-input'
 							: 'bg-primary-base'

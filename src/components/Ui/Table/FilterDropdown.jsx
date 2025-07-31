@@ -37,7 +37,7 @@ const FilterDropdown = ({
 	};
 
 	return (
-		<div className='absolute right-0 mt-2 w-64 bg-offWhite border rounded shadow-lg z-20'>
+		<div className='absolute right-0 mt-2 w-64 bg-light border rounded shadow-lg z-20'>
 			<div className='p-2 border-b'>
 				<input
 					type='text'
@@ -77,7 +77,7 @@ const FilterDropdown = ({
 
 			<div className='flex justify-end space-x-2 p-3 border-t'>
 				<button
-					className='px-4 py-1 bg-blue-600 text-offWhite text-sm rounded hover:bg-blue-700'
+					className='px-4 py-1 bg-blue-600 text-light text-sm rounded hover:bg-blue-700'
 					onClick={() => onApply(Array.from(selected))}
 				>
 					APPLY

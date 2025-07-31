@@ -24,7 +24,7 @@ export default {
 				'small-detail': '17.3px', // 13pt
 			},
 			colors: {
-				offWhite: '#f5f5f5',
+				light: '#f5f5f5',
 				primary: {
 					base: '#0080ff', // Accent Color / key buttons
 					select: '#0070cc', // hover / selected state for left nav (only)
@@ -37,9 +37,6 @@ export default {
 				border: {
 					input: '#555555', // Input box border
 					grid: '#dbdbdb', // Data grid lines
-				},
-				background: {
-					light: '#f5f5f5', // Light backgrounds
 				},
 			},
 		},

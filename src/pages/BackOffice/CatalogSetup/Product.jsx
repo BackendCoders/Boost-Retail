@@ -106,7 +106,7 @@ const Product = () => {
 	return (
 		<div className='py-1 space-y-2'>
 			{/* Header */}
-			<div className='py-3 border-b bg-offWhite px-4 flex items-center justify-between'>
+			<div className='py-3 border-b bg-light px-4 flex items-center justify-between'>
 				<h2 className='text-section-heading font-bold'>PRODUCTS</h2>
 				<div className='flex items-center gap-2'>
 					<span>Advanced Mode</span>
@@ -123,7 +123,7 @@ const Product = () => {
 							}`}
 						>
 							<div
-								className={`absolute top-0.5 w-5 h-5 bg-offWhite rounded-full transition ${
+								className={`absolute top-0.5 w-5 h-5 bg-light rounded-full transition ${
 									showAdvancedSearch ? 'left-5' : 'left-0.5'
 								}`}
 							/>
@@ -133,7 +133,7 @@ const Product = () => {
 			</div>
 
 			{/* Breadcrumb */}
-			<div className='py-2 border-b bg-offWhite px-4'>
+			<div className='py-2 border-b bg-light px-4'>
 				<p className='text-breadcrumb'>Catalog Setup &gt; Manage Products</p>
 			</div>
 

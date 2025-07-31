@@ -7,7 +7,7 @@ const MaintainCategory = () => {
 	return (
 		<div className='bg-gray-50 min-h-screen'>
 			{/* Header */}
-			<div className='py-3 border-b bg-offWhite px-4 flex items-center justify-between'>
+			<div className='py-3 border-b bg-light px-4 flex items-center justify-between'>
 				<h2 className='text-xl font-semibold'>CATEGORISATION</h2>
 				<div className='text-sm text-gray-500'>
 					Total Categories: <span className='font-semibold'>143</span> |
@@ -16,7 +16,7 @@ const MaintainCategory = () => {
 			</div>
 
 			{/* Breadcrumb */}
-			<div className='py-2 border-b bg-offWhite px-4'>
+			<div className='py-2 border-b bg-light px-4'>
 				<p className='text-sm text-gray-600'>Maintain Categories</p>
 			</div>
 

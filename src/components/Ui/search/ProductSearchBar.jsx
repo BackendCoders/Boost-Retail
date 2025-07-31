@@ -18,7 +18,7 @@ const ToggleSwitch = ({ label, checked = true }) => (
 
 const ProductSearchBar = () => {
 	return (
-		<div className='flex items-center justify-between bg-offWhite gap-4 py-3 px-4'>
+		<div className='flex items-center justify-between bg-light gap-4 py-3 px-4'>
 			{/* Left: Search + Filters */}
 			<div className='flex flex-col gap-1'>
 				<p className='text-page-heading text-text-title font-inter font-bold'>

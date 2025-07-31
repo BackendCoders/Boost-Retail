@@ -12,7 +12,7 @@ const SimProduct = () => {
 	return (
 		<div className='py-1 space-y-1'>
 			{/* Header */}
-			<div className='py-3 border-b bg-offWhite px-4 flex items-center justify-between'>
+			<div className='py-3 border-b bg-light px-4 flex items-center justify-between'>
 				<h2 className='text-section-heading font-bold'>PRODUCTS</h2>
 				<div className='flex items-center gap-2'>
 					<span>Manage by Brand</span>
@@ -29,7 +29,7 @@ const SimProduct = () => {
 							}`}
 						>
 							<div
-								className={`absolute top-0.5 w-5 h-5 bg-offWhite rounded-full transition ${
+								className={`absolute top-0.5 w-5 h-5 bg-light rounded-full transition ${
 									managedByBrand ? 'left-5' : 'left-0.5'
 								}`}
 							/>
@@ -39,11 +39,11 @@ const SimProduct = () => {
 			</div>
 
 			{/* Breadcrumb */}
-			<div className='flex items-center justify-between py-2 border-b bg-offWhite px-4'>
+			<div className='flex items-center justify-between py-2 border-b bg-light px-4'>
 				<p className='text-breadcrumb'>Data Imports &gt; SIM Products</p>
 
 				{/* Selected Info */}
-				<div className='px-4 py-2 bg-offWhite text-sm'>
+				<div className='px-4 py-2 bg-light text-sm'>
 					<span className='font-semibold'>Selected:</span>{' '}
 					<span>
 						{managedByBrand
@@ -54,7 +54,7 @@ const SimProduct = () => {
 			</div>
 
 			{/* Content Area */}
-			<div className='bg-offWhite min-h-[calc(100vh-150px)] px-4'>
+			<div className='bg-light min-h-[calc(100vh-150px)] px-4'>
 				{managedByBrand ? (
 					<BrandSelector
 						selectedBrands={selectedBrands}

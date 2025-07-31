@@ -39,7 +39,7 @@ const Login = () => {
 	};
 
 	return (
-		<div className='min-h-screen bg-offWhite flex items-center justify-center px-4'>
+		<div className='min-h-screen bg-light flex items-center justify-center px-4'>
 			<div className='w-full max-w-md border border-gray-200 rounded-xl shadow-md p-6'>
 				<h2 className='text-2xl font-bold mb-4 text-center'>Login</h2>
 				<form
@@ -84,7 +84,7 @@ const Login = () => {
 					{success && <p className='text-green-500 text-sm'>{success}</p>}
 					<button
 						type='submit'
-						className='w-full bg-blue-500 hover:bg-blue-600 text-offWhite font-semibold py-2 rounded-md transition'
+						className='w-full bg-blue-500 hover:bg-blue-600 text-light font-semibold py-2 rounded-md transition'
 					>
 						Login
 					</button>

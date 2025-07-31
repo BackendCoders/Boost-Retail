@@ -2,7 +2,7 @@
 
 const CategoryEditPanel = () => {
 	return (
-		<div className='w-[92%] bg-offWhite p-6'>
+		<div className='w-[92%] bg-light p-6'>
 			<h3 className='text-lg font-semibold mb-6 pb-2'>Edit Details</h3>
 
 			{/* Name Field */}

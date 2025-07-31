@@ -13,7 +13,7 @@ const SecondaryButton = ({
 		<button
 			onClick={onClick}
 			disabled={disabled}
-			className={`px-4 py-2 rounded border border-gray-400 text-gray-700 bg-offWhite hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all ${className}`}
+			className={`px-4 py-2 rounded border border-gray-400 text-gray-700 bg-light hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all ${className}`}
 		>
 			{children}
 		</button>
