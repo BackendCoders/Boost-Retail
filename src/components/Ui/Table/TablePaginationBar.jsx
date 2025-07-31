@@ -45,11 +45,11 @@ const TablePaginationBar = ({
 	};
 
 	return (
-		<div className='flex items-center justify-between bg-white px-4 py-2'>
+		<div className='flex items-center justify-between bg-offWhite px-4 py-2'>
 			{/* Pagination Controls */}
 			<div className='flex items-center gap-2'>
 				<button
-					className='bg-primary-base text-white px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
+					className='bg-primary-base text-offWhite px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
 					onClick={() => onPageChange('prev')}
 					disabled={currentPage === 1}
 				>
@@ -64,7 +64,7 @@ const TablePaginationBar = ({
 				<span className='text-text-placeholder'>of {totalPages}</span>
 
 				<button
-					className='bg-primary-base text-white px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
+					className='bg-primary-base text-offWhite px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
 					onClick={() => onPageChange('next')}
 					disabled={currentPage === totalPages}
 				>
@@ -104,11 +104,11 @@ const TablePaginationBar = ({
 						className='bg-primary-base p-2 rounded-md flex items-center justify-center'
 						onClick={() => setShowFilters((prev) => !prev)}
 					>
-						<SettingIcon className='w-7 h-7 text-white' />
+						<SettingIcon className='w-7 h-7 text-offWhite' />
 					</button>
 
 					{showFilters && (
-						<div className='absolute right-0 top-12 z-30 bg-white shadow-lg border border-border-grid rounded-md'>
+						<div className='absolute right-0 top-12 z-30 bg-offWhite shadow-lg border border-border-grid rounded-md'>
 							<FilterDropdown
 								availableColumns={availableColumns}
 								initialSelected={selectedColumns}

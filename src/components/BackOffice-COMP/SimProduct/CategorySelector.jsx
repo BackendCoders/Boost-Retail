@@ -41,7 +41,7 @@ const CategorySelector = () => {
 	});
 
 	return (
-		<div className='flex w-full divide-x divide-gray-300 bg-white rounded-md shadow-sm text-sm'>
+		<div className='flex w-full divide-x divide-gray-300 bg-offWhite rounded-md shadow-sm text-sm'>
 			{/* Main Categories */}
 			<div className='w-1/5 p-4 space-y-2'>
 				<h4 className='font-semibold text-gray-800'>Main Categories</h4>

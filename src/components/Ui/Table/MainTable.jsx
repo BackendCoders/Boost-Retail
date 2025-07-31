@@ -162,7 +162,7 @@ const MainTable = ({
 			className='overflow-x-auto rounded-md border border-border-grid relative'
 		>
 			<table className='min-w-full table-auto data-header'>
-				<thead className='bg-white'>
+				<thead className='bg-offWhite'>
 					<DragDropContext onDragEnd={handleDragEnd}>
 						<Droppable
 							droppableId='columns'
@@ -190,7 +190,7 @@ const MainTable = ({
 													ref={provided.innerRef}
 													{...provided.draggableProps}
 													{...provided.dragHandleProps}
-													className={`p-2 text-left border whitespace-nowrap bg-white ${
+													className={`p-2 text-left border offWhitespace-nowrap bg-offWhite ${
 														snapshot.isDragging ? 'shadow-md' : ''
 													}`}
 												>
@@ -250,7 +250,7 @@ const MainTable = ({
 										</div>
 
 										{activeFilterCol === col.key && (
-											<ul className='absolute top-full right-5 bg-white rounded shadow-md z-10 text-sm max-h-52'>
+											<ul className='absolute top-full right-5 bg-offWhite rounded shadow-md z-10 text-sm max-h-52'>
 												{(col.type === 'number'
 													? numberFilterOptions
 													: textFilterOptions
@@ -281,14 +281,16 @@ const MainTable = ({
 								key={row.id}
 								className={`border data-body group ${
 									isSelected
-										? 'text-white bg-primary-base'
-										: 'hover:bg-primary-base hover:text-white'
+										? 'text-offWhite bg-primary-base'
+										: 'hover:bg-primary-base hover:text-offWhite'
 								}`}
 							>
 								<td className='p-4 text-center border'>
 									<input
 										className={`${
-											isSelected ? 'accent-white' : 'group-hover:accent-white'
+											isSelected
+												? 'accent-offWhite'
+												: 'group-hover:accent-offWhite'
 										} `}
 										type='checkbox'
 										checked={isSelected}
@@ -306,8 +308,8 @@ const MainTable = ({
 												checked={row[col.key]}
 												className={`${
 													isSelected
-														? 'accent-white'
-														: 'group-hover:accent-white'
+														? 'accent-offWhite'
+														: 'group-hover:accent-offWhite'
 												} `}
 												onChange={(e) =>
 													onCheckboxToggle(row.id, col.key, e.target.checked)

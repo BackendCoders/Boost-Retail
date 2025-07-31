@@ -5,13 +5,29 @@ import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 import SidebarDrawer from './SidebarDrawer';
 import { setActiveItem, setActiveMiniMenu } from '../../slice/sidebarSlice';
 import { sideMenus } from './sideMenu.config';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Sidebar() {
 	const dispatch = useDispatch();
+	const location = useLocation();
 	const { activeTopNavigation, sidebarOpen, activeMiniMenu, activeItem } =
 		useSelector((state) => state.sidebar);
 
 	const miniSideMenu = sideMenus[activeTopNavigation] || [];
+
+	useEffect(() => {
+		if (!location.pathname || !miniSideMenu.length) return;
+
+		const matchedItem = miniSideMenu.find((item) =>
+			location.pathname.startsWith(item.path)
+		);
+
+		if (matchedItem) {
+			dispatch(setActiveMiniMenu(matchedItem.alt));
+			dispatch(setActiveItem(matchedItem.alt));
+		}
+	}, [location.pathname, miniSideMenu, dispatch]);
 
 	const activeLabel = Object.values(sideMenus)
 		.flat()

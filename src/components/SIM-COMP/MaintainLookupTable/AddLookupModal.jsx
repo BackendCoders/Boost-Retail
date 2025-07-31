@@ -35,7 +35,7 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 
 			{/* Floating Modal */}
 			<div
-				className='fixed z-50 w-80 bg-white border border-gray-300 rounded-xl shadow-2xl p-5'
+				className='fixed z-50 w-80 bg-offWhite border border-gray-300 rounded-xl shadow-2xl p-5'
 				style={{
 					top: `${position.top}px`,
 					left: `${position.left}px`,
@@ -79,7 +79,7 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 					</select>
 
 					<div className='flex gap-3 mt-2'>
-						<button className='bg-primary-base text-white px-4 py-1.5 rounded hover:bg-primary-select transition text-sm'>
+						<button className='bg-primary-base text-offWhite px-4 py-1.5 rounded hover:bg-primary-select transition text-sm'>
 							+ Column
 						</button>
 						<button className='border border-primary-base text-primary-base px-4 py-1.5 rounded hover:bg-blue-50 transition text-sm'>
@@ -95,7 +95,7 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 						>
 							CANCEL
 						</button>
-						<button className='bg-primary-base text-white px-4 py-1.5 rounded hover:bg-primary-select transition text-sm'>
+						<button className='bg-primary-base text-offWhite px-4 py-1.5 rounded hover:bg-primary-select transition text-sm'>
 							CREATE
 						</button>
 					</div>

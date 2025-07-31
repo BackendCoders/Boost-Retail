@@ -100,8 +100,8 @@ export default function SupplierFeedsTable({
 						onChange={(e) => onChange(row.id, 'active', e.target.checked)}
 						className={` ${
 							row.id === highLightRef.current
-								? 'accent-white'
-								: 'accent-primary-base group-hover:accent-white'
+								? 'accent-offWhite'
+								: 'accent-primary-base group-hover:accent-offWhite'
 						} transition-colors`}
 					/>
 				</div>
@@ -128,8 +128,8 @@ export default function SupplierFeedsTable({
 							<TrashIcon
 								className={`w-4 h-4 cursor-pointer ${
 									row.id === highLightRef.current
-										? 'text-white'
-										: 'text-text-body group-hover:text-white'
+										? 'text-offWhite'
+										: 'text-text-body group-hover:text-offWhite'
 								}`}
 							/>
 						</div>
@@ -153,7 +153,7 @@ export default function SupplierFeedsTable({
 					<button
 						// ref={plusButtonRef}
 						onClick={onAdd}
-						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-white flex items-center justify-center'
+						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-offWhite flex items-center justify-center'
 					>
 						<PlusIcon className='w-4 h-4' />
 					</button>

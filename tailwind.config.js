@@ -24,7 +24,7 @@ export default {
 				'small-detail': '17.3px', // 13pt
 			},
 			colors: {
-				white: '#f5f5f5',
+				offWhite: '#f5f5f5',
 				primary: {
 					base: '#0080ff', // Accent Color / key buttons
 					select: '#0070cc', // hover / selected state for left nav (only)

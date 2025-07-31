@@ -90,14 +90,20 @@ const CategoryTree = () => {
 			.filter(Boolean);
 	};
 
-	const filteredData = useMemo(() => filterCategories(categoryData), [searchTerm, filterType]);
+	const filteredData = useMemo(
+		() => filterCategories(categoryData),
+		[searchTerm, filterType]
+	);
 
 	const renderCategory = (cat, level = 1) => {
 		const isExpanded = expandedIds[cat.id] ?? true;
 		const hasChildren = cat.children && cat.children.length > 0;
 
 		return (
-			<div key={cat.id} className='mb-1'>
+			<div
+				key={cat.id}
+				className='mb-1'
+			>
 				<div
 					className='flex items-center gap-2 group hover:bg-gray-50 py-1 rounded-md'
 					style={{ paddingLeft: `${level * 16}px` }}
@@ -143,7 +149,7 @@ const CategoryTree = () => {
 	};
 
 	return (
-		<div className='w-[35%] p-5 bg-white border-r overflow-y-auto'>
+		<div className='w-[35%] p-5 bg-offWhite border-r overflow-y-auto'>
 			{/* Search and Filter */}
 			<div className='flex gap-4 mb-3'>
 				<input
@@ -166,11 +172,17 @@ const CategoryTree = () => {
 
 			{/* Collapse/Expand Controls */}
 			<div className='text-xs text-gray-500 mb-3'>
-				<span className='cursor-pointer hover:underline' onClick={collapseAll}>
+				<span
+					className='cursor-pointer hover:underline'
+					onClick={collapseAll}
+				>
 					Collapse All
 				</span>{' '}
 				|{' '}
-				<span className='cursor-pointer hover:underline' onClick={expandAll}>
+				<span
+					className='cursor-pointer hover:underline'
+					onClick={expandAll}
+				>
 					Expand All
 				</span>
 			</div>
