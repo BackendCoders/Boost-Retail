@@ -6,7 +6,7 @@ import SidebarDrawer from './SidebarDrawer';
 import { setActiveItem, setActiveMiniMenu } from '../../slice/sidebarSlice';
 import { sideMenus } from './sideMenu.config';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 export default function Sidebar() {
 	const dispatch = useDispatch();
@@ -14,7 +14,10 @@ export default function Sidebar() {
 	const { activeTopNavigation, sidebarOpen, activeMiniMenu, activeItem } =
 		useSelector((state) => state.sidebar);
 
-	const miniSideMenu = sideMenus[activeTopNavigation] || [];
+	const miniSideMenu = useMemo(
+		() => sideMenus[activeTopNavigation] || [],
+		[activeTopNavigation]
+	);
 
 	useEffect(() => {
 		if (!location.pathname || !miniSideMenu.length) return;

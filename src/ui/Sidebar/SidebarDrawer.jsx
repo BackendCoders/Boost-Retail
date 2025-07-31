@@ -6,7 +6,7 @@ import ArrowLeftIcon from '../../assets/icons/thin/ArrowLargeLeftThinIcon';
 import UpIcon from '../../assets/icons/thin/UpThinIcon';
 import DownIcon from '../../assets/icons/thin/DownThinIcon';
 import { menuData } from './menData.config';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // components/SidebarDrawer.jsx
 
@@ -16,6 +16,7 @@ export default function SidebarDrawer({
 	onClose,
 	sidebarOpen,
 }) {
+	const location = useLocation();
 	const drawerRef = useRef();
 	const [expandedSections, setExpandedSections] = useState({});
 
@@ -35,6 +36,27 @@ export default function SidebarDrawer({
 		};
 	}, [onClose]);
 
+	useEffect(() => {
+		if (!activeItem || !menuData[activeItem]) return;
+
+		const currentPath = location.pathname;
+		const sections = menuData[activeItem];
+
+		for (const section of sections) {
+			if (section.children) {
+				for (const child of section.children) {
+					if (currentPath.startsWith(child.path)) {
+						setExpandedSections({ [section.label]: true });
+						return; // stop once matched
+					}
+				}
+			} else if (section.link && currentPath.startsWith(section.link)) {
+				setExpandedSections({ [section.label]: true });
+				return;
+			}
+		}
+	}, [activeItem, location.pathname]);
+
 	const toggleSection = (section) => {
 		setExpandedSections((prev) => {
 			const isCurrentlyExpanded = !!prev[section];
@@ -48,7 +70,6 @@ export default function SidebarDrawer({
 	};
 
 	const menuItems = activeItem ? menuData[activeItem] || [] : [];
-	console.log(activeItem);
 
 	return (
 		<div
@@ -77,7 +98,11 @@ export default function SidebarDrawer({
 								className='text-gray-800 rounded cursor-pointer border-b border-gray-200'
 							>
 								<div
-									className='flex justify-between items-center px-3 py-3 hover:bg-gray-100 rounded cursor-pointer'
+									className={`flex justify-between items-center px-3 py-3 ${
+										location.pathname === section.link
+											? 'bg-gray-200'
+											: 'hover:bg-gray-100'
+									} rounded cursor-pointer`}
 									onClick={() => toggleSection(section.label)}
 								>
 									<Link to={section?.link || '#'}>
@@ -98,7 +123,11 @@ export default function SidebarDrawer({
 											<Link to={child?.path}>
 												<li
 													key={childIndex}
-													className='hover:bg-gray-100 px-3 py-1.5 rounded cursor-pointer'
+													className={`px-3 py-1.5 rounded cursor-pointer ${
+														location.pathname === child.path
+															? 'bg-gray-200'
+															: 'hover:bg-gray-100'
+													}`}
 												>
 													{child?.label}
 												</li>
