@@ -14,57 +14,79 @@ import ArrowLeftIcon from '../../assets/icons/thin/ArrowLargeLeftThinIcon';
 import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeSidebar, setActiveTopNavigation } from '../../slice/sidebarSlice';
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
 
 export default function Header() {
 	const dispatch = useDispatch();
+	const location = useLocation();
 	const { activeTopNavigation, sidebarOpen } = useSelector(
 		(state) => state.sidebar
 	);
 	const { loginUser } = useSelector((state) => state.auth);
-	const iconItems = [
-		{ icon: HomeIcon, key: 'Home', label: 'Home', link: '/dashboard' },
-		{ icon: PosIcon, key: 'POS', label: 'POS', link: '/pos/payments' },
-		{
-			icon: EcommerceIcon,
-			key: 'Ecommerce',
-			label: 'E-Commerce',
-			link: '/e-commerce/processing/orders/cycle-to-work',
-		},
-		{
-			icon: WorkshopIcon,
-			key: 'Workshop',
-			label: 'Workshop',
-			link: '/workshop',
-		},
-		{
-			icon: WarrantyIcon,
-			key: 'Warranty',
-			label: 'Warranty',
-			link: '/warranty',
-		},
-		{
-			icon: BackOfficeIcon,
-			key: 'BackOffice',
-			label: 'Back Office',
-			link: '/back-office/customer/customer-maintenance',
-		},
-		// { icon: AccountIcon, key: 'superAdmin', label: 'Super Admin' },
-		{ icon: CustomersIcon, key: 'Users', label: 'Users', link: '/users/users' },
-		{ icon: ReportIcon, key: 'Reports', label: 'Reports', link: '/reports' },
-		{
-			icon: SettingIcon,
-			key: 'Settings',
-			label: 'Setup',
-			link: 'settings/setup/business-profile',
-		},
-	];
+	const iconItems = useMemo(
+		() => [
+			{ icon: HomeIcon, key: 'Home', label: 'Home', link: '/dashboard' },
+			{ icon: PosIcon, key: 'POS', label: 'POS', link: '/pos/payments' },
+			{
+				icon: EcommerceIcon,
+				key: 'Ecommerce',
+				label: 'E-Commerce',
+				link: '/e-commerce/processing/orders/cycle-to-work',
+			},
+			{
+				icon: WorkshopIcon,
+				key: 'Workshop',
+				label: 'Workshop',
+				link: '/workshop',
+			},
+			{
+				icon: WarrantyIcon,
+				key: 'Warranty',
+				label: 'Warranty',
+				link: '/warranty',
+			},
+			{
+				icon: BackOfficeIcon,
+				key: 'BackOffice',
+				label: 'Back Office',
+				link: '/back-office/customer/customer-maintenance',
+			},
+			// { icon: AccountIcon, key: 'superAdmin', label: 'Super Admin' },
+			{
+				icon: CustomersIcon,
+				key: 'Users',
+				label: 'Users',
+				link: '/users/users',
+			},
+			{ icon: ReportIcon, key: 'Reports', label: 'Reports', link: '/reports' },
+			{
+				icon: SettingIcon,
+				key: 'Settings',
+				label: 'Setup',
+				link: 'settings/setup/business-profile',
+			},
+		],
+		[]
+	);
 
 	useEffect(() => {
-		if (loginUser === 1) dispatch(setActiveTopNavigation('superAdmin'));
-		else dispatch(setActiveTopNavigation('Home'));
-	}, [dispatch, loginUser]);
+		const path = location.pathname.split('/')[1]; // Get first segment from URL
+		if (loginUser === 1) {
+			dispatch(setActiveTopNavigation('superAdmin'));
+		} else {
+			// Try to find the item whose link starts with the same first path segment
+			const matchedItem = iconItems.find((item) =>
+				item.link?.startsWith(`/${path}`)
+			);
+
+			if (matchedItem) {
+				dispatch(setActiveTopNavigation(matchedItem.key));
+			} else {
+				dispatch(setActiveTopNavigation('Home')); // fallback
+			}
+		}
+	}, [dispatch, loginUser, location.pathname, iconItems]);
 
 	const activeLabel =
 		iconItems.find((item) => item.key === activeTopNavigation)?.label || '';
@@ -107,7 +129,7 @@ export default function Header() {
 			<ul className='flex items-center h-full'>
 				{loginUser !== 1 &&
 					iconItems.map((item) => (
-						<SidebarIconItem
+						<TopIconItem
 							icon={item.icon}
 							link={item.link}
 							key={item.key}
@@ -121,7 +143,7 @@ export default function Header() {
 	);
 }
 
-function SidebarIconItem({ icon: Icon, link, label, onclick, active }) {
+function TopIconItem({ icon: Icon, link, label, onclick, active }) {
 	return (
 		<li
 			className={`${
