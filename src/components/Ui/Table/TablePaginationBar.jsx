@@ -49,7 +49,7 @@ const TablePaginationBar = ({
 			{/* Pagination Controls */}
 			<div className='flex items-center gap-2'>
 				<button
-					className='bg-primary-base text-light px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
+					className='bg-primary text-light px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
 					onClick={() => onPageChange('prev')}
 					disabled={currentPage === 1}
 				>
@@ -64,7 +64,7 @@ const TablePaginationBar = ({
 				<span className='text-text-placeholder'>of {totalPages}</span>
 
 				<button
-					className='bg-primary-base text-light px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
+					className='bg-primary text-light px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
 					onClick={() => onPageChange('next')}
 					disabled={currentPage === totalPages}
 				>
@@ -79,7 +79,7 @@ const TablePaginationBar = ({
 
 				<div className='relative'>
 					<select
-						className='appearance-none border border-border-input px-3 py-1 pr-8 rounded-md text-text-body outline-none focus:ring-1 focus:ring-primary-base'
+						className='appearance-none border border-border-input px-3 py-1 pr-8 rounded-md text-text-body outline-none focus:ring-1 focus:ring-primary'
 						value={productsPerPage}
 						onChange={(e) => onPerPageChange(+e.target.value)}
 					>
@@ -101,7 +101,7 @@ const TablePaginationBar = ({
 					ref={btnWrapperRef}
 				>
 					<button
-						className='bg-primary-base p-2 rounded-md flex items-center justify-center'
+						className='bg-primary p-2 rounded-md flex items-center justify-center'
 						onClick={() => setShowFilters((prev) => !prev)}
 					>
 						<SettingIcon className='w-7 h-7 text-light' />

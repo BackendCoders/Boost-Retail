@@ -25,10 +25,8 @@ export default {
 			},
 			colors: {
 				light: '#f5f5f5',
-				primary: {
-					base: '#0080ff', // Accent Color / key buttons
-					select: '#0070cc', // hover / selected state for left nav (only)
-				},
+				primary: '#0080ff', // Accent Color / key buttons
+				secondary: '#0070cc', // hover / selected state for left nav (only)
 				text: {
 					title: '#000000', // Page / Section Titles
 					body: '#555555', // Input text / dropdown / body text / input box border

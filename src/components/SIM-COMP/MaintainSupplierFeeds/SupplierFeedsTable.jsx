@@ -101,7 +101,7 @@ export default function SupplierFeedsTable({
 						className={` ${
 							row.id === highLightRef.current
 								? 'accent-light'
-								: 'accent-primary-base group-hover:accent-light'
+								: 'accent-primary group-hover:accent-light'
 						} transition-colors`}
 					/>
 				</div>
@@ -153,7 +153,7 @@ export default function SupplierFeedsTable({
 					<button
 						// ref={plusButtonRef}
 						onClick={onAdd}
-						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-light flex items-center justify-center'
+						className='w-12 h-12 bg-primary hover:bg-secondary rounded text-light flex items-center justify-center'
 					>
 						<PlusIcon className='w-4 h-4' />
 					</button>

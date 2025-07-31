@@ -25,7 +25,7 @@ const SimProduct = () => {
 						/>
 						<div
 							className={`w-11 h-6 rounded-full transition ${
-								managedByBrand ? 'bg-primary-base' : 'bg-gray-400'
+								managedByBrand ? 'bg-primary' : 'bg-gray-400'
 							}`}
 						>
 							<div

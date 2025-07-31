@@ -99,7 +99,7 @@ export default function Header() {
 					className={`text-light flex justify-center items-center h-full w-[60px] ${
 						sidebarOpen
 							? 'bg-transparent border border-border-input'
-							: 'bg-primary-base'
+							: 'bg-primary'
 					} '`}
 				>
 					{!sidebarOpen ? (
@@ -147,7 +147,7 @@ function TopIconItem({ icon: Icon, link, label, onclick, active }) {
 	return (
 		<li
 			className={`${
-				active ? 'bg-primary-base' : 'hover:bg-primary-base'
+				active ? 'bg-primary' : 'hover:bg-primary'
 			} flex justify-center items-center py-4 px-4 transition-all duration-300 h-full w-[3.75rem] cursor-pointer`}
 			onClick={onclick}
 		>

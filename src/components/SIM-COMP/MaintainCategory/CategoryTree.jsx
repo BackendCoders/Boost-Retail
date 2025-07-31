@@ -132,9 +132,9 @@ const CategoryTree = () => {
 
 					{/* Action Icons */}
 					<div className='flex items-center gap-2 ml-2'>
-						<PlusIcon className='w-4 h-4 cursor-pointer text-primary-base hover:scale-110' />
-						<EditIcon className='w-4 h-4 cursor-pointer text-primary-base hover:scale-110' />
-						<DeleteIcon className='w-4 h-4 cursor-pointer text-primary-base hover:scale-110' />
+						<PlusIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
+						<EditIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
+						<DeleteIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
 					</div>
 				</div>
 

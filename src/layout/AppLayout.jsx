@@ -19,7 +19,7 @@ export default function AppLayout() {
 				{/* {loginUser === 1 ? <SuperAdminSidebar /> : <Sidebar />} */}
 				<Sidebar />
 				{/* Main Content */}
-				<main className='flex-1 bg-light p-4 overflow-y-auto overflow-x-hidden max-w-full scrollbar-thin scrollbar-thumb-primary-base'>
+				<main className='flex-1 bg-light p-4 overflow-y-auto overflow-x-hidden max-w-full scrollbar-thin scrollbar-thumb-primary'>
 					<Outlet />
 				</main>
 			</div>

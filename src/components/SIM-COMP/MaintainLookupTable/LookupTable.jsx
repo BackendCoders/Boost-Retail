@@ -110,7 +110,7 @@ export default function LookupTable({
 					<button
 						ref={plusButtonRef}
 						onClick={() => setShowModal(true)}
-						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-light flex items-center justify-center'
+						className='w-12 h-12 bg-primary hover:bg-secondary rounded text-light flex items-center justify-center'
 					>
 						<PlusIcon className='w-4 h-4' />
 					</button>

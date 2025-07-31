@@ -10,7 +10,7 @@ const ToggleSwitch = ({ label, checked = true }) => (
 			type='checkbox'
 			checked={checked}
 			readOnly
-			className='accent-primary-base w-4 h-4'
+			className='accent-primary w-4 h-4'
 		/>
 		{label}
 	</label>
@@ -30,7 +30,7 @@ const ProductSearchBar = () => {
 					<input
 						type='text'
 						placeholder='Enter Part Number / MPN / Barcode / Title'
-						className='w-[360px] px-3 py-2 rounded-md border border-border-input text-form-field text-text-body placeholder-text-placeholder outline-none focus:ring-1 focus:ring-primary-base font-inter'
+						className='w-[360px] px-3 py-2 rounded-md border border-border-input text-form-field text-text-body placeholder-text-placeholder outline-none focus:ring-1 focus:ring-primary font-inter'
 					/>
 
 					{/* Refresh Icon */}
@@ -59,7 +59,7 @@ const ProductSearchBar = () => {
 						key={label}
 						className='flex flex-col items-center gap-1'
 					>
-						<div className='w-16 h-16 border border-primary-base rounded-md flex items-center justify-center text-lg font-bold text-primary-base'>
+						<div className='w-16 h-16 border border-primary rounded-md flex items-center justify-center text-lg font-bold text-primary'>
 							{value}
 						</div>
 						<p className='text-data-body text-text-title font-inter'>{label}</p>

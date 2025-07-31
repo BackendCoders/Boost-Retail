@@ -119,7 +119,7 @@ const Product = () => {
 						/>
 						<div
 							className={`w-11 h-6 rounded-full transition ${
-								showAdvancedSearch ? 'bg-primary-base' : 'bg-gray-400'
+								showAdvancedSearch ? 'bg-primary' : 'bg-gray-400'
 							}`}
 						>
 							<div

@@ -41,7 +41,7 @@ export default function Sidebar() {
 			<div
 				className={`${
 					sidebarOpen ? 'w-[3.75rem]' : 'w-0'
-				} bg-primary-base transition-all duration-300 overflow-hidden`}
+				} bg-primary transition-all duration-300 overflow-hidden`}
 			>
 				<div className='flex flex-col items-center w-full'>
 					{miniSideMenu.map((item, index) => (
@@ -84,8 +84,8 @@ function SidebarIconItem({
 	return (
 		<div
 			className={`sidebar-icon ${
-				activeItem === alt ? 'bg-primary-select' : 'bg-transparent'
-			} hover:bg-primary-select transition-all duration-300 px-4 py-4 w-full flex justify-center items-center cursor-pointer h-[3.75rem]`}
+				activeItem === alt ? 'bg-secondary' : 'bg-transparent'
+			} hover:bg-secondary transition-all duration-300 px-4 py-4 w-full flex justify-center items-center cursor-pointer h-[3.75rem]`}
 			onClick={onClick}
 		>
 			<Tooltip

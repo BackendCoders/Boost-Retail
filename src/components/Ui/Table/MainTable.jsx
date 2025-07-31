@@ -281,8 +281,8 @@ const MainTable = ({
 								key={row.id}
 								className={`border data-body group ${
 									isSelected
-										? 'text-light bg-primary-base'
-										: 'hover:bg-primary-base hover:text-light'
+										? 'text-light bg-primary'
+										: 'hover:bg-primary hover:text-light'
 								}`}
 							>
 								<td className='p-4 text-center border'>

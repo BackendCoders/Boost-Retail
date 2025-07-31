@@ -133,7 +133,7 @@ const ConditionGroup = ({ group, onChange, nested = false, onRemoveGroup }) => {
 							key={val}
 							className={`w-1/2 text-xs font-bold ${
 								group.logic === val
-									? 'bg-primary-base text-light'
+									? 'bg-primary text-light'
 									: 'text-black hover:bg-gray-100'
 							}`}
 							onClick={() => changeLogic(val)}
@@ -273,7 +273,7 @@ const AdvancedSearch = () => {
 			/>
 			<button
 				onClick={handleSearch}
-				className='mt-4 px-2 py-1 bg-primary-base text-light rounded hover:bg-primary-base'
+				className='mt-4 px-2 py-1 bg-primary text-light rounded hover:bg-primary'
 			>
 				Search
 			</button>

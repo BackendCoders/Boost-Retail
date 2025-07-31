@@ -56,7 +56,7 @@ export default function RowEditorTable({
 						onChange={(e) =>
 							console.log('Checkbox toggled:', row.id, e.target.checked)
 						}
-						className='accent-primary-base group-hover:accent-light transition-colors'
+						className='accent-primary group-hover:accent-light transition-colors'
 					/>
 				</div>
 			),
@@ -95,7 +95,7 @@ export default function RowEditorTable({
 				>
 					<button
 						onClick={onAdd}
-						className='w-12 h-12 bg-primary-base hover:bg-primary-select rounded text-light flex items-center justify-center'
+						className='w-12 h-12 bg-primary hover:bg-secondary rounded text-light flex items-center justify-center'
 					>
 						<PlusIcon className='w-4 h-4' />
 					</button>

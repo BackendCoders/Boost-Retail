@@ -23,7 +23,7 @@ const BottomTablePagination = ({ currentPage, totalPages, onPageChange }) => {
 			{/* Pagination Controls */}
 			<div className='flex items-center gap-2'>
 				<button
-					className='bg-primary-base text-light px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
+					className='bg-primary text-light px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
 					onClick={() => onPageChange('prev')}
 					disabled={currentPage === 1}
 				>
@@ -38,7 +38,7 @@ const BottomTablePagination = ({ currentPage, totalPages, onPageChange }) => {
 				<span className='text-text-placeholder'>of {totalPages}</span>
 
 				<button
-					className='bg-primary-base text-light px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
+					className='bg-primary text-light px-3 py-1 rounded-full disabled:opacity-50 flex items-center'
 					onClick={() => onPageChange('next')}
 					disabled={currentPage === totalPages}
 				>

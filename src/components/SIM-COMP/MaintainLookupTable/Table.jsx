@@ -303,8 +303,8 @@ const Table = ({
 								}}
 								className={`border data-body cursor-pointer group ${
 									isSelected
-										? 'bg-primary-base text-light'
-										: 'hover:bg-primary-base hover:text-light'
+										? 'bg-primary text-light'
+										: 'hover:bg-primary hover:text-light'
 								}`}
 							>
 								{enableRowSelection && (

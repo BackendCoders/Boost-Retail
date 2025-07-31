@@ -70,7 +70,7 @@ const BatchEdit = () => {
 
 				<button
 					onClick={handleApply}
-					className='bg-primary-base hover:bg-blue-600 text-light text-xs font-medium px-4 py-1 rounded-2xl'
+					className='bg-primary hover:bg-blue-600 text-light text-xs font-medium px-4 py-1 rounded-2xl'
 				>
 					APPLY
 				</button>

@@ -55,7 +55,7 @@ const CategorySelector = () => {
 						}}
 						className={`cursor-pointer px-2 py-1 rounded hover:bg-gray-100 ${
 							selectedMain === cat
-								? 'bg-gray-100 font-semibold text-primary-base'
+								? 'bg-gray-100 font-semibold text-primary'
 								: 'text-gray-700'
 						}`}
 					>
@@ -79,7 +79,7 @@ const CategorySelector = () => {
 							}}
 							className={`cursor-pointer px-2 py-1 rounded hover:bg-gray-100 ${
 								selectedSub === sub
-									? 'bg-gray-100 font-semibold text-primary-base'
+									? 'bg-gray-100 font-semibold text-primary'
 									: 'text-gray-700'
 							}`}
 						>
@@ -100,7 +100,7 @@ const CategorySelector = () => {
 							onClick={() => setSelectedType(type)}
 							className={`cursor-pointer px-2 py-1 rounded hover:bg-gray-100 ${
 								selectedType === type
-									? 'bg-gray-100 font-semibold text-primary-base'
+									? 'bg-gray-100 font-semibold text-primary'
 									: 'text-gray-700'
 							}`}
 						>

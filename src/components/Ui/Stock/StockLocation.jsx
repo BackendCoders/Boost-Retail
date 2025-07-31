@@ -31,7 +31,7 @@ const StockLocation = () => {
 			<div className='overflow-x-auto'>
 				<table className='w-full border-collapse text-sm'>
 					<thead>
-						<tr className='bg-primary-base text-light'>
+						<tr className='bg-primary text-light'>
 							{tableHeaders.map((header) => (
 								<th
 									key={header}
