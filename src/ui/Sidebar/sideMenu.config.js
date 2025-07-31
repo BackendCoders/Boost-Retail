@@ -70,12 +70,12 @@ export const sideMenus = {
 			label: 'Products',
 			path: '/back-office/products',
 		},
-		{
-			icon: CustomiseIcon,
-			alt: 'PartOrderings',
-			label: 'Part Orderings',
-			path: '/back-office/part-orderings',
-		},
+		// {
+		// 	icon: CustomiseIcon,
+		// 	alt: 'PartOrderings',
+		// 	label: 'Part Orderings',
+		// 	path: '/back-office/part-orderings',
+		// },
 		{
 			icon: SettingIcon,
 			alt: 'Settings',

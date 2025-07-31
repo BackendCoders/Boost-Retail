@@ -367,20 +367,20 @@ export const menuData = {
 				},
 			],
 		},
-		{
-			label: 'Tools',
-			link: '#',
-			children: [
-				{
-					label: 'Print Labels',
-					path: '/back-office/products/tools/print-labels',
-				},
-				{
-					label: 'Price Match',
-					path: '/back-office/products/tools/price-match',
-				},
-			],
-		},
+		// {
+		// 	label: 'Tools',
+		// 	link: '#',
+		// 	children: [
+		// 		{
+		// 			label: 'Print Labels',
+		// 			path: '/back-office/products/tools/print-labels',
+		// 		},
+		// 		{
+		// 			label: 'Price Match',
+		// 			path: '/back-office/products/tools/price-match',
+		// 		},
+		// 	],
+		// },
 	],
 	PartOrderings: [
 		{
