@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MissingImagesSearch from '../../../../components/SIM-COMP/MissingData/MissingImagesSearch';
 import MissingImagesTable from '../../../../components/SIM-COMP/MissingData/MissingImagesTable';
 import ImageReorder from '../../../../components/SIM-COMP/MissingData/ImageReorder';
@@ -74,6 +74,45 @@ const MissingImages = () => {
 			)
 		);
 	};
+
+	const handleFiles = (files) => {
+		// Filter for only image files
+		const imageFiles = files.filter((file) => file.type.match('image.*'));
+
+		if (imageFiles.length === 0) {
+			alert('Please upload only image files');
+			return;
+		}
+
+		// Process the files (example: create previews and add to state)
+		const newImages = imageFiles.map((file) => ({
+			id: URL.createObjectURL(file), // Using object URL as temporary ID
+			url: URL.createObjectURL(file), // For preview
+			file, // Store the actual file object
+		}));
+
+		// Update your state (example using the first category)
+		setCategories((prevCategories) =>
+			prevCategories.map((category) =>
+				category.id === 1
+					? { ...category, images: [...category.images, ...newImages] }
+					: category
+			)
+		);
+	};
+
+	useEffect(() => {
+		return () => {
+			// Clean up object URLs when component unmounts
+			categories.forEach((category) => {
+				category.images?.forEach((image) => {
+					if (image.url.startsWith('blob:')) {
+						URL.revokeObjectURL(image.url);
+					}
+				});
+			});
+		};
+	}, [categories]);
 
 	console.log({ selectedCategoryId, selectedCategory });
 
@@ -166,15 +205,58 @@ const MissingImages = () => {
 					</div>
 
 					{/* Upload Section */}
-					<div className='col-span-1 bg-gray-300 border  shadow-sm p-4 rounded-lg'>
+					<div className='col-span-1 bg-gray-300 border shadow-sm p-4 rounded-lg'>
 						<h2 className='font-semibold mb-2'>Upload Images</h2>
-						<div className=' flex flex-col items-center justify-center bg-white border-dashed border-2 border-gray-400 rounded-lg p-4 min-h-36 max-h-36'>
+						<div
+							className='flex flex-col items-center justify-center bg-white border-dashed border-2 border-gray-400 rounded-lg p-4 min-h-36 max-h-36 relative'
+							onDragOver={(e) => {
+								e.preventDefault();
+								e.currentTarget.classList.add('border-blue-500', 'bg-blue-50');
+							}}
+							onDragLeave={(e) => {
+								e.preventDefault();
+								e.currentTarget.classList.remove(
+									'border-blue-500',
+									'bg-blue-50'
+								);
+							}}
+							onDrop={(e) => {
+								e.preventDefault();
+								e.currentTarget.classList.remove(
+									'border-blue-500',
+									'bg-blue-50'
+								);
+								const files = Array.from(e.dataTransfer.files);
+								handleFiles(files);
+							}}
+						>
+							<input
+								type='file'
+								id='file-upload'
+								className='hidden'
+								multiple
+								accept='image/*'
+								onChange={(e) => {
+									const files = Array.from(e.target.files);
+									handleFiles(files);
+								}}
+							/>
+							<div className='w-10 h-10'>
+								<img
+									src='https://www.pngplay.com/wp-content/uploads/8/Upload-Icon-Logo-Transparent-Image.png'
+									className='object-cover'
+									alt='Upload icon'
+								/>
+							</div>
 							<div className='text-center text-sm text-gray-500 mb-2'>
 								Drag & Drop to Upload Images OR
 							</div>
-							<button className='bg-blue-500 text-white text-sm px-4 py-1 rounded hover:bg-blue-600'>
+							<label
+								htmlFor='file-upload'
+								className='bg-blue-500 text-white text-sm px-4 py-1 rounded hover:bg-blue-600 cursor-pointer'
+							>
 								BROWSE FILES
-							</button>
+							</label>
 						</div>
 					</div>
 					<div className='col-span-3 bg-gray-300 border  shadow-sm p-4 rounded-lg'>
