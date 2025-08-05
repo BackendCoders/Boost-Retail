@@ -494,28 +494,28 @@ export const menuData = {
 			],
 		},
 		{
-			label: 'Missing Data',
+			label: 'Incorrect Data',
 			link: '#',
 			children: [
 				{
 					label: 'Missing Categories',
-					path: '/admin/sim/missing-data/missing-categories',
+					path: '/admin/sim/incorrect-data/missing-categories',
 				},
 				{
-					label: 'Missing Categories Visual Mode',
-					path: '/admin/sim/missing-data/missing-categories-visual-mode',
+					label: 'Visual Category Checker',
+					path: '/admin/sim/incorrect-data/visual-category-checker',
 				},
 				{
 					label: 'Conflicting Categories',
-					path: '/admin/sim/missing-data/conflicting-categories',
+					path: '/admin/sim/incorrect-data/conflicting-categories',
 				},
 				{
 					label: 'Missing Product Data',
-					path: '/admin/sim/missing-data/missing-product-data',
+					path: '/admin/sim/incorrect-data/missing-product-data',
 				},
 				{
 					label: 'Missing Images',
-					path: '/admin/sim/missing-data/missing-images',
+					path: '/admin/sim/incorrect-data/missing-images',
 				},
 			],
 		},

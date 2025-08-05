@@ -13,6 +13,7 @@ import MaintainSupplierFeeds from '../pages/SuperAdmin/SIM/SupplierFeeds/Maintai
 
 /** Auth page */
 import LoginPage from '../pages/Auth/Login';
+import MissingCategories from '../pages/SuperAdmin/SIM/MissingData/MissingCategories';
 
 export default function AppRoutes() {
 	return (
@@ -485,27 +486,27 @@ export default function AppRoutes() {
 				/>
 				{/* MissingData - Missing Categories */}
 				<Route
-					path='/admin/sim/missing-data/missing-categories'
-					element={<div>Missing Categories</div>}
+					path='/admin/sim/incorrect-data/missing-categories'
+					element={<MissingCategories />}
 				/>
 				{/* MissingData - Missing Categories Visual Mode */}
 				<Route
-					path='/admin/sim/missing-data/missing-categories-visual-mode'
-					element={<div>Missing Categories Visual Mode</div>}
+					path='/admin/sim/incorrect-data/visual-category-checker'
+					element={<div>Visual Category Checker</div>}
 				/>
 				{/* MissingData - Conflicting Categories */}
 				<Route
-					path='/admin/sim/missing-data/conflicting-categories'
+					path='/admin/sim/incorrect-data/conflicting-categories'
 					element={<div>Conflicting Categories</div>}
 				/>
 				{/* MissingData - Missing Product Data */}
 				<Route
-					path='/admin/sim/missing-data/missing-product-data'
+					path='/admin/sim/incorrect-data/missing-product-data'
 					element={<div>Missing Product Data</div>}
 				/>
 				{/* MissingData - Missing Images */}
 				<Route
-					path='/admin/sim/missing-data/missing-images'
+					path='/admin/sim/incorrect-data/missing-images'
 					element={<div>Missing Images</div>}
 				/>
 				{/* Sim Ends */}
