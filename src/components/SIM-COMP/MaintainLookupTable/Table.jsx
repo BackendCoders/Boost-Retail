@@ -232,13 +232,22 @@ const Table = ({
 
 					{showFilterRow && (
 						<tr className='bg-gray-300'>
-							{enableRowSelection && <td className='p-4 border'></td>}
+							{enableRowSelection && (
+								<td className='p-4 border'>
+									<div
+										className='text-blue-500 font-semibold text-center cursor-pointer'
+										onClick={handleClearFilters}
+									>
+										Clear
+									</div>
+								</td>
+							)}
 							{columnsState.map((col, index) => (
 								<td
 									key={col.key}
 									className='p-4 border relative'
 								>
-									{index === 0 ? (
+									{index === 0 && !enableRowSelection ? (
 										<div
 											className='text-blue-500 font-semibold text-center cursor-pointer'
 											onClick={handleClearFilters}

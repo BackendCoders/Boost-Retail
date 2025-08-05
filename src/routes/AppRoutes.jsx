@@ -14,6 +14,7 @@ import MaintainSupplierFeeds from '../pages/SuperAdmin/SIM/SupplierFeeds/Maintai
 /** Auth page */
 import LoginPage from '../pages/Auth/Login';
 import MissingCategories from '../pages/SuperAdmin/SIM/MissingData/MissingCategories';
+import MissingImages from '../pages/SuperAdmin/SIM/MissingData/MissingImages';
 
 export default function AppRoutes() {
 	return (
@@ -507,7 +508,7 @@ export default function AppRoutes() {
 				{/* MissingData - Missing Images */}
 				<Route
 					path='/admin/sim/incorrect-data/missing-images'
-					element={<div>Missing Images</div>}
+					element={<MissingImages />}
 				/>
 				{/* Sim Ends */}
 

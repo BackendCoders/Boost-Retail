@@ -48,7 +48,7 @@ export default function MissingCategoryTable({
 			key: 'category1',
 			Cell: ({ value }) => (
 				<select
-					className='border p-1 text-sm w-full text-black'
+					className='border p-1 text-small-button w-full text-black'
 					value={value}
 					// onChange={(e) => onChange(row.id, 'category1', e.target.value)}
 				>
@@ -64,7 +64,7 @@ export default function MissingCategoryTable({
 			key: 'category2',
 			Cell: ({ value }) => (
 				<select
-					className='border p-1 text-sm w-full text-black'
+					className='border p-1 text-small-button w-full text-black'
 					value={value}
 					// onChange={(e) => onChange(row.id, 'category2', e.target.value)}
 				>
@@ -80,7 +80,7 @@ export default function MissingCategoryTable({
 			key: 'category3',
 			Cell: ({ value }) => (
 				<select
-					className='border p-1 text-sm w-full text-black'
+					className='border p-1 text-small-button w-full text-black'
 					value={value}
 					// onChange={(e) => onChange(row.id, 'category3', e.target.value)}
 				>
@@ -100,7 +100,7 @@ export default function MissingCategoryTable({
 				data={categories}
 				onRowClick={handleRowClick}
 				selectedRow={selectedCategoryId}
-				enableRowSelection={false}				
+				enableRowSelection={false}
 			/>
 		</div>
 	);

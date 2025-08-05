@@ -7,7 +7,8 @@ import MissingCategoryTable from '../../../../components/SIM-COMP/MissingData/Mi
 const fakeCategories = [
 	{
 		id: 1,
-		image: 'https://i.imgur.com/4ZQZ4dZ.png',
+		image:
+			'https://m.media-amazon.com/images/I/713xBaYiURL._UF894,1000_QL80_.jpg',
 		mpn: '123456789',
 		title: 'Giant TCR Advanced',
 		model: 'TCR',
@@ -21,7 +22,8 @@ const fakeCategories = [
 	},
 	{
 		id: 2,
-		image: 'https://i.imgur.com/4ZQZ4dZ.png',
+		image:
+			'https://m.media-amazon.com/images/I/713xBaYiURL._UF894,1000_QL80_.jpg',
 		mpn: '123456788',
 		title: 'Liv Envie 0',
 		model: 'Enve',
@@ -35,7 +37,8 @@ const fakeCategories = [
 	},
 	{
 		id: 3,
-		image: 'https://i.imgur.com/4ZQZ4dZ.png',
+		image:
+			'https://m.media-amazon.com/images/I/713xBaYiURL._UF894,1000_QL80_.jpg',
 		mpn: '123456787',
 		title: 'Trek Rail+ 0',
 		model: 'Rail+',
@@ -56,8 +59,6 @@ const MissingCategories = () => {
 	const selectedCategory = fakeCategories.find(
 		(item) => item.id === selectedCategoryId
 	);
-
-	console.log({ selectedCategoryId, selectedCategory });
 
 	return (
 		<div className='space-y-4'>
