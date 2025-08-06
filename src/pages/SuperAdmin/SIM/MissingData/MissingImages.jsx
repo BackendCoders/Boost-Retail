@@ -176,7 +176,7 @@ const MissingImages = () => {
 		};
 	}, [categories]);
 
-	console.log({ selectedCategoryId, selectedCategory });
+	console.log({ selectedCategoryId, selectedCategory, setInitialCategories });
 
 	return (
 		<div className='space-y-4'>
@@ -210,7 +210,15 @@ const MissingImages = () => {
 					)}
 				</div>
 				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
-					<p className='text-sm mt-1'>Missing Images</p>
+					<button
+						className='text-sm mt-1'
+						onClick={() => {
+							setSelectedInitialCategoryId(null);
+							setSelectedCategoryId(null);
+						}}
+					>
+						Missing Images
+					</button>
 					<span className='text-sm font-semibold'>
 						Missing Categories: {categories.length}
 					</span>
