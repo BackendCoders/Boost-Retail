@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import MissingImagesSearch from '../../../../components/SIM-COMP/MissingData/MissingImagesSearch';
 import MissingImagesTable from '../../../../components/SIM-COMP/MissingData/MissingImagesTable';
 import ImageReorder from '../../../../components/SIM-COMP/MissingData/ImageReorder';
+import MissingImagesDetailsTable from '../../../../components/SIM-COMP/MissingData/MissingImagesDetailsTable';
+import MissingImagesAdd from '../../../../components/SIM-COMP/MissingData/MissingImagesAdd';
 
 const fakeCategories = [
 	{
@@ -22,44 +24,103 @@ const fakeCategories = [
 			{ id: 'img6', url: 'https://i.imgur.com/4ZQZ4dZ.png' },
 			// Add more images as needed
 		],
-		mpn: '123456789',
+		simPn: '123456789',
+		eposPn: '0123456',
+		mpn: 'TC56787',
 		barcode: '123456789',
 		title: 'Giant TCR Advanced',
 		model: 'TCR',
 		color: 'Grey',
+		size: 'S',
 		seasonYear: '2025',
+		rrp: 3000,
 		supplierUrl: 'https://supplier.com/product/123456789',
 	},
 	{
 		id: 2,
 		image: '',
 		images: [],
-		mpn: '123456788',
+		simPn: '123456788',
+		eposPn: '0123455',
+		mpn: 'TC56788',
 		barcode: '123456789',
 		title: 'Liv Envie 0',
 		model: 'Enve',
 		color: 'Black',
+		size: 'L',
 		seasonYear: '2025',
+		rrp: 3000,
 		supplierUrl: 'https://supplier.com/product/123456788',
 	},
 	{
 		id: 3,
 		image: '',
 		images: [],
-		mpn: '123456787',
+		simPn: '123456787',
+		eposPn: '0123454',
+		mpn: 'TC56789',
 		barcode: '123456789',
 		title: 'Trek Rail+ 0',
 		model: 'Rail+',
 		color: 'Blue',
+		size: 'L',
 		seasonYear: '2025',
+		rrp: 3000,
 		supplierUrl: 'https://supplier.com/product/123456787',
+	},
+];
+const fakeInitialCategories = [
+	{
+		id: 1,
+		mpn: '123456789',
+		title: 'Giant TCR Advanced',
+		model: 'TCR',
+		brand: 'TCR',
+		seasonYear: '2025',
+		category1: 'Bikes',
+		category2: 'Road',
+		category3: 'Performance',
+		price: 6000,
+	},
+	{
+		id: 2,
+		mpn: '123456788',
+		title: 'Liv Envie 0',
+		model: 'Enve',
+		brand: 'Enve',
+		seasonYear: '2025',
+		category1: 'Bikes',
+		category2: 'Road',
+		category3: 'Endurance',
+		price: 4500,
+	},
+	{
+		id: 3,
+		mpn: '123456787',
+		title: 'Trek Rail+ 0',
+		model: 'Rail+',
+		brand: 'Rail+',
+		seasonYear: '2025',
+		category1: 'Bikes',
+		category2: 'Mountain',
+		category3: 'Full Suspension',
+		price: 2300,
 	},
 ];
 
 const MissingImages = () => {
+	const [initialCategories, setInitialCategories] = useState(
+		fakeInitialCategories
+	);
 	const [categories, setCategories] = useState(fakeCategories);
 	const [advancedMode, setAdvancedMode] = useState(false);
+	const [selectedInitialCategoryId, setSelectedInitialCategoryId] =
+		useState(null);
 	const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+
+	const selectedInitialCategory = initialCategories.find(
+		(item) => item.id === selectedInitialCategoryId
+	);
 
 	const selectedCategory = categories.find(
 		(item) => item.id === selectedCategoryId
@@ -122,28 +183,30 @@ const MissingImages = () => {
 			<div className=''>
 				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
 					<h1 className='text-xl font-bold'>INCORRECT DATA</h1>
-					<div className='flex items-center gap-2'>
-						<span>Advanced Mode</span>
-						<label className='relative inline-flex items-center cursor-pointer'>
-							<input
-								type='checkbox'
-								className='sr-only'
-								checked={advancedMode}
-								onChange={() => setAdvancedMode((p) => !p)}
-							/>
-							<div
-								className={`w-11 h-6 rounded-full transition ${
-									advancedMode ? 'bg-primary' : 'bg-gray-400'
-								}`}
-							>
-								<div
-									className={`absolute top-0.5 w-5 h-5 bg-light rounded-full transition ${
-										advancedMode ? 'left-5' : 'left-0.5'
-									}`}
+					{selectedInitialCategoryId && (
+						<div className='flex items-center gap-2'>
+							<span>Advanced Mode</span>
+							<label className='relative inline-flex items-center cursor-pointer'>
+								<input
+									type='checkbox'
+									className='sr-only'
+									checked={advancedMode}
+									onChange={() => setAdvancedMode((p) => !p)}
 								/>
-							</div>
-						</label>
-					</div>
+								<div
+									className={`w-11 h-6 rounded-full transition ${
+										advancedMode ? 'bg-primary' : 'bg-gray-400'
+									}`}
+								>
+									<div
+										className={`absolute top-0.5 w-5 h-5 bg-light rounded-full transition ${
+											advancedMode ? 'left-5' : 'left-0.5'
+										}`}
+									/>
+								</div>
+							</label>
+						</div>
+					)}
 				</div>
 				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
 					<p className='text-sm mt-1'>Missing Images</p>
@@ -154,56 +217,15 @@ const MissingImages = () => {
 			</div>
 
 			{/* Search */}
-			<div className=''>
+
+			{!selectedInitialCategoryId ? (
 				<MissingImagesSearch advancedMode={advancedMode} />
-			</div>
+			) : (
+				<MissingImagesAdd selectedCategory={selectedInitialCategory} />
+			)}
 
 			{advancedMode && selectedCategory && (
 				<div className='grid grid-cols-5 gap-4 rounded-lg'>
-					{/* Title & Info */}
-					<div className='col-span-5 grid grid-cols-4 gap-4 mb-4 bg-light'>
-						<div className='flex flex-col item-center gap-1'>
-							<label>Title</label>
-							<input
-								type='text'
-								value={selectedCategory.title}
-								readOnly
-								className='border border-border-input rounded-md text-form-field placeholder:text-md text-text-body bg-light outline-none focus:ring-1 focus:ring-black px-3 py-1'
-								placeholder='Title'
-							/>
-						</div>
-						<div className='flex flex-col item-center gap-1'>
-							<label>Model</label>
-							<input
-								type='text'
-								value={selectedCategory.model}
-								readOnly
-								className='border border-border-input rounded-md text-form-field placeholder:text-md text-text-body bg-light outline-none focus:ring-1 focus:ring-black px-3 py-1'
-								placeholder='Model'
-							/>
-						</div>
-						<div className='flex flex-col item-center gap-1'>
-							<label>Brand</label>
-							<input
-								type='text'
-								value='Giant' // Replace with dynamic if needed
-								readOnly
-								className='border border-border-input rounded-md text-form-field placeholder:text-md text-text-body bg-light outline-none focus:ring-1 focus:ring-black px-3 py-1'
-								placeholder='Brand'
-							/>
-						</div>
-						<div className='flex flex-col item-center gap-1'>
-							<label>Supplier</label>
-							<input
-								type='text'
-								value='Giant' // Replace with dynamic if needed
-								readOnly
-								className='border border-border-input rounded-md text-form-field placeholder:text-md text-text-body bg-light outline-none focus:ring-1 focus:ring-black px-3 py-1'
-								placeholder='Supplier'
-							/>
-						</div>
-					</div>
-
 					{/* Upload Section */}
 					<div className='col-span-1 bg-gray-300 border shadow-sm p-4 rounded-lg'>
 						<h2 className='font-semibold mb-2'>Upload Images</h2>
@@ -335,11 +357,23 @@ const MissingImages = () => {
 			)}
 
 			{/* Grid */}
-			<MissingImagesTable
-				selectedCategoryId={selectedCategoryId}
-				setSelectedCategoryId={setSelectedCategoryId}
-				categories={categories}
-			/>
+			{!selectedInitialCategory && (
+				<MissingImagesTable
+					selectedCategoryId={selectedInitialCategoryId}
+					setSelectedCategoryId={setSelectedInitialCategoryId}
+					categories={initialCategories}
+				/>
+			)}
+
+			{/* Grid */}
+			{selectedInitialCategoryId && (
+				<MissingImagesDetailsTable
+					selectedCategoryId={selectedCategoryId}
+					setSelectedCategoryId={setSelectedCategoryId}
+					categories={categories}
+					setAdvancedMode={setAdvancedMode}
+				/>
+			)}
 		</div>
 	);
 };

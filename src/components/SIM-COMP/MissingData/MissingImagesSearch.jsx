@@ -5,7 +5,7 @@ const MissingImagesSearch = ({ advancedMode }) => {
 		<div className='flex items-center justify-between bg-light gap-4'>
 			{/* Left: Search + Filters */}
 			<div className='flex flex-col gap-1'>
-				<p className='text-lg text-black font-bold'>Add Images</p>
+				<p className='text-lg text-black font-bold'>Search</p>
 
 				{!advancedMode && (
 					<div className='flex items-center gap-4'>
