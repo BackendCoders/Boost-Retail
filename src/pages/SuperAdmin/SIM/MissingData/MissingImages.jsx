@@ -114,6 +114,7 @@ const MissingImages = () => {
 	);
 	const [categories, setCategories] = useState(fakeCategories);
 	const [advancedMode, setAdvancedMode] = useState(false);
+	const [selectedRows, setSelectedRows] = useState([]);
 	const [selectedInitialCategoryId, setSelectedInitialCategoryId] =
 		useState(null);
 	const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -368,6 +369,8 @@ const MissingImages = () => {
 			{/* Grid */}
 			{selectedInitialCategoryId && (
 				<MissingImagesDetailsTable
+					selectedRows={selectedRows}
+					setSelectedRows={setSelectedRows}
 					selectedCategoryId={selectedCategoryId}
 					setSelectedCategoryId={setSelectedCategoryId}
 					categories={categories}

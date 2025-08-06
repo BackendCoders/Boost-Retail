@@ -71,10 +71,13 @@ const Table = ({
 	columns,
 	data,
 	selectedRow = 0,
+	selectedRows = [],
 	onRowSelect,
+	onMultiSelect,
 	onRowClick,
 	onCheckboxToggle,
 	enableRowSelection = true,
+	enableMultiSelect = true,
 	showFilterRow = true,
 }) => {
 	const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
@@ -126,6 +129,28 @@ const Table = ({
 	const handleFilterOptionSelect = (colKey, option) => {
 		setFilterTypes((prev) => ({ ...prev, [colKey]: option }));
 		setActiveFilterCol(null);
+	};
+
+	const handleMultiSelect = (rowId, isSelected) => {
+		if (!enableMultiSelect) return;
+
+		let newSelectedRows = [...selectedRows];
+		if (isSelected) {
+			newSelectedRows.push(rowId);
+		} else {
+			newSelectedRows = newSelectedRows.filter((id) => id !== rowId);
+		}
+		onMultiSelect?.(newSelectedRows);
+	};
+
+	// Handle select all checkbox
+	const handleSelectAll = (isSelected) => {
+		if (!enableMultiSelect) return;
+
+		const newSelectedRows = isSelected
+			? filteredAndSortedData.map((row) => row.id)
+			: [];
+		onMultiSelect?.(newSelectedRows);
 	};
 
 	const filteredAndSortedData = useMemo(() => {
@@ -185,10 +210,24 @@ const Table = ({
 								>
 									{enableRowSelection && (
 										<th className='p-4 border text-center'>
-											<input
-												type='checkbox'
-												onChange={(e) => onRowSelect?.('all', e.target.checked)}
-											/>
+											{enableMultiSelect ? (
+												<input
+													type='checkbox'
+													checked={
+														selectedRows.length ===
+															filteredAndSortedData.length &&
+														filteredAndSortedData.length > 0
+													}
+													onChange={(e) => handleSelectAll(e.target.checked)}
+												/>
+											) : (
+												<input
+													type='checkbox'
+													onChange={(e) =>
+														onRowSelect?.('all', e.target.checked)
+													}
+												/>
+											)}
 										</th>
 									)}
 									{columnsState.map((col, index) => (
@@ -304,6 +343,7 @@ const Table = ({
 				<tbody>
 					{filteredAndSortedData.map((row) => {
 						const isSelected = selectedRow === row.id;
+						const isMultiSelected = selectedRows.includes(row.id);
 						return (
 							<tr
 								key={row.id}
@@ -317,14 +357,21 @@ const Table = ({
 								}`}
 							>
 								{enableRowSelection && (
-									<td className='p-4 text-center border'>
+									<td
+										className='p-4 text-center border'
+										onClick={(e) => e.stopPropagation()}
+									>
 										<input
 											className={`${
-												isSelected ? 'accent-light' : 'group-hover:accent-light'
+												isSelected || !isMultiSelected
+													? 'accent-light'
+													: 'group-hover:accent-light'
 											}`}
 											type='checkbox'
-											checked={isSelected}
-											onChange={(e) => onRowSelect?.(row.id, e.target.checked)}
+											checked={isMultiSelected}
+											onChange={(e) =>
+												handleMultiSelect(row.id, e.target.checked)
+											}
 										/>
 									</td>
 								)}

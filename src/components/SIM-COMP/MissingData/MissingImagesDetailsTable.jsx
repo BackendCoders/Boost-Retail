@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import Table from '../MaintainLookupTable/Table';
 
 export default function MissingImagesDetailsTable({
+	selectedRows,
+	setSelectedRows,
 	selectedCategoryId,
 	setSelectedCategoryId,
 	categories,
@@ -16,6 +18,7 @@ export default function MissingImagesDetailsTable({
 	const handleRowClick = (id) => {
 		highLightRef.current = id;
 		setSelectedCategoryId(id);
+		setSelectedRows([]);
 	};
 
 	const columns = [
@@ -105,6 +108,9 @@ export default function MissingImagesDetailsTable({
 				data={categories}
 				onRowClick={handleRowClick}
 				selectedRow={selectedCategoryId}
+				selectedRows={selectedRows}
+				onMultiSelect={setSelectedRows}
+				enableMultiSelect={true}
 			/>
 			{dropdownRowId && (
 				<ul
