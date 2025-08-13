@@ -1,7 +1,6 @@
 /** @format */
 
-import { useState, useMemo } from 'react';
-import categoryData from '../../../data/dummyCategories.json';
+import { useState, useMemo, useCallback } from 'react';
 
 import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import EditIcon from '../../../assets/icons/line/EditPenIcon';
@@ -26,7 +25,7 @@ const DownArrow = ({ className = '', ...props }) => (
 );
 
 const CategoryTree = ({
-	categories = categoryData,
+	categories,
 	setCategories,
 	selectedCategory,
 	setSelectedCategory,
@@ -52,7 +51,7 @@ const CategoryTree = ({
 				if (cat.children) traverse(cat.children);
 			});
 		};
-		traverse(categoryData);
+		traverse(categories);
 		setExpandedIds(collapsed);
 	};
 
@@ -64,42 +63,45 @@ const CategoryTree = ({
 				if (cat.children) traverse(cat.children);
 			});
 		};
-		traverse(categoryData);
+		traverse(categories);
 		setExpandedIds(expanded);
 	};
 
-	const filterCategories = (categories) => {
-		return categories
-			.map((cat) => {
-				const children = cat.children ? filterCategories(cat.children) : [];
+	const filterCategories = useCallback(
+		(categories) => {
+			return categories
+				.map((cat) => {
+					const children = cat.children ? filterCategories(cat.children) : [];
 
-				const matchesSearch = cat.name
-					.toLowerCase()
-					.includes(searchTerm.toLowerCase());
+					const matchesSearch = cat.name
+						.toLowerCase()
+						.includes(searchTerm.toLowerCase());
 
-				const matchesFilter =
-					filterType === 'all'
-						? true
-						: filterType === 'hasProducts'
-						? cat.count > 0
-						: cat.count === 0;
+					const matchesFilter =
+						filterType === 'all'
+							? true
+							: filterType === 'hasProducts'
+							? cat.count > 0
+							: cat.count === 0;
 
-				const shouldInclude =
-					(matchesSearch && matchesFilter) || children.length > 0;
+					const shouldInclude =
+						(matchesSearch && matchesFilter) || children.length > 0;
 
-				if (!shouldInclude) return null;
+					if (!shouldInclude) return null;
 
-				return {
-					...cat,
-					children,
-				};
-			})
-			.filter(Boolean);
-	};
+					return {
+						...cat,
+						children,
+					};
+				})
+				.filter(Boolean);
+		},
+		[filterType, searchTerm]
+	);
 
 	const filteredData = useMemo(
-		() => filterCategories(categoryData),
-		[searchTerm, filterType]
+		() => filterCategories(categories),
+		[filterCategories, categories]
 	);
 
 	const handleSingleClick = (cat) => {
