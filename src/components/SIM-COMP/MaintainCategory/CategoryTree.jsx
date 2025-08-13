@@ -231,7 +231,7 @@ const CategoryTree = ({
 	};
 
 	return (
-		<div className='w-[35%] p-5 bg-light border-r overflow-y-auto scrollbar-thin'>
+		<div className='w-[35%] p-5 bg-light border-r max-h-[45.75rem] overflow-y-auto scrollbar-thin'>
 			{/* Search and Filter */}
 			<div className='flex gap-4 mb-3'>
 				<input

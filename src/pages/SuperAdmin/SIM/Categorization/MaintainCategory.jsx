@@ -9,7 +9,7 @@ const MaintainCategory = () => {
 	const [selectedCategory, setSelectedCategory] = useState(null);
 	const [categories, setCategories] = useState(categoryData);
 	return (
-		<div className='bg-light min-h-screen'>
+		<div className='bg-light space-y-4'>
 			{/* Header */}
 			<div>
 				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
@@ -27,7 +27,7 @@ const MaintainCategory = () => {
 			</div>
 
 			{/* Main Layout */}
-			<div className='flex h-[calc(100vh-108px)]'>
+			<div className='flex'>
 				<CategoryTree
 					categories={categories}
 					setCategories={setCategories}
