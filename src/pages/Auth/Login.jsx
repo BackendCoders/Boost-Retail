@@ -28,6 +28,7 @@ const Login = () => {
 
 		// Simple login logic
 		if (role === 1 || role === 2) {
+			localStorage.setItem('user', role);
 			dispatch(setLoginUser(role));
 			setSuccess(`Welcome ${role === 1 ? 'Super Admin' : 'Retail Admin'}!`);
 			setTimeout(() => {
