@@ -25,8 +25,15 @@ const DownArrow = ({ className = '', ...props }) => (
 	</svg>
 );
 
-const CategoryTree = () => {
+const CategoryTree = ({
+	categories = categoryData,
+	setCategories,
+	selectedCategory,
+	setSelectedCategory,
+}) => {
 	const [expandedIds, setExpandedIds] = useState({});
+	const [editingId, setEditingId] = useState(null);
+	const [editValue, setEditValue] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [filterType, setFilterType] = useState('all');
 
@@ -95,6 +102,37 @@ const CategoryTree = () => {
 		[searchTerm, filterType]
 	);
 
+	const handleSingleClick = (cat) => {
+		setSelectedCategory(cat);
+	};
+
+	const handleDoubleClick = (cat) => {
+		setEditingId(cat.id);
+		setEditValue(cat.name);
+	};
+
+	const handleRenameSubmit = (id) => {
+		setCategories((prev) =>
+			prev.map((cat) => (cat.id === id ? { ...cat, name: editValue } : cat))
+		);
+		setEditingId(null);
+	};
+
+	const handleAddCategory = (parent, level) => {
+		const newCat = {
+			id: Date.now(),
+			name: `New Category ${level}`,
+			count: 0,
+			children: [],
+		};
+		if (level === 1) {
+			setCategories((prev) => [...prev, newCat]);
+		} else {
+			parent.children = [...(parent.children || []), newCat];
+			setCategories([...categories]);
+		}
+	};
+
 	const renderCategory = (cat, level = 1) => {
 		const isExpanded = expandedIds[cat.id] ?? true;
 		const hasChildren = cat.children && cat.children.length > 0;
@@ -105,36 +143,78 @@ const CategoryTree = () => {
 				className='mb-1'
 			>
 				<div
-					className='flex items-center gap-2 group hover:bg-gray-50 py-1 rounded-md'
+					className={`flex items-center gap-2 group hover:bg-gray-50 py-1 rounded-md ${
+						selectedCategory?.id === cat.id ? 'bg-blue-100' : ''
+					}`}
 					style={{ paddingLeft: `${level * 16}px` }}
+					onClick={() => handleSingleClick(cat)}
+					onDoubleClick={() => handleDoubleClick(cat)}
 				>
 					{/* Arrow */}
 					{hasChildren && (
-						<DownArrow
-							className={`w-3 h-3 transform transition-transform duration-200 cursor-pointer ${
-								isExpanded ? '' : '-rotate-90'
-							}`}
-							onClick={() => toggleExpand(cat.id)}
-						/>
+						<button
+							onClick={(e) => {
+								e.stopPropagation();
+								toggleExpand(cat.id);
+							}}
+						>
+							<DownArrow
+								className={`w-3 h-3 transform transition-transform duration-200 cursor-pointer ${
+									isExpanded ? '' : '-rotate-90'
+								}`}
+							/>
+						</button>
 					)}
 
-					{/* Text */}
-					<span
-						className={`font-medium ${
-							cat.count === 0 ? 'text-red-500' : 'text-gray-700'
-						}`}
-					>
-						{cat.name}
-					</span>
+					{/* Name or Input */}
+					{editingId === cat.id ? (
+						<input
+							value={editValue}
+							onChange={(e) => setEditValue(e.target.value)}
+							onBlur={() => handleRenameSubmit(cat.id)}
+							onKeyDown={(e) => e.key === 'Enter' && handleRenameSubmit(cat.id)}
+							autoFocus
+							className='border rounded px-1 text-sm'
+						/>
+					) : (
+						<span
+							className={`font-medium ${
+								cat.count === 0 ? 'text-red-500' : 'text-gray-700'
+							}`}
+						>
+							{cat.name}
+						</span>
+					)}
 
 					{/* Count */}
 					<span className='text-sm text-gray-400'>({cat.count})</span>
 
 					{/* Action Icons */}
 					<div className='flex items-center gap-2 ml-2'>
-						<PlusIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
-						<EditIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
-						<DeleteIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
+						<button
+							onClick={(e) => {
+								e.stopPropagation();
+								handleAddCategory(cat, level + 1);
+							}}
+						>
+							<PlusIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
+						</button>
+						<button
+							onClick={(e) => {
+								e.stopPropagation();
+								setSelectedCategory(cat);
+							}}
+						>
+							<EditIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
+						</button>
+						<button
+							onClick={(e) => {
+								e.stopPropagation();
+								// delete logic
+							}}
+						>
+							<DeleteIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
+						</button>
 					</div>
 				</div>
 
