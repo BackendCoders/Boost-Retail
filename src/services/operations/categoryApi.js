@@ -8,8 +8,13 @@ import {
 	handlePutReq,
 } from '../apiRequestHandler';
 
-const { CREATE_CATEGORY, GET_CATEGORIES, UPDATE_CATEGORY, DELETE_CATEGORY } =
-	categoriesEndpoint;
+const {
+	CREATE_CATEGORY,
+	GET_CATEGORIES,
+	GET_CATEGORY_PARENTS,
+	UPDATE_CATEGORY,
+	DELETE_CATEGORY,
+} = categoriesEndpoint;
 
 export async function createCategory(data) {
 	// Fetch current user details using token
@@ -22,6 +27,13 @@ export async function getCategories() {
 	// Fetch current user details using token
 	const response = await handleGetReq(GET_CATEGORIES);
 	console.log('Get List Categories API RESPONSE.........', response);
+	return response.data;
+}
+
+export async function getCategoryParents(id) {
+	// Fetch current user details using token
+	const response = await handleGetReq(GET_CATEGORY_PARENTS(id));
+	console.log('Get List Category Parents API RESPONSE.........', response);
 	return response.data;
 }
 

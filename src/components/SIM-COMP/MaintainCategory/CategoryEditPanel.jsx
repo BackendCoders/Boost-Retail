@@ -7,15 +7,18 @@ import { refreshAllCategories } from '../../../slice/categorySlice';
 
 const CategoryEditPanel = () => {
 	const dispatch = useDispatch();
-	const { category: selectedCategory } = useSelector((state) => state.category);
+	const { category: selectedCategory, parentCatOpts } = useSelector(
+		(state) => state.category
+	);
 	const [name, setName] = useState('');
 	const [parentId, setParentId] = useState('');
 
 	const handleUpdate = async () => {
 		try {
 			const payload = {
-				...selectedCategory,
-				name
+				id: selectedCategory.id,
+				name,
+				parentId,
 			};
 			const res = await updateCategory(selectedCategory.id, payload);
 			console.log(res);
@@ -68,7 +71,9 @@ const CategoryEditPanel = () => {
 					onChange={(e) => setParentId(e.target.value)}
 					className='rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 border-2 focus:ring-blue-500 w-full'
 				>
-					<option value=''>No Parent</option>
+					{parentCatOpts.map((opt) => (
+						<option key={opt.id}>{opt.name}</option>
+					))}
 				</select>
 			</div>
 

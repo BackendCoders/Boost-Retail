@@ -7,6 +7,7 @@ const initialState = {
 	loading: false,
 	categories: [],
 	category: null,
+	parentCatOpts: [],
 };
 
 const categorySlice = createSlice({
@@ -21,6 +22,9 @@ const categorySlice = createSlice({
 		},
 		setCategory(state, action) {
 			state.category = action.payload;
+		},
+		setParentCatOpts(state, action) {
+			state.parentCatOpts = action.payload;
 		},
 	},
 });
@@ -39,5 +43,6 @@ export function refreshAllCategories() {
 	};
 }
 
-export const { setLoading, setCategories, setCategory } = categorySlice.actions;
+export const { setLoading, setCategories, setCategory, setParentCatOpts } =
+	categorySlice.actions;
 export default categorySlice.reducer;

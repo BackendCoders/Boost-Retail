@@ -9,10 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	refreshAllCategories,
 	setCategory,
+	setParentCatOpts,
 } from '../../../slice/categorySlice';
 import {
 	createCategory,
 	deleteCategory,
+	getCategoryParents,
 	updateCategory,
 } from '../../../services/operations/categoryApi';
 // import DownArrow from '../../../assets/icons/thin/DownThinIcon';
@@ -116,8 +118,14 @@ const CategoryTree = () => {
 		[filterCategories, categories]
 	);
 
-	const handleSingleClick = (cat) => {
-		dispatch(setCategory(cat));
+	const handleSingleClick = async (cat) => {
+		try {
+			const res = await getCategoryParents(cat.id);
+			dispatch(setCategory(cat));
+			dispatch(setParentCatOpts(res));
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const handleDoubleClick = (cat) => {
@@ -132,8 +140,9 @@ const CategoryTree = () => {
 
 			// Create updated payload
 			const payload = {
-				...category,
+				id: category.id,
 				name: editValue,
+				parentId: category.parentId,
 			};
 			const res = await updateCategory(category.id, payload);
 			dispatch(refreshAllCategories());
