@@ -8,7 +8,7 @@ import { refreshAllCategories } from '../../../../slice/categorySlice';
 
 const MaintainCategory = () => {
 	const dispatch = useDispatch();
-	const { categories } = useSelector((state) => state.category);
+	const { categories} = useSelector((state) => state.category);
 	const [selectedCategory, setSelectedCategory] = useState(null);
 
 	useEffect(() => {
@@ -39,6 +39,7 @@ const MaintainCategory = () => {
 					selectedCategory={selectedCategory}
 					setSelectedCategory={setSelectedCategory}
 				/>
+
 				<CategoryEditPanel selectedCategory={selectedCategory} />
 			</div>
 		</div>

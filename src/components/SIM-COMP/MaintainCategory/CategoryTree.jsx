@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 
 import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import EditIcon from '../../../assets/icons/line/EditPenIcon';
@@ -28,12 +28,15 @@ const DownArrow = ({ className = '', ...props }) => (
 
 const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 	const dispatch = useDispatch();
-	const { categories } = useSelector((state) => state.category);
+	const { categories, loading } = useSelector((state) => state.category);
 	const [expandedIds, setExpandedIds] = useState({});
 	const [editingId, setEditingId] = useState(null);
 	const [editValue, setEditValue] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [filterType, setFilterType] = useState('all');
+	const [newCategoryId, setNewCategoryId] = useState(null);
+
+	const categoryRefs = useRef({});
 
 	const toggleExpand = (id) => {
 		setExpandedIds((prev) => ({
@@ -123,33 +126,94 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 		setEditingId(null);
 	};
 
-	const handleAddCategory = (parent, level) => {
-		console.log(parent, level);
+	const handleAddCategory = (clickedCategory, level) => {
 		const newCat = {
 			id: Date.now(),
 			name: `New Category ${level}`,
 			count: 0,
 			children: [],
 		};
+
+		setNewCategoryId(newCat.id);
+
 		if (level === 1) {
+			// Add to root (Category 1 list)
 			dispatch(setCategories([...categories, newCat]));
-		} else {
-			const updateTree = (items) =>
-				items.map((cat) => {
-					if (cat.id === parent.id) {
+			return;
+		}
+
+		// Helper to immutably update
+		const addCategoryAtLevel = (nodes, targetParentId, targetLevel) => {
+			return nodes.map((node) => {
+				if (node.id === targetParentId && targetLevel === level) {
+					// Add new category at the same level
+					return {
+						...node,
+						children: [...(node.children || []), newCat],
+					};
+				}
+				if (node.children) {
+					return {
+						...node,
+						children: addCategoryAtLevel(
+							node.children,
+							targetParentId,
+							targetLevel
+						),
+					};
+				}
+				return node;
+			});
+		};
+
+		if (level === 2) {
+			// Find the Category 1 parent of the clicked category
+			const parentCategory1 = categories.find((cat) =>
+				cat.children?.some(
+					(c) =>
+						c.id === clickedCategory.id ||
+						c.children?.some((cc) => cc.id === clickedCategory.id)
+				)
+			);
+			if (parentCategory1) {
+				const updated = categories.map((cat) => {
+					if (cat.id === parentCategory1.id) {
 						return {
 							...cat,
-							children: [...(cat.children || []), newCat],
+							children: [...cat.children, newCat],
 						};
-					}
-					if (cat.children) {
-						return { ...cat, children: updateTree(cat.children) };
 					}
 					return cat;
 				});
-			dispatch(setCategories(updateTree(categories)));
+				dispatch(setCategories(updated));
+			}
+		} else if (level === 3) {
+			// Find the Category 2 parent of the clicked category
+			const updated = categories.map((cat) => ({
+				...cat,
+				children: cat.children.map((cat2) => {
+					if (cat2.children?.some((c3) => c3.id === clickedCategory.id)) {
+						return {
+							...cat2,
+							children: [...cat2.children, newCat],
+						};
+					}
+					return cat2;
+				}),
+			}));
+			dispatch(setCategories(updated));
 		}
 	};
+
+	useEffect(() => {
+		if (newCategoryId && categoryRefs.current[newCategoryId]) {
+			categoryRefs.current[newCategoryId].scrollIntoView({
+				behavior: 'smooth',
+				block: 'center',
+			});
+			setNewCategoryId(null); // reset so it doesn't keep scrolling
+		}
+	}, [newCategoryId]);
 
 	const renderCategory = (cat, level = 1) => {
 		const isExpanded = expandedIds[cat.id] ?? true;
@@ -158,6 +222,7 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 		return (
 			<div
 				key={cat.id}
+				ref={(el) => (categoryRefs.current[cat.id] = el)}
 				className='mb-1'
 			>
 				<div
@@ -213,7 +278,7 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 						<button
 							onClick={(e) => {
 								e.stopPropagation();
-								handleAddCategory(cat, level + 1);
+								handleAddCategory(cat, level);
 							}}
 						>
 							<PlusIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
@@ -239,7 +304,7 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 
 				{/* Children */}
 				{hasChildren && isExpanded && (
-					<div>
+					<div className='pl-8'>
 						{cat.children.map((child) => renderCategory(child, level + 1))}
 					</div>
 				)}
@@ -288,7 +353,11 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 
 			{/* Tree */}
 			<div className='text-sm'>
-				{filteredData.map((cat) => renderCategory(cat))}
+				{loading ? (
+					<div>Loading...</div>
+				) : (
+					filteredData.map((cat) => renderCategory(cat))
+				)}
 			</div>
 		</div>
 	);
