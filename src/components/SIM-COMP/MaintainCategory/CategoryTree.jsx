@@ -5,6 +5,8 @@ import { useState, useMemo, useCallback } from 'react';
 import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import EditIcon from '../../../assets/icons/line/EditPenIcon';
 import DeleteIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategories } from '../../../slice/categorySlice';
 // import DownArrow from '../../../assets/icons/thin/DownThinIcon';
 
 // ✅ Replace with inline SVG if your icon component doesn't rotate properly
@@ -24,12 +26,9 @@ const DownArrow = ({ className = '', ...props }) => (
 	</svg>
 );
 
-const CategoryTree = ({
-	categories,
-	setCategories,
-	selectedCategory,
-	setSelectedCategory,
-}) => {
+const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
+	const dispatch = useDispatch();
+	const { categories } = useSelector((state) => state.category);
 	const [expandedIds, setExpandedIds] = useState({});
 	const [editingId, setEditingId] = useState(null);
 	const [editValue, setEditValue] = useState('');
@@ -114,13 +113,18 @@ const CategoryTree = ({
 	};
 
 	const handleRenameSubmit = (id) => {
-		setCategories((prev) =>
-			prev.map((cat) => (cat.id === id ? { ...cat, name: editValue } : cat))
+		dispatch(
+			setCategories(
+				categories.map((cat) =>
+					cat.id === id ? { ...cat, name: editValue } : cat
+				)
+			)
 		);
 		setEditingId(null);
 	};
 
 	const handleAddCategory = (parent, level) => {
+		console.log(parent, level);
 		const newCat = {
 			id: Date.now(),
 			name: `New Category ${level}`,
@@ -128,10 +132,22 @@ const CategoryTree = ({
 			children: [],
 		};
 		if (level === 1) {
-			setCategories((prev) => [...prev, newCat]);
+			dispatch(setCategories([...categories, newCat]));
 		} else {
-			parent.children = [...(parent.children || []), newCat];
-			setCategories([...categories]);
+			const updateTree = (items) =>
+				items.map((cat) => {
+					if (cat.id === parent.id) {
+						return {
+							...cat,
+							children: [...(cat.children || []), newCat],
+						};
+					}
+					if (cat.children) {
+						return { ...cat, children: updateTree(cat.children) };
+					}
+					return cat;
+				});
+			dispatch(setCategories(updateTree(categories)));
 		}
 	};
 
@@ -159,6 +175,7 @@ const CategoryTree = ({
 								e.stopPropagation();
 								toggleExpand(cat.id);
 							}}
+							className='px-2 py-1 hover:text-primary'
 						>
 							<DownArrow
 								className={`w-3 h-3 transform transition-transform duration-200 cursor-pointer ${

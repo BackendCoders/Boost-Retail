@@ -1,13 +1,20 @@
 /** @format */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import CategoryTree from '../../../../components/SIM-COMP/MaintainCategory/CategoryTree';
 import CategoryEditPanel from '../../../../components/SIM-COMP/MaintainCategory/CategoryEditPanel';
-import categoryData from '../../../../data/dummyCategories.json';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshAllCategories } from '../../../../slice/categorySlice';
 
 const MaintainCategory = () => {
+	const dispatch = useDispatch();
+	const { categories } = useSelector((state) => state.category);
 	const [selectedCategory, setSelectedCategory] = useState(null);
-	const [categories, setCategories] = useState(categoryData);
+
+	useEffect(() => {
+		dispatch(refreshAllCategories());
+	}, [dispatch]);
+
 	return (
 		<div className='bg-light space-y-4'>
 			{/* Header */}
@@ -20,7 +27,7 @@ const MaintainCategory = () => {
 				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
 					<p className='text-sm mt-1'>Maintain Categories</p>
 					<span className='text-sm font-semibold'>
-						Total Categories: 143
+						Total Categories: {categories.length}
 						<span className='text-red-500 ml-1'>Unused: 7</span>
 					</span>
 				</div>
@@ -29,15 +36,10 @@ const MaintainCategory = () => {
 			{/* Main Layout */}
 			<div className='flex'>
 				<CategoryTree
-					categories={categories}
-					setCategories={setCategories}
 					selectedCategory={selectedCategory}
 					setSelectedCategory={setSelectedCategory}
 				/>
-				<CategoryEditPanel
-					selectedCategory={selectedCategory}
-					setCategories={setCategories}
-				/>
+				<CategoryEditPanel selectedCategory={selectedCategory} />
 			</div>
 		</div>
 	);

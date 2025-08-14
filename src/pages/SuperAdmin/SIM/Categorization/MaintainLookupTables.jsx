@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import LookupTable from '../../../../components/SIM-COMP/MaintainLookupTable/LookupTable';
 import RowEditorTable from '../../../../components/SIM-COMP/MaintainLookupTable/RowEditorTable';
-// import { Plus, Edit, Trash } from 'lucide-react';
 
 const lookupTables = [
 	{
