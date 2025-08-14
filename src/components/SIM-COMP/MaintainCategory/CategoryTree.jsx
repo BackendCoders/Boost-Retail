@@ -135,7 +135,7 @@ const CategoryTree = () => {
 				...category,
 				name: editValue,
 			};
-			const res = await updateCategory(payload);
+			const res = await updateCategory(category.id, payload);
 			dispatch(refreshAllCategories());
 			console.log('update Category Response', res);
 		} catch (error) {

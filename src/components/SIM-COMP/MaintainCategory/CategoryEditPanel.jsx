@@ -1,12 +1,29 @@
 /** @format */
 
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCategory } from '../../../services/operations/categoryApi';
+import { refreshAllCategories } from '../../../slice/categorySlice';
 
 const CategoryEditPanel = () => {
+	const dispatch = useDispatch();
 	const { category: selectedCategory } = useSelector((state) => state.category);
 	const [name, setName] = useState('');
 	const [parentId, setParentId] = useState('');
+
+	const handleUpdate = async () => {
+		try {
+			const payload = {
+				...selectedCategory,
+				name
+			};
+			const res = await updateCategory(selectedCategory.id, payload);
+			console.log(res);
+			dispatch(refreshAllCategories());
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		if (selectedCategory) {
@@ -67,6 +84,13 @@ const CategoryEditPanel = () => {
 					))}
 				</ul>
 			</div>
+
+			<button
+				onClick={() => handleUpdate()}
+				className='px-2 py-2 rounded-lg text-white bg-primary hover:bg-secondary'
+			>
+				Update
+			</button>
 		</div>
 	);
 };
