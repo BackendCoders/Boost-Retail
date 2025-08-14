@@ -1,5 +1,5 @@
 /** @format */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import CategoryTree from '../../../../components/SIM-COMP/MaintainCategory/CategoryTree';
 import CategoryEditPanel from '../../../../components/SIM-COMP/MaintainCategory/CategoryEditPanel';
@@ -8,19 +8,18 @@ import { refreshAllCategories } from '../../../../slice/categorySlice';
 
 const MaintainCategory = () => {
 	const dispatch = useDispatch();
-	const { categories} = useSelector((state) => state.category);
-	const [selectedCategory, setSelectedCategory] = useState(null);
+	const { categories } = useSelector((state) => state.category);
 
 	useEffect(() => {
 		dispatch(refreshAllCategories());
 	}, [dispatch]);
 
 	return (
-		<div className='bg-light space-y-4'>
+		<div className='bg-light h-full space-y-4 flex flex-col'>
 			{/* Header */}
 			<div>
 				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
-					<h1 className='text-xl font-semibold'>CATEGORISATION</h1>
+					<h1 className='text-xl font-semibold'>CATEGORIZATION</h1>
 				</div>
 
 				{/* Breadcrumb */}
@@ -34,13 +33,10 @@ const MaintainCategory = () => {
 			</div>
 
 			{/* Main Layout */}
-			<div className='flex'>
-				<CategoryTree
-					selectedCategory={selectedCategory}
-					setSelectedCategory={setSelectedCategory}
-				/>
+			<div className='flex flex-1 overflow-hidden flex-col md:flex-row'>
+				<CategoryTree />
 
-				<CategoryEditPanel selectedCategory={selectedCategory} />
+				<CategoryEditPanel />
 			</div>
 		</div>
 	);

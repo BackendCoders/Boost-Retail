@@ -6,7 +6,15 @@ import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import EditIcon from '../../../assets/icons/line/EditPenIcon';
 import DeleteIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategories } from '../../../slice/categorySlice';
+import {
+	refreshAllCategories,
+	setCategories,
+	setCategory,
+} from '../../../slice/categorySlice';
+import {
+	createCategory,
+	deleteCategory,
+} from '../../../services/operations/categoryApi';
 // import DownArrow from '../../../assets/icons/thin/DownThinIcon';
 
 // ✅ Replace with inline SVG if your icon component doesn't rotate properly
@@ -26,16 +34,18 @@ const DownArrow = ({ className = '', ...props }) => (
 	</svg>
 );
 
-const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
+const CategoryTree = () => {
 	const dispatch = useDispatch();
-	const { categories, loading } = useSelector((state) => state.category);
+	const { categories, category: selectedCategory } = useSelector(
+		(state) => state.category
+	);
 	const [expandedIds, setExpandedIds] = useState({});
 	const [editingId, setEditingId] = useState(null);
 	const [editValue, setEditValue] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [filterType, setFilterType] = useState('all');
-	const [newCategoryId, setNewCategoryId] = useState(null);
-
+	const [addingCategoryParent, setAddingCategoryParent] = useState(null);
+	const [newCategoryName, setNewCategoryName] = useState('');
 	const categoryRefs = useRef({});
 
 	const toggleExpand = (id) => {
@@ -107,7 +117,7 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 	);
 
 	const handleSingleClick = (cat) => {
-		setSelectedCategory(cat);
+		dispatch(setCategory(cat));
 	};
 
 	const handleDoubleClick = (cat) => {
@@ -126,94 +136,179 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 		setEditingId(null);
 	};
 
-	const handleAddCategory = (clickedCategory, level) => {
-		const newCat = {
-			id: Date.now(),
-			name: `New Category ${level}`,
-			count: 0,
-			children: [],
-		};
-
-		setNewCategoryId(newCat.id);
-
+	const getParentIdForNewCategory = (clickedCategory, level) => {
 		if (level === 1) {
-			// Add to root (Category 1 list)
-			dispatch(setCategories([...categories, newCat]));
-			return;
+			return 0; // root
+		}
+		if (level === 2) {
+			// find Category 1 that contains this clicked category
+			const parentCategory1 = categories.find((cat) =>
+				cat.children?.some((c) => c.id === clickedCategory.id)
+			);
+			return parentCategory1?.id || 0;
+		}
+		if (level === 3) {
+			// find Category 2 that contains this clicked category
+			for (const cat1 of categories) {
+				for (const cat2 of cat1.children || []) {
+					if (cat2.children?.some((c3) => c3.id === clickedCategory.id)) {
+						return cat2.id;
+					}
+				}
+			}
+		}
+		return 0;
+	};
+
+	const handleAddCategoryStart = (clickedCategory, level) => {
+		const pid = getParentIdForNewCategory(clickedCategory, level);
+		setAddingCategoryParent({ cat: clickedCategory, level, parentId: pid });
+		setNewCategoryName('');
+	};
+	// Handle Enter key to create category
+	const handleAddCategorySubmit = async () => {
+		if (!newCategoryName.trim()) return;
+		const payload = {
+			name: newCategoryName.trim(),
+			parentId: addingCategoryParent.parentId,
+		};
+		// Call API here
+		try {
+			// Example:
+			const res = await createCategory(payload);
+			console.log('API Payload:', res);
+			dispatch(refreshAllCategories());
+
+			// Add to local state after API success
+			// const newCat = {
+			// 	id: Date.now(), // or res.data.id from API
+			// 	name: newCategoryName.trim(),
+			// 	count: 0,
+			// 	children: [],
+			// };
+
+			// if (parentId === 0) {
+			// 	dispatch(setCategories([...categories, newCat]));
+			// } else {
+			// 	const updated = categories.map((cat) => {
+			// 		if (cat.id === parentId) {
+			// 			return {
+			// 				...cat,
+			// 				children: [...(cat.children || []), newCat],
+			// 			};
+			// 		}
+			// 		return cat;
+			// 	});
+			// 	dispatch(setCategories(updated));
+			// }
+		} catch (err) {
+			console.error('Error creating category', err);
 		}
 
-		// Helper to immutably update
-		const addCategoryAtLevel = (nodes, targetParentId, targetLevel) => {
-			return nodes.map((node) => {
-				if (node.id === targetParentId && targetLevel === level) {
-					// Add new category at the same level
-					return {
-						...node,
-						children: [...(node.children || []), newCat],
-					};
-				}
-				if (node.children) {
-					return {
-						...node,
-						children: addCategoryAtLevel(
-							node.children,
-							targetParentId,
-							targetLevel
-						),
-					};
-				}
-				return node;
-			});
-		};
+		// Reset
+		setAddingCategoryParent(null);
+		setNewCategoryName('');
+	};
 
-		if (level === 2) {
-			// Find the Category 1 parent of the clicked category
-			const parentCategory1 = categories.find((cat) =>
-				cat.children?.some(
-					(c) =>
-						c.id === clickedCategory.id ||
-						c.children?.some((cc) => cc.id === clickedCategory.id)
-				)
-			);
-			if (parentCategory1) {
-				const updated = categories.map((cat) => {
-					if (cat.id === parentCategory1.id) {
-						return {
-							...cat,
-							children: [...cat.children, newCat],
-						};
-					}
-					return cat;
-				});
-				dispatch(setCategories(updated));
-			}
-		} else if (level === 3) {
-			// Find the Category 2 parent of the clicked category
-			const updated = categories.map((cat) => ({
-				...cat,
-				children: cat.children.map((cat2) => {
-					if (cat2.children?.some((c3) => c3.id === clickedCategory.id)) {
-						return {
-							...cat2,
-							children: [...cat2.children, newCat],
-						};
-					}
-					return cat2;
-				}),
-			}));
-			dispatch(setCategories(updated));
+	// Handle Delete Category
+	const handleDeleteCategory = async (cat) => {
+		try {
+			const res = await deleteCategory(cat?.id);
+			dispatch(refreshAllCategories());
+			console.log(res);
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
-	useEffect(() => {
-		if (newCategoryId && categoryRefs.current[newCategoryId]) {
-			categoryRefs.current[newCategoryId].scrollIntoView({
-				behavior: 'smooth',
-				block: 'center',
-			});
-			setNewCategoryId(null); // reset so it doesn't keep scrolling
-		}
-	}, [newCategoryId]);
+	// const handleAddCategory = (clickedCategory, level) => {
+	// 	const newCat = {
+	// 		id: Date.now(),
+	// 		name: `New Category ${level}`,
+	// 		count: 0,
+	// 		children: [],
+	// 	};
+
+	// 	setNewCategoryId(newCat.id);
+
+	// 	if (level === 1) {
+	// 		// Add to root (Category 1 list)
+	// 		dispatch(setCategories([...categories, newCat]));
+	// 		return;
+	// 	}
+
+	// 	// Helper to immutably update
+	// 	const addCategoryAtLevel = (nodes, targetParentId, targetLevel) => {
+	// 		return nodes.map((node) => {
+	// 			if (node.id === targetParentId && targetLevel === level) {
+	// 				// Add new category at the same level
+	// 				return {
+	// 					...node,
+	// 					children: [...(node.children || []), newCat],
+	// 				};
+	// 			}
+	// 			if (node.children) {
+	// 				return {
+	// 					...node,
+	// 					children: addCategoryAtLevel(
+	// 						node.children,
+	// 						targetParentId,
+	// 						targetLevel
+	// 					),
+	// 				};
+	// 			}
+	// 			return node;
+	// 		});
+	// 	};
+
+	// 	if (level === 2) {
+	// 		// Find the Category 1 parent of the clicked category
+	// 		const parentCategory1 = categories.find((cat) =>
+	// 			cat.children?.some(
+	// 				(c) =>
+	// 					c.id === clickedCategory.id ||
+	// 					c.children?.some((cc) => cc.id === clickedCategory.id)
+	// 			)
+	// 		);
+	// 		if (parentCategory1) {
+	// 			const updated = categories.map((cat) => {
+	// 				if (cat.id === parentCategory1.id) {
+	// 					return {
+	// 						...cat,
+	// 						children: [...cat.children, newCat],
+	// 					};
+	// 				}
+	// 				return cat;
+	// 			});
+	// 			dispatch(setCategories(updated));
+	// 		}
+	// 	} else if (level === 3) {
+	// 		// Find the Category 2 parent of the clicked category
+	// 		const updated = categories.map((cat) => ({
+	// 			...cat,
+	// 			children: cat.children.map((cat2) => {
+	// 				if (cat2.children?.some((c3) => c3.id === clickedCategory.id)) {
+	// 					return {
+	// 						...cat2,
+	// 						children: [...cat2.children, newCat],
+	// 					};
+	// 				}
+	// 				return cat2;
+	// 			}),
+	// 		}));
+	// 		dispatch(setCategories(updated));
+	// 	}
+	// };
+
+	// useEffect(() => {
+	// 	if (newCategoryId && categoryRefs.current[newCategoryId]) {
+	// 		categoryRefs.current[newCategoryId].scrollIntoView({
+	// 			behavior: 'smooth',
+	// 			block: 'center',
+	// 		});
+	// 		setNewCategoryId(null); // reset so it doesn't keep scrolling
+	// 	}
+	// }, [newCategoryId]);
 
 	const renderCategory = (cat, level = 1) => {
 		const isExpanded = expandedIds[cat.id] ?? true;
@@ -278,7 +373,7 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 						<button
 							onClick={(e) => {
 								e.stopPropagation();
-								handleAddCategory(cat, level);
+								handleAddCategoryStart(cat, level);
 							}}
 						>
 							<PlusIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
@@ -286,7 +381,7 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 						<button
 							onClick={(e) => {
 								e.stopPropagation();
-								setSelectedCategory(cat);
+								dispatch(setCategory(cat));
 							}}
 						>
 							<EditIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
@@ -294,13 +389,34 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 						<button
 							onClick={(e) => {
 								e.stopPropagation();
-								// delete logic
+								handleDeleteCategory(cat);
 							}}
 						>
 							<DeleteIcon className='w-4 h-4 cursor-pointer text-primary hover:scale-110' />
 						</button>
 					</div>
 				</div>
+
+				{/* Inline new category input */}
+				{addingCategoryParent?.cat.id === cat.id && (
+					<div
+						className='flex items-center gap-2 mt-1'
+						style={{ paddingLeft: `${(level + 1) * 16}px` }}
+					>
+						<input
+							type='text'
+							value={newCategoryName}
+							onChange={(e) => setNewCategoryName(e.target.value)}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter') handleAddCategorySubmit();
+								if (e.key === 'Escape') setAddingCategoryParent(null);
+							}}
+							autoFocus
+							placeholder='Enter category name'
+							className='border px-3 py-1 w-[60%] rounded text-sm'
+						/>
+					</div>
+				)}
 
 				{/* Children */}
 				{hasChildren && isExpanded && (
@@ -313,7 +429,7 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 	};
 
 	return (
-		<div className='w-[35%] p-5 bg-light border-r max-h-[45.75rem] overflow-y-auto scrollbar-thin'>
+		<div className='w-full sm:w-[55%] md:w-[75%] lg:w-[35%] p-5 bg-light border-r overflow-y-auto scrollbar-thin h-full'>
 			{/* Search and Filter */}
 			<div className='flex gap-4 mb-3'>
 				<input
@@ -353,11 +469,7 @@ const CategoryTree = ({ selectedCategory, setSelectedCategory }) => {
 
 			{/* Tree */}
 			<div className='text-sm'>
-				{loading ? (
-					<div>Loading...</div>
-				) : (
-					filteredData.map((cat) => renderCategory(cat))
-				)}
+				{filteredData.map((cat) => renderCategory(cat))}
 			</div>
 		</div>
 	);

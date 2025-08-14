@@ -1,8 +1,10 @@
 /** @format */
 
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const CategoryEditPanel = ({ selectedCategory }) => {
+const CategoryEditPanel = () => {
+	const { category: selectedCategory } = useSelector((state) => state.category);
 	const [name, setName] = useState('');
 	const [parentId, setParentId] = useState('');
 
