@@ -26,6 +26,7 @@ export async function getCategories() {
 }
 
 export async function updateCategory(data) {
+	console.log(data);
 	const id = data.id;
 	const response = await handlePutReq(UPDATE_CATEGORY(id), data);
 	console.log('Update Category API RESPONSE.........', response);

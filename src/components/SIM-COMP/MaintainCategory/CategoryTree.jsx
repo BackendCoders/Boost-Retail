@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 
 import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import EditIcon from '../../../assets/icons/line/EditPenIcon';
@@ -8,12 +8,12 @@ import DeleteIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	refreshAllCategories,
-	setCategories,
 	setCategory,
 } from '../../../slice/categorySlice';
 import {
 	createCategory,
 	deleteCategory,
+	updateCategory,
 } from '../../../services/operations/categoryApi';
 // import DownArrow from '../../../assets/icons/thin/DownThinIcon';
 
@@ -125,14 +125,22 @@ const CategoryTree = () => {
 		setEditValue(cat.name);
 	};
 
-	const handleRenameSubmit = (id) => {
-		dispatch(
-			setCategories(
-				categories.map((cat) =>
-					cat.id === id ? { ...cat, name: editValue } : cat
-				)
-			)
-		);
+	const handleRenameSubmit = async (id) => {
+		try {
+			const category = categories.find((cat) => (cat.id === id ? cat : null));
+			if (!category) return console.error('Category not found');
+
+			// Create updated payload
+			const payload = {
+				...category,
+				name: editValue,
+			};
+			const res = await updateCategory(payload);
+			dispatch(refreshAllCategories());
+			console.log('update Category Response', res);
+		} catch (error) {
+			console.log(error);
+		}
 		setEditingId(null);
 	};
 
@@ -353,7 +361,7 @@ const CategoryTree = () => {
 							onBlur={() => handleRenameSubmit(cat.id)}
 							onKeyDown={(e) => e.key === 'Enter' && handleRenameSubmit(cat.id)}
 							autoFocus
-							className='border rounded px-1 text-sm'
+							className='border px-3 py-1 w-[60%] rounded text-sm'
 						/>
 					) : (
 						<span
