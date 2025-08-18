@@ -10,6 +10,7 @@ const CategoryEditPanel = () => {
 	const { category: selectedCategory, parentCatOpts } = useSelector(
 		(state) => state.category
 	);
+
 	const [name, setName] = useState('');
 	const [parentId, setParentId] = useState('');
 
@@ -28,12 +29,18 @@ const CategoryEditPanel = () => {
 		}
 	};
 
+	const selectedParentId = parentCatOpts.find(
+		(opt) => opt?.id === selectedCategory?.parentId
+	);
+
 	useEffect(() => {
 		if (selectedCategory) {
-			setName(selectedCategory.name || '');
-			setParentId(selectedCategory.parentId || '');
+			setName(selectedCategory?.name || '');
+			setParentId(
+				selectedCategory?.parentId ? String(selectedCategory.parentId) : ''
+			);
 		}
-	}, [selectedCategory]);
+	}, [selectedCategory, selectedParentId]);
 
 	if (!selectedCategory) {
 		return (
@@ -72,7 +79,12 @@ const CategoryEditPanel = () => {
 					className='rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 border-2 focus:ring-blue-500 w-full'
 				>
 					{parentCatOpts.map((opt) => (
-						<option key={opt.id}>{opt.name}</option>
+						<option
+							key={opt.id}
+							value={opt.id}
+						>
+							{opt.name}
+						</option>
 					))}
 				</select>
 			</div>
