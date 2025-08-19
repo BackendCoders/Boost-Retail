@@ -1,11 +1,11 @@
 /** @format */
 
 import { useState, useMemo, useCallback, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import EditIcon from '../../../assets/icons/line/EditPenIcon';
 import DeleteIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
-import { useDispatch, useSelector } from 'react-redux';
 import {
 	refreshAllCategories,
 	setCategory,
@@ -17,7 +17,6 @@ import {
 	getCategoryParents,
 	updateCategory,
 } from '../../../services/operations/categoryApi';
-// import DownArrow from '../../../assets/icons/thin/DownThinIcon';
 
 // ✅ Replace with inline SVG if your icon component doesn't rotate properly
 const DownArrow = ({ className = '', ...props }) => (
@@ -237,95 +236,6 @@ const CategoryTree = () => {
 			console.log(error);
 		}
 	};
-
-	// const handleAddCategory = (clickedCategory, level) => {
-	// 	const newCat = {
-	// 		id: Date.now(),
-	// 		name: `New Category ${level}`,
-	// 		count: 0,
-	// 		children: [],
-	// 	};
-
-	// 	setNewCategoryId(newCat.id);
-
-	// 	if (level === 1) {
-	// 		// Add to root (Category 1 list)
-	// 		dispatch(setCategories([...categories, newCat]));
-	// 		return;
-	// 	}
-
-	// 	// Helper to immutably update
-	// 	const addCategoryAtLevel = (nodes, targetParentId, targetLevel) => {
-	// 		return nodes.map((node) => {
-	// 			if (node.id === targetParentId && targetLevel === level) {
-	// 				// Add new category at the same level
-	// 				return {
-	// 					...node,
-	// 					children: [...(node.children || []), newCat],
-	// 				};
-	// 			}
-	// 			if (node.children) {
-	// 				return {
-	// 					...node,
-	// 					children: addCategoryAtLevel(
-	// 						node.children,
-	// 						targetParentId,
-	// 						targetLevel
-	// 					),
-	// 				};
-	// 			}
-	// 			return node;
-	// 		});
-	// 	};
-
-	// 	if (level === 2) {
-	// 		// Find the Category 1 parent of the clicked category
-	// 		const parentCategory1 = categories.find((cat) =>
-	// 			cat.children?.some(
-	// 				(c) =>
-	// 					c.id === clickedCategory.id ||
-	// 					c.children?.some((cc) => cc.id === clickedCategory.id)
-	// 			)
-	// 		);
-	// 		if (parentCategory1) {
-	// 			const updated = categories.map((cat) => {
-	// 				if (cat.id === parentCategory1.id) {
-	// 					return {
-	// 						...cat,
-	// 						children: [...cat.children, newCat],
-	// 					};
-	// 				}
-	// 				return cat;
-	// 			});
-	// 			dispatch(setCategories(updated));
-	// 		}
-	// 	} else if (level === 3) {
-	// 		// Find the Category 2 parent of the clicked category
-	// 		const updated = categories.map((cat) => ({
-	// 			...cat,
-	// 			children: cat.children.map((cat2) => {
-	// 				if (cat2.children?.some((c3) => c3.id === clickedCategory.id)) {
-	// 					return {
-	// 						...cat2,
-	// 						children: [...cat2.children, newCat],
-	// 					};
-	// 				}
-	// 				return cat2;
-	// 			}),
-	// 		}));
-	// 		dispatch(setCategories(updated));
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	if (newCategoryId && categoryRefs.current[newCategoryId]) {
-	// 		categoryRefs.current[newCategoryId].scrollIntoView({
-	// 			behavior: 'smooth',
-	// 			block: 'center',
-	// 		});
-	// 		setNewCategoryId(null); // reset so it doesn't keep scrolling
-	// 	}
-	// }, [newCategoryId]);
 
 	const renderCategory = (cat, level = 1) => {
 		const isExpanded = expandedIds[cat.id] ?? true;
