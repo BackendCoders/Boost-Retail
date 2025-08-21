@@ -1,6 +1,5 @@
 /** @format */
 
-import React from 'react';
 import RepeatIcon from '../../../assets/icons/thin/RepeatThinIcon.jsx';
 
 // ✅ Reusable Toggle Component

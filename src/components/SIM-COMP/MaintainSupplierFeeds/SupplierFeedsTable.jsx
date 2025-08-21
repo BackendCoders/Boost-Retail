@@ -1,10 +1,10 @@
 /** @format */
 
+import { useRef } from 'react';
 import Tooltip from '../../Ui/Tooltip/Tooltip';
 import Table from '../MaintainLookupTable/Table';
 import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
-import { useRef } from 'react';
 export default function SupplierFeedsTable({
 	supplierFeeds,
 	onChange,

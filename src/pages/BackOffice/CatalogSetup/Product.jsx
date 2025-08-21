@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AdvancedSearch from '../../../components/Ui/AdvancedSearch/AdvancedSearch';
 import BatchEdit from '../../../components/Ui/BatchEdit/BatchEdit';
 import StockLocation from '../../../components/Ui/Stock/StockLocation';

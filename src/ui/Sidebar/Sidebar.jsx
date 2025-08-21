@@ -1,12 +1,12 @@
 /** @format */
 
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import Tooltip from '../../components/Ui/Tooltip/Tooltip';
 import SidebarDrawer from './SidebarDrawer';
 import { setActiveItem, setActiveMiniMenu } from '../../slice/sidebarSlice';
 import { sideMenus } from './sideMenu.config';
-import { useLocation } from 'react-router-dom';
-import { useEffect, useMemo } from 'react';
 
 export default function Sidebar() {
 	const dispatch = useDispatch();

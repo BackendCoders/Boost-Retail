@@ -1,7 +1,6 @@
 /** @format */
 
 // File: Ui/Button/SecondaryButton.jsx
-import React from 'react';
 
 const SecondaryButton = ({
 	children,

@@ -1,8 +1,8 @@
 /** @format */
 // import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 import Header from '../ui/Header/Header';
 import Sidebar from '../ui/Sidebar/Sidebar';
-import { Outlet } from 'react-router-dom';
 // import SuperAdminSidebar from '../ui/Sidebar/superAdminSidebar/SuperAdminSidebar';
 
 export default function AppLayout() {

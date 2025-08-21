@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import SettingIcon from '../../../assets/icons/thin/SettingsThinIcon';
 import LeftArrow from '../../../assets/icons/line/ArrowLeftIcon';
 import RightArrow from '../../../assets/icons/line/ArrowRightIcon';

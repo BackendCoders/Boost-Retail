@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import BrandSelector from '../../../components/BackOffice-COMP/SimProduct/BrandSelector';
 import CategorySelector from '../../../components/BackOffice-COMP/SimProduct/CategorySelector';
 

@@ -1,7 +1,6 @@
 /** @format */
 
 // File: Ui/Button/PrimaryButton.jsx
-import React from 'react';
 
 const PrimaryButton = ({
 	children,

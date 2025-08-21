@@ -1,5 +1,4 @@
 // File: Ui/Button/IconButton.jsx
-import React from 'react';
 
 const IconButton = ({ icon: Icon, onClick, title = '', className = '' }) => {
   return (

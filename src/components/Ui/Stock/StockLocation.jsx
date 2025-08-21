@@ -1,6 +1,5 @@
 /** @format */
 
-import React from 'react';
 
 const tableHeaders = ['LOC', 'QTY', 'MIN', 'MAX', 'BO', 'SOLD', 'LA'];
 const tableData = [

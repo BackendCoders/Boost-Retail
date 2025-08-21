@@ -1,7 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react';
-import RepeatIcon from '../../../assets/icons/thin/RepeatThinIcon.jsx';
+import { useState } from 'react';
 
 // ✅ Reusable Toggle Component
 const ToggleSwitch = ({ label, checked = true, onChange }) => (

@@ -1,4 +1,8 @@
 /** @format */
+import { useEffect, useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import MenuIcon from '../../assets/icons/thin/MenuThinIcon';
 import AccountIcon from '../../assets/icons/thin/AccountIcon';
 import HomeIcon from '../../assets/icons/thin/HomeThinIcon';
@@ -12,10 +16,7 @@ import WorkshopIcon from '../../assets/icons/thin/WorkshopThinIcon';
 import BackOfficeIcon from '../../assets/icons/standard/BackOfficeStandardIcon';
 import ArrowLeftIcon from '../../assets/icons/thin/ArrowLargeLeftThinIcon';
 import Tooltip from '../../components/Ui/Tooltip/Tooltip';
-import { useDispatch, useSelector } from 'react-redux';
 import { closeSidebar, setActiveTopNavigation } from '../../slice/sidebarSlice';
-import { Link, useLocation } from 'react-router-dom';
-import { useEffect, useMemo } from 'react';
 
 export default function Header() {
 	const dispatch = useDispatch();

@@ -1,4 +1,3 @@
-import React from 'react';
 
 const SearchInput = ({ placeholder, value, onChange }) => {
   return (

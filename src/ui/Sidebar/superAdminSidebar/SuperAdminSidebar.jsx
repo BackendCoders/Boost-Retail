@@ -1,9 +1,9 @@
 /** @format */
 
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { adminMenuData } from './adminmenuData';
-import { useSelector } from 'react-redux';
 import UpIcon from '../../../assets/icons/thin/UpThinIcon';
 import DownIcon from '../../../assets/icons/thin/DownThinIcon';
 
