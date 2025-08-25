@@ -15,6 +15,7 @@ import MaintainSupplierFeeds from '../pages/SuperAdmin/SIM/SupplierFeeds/Maintai
 import LoginPage from '../pages/Auth/Login';
 import MissingCategories from '../pages/SuperAdmin/SIM/MissingData/MissingCategories';
 import MissingImages from '../pages/SuperAdmin/SIM/MissingData/MissingImages';
+import SimProductDetail from '../components/SIM-COMP/MaintainSimProduct/SimProductDetail';
 
 export default function AppRoutes() {
 	return (
@@ -484,6 +485,11 @@ export default function AppRoutes() {
 				<Route
 					path='/admin/sim/products/maintain'
 					element={<MaintainSimProducts />}
+				/>
+
+				<Route
+					path='/admin/sim/products/maintain/:productId'
+					element={<SimProductDetail />}
 				/>
 				{/* MissingData - Missing Categories */}
 				<Route

@@ -75,7 +75,7 @@ const TablePaginationBar = ({
 
 			{/* Per-Page Selector & Settings */}
 			<div className='flex items-center gap-4'>
-				<label className='text-text-body font-inter'>Products Per Page</label>
+				<label className='text-text-body font-inter'>Results Per Page</label>
 
 				<div className='relative'>
 					<select
@@ -101,7 +101,7 @@ const TablePaginationBar = ({
 					ref={btnWrapperRef}
 				>
 					<button
-						className='bg-primary p-2 rounded-md flex items-center justify-center'
+						className='bg-primary p-2 rounded-full flex items-center justify-center'
 						onClick={() => setShowFilters((prev) => !prev)}
 					>
 						<SettingIcon className='w-7 h-7 text-light' />
