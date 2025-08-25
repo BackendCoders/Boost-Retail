@@ -1,11 +1,24 @@
 /** @format */
 
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import DetailTab from './SimProductDetailTabs/DetailTab';
+import DescriptionTab from './SimProductDetailTabs/DescriptionTab';
+import SpecificationTab from './SimProductDetailTabs/SpecificationTab';
+import GeometryTab from './SimProductDetailTabs/GeometryTab';
+
+const tabs = [
+	{ id: 'details', label: 'Details' },
+	{ id: 'description', label: 'Description' },
+	{ id: 'specifications', label: 'Specifications' },
+	{ id: 'geometry', label: 'Geometry' },
+];
 
 export default function SimProductDetail() {
 	const { simProducts } = useSelector((state) => state.simProduct);
 	const { productId } = useParams();
+	const [activeTab, setActiveTab] = useState('details');
 	const product = simProducts.find((p) => p.id === Number(productId));
 	console.log({ productId, product });
 	return (
@@ -29,6 +42,33 @@ export default function SimProductDetail() {
 						</span>
 					</div>
 				</div>
+			</div>
+
+			{/* Product Details Tab Section */}
+			<div className='flex flex-col gap-2'>
+				<div className='font-semibold'>Search</div>
+				<div className='flex gap-2'>
+					{tabs.map((tab) => (
+						<button
+							key={tab.id}
+							className={`px-4 py-2 border rounded-full ${
+								activeTab === tab.id
+									? 'border-primary bg-primary text-white'
+									: 'border-text-body text-text-body'
+							}`}
+							onClick={() => setActiveTab(tab.id)}
+						>
+							{tab.label}
+						</button>
+					))}
+				</div>
+			</div>
+
+			<div>
+				{activeTab === 'details' && <DetailTab />}
+				{activeTab === 'description' && <DescriptionTab />}
+				{activeTab === 'specifications' && <SpecificationTab />}
+				{activeTab === 'geometry' && <GeometryTab />}
 			</div>
 		</div>
 	);
