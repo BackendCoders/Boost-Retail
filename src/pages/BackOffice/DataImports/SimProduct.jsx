@@ -1,8 +1,8 @@
 /** @format */
 
 import { useState } from 'react';
-import BrandSelector from '../../../components/BackOffice-COMP/SimProduct/BrandSelector';
-import CategorySelector from '../../../components/BackOffice-COMP/SimProduct/CategorySelector';
+import BrandSelector from '../../../components/BackOffice-COMP/DataImport/SimProduct/BrandSelector';
+import CategorySelector from '../../../components/BackOffice-COMP/DataImport/SimProduct/CategorySelector';
 
 const SimProduct = () => {
 	const [managedByBrand, setManagedByBrand] = useState(false);

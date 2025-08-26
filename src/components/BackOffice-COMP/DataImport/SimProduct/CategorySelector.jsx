@@ -1,7 +1,7 @@
 /** @format */
 
 import { useState } from 'react';
-import { categories, brands } from '../../../data/dummyData';
+import { categories, brands } from '../../../../data/dummyData';
 
 const CategorySelector = () => {
 	const [selectedMain, setSelectedMain] = useState(null);
