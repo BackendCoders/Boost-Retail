@@ -79,9 +79,9 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 					</select>
 
 					<div className='flex gap-3 mt-2'>
-						<button className='bg-primary text-light px-4 py-1.5 rounded hover:bg-secondary transition text-sm'>
+						{/* <button className='bg-primary text-light px-4 py-1.5 rounded hover:bg-secondary transition text-sm'>
 							+ Column
-						</button>
+						</button> */}
 						<button className='border border-primary text-primary px-4 py-1.5 rounded hover:bg-blue-50 transition text-sm'>
 							+ Supplier Column
 						</button>
