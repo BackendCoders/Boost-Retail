@@ -18,7 +18,7 @@ const Description = () => {
 					rows={10}
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
-					className='border border-text-body px-3 py-1 rounded text-xs flex-1 bg-light'
+					className='border px-3 py-1 rounded text-xs flex-1 bg-light'
 				/>
 			</div>
 		</div>
