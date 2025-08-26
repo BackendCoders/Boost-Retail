@@ -60,14 +60,14 @@ const MaintainSimProducts = () => {
 
 			{/* Advance Search Area */}
 			{advancedMode && (
-				<div className='flex flex-wrap gap-4 max-h-[28rem]'>
-					<div className='flex-1 min-w-[320px] h-full'>
+				<div className='flex flex-wrap gap-4 min-h-[18rem]'>
+					<div className='flex-1 min-w-[320px]'>
 						<AdvancedSearch />
 					</div>
-					<div className='flex-1 min-w-[280px] h-full'>
+					<div className='flex-1 min-w-[280px]'>
 						<Description />
 					</div>
-					<div className='flex-1 min-w-[260px] h-full'>
+					<div className='flex-1 min-w-[260px]'>
 						<LargeImage />
 					</div>
 				</div>

@@ -265,7 +265,7 @@ const AdvancedSearch = () => {
 	};
 
 	return (
-		<div className='p-4 bg-gray-100 rounded-lg w-full border border-gray-300 max-h-[320px] overflow-y-auto'>
+		<div className='p-4 bg-gray-100 rounded-lg w-full border border-gray-300 max-h-[320px] overflow-y-auto h-full'>
 			<h2 className='font-semibold text-base mb-4'>Advanced Search</h2>
 			<ConditionGroup
 				group={rootGroup}
