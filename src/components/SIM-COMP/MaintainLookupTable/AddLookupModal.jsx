@@ -26,16 +26,14 @@ const supplierFeedsOptions = [
 ];
 
 export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
-	const { handleSubmit, control, watch } = useForm({
+	const { handleSubmit, control, watch, register, reset } = useForm({
 		defaultValues: {
 			supplierFeed: null,
 			categorisation: null,
 			tableName: '',
 		},
 	});
-	const [supplierColumnsOptions, setSupplierColumnsOptions] = useState([
-		{ value: '', label: '' },
-	]);
+	const [supplierColumnsOptions, setSupplierColumnsOptions] = useState([]);
 	const [selectedColumnList, setSelectedColumnList] = useState([]);
 	const [position, setPosition] = useState({ top: 0, left: 0 });
 
@@ -94,8 +92,17 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 		}
 	}, [isOpen, anchorRef]);
 
-	const onSubmit = (data) => {
-		console.log(data);
+	const onSubmit = (formData) => {
+		const payload = {
+			id: 0,
+			supplierFeed: formData.supplierFeed,
+			tableName: formData.tableName,
+			supplierColumns: formData.supplierColumns,
+			categorisation: formData.categorisation,
+			isActive: true,
+		};
+
+		console.log('Final Payload:', payload);
 	};
 
 	if (!isOpen) return null;
@@ -127,6 +134,7 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 						type='text'
 						placeholder='Enter Table Name'
 						className='border rounded px-3 py-2'
+						{...register('tableName')}
 					/>
 
 					<label className='font-medium'>Supplier Feed:</label>
@@ -150,12 +158,27 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 					/>
 
 					<label className='font-medium'>Categorisation:</label>
-					<SelectInput
-						placeholder='Select Categories...'
-						options={[
-							{ value: 'Categories', label: 'Categories' },
-							{ value: 'Search 1/2', label: 'Search 1/2' },
-						]}
+					<Controller
+						name='categorisation'
+						control={control}
+						render={({ field }) => (
+							<SelectInput
+								placeholder='Select Categories...'
+								options={[
+									{ value: 'Categories', label: 'Categories' },
+									{ value: 'Search 1/2', label: 'Search 1/2' },
+								]}
+								value={
+									[
+										{ value: 'Categories', label: 'Categories' },
+										{ value: 'Search 1/2', label: 'Search 1/2' },
+									].find((option) => option.value === field.value) || null
+								}
+								onChange={(selected) =>
+									field.onChange(selected ? selected.value : '')
+								}
+							/>
+						)}
 					/>
 
 					<label className='font-medium'>Columns:</label>
@@ -215,9 +238,9 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 						{/* <button className='bg-primary text-light px-4 py-1.5 rounded hover:bg-secondary transition text-sm'>
 							+ Column
 						</button> */}
-						<button className='border border-primary text-primary px-4 py-1.5 rounded hover:bg-blue-50 transition text-sm'>
+						{/* <button className='border border-primary text-primary px-4 py-1.5 rounded hover:bg-blue-50 transition text-sm'>
 							+ Supplier Column
-						</button>
+						</button> */}
 					</div>
 
 					{/* Footer Buttons */}
