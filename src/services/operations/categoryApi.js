@@ -14,6 +14,12 @@ const {
 	GET_CATEGORY_PARENTS,
 	UPDATE_CATEGORY,
 	DELETE_CATEGORY,
+	GET_CATEGORY_LOOKUP,
+	ADD_CATEGORY_LOOKUP_ASYNC,
+	UPDATE_CATEGORY_LOOKUP_ASYNC,
+	DELETE_CATEGORY_LOOKUP_ASYNC,
+	GET_CATEGORY_MAPS,
+	GET_SUPPLIER_COLUMNS,
 } = categoriesEndpoint;
 
 export async function createCategory(data) {
@@ -46,5 +52,46 @@ export async function updateCategory(id, data) {
 export async function deleteCategory(id) {
 	const response = await handleDeleteReq(DELETE_CATEGORY(id));
 	console.log('Delete Category API RESPONSE.........', response);
+	return response.data;
+}
+
+export async function getCategoryLookups() {
+	const response = await handleGetReq(GET_CATEGORY_LOOKUP);
+	console.log('Get List of Category Lookups API RESPONSE.........', response);
+	return response.data;
+}
+
+export async function addCategoryLookupAsync(data) {
+	const response = await handlePostReq(ADD_CATEGORY_LOOKUP_ASYNC, data);
+	console.log('Add Category Lookup Async API RESPONSE.........', response);
+	return response.data;
+}
+
+export async function updateCategoryLookupAsync(id, data) {
+	const response = await handlePutReq(UPDATE_CATEGORY_LOOKUP_ASYNC(id), data);
+	console.log('Update Category Lookup Async API RESPONSE.........', response);
+	return response.data;
+}
+
+export async function deleteCategoryLookupAsync(id, data) {
+	const response = await handleDeleteReq(
+		DELETE_CATEGORY_LOOKUP_ASYNC(id),
+		data
+	);
+	console.log('Delete Category Lookup Async API RESPONSE.........', response);
+	return response.data;
+}
+
+export async function getCategoryMaps() {
+	// Fetch current user details using token
+	const response = await handleGetReq(GET_CATEGORY_MAPS);
+	console.log('Get category map API RESPONSE.........', response);
+	return response.data;
+}
+
+export async function getSupplierColumns(id) {
+	// Fetch current user details using token
+	const response = await handleGetReq(GET_SUPPLIER_COLUMNS(id));
+	console.log('Get List of Supplier Columns API RESPONSE.........', response);
 	return response.data;
 }

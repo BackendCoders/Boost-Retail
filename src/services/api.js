@@ -9,4 +9,14 @@ export const categoriesEndpoint = {
 		`${BASE}/api/Category/GetCategoryParents?categoryId=${id}`,
 	UPDATE_CATEGORY: (id) => `${BASE}/api/Category/${id}`,
 	DELETE_CATEGORY: (id) => `${BASE}/api/Category/${id}`,
+
+	GET_CATEGORY_LOOKUP: `${BASE}/api/Category/GetCategoryLookups`,
+	ADD_CATEGORY_LOOKUP_ASYNC: `${BASE}/api/Category/AddCategoryLookupAsync`,
+	UPDATE_CATEGORY_LOOKUP_ASYNC: (id) =>
+		`${BASE}/api/Category/UpdateCategoryLookupAsync/${id}`,
+	DELETE_CATEGORY_LOOKUP_ASYNC: (id) =>
+		`${BASE}/api/Category/DeleteCategoryLookupAsync/${id}`,
+	GET_CATEGORY_MAPS: `${BASE}/api/Category/GetCategoryMaps`,
+	GET_SUPPLIER_COLUMNS: (id) =>
+		`${BASE}/api/Category/GetSupplierColumns?supplier=${id}`,
 };
