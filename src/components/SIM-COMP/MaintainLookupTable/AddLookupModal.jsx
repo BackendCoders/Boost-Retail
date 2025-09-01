@@ -4,7 +4,10 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import SelectInput from '../../Ui/Input/SelectInput';
 import { Controller, useForm } from 'react-hook-form';
-import { getSupplierColumns } from '../../../services/operations/categoryApi';
+import {
+	addCategoryLookupAsync,
+	getSupplierColumns,
+} from '../../../services/operations/categoryApi';
 import CloseSmallestStandardIcon from '../../../assets/icons/standard/CloseSmallestStandardIcon';
 
 const supplierFeedsOptions = [
@@ -92,17 +95,23 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 		}
 	}, [isOpen, anchorRef]);
 
-	const onSubmit = (formData) => {
+	const onSubmit = async (formData) => {
 		const payload = {
 			id: 0,
 			supplierFeed: formData.supplierFeed,
 			tableName: formData.tableName,
-			supplierColumns: formData.supplierColumns,
+			supplierColumns: selectedColumnList.join(', '),
 			categorisation: formData.categorisation,
 			isActive: true,
 		};
-
-		console.log('Final Payload:', payload);
+		try {
+			const response = await addCategoryLookupAsync(payload);
+			console.log('Add Lookup Table Response:', response);
+			reset();
+			onClose();
+		} catch (error) {
+			console.error('Error adding lookup table:', error);
+		}
 	};
 
 	if (!isOpen) return null;
