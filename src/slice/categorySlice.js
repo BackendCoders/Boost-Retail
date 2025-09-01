@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
 	getCategories,
 	getCategoryLookups,
+	getCategoryMaps,
 } from '../services/operations/categoryApi';
 
 export const supplierFeedsOptions = [
@@ -30,6 +31,7 @@ const initialState = {
 	category: null,
 	parentCatOpts: [],
 	lookupTablesData: [],
+	rowEditorTableData: [],
 };
 
 const categorySlice = createSlice({
@@ -50,6 +52,9 @@ const categorySlice = createSlice({
 		},
 		setLookupTablesData(state, action) {
 			state.lookupTablesData = action.payload;
+		},
+		setRowEditorTableData(state, action) {
+			state.rowEditorTableData = action.payload;
 		},
 	},
 });
@@ -81,6 +86,19 @@ export function refreshAllLookupTablesData() {
 		}
 	};
 }
+export function refreshAllRowEditorTableData(id) {
+	return async (dispatch) => {
+		try {
+			dispatch(setLoading(true));
+			const response = await getCategoryMaps(id);
+			dispatch(setRowEditorTableData(response));
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch(setLoading(false));
+		}
+	};
+}
 
 export const {
 	setLoading,
@@ -88,5 +106,6 @@ export const {
 	setCategory,
 	setParentCatOpts,
 	setLookupTablesData,
+	setRowEditorTableData,
 } = categorySlice.actions;
 export default categorySlice.reducer;

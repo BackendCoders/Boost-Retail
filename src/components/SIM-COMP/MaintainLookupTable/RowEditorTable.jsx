@@ -4,38 +4,45 @@ import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon'; // Replace with your trash icon
 import Tooltip from '../../Ui/Tooltip/Tooltip';
 import Table from './Table';
+import { useSelector } from 'react-redux';
+import TablePaginationBar from '../../Ui/Table/TablePaginationBar';
+import { useState } from 'react';
+import BottomTablePagination from '../../Ui/Table/BottomTablePagination';
 
 export default function RowEditorTable({
 	title,
-	rows,
 	onChange,
 	onDelete,
 	onAdd,
-	dynamicColumns,
 	// selectedRows,
 	// onRowSelect,
 	// onCheckboxToggle,
 }) {
+	const { rowEditorTableData } = useSelector((state) => state.category);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+
 	const dynamicCols =
-		dynamicColumns?.map((col) => ({
-			label: col,
-			key: col.toLowerCase().replace(/\s+/g, ''),
-			Cell: ({ row, value }) => (
-				<div className='flex justify-center w-full'>
-					<input
-						className='border p-1 text-sm w-full text-black group-hover:text-black'
-						value={value}
-						onChange={(e) =>
-							onChange(
-								row.id,
-								col.toLowerCase().replace(/\s+/g, ''),
-								e.target.value
-							)
-						}
-					/>
-				</div>
-			),
-		})) || [];
+		Array.isArray(rowEditorTableData) && rowEditorTableData.length > 0
+			? Object.keys(rowEditorTableData[0])
+					.filter((key) => key !== 'id' && key !== 'active') // keep brand, model, category...
+					.map((key) => ({
+						label: key.charAt(0).toUpperCase() + key.slice(1),
+						key,
+						Cell: ({ row }) => (
+							<div className='flex justify-center w-full'>
+								<input
+									type='text'
+									className='border p-1 text-sm w-full text-black group-hover:text-black'
+									value={row?.[key] ?? ''}
+									onChange={(e) => onChange(row.id, key, e.target.value)}
+								/>
+							</div>
+						),
+					}))
+			: [];
+
+	console.log('Dynamic Columns:', dynamicCols);
 
 	const columns = [
 		{
@@ -104,8 +111,26 @@ export default function RowEditorTable({
 
 			<Table
 				columns={columns}
-				data={rows}
+				data={rowEditorTableData}
 				enableRowSelection={false}
+				currentPage={currentPage}
+				itemsPerPage={perPage}
+			/>
+
+			<TablePaginationBar
+				currentPage={currentPage}
+				totalPages={100}
+				productsPerPage={perPage}
+				onPageChange={(dir) =>
+					setCurrentPage((p) =>
+						dir === 'prev' ? Math.max(p - 1, 1) : Math.min(p + 1, 100)
+					)
+				}
+				onPerPageChange={setPerPage}
+				isSettingFilter={false}
+				// availableColumns={allLabels}
+				// selectedColumns={selectedColumns}
+				// onColumnsChange={setSelectedColumns}
 			/>
 		</div>
 	);

@@ -25,6 +25,7 @@ const TablePaginationBar = ({
 	],
 	selectedColumns,
 	onColumnsChange,
+	isSettingFilter = true,
 }) => {
 	const [showFilters, setShowFilters] = useState(false);
 	const btnWrapperRef = useRef(null);
@@ -96,28 +97,30 @@ const TablePaginationBar = ({
 				</div>
 
 				{/* Gear Icon + Dropdown */}
-				<div
-					className='relative'
-					ref={btnWrapperRef}
-				>
-					<button
-						className='bg-primary p-2 rounded-full flex items-center justify-center'
-						onClick={() => setShowFilters((prev) => !prev)}
+				{isSettingFilter && (
+					<div
+						className='relative'
+						ref={btnWrapperRef}
 					>
-						<SettingIcon className='w-7 h-7 text-light' />
-					</button>
+						<button
+							className='bg-primary p-2 rounded-full flex items-center justify-center'
+							onClick={() => setShowFilters((prev) => !prev)}
+						>
+							<SettingIcon className='w-7 h-7 text-light' />
+						</button>
 
-					{showFilters && (
-						<div className='absolute right-0 top-12 z-30 bg-light shadow-lg border border-border-grid rounded-md'>
-							<FilterDropdown
-								availableColumns={availableColumns}
-								initialSelected={selectedColumns}
-								onApply={handleApply}
-								onCancel={() => setShowFilters(false)}
-							/>
-						</div>
-					)}
-				</div>
+						{showFilters && (
+							<div className='absolute right-0 top-12 z-30 bg-light shadow-lg border border-border-grid rounded-md'>
+								<FilterDropdown
+									availableColumns={availableColumns}
+									initialSelected={selectedColumns}
+									onApply={handleApply}
+									onCancel={() => setShowFilters(false)}
+								/>
+							</div>
+						)}
+					</div>
+				)}
 			</div>
 		</div>
 	);

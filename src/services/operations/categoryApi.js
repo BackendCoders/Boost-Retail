@@ -82,9 +82,9 @@ export async function deleteCategoryLookupAsync(id, data) {
 	return response.data;
 }
 
-export async function getCategoryMaps() {
+export async function getCategoryMaps(id) {
 	// Fetch current user details using token
-	const response = await handleGetReq(GET_CATEGORY_MAPS);
+	const response = await handleGetReq(GET_CATEGORY_MAPS(id));
 	console.log('Get category map API RESPONSE.........', response);
 	return response.data;
 }

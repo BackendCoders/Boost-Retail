@@ -16,7 +16,8 @@ export const categoriesEndpoint = {
 		`${BASE}/api/Category/UpdateCategoryLookupAsync/${id}`,
 	DELETE_CATEGORY_LOOKUP_ASYNC: (id) =>
 		`${BASE}/api/Category/DeleteCategoryLookupAsync/${id}`,
-	GET_CATEGORY_MAPS: `${BASE}/api/Category/GetCategoryMaps`,
+	GET_CATEGORY_MAPS: (id) =>
+		`${BASE}/api/Category/GetCategoryMaps?lookupId=${id}`,
 	GET_SUPPLIER_COLUMNS: (id) =>
 		`${BASE}/api/Category/GetSupplierColumns?supplier=${id}`,
 };

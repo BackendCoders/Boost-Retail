@@ -79,6 +79,8 @@ const Table = ({
 	enableRowSelection = true,
 	enableMultiSelect = true,
 	showFilterRow = true,
+	currentPage = 1,
+	itemsPerPage = 10,
 }) => {
 	const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
 	const [filters, setFilters] = useState({});
@@ -106,6 +108,10 @@ const Table = ({
 		document.addEventListener('mousedown', handleClickOutside);
 		return () => document.removeEventListener('mousedown', handleClickOutside);
 	}, []);
+
+	useEffect(() => {
+		setColumnsState(columns);
+	}, [columns]);
 
 	const handleSort = (key) => {
 		let direction = 'asc';
@@ -190,6 +196,14 @@ const Table = ({
 		filters,
 		filterTypes,
 	]);
+
+	const paginatedData = useMemo(() => {
+		if (!itemsPerPage) return filteredAndSortedData;
+
+		const startIndex = (currentPage - 1) * itemsPerPage;
+		const endIndex = startIndex + itemsPerPage;
+		return filteredAndSortedData.slice(startIndex, endIndex);
+	}, [filteredAndSortedData, currentPage, itemsPerPage]);
 
 	return (
 		<div
@@ -341,7 +355,7 @@ const Table = ({
 					)}
 				</thead>
 				<tbody>
-					{filteredAndSortedData.map((row) => {
+					{paginatedData.map((row) => {
 						const isSelected = selectedRow === row.id;
 						const isMultiSelected = selectedRows.includes(row.id);
 						return (
