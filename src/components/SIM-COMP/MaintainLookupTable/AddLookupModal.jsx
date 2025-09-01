@@ -9,26 +9,14 @@ import {
 	getSupplierColumns,
 } from '../../../services/operations/categoryApi';
 import CloseSmallestStandardIcon from '../../../assets/icons/standard/CloseSmallestStandardIcon';
-
-const supplierFeedsOptions = [
-	{ value: 0, label: 'Cannondale' },
-	{ value: 1, label: 'Cube' },
-	{ value: 2, label: 'Frog' },
-	{ value: 3, label: 'Giant' },
-	{ value: 4, label: 'Haibike' },
-	{ value: 5, label: 'Lapierre' },
-	{ value: 6, label: 'Liv' },
-	{ value: 7, label: 'Marin' },
-	{ value: 8, label: 'Merida' },
-	{ value: 9, label: 'Orbea' },
-	{ value: 10, label: 'Raleigh' },
-	{ value: 11, label: 'Specialized' },
-	{ value: 12, label: 'Tern' },
-	{ value: 13, label: 'Trek' },
-	{ value: 14, label: 'Whyte' },
-];
+import {
+	refreshAllLookupTablesData,
+	supplierFeedsOptions,
+} from '../../../slice/categorySlice';
+import { useDispatch } from 'react-redux';
 
 export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
+	const dispatch = useDispatch();
 	const { handleSubmit, control, watch, register, reset } = useForm({
 		defaultValues: {
 			supplierFeed: null,
@@ -106,7 +94,9 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 		};
 		try {
 			const response = await addCategoryLookupAsync(payload);
-			console.log('Add Lookup Table Response:', response);
+			if (response) {
+				dispatch(refreshAllLookupTablesData());
+			}
 			reset();
 			onClose();
 		} catch (error) {

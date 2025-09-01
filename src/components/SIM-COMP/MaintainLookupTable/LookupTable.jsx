@@ -6,12 +6,19 @@ import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon'; // Replace
 import Table from './Table';
 import Tooltip from '../../Ui/Tooltip/Tooltip';
 import AddLookupModal from './AddLookupModal';
+import {
+	refreshAllLookupTablesData,
+	supplierFeedsOptions,
+} from '../../../slice/categorySlice';
+import { deleteCategoryLookupAsync } from '../../../services/operations/categoryApi';
+import { useDispatch } from 'react-redux';
 
 export default function LookupTable({
 	lookupTables,
 	selectedTableId,
 	setSelectedTableId,
 }) {
+	const dispatch = useDispatch();
 	const [showModal, setShowModal] = useState(false);
 	const highLightRef = useRef(null);
 	const plusButtonRef = useRef(null);
@@ -21,6 +28,23 @@ export default function LookupTable({
 		setSelectedTableId(id);
 	};
 
+	const onDelete = async (id) => {
+		console.log('Delete row with id:', id);
+		try {
+			const response = await deleteCategoryLookupAsync(id);
+			console.log('Delete response:', response);
+			if (response) {
+				dispatch(refreshAllLookupTablesData());
+			}
+		} catch (error) {
+			console.error('Error deleting category lookup:', error);
+		}
+	};
+
+	const onEdit = async (id) => {
+		console.log('Edit row with id:', id);
+	};
+
 	const columns = [
 		{
 			label: 'Table Name',
@@ -28,11 +52,7 @@ export default function LookupTable({
 		},
 		{
 			label: 'Supplier Feed',
-			key: 'supplier',
-		},
-		{
-			label: 'Columns',
-			key: 'columns',
+			key: 'supplierFeed',
 			Cell: ({ row }) => (
 				<div
 					className={`flex items-center ${
@@ -41,7 +61,25 @@ export default function LookupTable({
 							: 'text-text-body group-hover:text-light'
 					}`}
 				>
-					{row?.columns?.join(', ')}
+					{row?.supplierFeed
+						? supplierFeedsOptions.find((opt) => opt.value === row.supplierFeed)
+								?.label
+						: ''}
+				</div>
+			),
+		},
+		{
+			label: 'Columns',
+			key: 'supplierColumns',
+			Cell: ({ row }) => (
+				<div
+					className={`flex items-center ${
+						row.id === highLightRef?.current
+							? 'text-light'
+							: 'text-text-body group-hover:text-light'
+					}`}
+				>
+					{row?.supplierColumns}
 				</div>
 			),
 		},
@@ -51,7 +89,7 @@ export default function LookupTable({
 		},
 		{
 			label: 'Active',
-			key: 'active',
+			key: 'isActive',
 			type: 'checkbox',
 		},
 		{
@@ -63,32 +101,34 @@ export default function LookupTable({
 					<div className='flex justify-center items-center space-x-2 gap-2'>
 						<Tooltip
 							content='Edit Row'
-							placement='left'
+							placement='bottom'
 							offset={[0, 10]}
 						>
-							<EditIcon
-								className={`w-4 h-4 cursor-pointer ${
-									row.id === highLightRef?.current
-										? 'text-light'
-										: 'text-text-body group-hover:text-light'
-								}`}
-								// onClick={() => onEdit(row.id)}
-							/>
+							<button onClick={() => onEdit(row.id)}>
+								<EditIcon
+									className={`w-4 h-4 cursor-pointer ${
+										row.id === highLightRef?.current
+											? 'text-light'
+											: 'text-text-body group-hover:text-light'
+									}`}
+								/>
+							</button>
 						</Tooltip>
 
 						<Tooltip
 							content='Delete Row'
-							placement='left'
+							placement='bottom'
 							offset={[0, 10]}
 						>
-							<TrashIcon
-								className={`w-4 h-4 cursor-pointer ${
-									row.id === highLightRef?.current
-										? 'text-light'
-										: 'text-text-body group-hover:text-light'
-								}`}
-								// onClick={() => onDelete(row.id)}
-							/>
+							<button onClick={() => onDelete(row.id)}>
+								<TrashIcon
+									className={`w-4 h-4 cursor-pointer ${
+										row.id === highLightRef?.current
+											? 'text-light'
+											: 'text-text-body group-hover:text-light'
+									}`}
+								/>
+							</button>
 						</Tooltip>
 					</div>
 				);

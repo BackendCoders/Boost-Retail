@@ -1,13 +1,35 @@
 /** @format */
 
 import { createSlice } from '@reduxjs/toolkit';
-import { getCategories } from '../services/operations/categoryApi';
+import {
+	getCategories,
+	getCategoryLookups,
+} from '../services/operations/categoryApi';
+
+export const supplierFeedsOptions = [
+	{ value: 0, label: 'Cannondale' },
+	{ value: 1, label: 'Cube' },
+	{ value: 2, label: 'Frog' },
+	{ value: 3, label: 'Giant' },
+	{ value: 4, label: 'Haibike' },
+	{ value: 5, label: 'Lapierre' },
+	{ value: 6, label: 'Liv' },
+	{ value: 7, label: 'Marin' },
+	{ value: 8, label: 'Merida' },
+	{ value: 9, label: 'Orbea' },
+	{ value: 10, label: 'Raleigh' },
+	{ value: 11, label: 'Specialized' },
+	{ value: 12, label: 'Tern' },
+	{ value: 13, label: 'Trek' },
+	{ value: 14, label: 'Whyte' },
+];
 
 const initialState = {
 	loading: false,
 	categories: [],
 	category: null,
 	parentCatOpts: [],
+	lookupTablesData: [],
 };
 
 const categorySlice = createSlice({
@@ -26,6 +48,9 @@ const categorySlice = createSlice({
 		setParentCatOpts(state, action) {
 			state.parentCatOpts = action.payload;
 		},
+		setLookupTablesData(state, action) {
+			state.lookupTablesData = action.payload;
+		},
 	},
 });
 
@@ -43,6 +68,25 @@ export function refreshAllCategories() {
 	};
 }
 
-export const { setLoading, setCategories, setCategory, setParentCatOpts } =
-	categorySlice.actions;
+export function refreshAllLookupTablesData() {
+	return async (dispatch) => {
+		try {
+			dispatch(setLoading(true));
+			const response = await getCategoryLookups();
+			dispatch(setLookupTablesData(response));
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch(setLoading(false));
+		}
+	};
+}
+
+export const {
+	setLoading,
+	setCategories,
+	setCategory,
+	setParentCatOpts,
+	setLookupTablesData,
+} = categorySlice.actions;
 export default categorySlice.reducer;

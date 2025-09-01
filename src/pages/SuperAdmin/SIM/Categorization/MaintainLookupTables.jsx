@@ -1,28 +1,10 @@
 /** @format */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LookupTable from '../../../../components/SIM-COMP/MaintainLookupTable/LookupTable';
 import RowEditorTable from '../../../../components/SIM-COMP/MaintainLookupTable/RowEditorTable';
-
-const lookupTables = [
-	{
-		id: 1,
-		tableName: 'Giant Bike Models',
-		supplier: 'Giant',
-		columns: ['Brand', 'Model', 'Category 1', 'Category 2', 'Category 3'],
-		categorisation: 'Categories',
-		active: true,
-	},
-	{
-		id: 2,
-		tableName: 'Trek Bike Models',
-		supplier: 'Trek',
-		columns: ['Brand', 'Model', 'Category 1', 'Category 2', 'Category 3'],
-		categorisation: 'Categories',
-		active: true,
-	},
-	// More entries...
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshAllLookupTablesData } from '../../../../slice/categorySlice';
 
 const initialRows = [
 	{
@@ -55,6 +37,8 @@ const initialRows = [
 ];
 
 const MaintainLookupTables = () => {
+	const dispatch = useDispatch();
+	const { lookupTablesData } = useSelector((state) => state.category);
 	const [selectedTableId, setSelectedTableId] = useState(null);
 	const [rows, setRows] = useState(initialRows);
 
@@ -81,7 +65,11 @@ const MaintainLookupTables = () => {
 		setRows(rows.filter((row) => row.id !== id));
 	};
 
-	const selectedTable = lookupTables.find((t) => t.id === selectedTableId);
+	const selectedTable = lookupTablesData.find((t) => t.id === selectedTableId);
+
+	useEffect(() => {
+		dispatch(refreshAllLookupTablesData());
+	}, [dispatch]);
 
 	return (
 		<div className='space-y-4'>
@@ -92,12 +80,14 @@ const MaintainLookupTables = () => {
 				</div>
 				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
 					<p className='text-sm mt-1'>Maintain Lookup Tables</p>
-					<span className='text-sm font-semibold'>Lookup Tables: {lookupTables.length}</span>
+					<span className='text-sm font-semibold'>
+						Lookup Tables: {lookupTablesData.length}
+					</span>
 				</div>
 			</div>
 			{/* Top Grid */}
 			<LookupTable
-				lookupTables={lookupTables}
+				lookupTables={lookupTablesData}
 				selectedTableId={selectedTableId}
 				setSelectedTableId={setSelectedTableId}
 			/>
