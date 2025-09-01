@@ -67,6 +67,8 @@ const MaintainLookupTables = () => {
 
 	const selectedTable = lookupTablesData.find((t) => t.id === selectedTableId);
 
+	console.log('Selected Table:', selectedTable);
+
 	useEffect(() => {
 		dispatch(refreshAllLookupTablesData());
 	}, [dispatch]);
@@ -100,7 +102,9 @@ const MaintainLookupTables = () => {
 					onChange={handleChange}
 					onDelete={handleDeleteRow}
 					onAdd={handleAddRow}
-					dynamicColumns={selectedTable?.columns || []}
+					dynamicColumns={
+						selectedTable?.supplierColumns.split(', ').map((col) => col) || []
+					}
 				/>
 			)}
 		</div>

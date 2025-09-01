@@ -69,14 +69,20 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 	useEffect(() => {
 		if (isOpen && anchorRef?.current) {
 			const rect = anchorRef.current.getBoundingClientRect();
-			const modalWidth = 370; // Tailwind's w-96
-			const padding = -15;
+			const modalWidth = 370; // your modal width
+			const padding = 10;
 
 			let top = rect.bottom + window.scrollY + padding;
 			let left = rect.left + window.scrollX;
 
-			if (left + modalWidth > window.innerWidth) {
+			// ✅ Prevent overflow on the right side
+			if (left + modalWidth > window.innerWidth - padding) {
 				left = window.innerWidth - modalWidth - padding;
+			}
+
+			// ✅ Prevent overflow on the left side
+			if (left < padding) {
+				left = padding;
 			}
 
 			setPosition({ top, left });
@@ -116,7 +122,8 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 
 			{/* Floating Modal */}
 			<div
-				className='fixed z-50 w-80 bg-light border border-gray-300 rounded-xl shadow-2xl p-5'
+				className='fixed z-50 w-80 bg-light border border-gray-300 
+             rounded-xl shadow-2xl p-5'
 				style={{
 					top: `${position.top}px`,
 					left: `${position.left}px`,
