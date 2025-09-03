@@ -1,5 +1,6 @@
 /** @format */
 import { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import EditIcon from '../../../assets/icons/line/EditPenIcon';
 import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon'; // Replace with your trash icon
@@ -11,7 +12,6 @@ import {
 	supplierFeedsOptions,
 } from '../../../slice/categorySlice';
 import { deleteCategoryLookupAsync } from '../../../services/operations/categoryApi';
-import { useDispatch } from 'react-redux';
 
 export default function LookupTable({
 	lookupTables,

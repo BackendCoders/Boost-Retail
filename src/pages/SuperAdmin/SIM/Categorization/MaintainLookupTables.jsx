@@ -1,9 +1,9 @@
 /** @format */
 
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import LookupTable from '../../../../components/SIM-COMP/MaintainLookupTable/LookupTable';
 import RowEditorTable from '../../../../components/SIM-COMP/MaintainLookupTable/RowEditorTable';
-import { useDispatch, useSelector } from 'react-redux';
 import {
 	refreshAllLookupTablesData,
 	refreshAllRowEditorTableData,

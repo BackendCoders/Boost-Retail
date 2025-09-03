@@ -1,13 +1,13 @@
 /** @format */
 
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
-import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon'; // Replace with your trash icon
+import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
 import Tooltip from '../../Ui/Tooltip/Tooltip';
 import Table from './Table';
-import { useSelector } from 'react-redux';
 import TablePaginationBar from '../../Ui/Table/TablePaginationBar';
-import { useState } from 'react';
-import BottomTablePagination from '../../Ui/Table/BottomTablePagination';
 
 export default function RowEditorTable({
 	title,

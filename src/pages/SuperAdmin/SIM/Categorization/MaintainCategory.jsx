@@ -1,9 +1,9 @@
 /** @format */
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CategoryTree from '../../../../components/SIM-COMP/MaintainCategory/CategoryTree';
 import CategoryEditPanel from '../../../../components/SIM-COMP/MaintainCategory/CategoryEditPanel';
-import { useDispatch, useSelector } from 'react-redux';
 import { refreshAllCategories } from '../../../../slice/categorySlice';
 
 const MaintainCategory = () => {

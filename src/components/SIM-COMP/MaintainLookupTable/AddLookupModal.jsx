@@ -1,9 +1,10 @@
 /** @format */
 
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import ReactDOM from 'react-dom';
-import SelectInput from '../../Ui/Input/SelectInput';
 import { Controller, useForm } from 'react-hook-form';
+import SelectInput from '../../Ui/Input/SelectInput';
 import {
 	addCategoryLookupAsync,
 	getSupplierColumns,
@@ -13,7 +14,6 @@ import {
 	refreshAllLookupTablesData,
 	supplierFeedsOptions,
 } from '../../../slice/categorySlice';
-import { useDispatch } from 'react-redux';
 
 export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 	const dispatch = useDispatch();
