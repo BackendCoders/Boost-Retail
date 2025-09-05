@@ -55,7 +55,7 @@ export default function LookupTable({
 			key: 'supplierFeed',
 			Cell: ({ row }) => (
 				<div
-					className={`flex items-center ${
+					className={`flex items-center justify-center ${
 						row.id === highLightRef?.current
 							? 'text-light'
 							: 'text-text-body group-hover:text-light'
@@ -73,7 +73,7 @@ export default function LookupTable({
 			key: 'supplierColumns',
 			Cell: ({ row }) => (
 				<div
-					className={`flex items-center ${
+					className={`flex items-center justify-center ${
 						row.id === highLightRef?.current
 							? 'text-light'
 							: 'text-text-body group-hover:text-light'
