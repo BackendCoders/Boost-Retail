@@ -67,26 +67,39 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 	}, [selectedSupplierFeed]);
 
 	useEffect(() => {
-		if (isOpen && anchorRef?.current) {
-			const rect = anchorRef.current.getBoundingClientRect();
-			const modalWidth = 370; // your modal width
-			const padding = 10;
+		function updatePosition() {
+			if (!isOpen) return;
 
-			let top = rect.bottom + window.scrollY + padding;
-			let left = rect.left + window.scrollX;
+			if (window.innerWidth < 768) {
+				setPosition({
+					top: window.innerHeight / 2 - 200, // adjust based on modal height
+					left: window.innerWidth / 2 - 160, // adjust based on modal width (370px / 2)
+				});
+			} else if (anchorRef?.current) {
+				const rect = anchorRef.current.getBoundingClientRect();
+				const modalWidth = 370; // your modal width
+				const padding = 10;
 
-			// ✅ Prevent overflow on the right side
-			if (left + modalWidth > window.innerWidth - padding) {
-				left = window.innerWidth - modalWidth - padding;
+				let top = rect.bottom + window.scrollY + padding;
+				let left = rect.left + window.scrollX;
+
+				// ✅ Prevent overflow on the right side
+				if (left + modalWidth > window.innerWidth - padding) {
+					left = window.innerWidth - modalWidth - padding;
+				}
+
+				// ✅ Prevent overflow on the left side
+				if (left < padding) {
+					left = padding;
+				}
+
+				setPosition({ top, left });
 			}
-
-			// ✅ Prevent overflow on the left side
-			if (left < padding) {
-				left = padding;
-			}
-
-			setPosition({ top, left });
 		}
+		updatePosition();
+
+		const resize = addEventListener('resize', updatePosition);
+		return () => removeEventListener('resize', resize);
 	}, [isOpen, anchorRef]);
 
 	const onSubmit = async (formData) => {
