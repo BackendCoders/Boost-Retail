@@ -91,20 +91,6 @@ const simProductSlice = createSlice({
 	},
 });
 
-// export function refreshAllSimProducts() {
-// 	return async (dispatch) => {
-// 		try {
-// 			dispatch(setLoading(true));
-// 			const response = await getSimProducts();
-// 			dispatch(setSimProducts(response));
-// 		} catch (error) {
-// 			console.log(error);
-// 		} finally {
-// 			dispatch(setLoading(false));
-// 		}
-// 	};
-// }
-
 export const { setLoading, setSimProducts, setSelectedProductId } =
 	simProductSlice.actions;
 export default simProductSlice.reducer;
