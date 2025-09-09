@@ -25,10 +25,10 @@ export default function SimProductDetail() {
 		<div className='space-y-4'>
 			{/* Header Section */}
 			<div className=''>
-				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
+				<div className='flex justify-between items-center py-3 border-b border-b-gray-60'>
 					<h1 className='text-xl font-bold'>SIM PRODUCTS</h1>
 				</div>
-				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
+				<div className='flex justify-between items-center py-3 border-b border-b-gray-60'>
 					<p className='text-sm mt-1'>
 						Maintain Sim Products {'>'} {product?.year}{' '}
 						{product?.brand?.at(0)?.toUpperCase() +

@@ -135,7 +135,7 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 
 			{/* Floating Modal */}
 			<div
-				className='fixed z-50 w-80 bg-light border border-gray-300 
+				className='fixed z-50 w-80 bg-white border border-gray-60 
              rounded-xl shadow-2xl p-5'
 				style={{
 					top: `${position.top}px`,

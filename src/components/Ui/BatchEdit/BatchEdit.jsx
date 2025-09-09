@@ -39,7 +39,7 @@ const BatchEdit = () => {
 	const priceTypes = Object.keys(fields);
 
 	return (
-		<div className='p-4 bg-gray-100 rounded-lg border border-gray-320 w-full'>
+		<div className='p-4 bg-gray-100 rounded-lg border border-gray-60 w-full'>
 			{/* Heading */}
 			<h2 className='font-semibold text-base mb-4'>Batch Edit</h2>
 

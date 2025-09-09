@@ -32,9 +32,9 @@ export default {
 					body: '#555555', // Input text / dropdown / body text / input box border
 					suggested: '#bababa', // Input box suggested text
 				},
-				border: {
+				gray: {
 					input: '#555555', // Input box border
-					grid: '#dbdbdb', // Data grid lines
+					60: '#dbdbdb', // Data grid lines
 				},
 			},
 		},

@@ -18,12 +18,12 @@ const MaintainCategory = () => {
 		<div className='bg-light h-full space-y-4 flex flex-col'>
 			{/* Header */}
 			<div>
-				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
+				<div className='flex justify-between items-center py-3 border-b border-b-gray-60'>
 					<h1 className='text-xl font-semibold'>CATEGORIZATION</h1>
 				</div>
 
 				{/* Breadcrumb */}
-				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
+				<div className='flex justify-between items-center py-3 border-b border-b-gray-60'>
 					<p className='text-sm mt-1'>Maintain Categories</p>
 					<span className='text-sm font-semibold'>
 						Total Categories: {categories.length}

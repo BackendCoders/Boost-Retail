@@ -208,10 +208,10 @@ const Table = ({
 	return (
 		<div
 			ref={wrapperRef}
-			className='overflow-x-auto rounded-md border border-border-grid relative'
+			className='overflow-x-auto rounded-md border border-gray-60 relative'
 		>
 			<table className='min-w-full table-auto data-header'>
-				<thead className='bg-light'>
+				<thead className='bg-white'>
 					<DragDropContext onDragEnd={handleDragEnd}>
 						<Droppable
 							droppableId='columns'
@@ -255,7 +255,7 @@ const Table = ({
 													ref={provided.innerRef}
 													{...provided.draggableProps}
 													{...provided.dragHandleProps}
-													className={`p-4 text-left border lightspace-nowrap bg-light ${
+													className={`p-4 text-left border lightspace-nowrap ${
 														snapshot.isDragging ? 'shadow-md' : ''
 													}`}
 												>
@@ -284,7 +284,7 @@ const Table = ({
 					</DragDropContext>
 
 					{showFilterRow && (
-						<tr className='bg-gray-300'>
+						<tr className='bg-light'>
 							{enableRowSelection && (
 								<td className='p-4 border'>
 									<div
@@ -313,38 +313,45 @@ const Table = ({
 												<input
 													type='text'
 													value={filters[col.key] || ''}
-													className='w-full border px-2 py-1 text-xs rounded'
+													className='w-full border px-2 py-2 text-xs rounded'
 													onChange={(e) =>
 														handleFilterChange(col.key, e.target.value)
 													}
 												/>
 												<div
-													className='p-1 rounded cursor-pointer hover:bg-gray-300'
+													className='p-1 rounded cursor-pointer'
 													onClick={() =>
 														setActiveFilterCol(
 															activeFilterCol === col.key ? null : col.key
 														)
 													}
 												>
-													<Funnel className='w-6 h-6' />
+													<Funnel className='w-6 h-6 text-gray-300' />
 												</div>
 												{activeFilterCol === col.key && (
-													<ul className='absolute top-full right-5 bg-light rounded shadow-md z-10 text-sm max-h-52'>
-														{(col.type === 'number'
-															? numberFilterOptions
-															: textFilterOptions
-														).map((opt) => (
-															<li
-																key={opt}
-																className='px-1 py-1 cursor-pointer hover:bg-gray-300'
-																onClick={() =>
-																	handleFilterOptionSelect(col.key, opt)
-																}
-															>
-																{opt}
-															</li>
-														))}
-													</ul>
+													<>
+														<div className='absolute top-full right-5 bg-white border border-gray-60 rounded shadow-md z-10 text-sm max-h-52 max-w-48 p-2'>
+															<p className='text-sm font-bold mb-2 text-[#555]'>
+																Filter mode
+															</p>
+															<ul className=''>
+																{(col.type === 'number'
+																	? numberFilterOptions
+																	: textFilterOptions
+																).map((opt) => (
+																	<li
+																		key={opt}
+																		className='px-1 py-1 cursor-pointer hover:bg-gray-300'
+																		onClick={() =>
+																			handleFilterOptionSelect(col.key, opt)
+																		}
+																	>
+																		{opt}
+																	</li>
+																))}
+															</ul>
+														</div>
+													</>
 												)}
 											</div>
 										)

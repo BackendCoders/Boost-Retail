@@ -18,7 +18,7 @@ const MaintainSimProducts = () => {
 		<div className='space-y-4'>
 			{/* Header Section */}
 			<div className=''>
-				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
+				<div className='flex justify-between items-center py-3 border-b border-b-gray-60'>
 					<h1 className='text-xl font-bold'>SIM PRODUCTS</h1>
 					<div className='flex items-center gap-2'>
 						<span>Advanced Mode</span>
@@ -43,7 +43,7 @@ const MaintainSimProducts = () => {
 						</label>
 					</div>
 				</div>
-				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
+				<div className='flex justify-between items-center py-3 border-b border-b-gray-60'>
 					<p className='text-sm mt-1'>Maintain Sim Products</p>
 					<div className='flex items-center gap-4 text-sm font-semibold'>
 						<span className=''>

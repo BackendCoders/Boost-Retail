@@ -114,7 +114,7 @@ export default function MissingImagesDetailsTable({
 			/>
 			{dropdownRowId && (
 				<ul
-					className='absolute z-50 bg-white border border-gray-300 shadow-md rounded w-56 text-sm'
+					className='absolute z-50 bg-white border border-gray-60 shadow-md rounded w-56 text-sm'
 					style={{
 						top: dropdownPosition.y,
 						left: dropdownPosition.x,

@@ -6,7 +6,7 @@ const Description = () => {
 	const [description, setDescription] = useState('');
 
 	return (
-		<div className='p-4 bg-gray-100 rounded-lg border border-gray-300 w-full h-full'>
+		<div className='p-4 bg-gray-100 rounded-lg border border-gray-60 w-full h-full'>
 			{/* Heading */}
 			<h2 className='font-semibold text-base mb-4'>Description</h2>
 

@@ -24,7 +24,7 @@ export default function AppLayout() {
 				<Sidebar />
 
 				{/* Main Content */}
-				<main className='flex-1 bg-light p-4 overflow-y-auto overflow-x-hidden max-w-full scrollbar-thin'>
+				<main className='flex-1 bg-white p-4 overflow-y-auto overflow-x-hidden max-w-full scrollbar-thin'>
 					<Outlet /> {/* This will now be the only scrollable area */}
 				</main>
 			</div>

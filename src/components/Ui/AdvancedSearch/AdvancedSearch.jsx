@@ -151,7 +151,7 @@ const ConditionGroup = ({ group, onChange, nested = false, onRemoveGroup }) => {
 					+
 				</button>
 				{group.menuOpen && (
-					<div className='absolute top-full left-16 mt-1 bg-light border border-gray-200 shadow-md rounded-sm z-10'>
+					<div className='absolute top-full left-16 mt-1 bg-light border border-gray-60 shadow-md rounded-sm z-10'>
 						<button
 							onClick={addRule}
 							className='flex items-center w-full px-3 py-2 text-sm hover:bg-gray-100'

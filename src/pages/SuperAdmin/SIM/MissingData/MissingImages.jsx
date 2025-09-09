@@ -182,7 +182,7 @@ const MissingImages = () => {
 		<div className='space-y-4'>
 			{/* Header Section */}
 			<div className=''>
-				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
+				<div className='flex justify-between items-center py-3 border-b border-b-gray-60'>
 					<h1 className='text-xl font-bold'>INCORRECT DATA</h1>
 					{selectedInitialCategoryId && (
 						<div className='flex items-center gap-2'>
@@ -209,7 +209,7 @@ const MissingImages = () => {
 						</div>
 					)}
 				</div>
-				<div className='flex justify-between items-center py-3 border-b border-b-border-grid'>
+				<div className='flex justify-between items-center py-3 border-b border-b-gray-60'>
 					<button
 						className='text-sm mt-1'
 						onClick={() => {

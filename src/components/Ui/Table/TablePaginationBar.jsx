@@ -58,7 +58,7 @@ const TablePaginationBar = ({
 					<span>PREV</span>
 				</button>
 
-				<div className='border border-border-grid px-3 py-1 rounded-md text-text-body'>
+				<div className='border border-gray-60 px-3 py-1 rounded-md text-text-body'>
 					Page {currentPage}
 				</div>
 
@@ -110,7 +110,7 @@ const TablePaginationBar = ({
 						</button>
 
 						{showFilters && (
-							<div className='absolute right-0 top-12 z-30 bg-light shadow-lg border border-border-grid rounded-md'>
+							<div className='absolute right-0 top-12 z-30 bg-light shadow-lg border border-gray-60 rounded-md'>
 								<FilterDropdown
 									availableColumns={availableColumns}
 									initialSelected={selectedColumns}

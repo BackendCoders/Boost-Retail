@@ -159,7 +159,7 @@ const MainTable = ({
 	return (
 		<div
 			ref={wrapperRef}
-			className='overflow-x-auto rounded-md border border-border-grid relative'
+			className='overflow-x-auto rounded-md border border-gray-60 relative'
 		>
 			<table className='min-w-full table-auto data-header'>
 				<thead className='bg-light'>

@@ -31,7 +31,7 @@ const BottomTablePagination = ({ currentPage, totalPages, onPageChange }) => {
 					<span>PREV</span>
 				</button>
 
-				<div className='border border-border-grid px-3 py-1 rounded-md text-text-body'>
+				<div className='border border-gray-60 px-3 py-1 rounded-md text-text-body'>
 					Page {currentPage}
 				</div>
 
