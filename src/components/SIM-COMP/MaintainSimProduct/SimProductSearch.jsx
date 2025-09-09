@@ -9,7 +9,8 @@ const ToggleSwitch = ({ label, checked = true, onChange }) => (
 			type='checkbox'
 			checked={checked}
 			onChange={onChange}
-			className='peer w-4 h-4 accent-white border border-gray-950 checked:border-gray-950 rounded'
+			// className='peer w-4 h-4 border border-gray-60 checked:border-gray-100 rounded text-black focus:ring-0 focus:outline-none'
+			className="w-4 h-4 border border-gray-600 rounded-sm appearance-none checked:bg-white checked:after:content-['✔'] checked:after:block checked:after:text-black checked:after:text-sm checked:after:leading-none flex items-center justify-center"
 		/>
 		{label}
 	</label>
@@ -20,7 +21,7 @@ const SimProductSearch = () => {
 	const [showSIM, setShowSIM] = useState(true);
 	const [showSingleResult, setShowSingleResult] = useState(true);
 	return (
-		<div className='flex items-center justify-between bg-light gap-4'>
+		<div className='flex items-center justify-between gap-4'>
 			{/* Left: Search + Filters */}
 			<div className='flex flex-col gap-1'>
 				<p className='text-lg text-black font-bold'>Search</p>
@@ -30,7 +31,7 @@ const SimProductSearch = () => {
 					<input
 						type='text'
 						placeholder='Enter MPN / Barcode / Title / Model'
-						className='w-[460px] px-3 py-2 rounded-md border border-border-input text-form-field placeholder:text-md text-text-body bg-light outline-none focus:ring-1 focus:ring-black'
+						className='w-[460px] px-3 py-2 rounded-md border border-border-input text-form-field placeholder:text-md text-text-body outline-none focus:ring-1 focus:ring-black'
 					/>
 
 					{/* Refresh Icon */}

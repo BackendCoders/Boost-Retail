@@ -46,7 +46,7 @@ const TablePaginationBar = ({
 	};
 
 	return (
-		<div className='flex items-center justify-between bg-light px-4 py-2'>
+		<div className='flex items-center justify-between mb-2'>
 			{/* Pagination Controls */}
 			<div className='flex items-center gap-2'>
 				<button
@@ -103,14 +103,14 @@ const TablePaginationBar = ({
 						ref={btnWrapperRef}
 					>
 						<button
-							className='bg-primary p-2 rounded-full flex items-center justify-center'
+							className='bg-primary p-4 rounded-full flex items-center justify-center'
 							onClick={() => setShowFilters((prev) => !prev)}
 						>
 							<SettingIcon className='w-7 h-7 text-light' />
 						</button>
 
 						{showFilters && (
-							<div className='absolute right-0 top-12 z-30 bg-light shadow-lg border border-gray-60 rounded-md'>
+							<div className='absolute right-0 top-12 z-30 shadow-lg border border-gray-60 rounded-md'>
 								<FilterDropdown
 									availableColumns={availableColumns}
 									initialSelected={selectedColumns}

@@ -141,8 +141,10 @@ export default function SupplierFeedsTable({
 
 	return (
 		<div>
-			<div className='flex items-start justify-between'>
-				<h2 className='font-semibold'>Create Supplier Feed</h2>
+			<div className='flex items-start justify-between mb-2'>
+				<h2 className='font-semibold text-[17.3px] leading-none'>
+					Create Supplier Feed
+				</h2>
 				{/* Add Button */}
 
 				<Tooltip
@@ -153,9 +155,9 @@ export default function SupplierFeedsTable({
 					<button
 						// ref={plusButtonRef}
 						onClick={onAdd}
-						className='w-12 h-12 bg-primary hover:bg-secondary rounded text-light flex items-center justify-center'
+						className='px-4 py-4 rounded-full bg-primary hover:bg-secondary text-light flex items-center justify-center'
 					>
-						<PlusIcon className='w-4 h-4' />
+						<PlusIcon className='w-6 h-6' />
 					</button>
 				</Tooltip>
 			</div>

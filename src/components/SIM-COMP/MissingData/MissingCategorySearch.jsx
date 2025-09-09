@@ -9,7 +9,7 @@ const ToggleSwitch = ({ label, checked = true, onChange }) => (
 			type='checkbox'
 			checked={checked}
 			onChange={onChange}
-			className='peer w-4 h-4 accent-white border border-gray-950 checked:border-gray-950 rounded'
+			className="w-4 h-4 border border-gray-600 rounded-sm appearance-none checked:bg-white checked:after:content-['✔'] checked:after:block checked:after:text-black checked:after:text-sm checked:after:leading-none flex items-center justify-center"
 		/>
 		{label}
 	</label>

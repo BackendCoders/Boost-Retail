@@ -19,7 +19,7 @@ const BottomTablePagination = ({ currentPage, totalPages, onPageChange }) => {
 	}, []);
 
 	return (
-		<div className='flex items-center justify-between bg-light px-4 py-2'>
+		<div className='flex items-center justify-between mb-2'>
 			{/* Pagination Controls */}
 			<div className='flex items-center gap-2'>
 				<button
