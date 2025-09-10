@@ -2,7 +2,7 @@
 
 export default function DetailForm() {
 	return (
-		<div className='p-4 bg-gray-100 rounded-lg border border-gray-60 w-full h-full'>
+		<div className='p-4 bg-light rounded-lg border border-gray-60 w-full h-full'>
 			{/* Heading */}
 			<h2 className='font-semibold text-base mb-4'>Details</h2>
 			<form>

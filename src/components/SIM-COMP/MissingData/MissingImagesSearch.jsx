@@ -13,7 +13,7 @@ const MissingImagesSearch = ({ advancedMode }) => {
 						<input
 							type='text'
 							placeholder='Enter MPN / Model / Title'
-							className='w-[460px] px-3 py-2 rounded-md border border-border-input text-form-field placeholder:text-md text-text-body bg-light outline-none focus:ring-1 focus:ring-black'
+							className='w-[460px] px-3 py-1 rounded-md border border-border-input text-form-field placeholder:text-md text-text-body bg-light outline-none focus:ring-1 focus:ring-black'
 						/>
 
 						{/* Refresh Icon */}

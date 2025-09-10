@@ -7,7 +7,7 @@ export default function DescriptionTab() {
 	const [content, setContent] = useState('');
 
 	return (
-		<div className='p-4 bg-gray-100 rounded-lg border w-full'>
+		<div className='p-4 bg-light rounded-lg border w-full'>
 			<label className='block font-semibold mb-2'>Description</label>
 			<Editor
 				apiKey='your-tinymce-api-key' // free key from https://www.tiny.cloud

@@ -29,7 +29,7 @@ const ProductSearchBar = () => {
 					<input
 						type='text'
 						placeholder='Enter Part Number / MPN / Barcode / Title'
-						className='w-[360px] px-3 py-2 rounded-md border border-border-input text-form-field text-text-body placeholder-text-placeholder outline-none focus:ring-1 focus:ring-primary font-inter'
+						className='w-[360px] px-3 py-1 rounded-md border border-border-input text-form-field text-text-body placeholder-text-placeholder outline-none focus:ring-1 focus:ring-primary font-inter'
 					/>
 
 					{/* Refresh Icon */}
