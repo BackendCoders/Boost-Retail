@@ -18,6 +18,8 @@ const BottomTablePagination = ({ currentPage, totalPages, onPageChange }) => {
 		return () => document.removeEventListener('mousedown', handleClickOutside);
 	}, []);
 
+	console.log(showFilters);
+
 	return (
 		<div className='flex items-center justify-between mb-2'>
 			{/* Pagination Controls */}

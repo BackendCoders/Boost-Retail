@@ -1,13 +1,9 @@
 /** @format */
-// import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import Header from '../ui/Header/Header';
 import Sidebar from '../ui/Sidebar/Sidebar';
-// import SuperAdminSidebar from '../ui/Sidebar/superAdminSidebar/SuperAdminSidebar';
 
 export default function AppLayout() {
-	// const { loginUser } = useSelector((state) => state.auth);
-
 	return (
 		<div className='h-screen flex flex-col font-inter overflow-hidden'>
 			{/* Header */}
@@ -18,9 +14,6 @@ export default function AppLayout() {
 
 			{/* Main Layout */}
 			<div className='flex flex-1 pt-[3.75rem] h-full'>
-				{/* Sidebar */}
-				{/* {loginUser === 1 ? <SuperAdminSidebar /> : <Sidebar />} */}
-
 				<Sidebar />
 
 				{/* Main Content */}
