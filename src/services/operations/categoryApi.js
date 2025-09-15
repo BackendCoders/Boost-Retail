@@ -30,14 +30,12 @@ export async function createCategory(data) {
 }
 
 export async function getCategories() {
-	// Fetch current user details using token
 	const response = await handleGetReq(GET_CATEGORIES);
 	console.log('Get List Categories API RESPONSE.........', response);
 	return response.data;
 }
 
 export async function getCategoryParents(id) {
-	// Fetch current user details using token
 	const response = await handleGetReq(GET_CATEGORY_PARENTS(id));
 	console.log('Get List Category Parents API RESPONSE.........', response);
 	return response.data;
@@ -83,7 +81,6 @@ export async function deleteCategoryLookupAsync(id, data) {
 }
 
 export async function getCategoryMaps(id) {
-	// Fetch current user details using token
 	const response = await handleGetReq(GET_CATEGORY_MAPS(id));
 	console.log('Get category map API RESPONSE.........', response);
 	return response.data;
