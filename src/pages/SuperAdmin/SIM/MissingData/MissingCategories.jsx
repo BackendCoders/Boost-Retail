@@ -105,7 +105,7 @@ const MissingCategories = () => {
 			{advancedMode && selectedCategory && (
 				<div className='grid grid-cols-3 gap-4'>
 					{/* Short Description Card */}
-					<div className='bg-gray-300 border  shadow-sm p-4 rounded-lg'>
+					<div className='bg-light border  shadow-sm p-4 rounded-lg'>
 						<h2 className='font-semibold mb-2'>Short Description</h2>
 						<div className='bg-white rounded-md min-h-48 max-h-48 overflow-y-auto p-2'>
 							<p className='text-sm text-gray-700 whitespace-pre-line'>
@@ -115,7 +115,7 @@ const MissingCategories = () => {
 					</div>
 
 					{/* Long Description Card */}
-					<div className='bg-gray-300 border  shadow-sm p-4 rounded-lg'>
+					<div className='bg-light border  shadow-sm p-4 rounded-lg'>
 						<h2 className='font-semibold mb-2'>Long Description</h2>
 						<div className='bg-white rounded-md min-h-48 max-h-48 overflow-y-auto p-2'>
 							<p className='text-sm text-gray-700 whitespace-pre-line'>
@@ -125,7 +125,7 @@ const MissingCategories = () => {
 					</div>
 
 					{/* Specification Card */}
-					<div className='bg-gray-300 border  shadow-sm p-4 rounded-lg'>
+					<div className='bg-light border  shadow-sm p-4 rounded-lg'>
 						<h2 className='font-semibold mb-2'>Specification</h2>
 						<div className='bg-white rounded-md min-h-48 max-h-48 overflow-y-auto p-2'>
 							<p className='text-sm text-gray-700 whitespace-pre-line'>
