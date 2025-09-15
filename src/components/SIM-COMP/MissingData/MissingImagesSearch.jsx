@@ -2,7 +2,7 @@
 
 const MissingImagesSearch = ({ advancedMode }) => {
 	return (
-		<div className='flex items-center justify-between bg-light gap-4'>
+		<div className='flex items-center justify-between gap-4'>
 			{/* Left: Search + Filters */}
 			<div className='flex flex-col gap-1'>
 				<p className='text-lg text-black font-bold'>Search</p>
@@ -13,7 +13,7 @@ const MissingImagesSearch = ({ advancedMode }) => {
 						<input
 							type='text'
 							placeholder='Enter MPN / Model / Title'
-							className='w-[460px] px-3 py-1 rounded-md border border-border-input text-form-field placeholder:text-md text-text-body bg-light outline-none focus:ring-1 focus:ring-black'
+							className='w-[460px] px-3 py-1 rounded-md border border-border-input text-form-field placeholder:text-md text-text-body outline-none focus:ring-1 focus:ring-black'
 						/>
 
 						{/* Refresh Icon */}

@@ -36,7 +36,7 @@ const ImageReorder = ({ images, setImages }) => {
 										ref={provided.innerRef}
 										{...provided.draggableProps}
 										{...provided.dragHandleProps}
-										className='border rounded overflow-hidden flex items-center justify-center bg-white p-1'
+										className='border rounded overflow-hidden flex items-center justify-center bg-light p-1'
 									>
 										<img
 											src={img.url}

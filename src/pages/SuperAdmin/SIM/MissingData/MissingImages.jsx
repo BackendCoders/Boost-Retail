@@ -236,7 +236,7 @@ const MissingImages = () => {
 			{advancedMode && selectedCategory && (
 				<div className='grid grid-cols-5 gap-4 rounded-lg'>
 					{/* Upload Section */}
-					<div className='col-span-1 bg-gray-300 border shadow-sm p-4 rounded-lg'>
+					<div className='col-span-1 bg-light border shadow-sm p-4 rounded-lg'>
 						<h2 className='font-semibold mb-2'>Upload Images</h2>
 						<div
 							className='flex flex-col items-center justify-center bg-white border-dashed border-2 border-gray-400 rounded-lg p-4 min-h-36 max-h-36 relative'
@@ -290,7 +290,7 @@ const MissingImages = () => {
 							</label>
 						</div>
 					</div>
-					<div className='col-span-3 bg-gray-300 border  shadow-sm p-4 rounded-lg'>
+					<div className='col-span-3 bg-light border  shadow-sm p-4 rounded-lg'>
 						<div className='flex gap-4'>
 							{/* Main Image */}
 							<div className='flex-1 flex flex-col'>
@@ -333,7 +333,7 @@ const MissingImages = () => {
 					</div>
 
 					{/* Apply Images */}
-					<div className='col-span-1 border bg-gray-300 p-4 rounded'>
+					<div className='col-span-1 border bg-light p-4 rounded'>
 						<h2 className='font-semibold mb-2'>Apply Images</h2>
 						<div className='flex flex-col gap-2 text-sm'>
 							<label className='flex items-center gap-2'>
