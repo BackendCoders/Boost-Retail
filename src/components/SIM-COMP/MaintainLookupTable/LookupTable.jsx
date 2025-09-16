@@ -138,7 +138,7 @@ export default function LookupTable({
 
 	return (
 		<div>
-			<div className='flex items-start justify-between'>
+			<div className='flex items-start justify-between mb-2'>
 				<h2 className='font-semibold'>Create Lookup Tables</h2>
 				{/* Add Button */}
 
@@ -150,9 +150,9 @@ export default function LookupTable({
 					<button
 						ref={plusButtonRef}
 						onClick={() => setShowModal(true)}
-						className='w-12 h-12 bg-primary hover:bg-secondary rounded text-light flex items-center justify-center'
+						className='px-4 py-4 rounded-full bg-primary hover:bg-secondary text-light flex items-center justify-center'
 					>
-						<PlusIcon className='w-4 h-4' />
+						<PlusIcon className='w-6 h-6' />
 					</button>
 				</Tooltip>
 			</div>

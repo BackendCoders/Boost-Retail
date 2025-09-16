@@ -17,29 +17,21 @@ const MaintainLookupTables = () => {
 	);
 	const [selectedTableId, setSelectedTableId] = useState(null);
 
-	const handleAddRow = () => {
-		const newRow = {
-			id: rowEditorTableData.length + 1,
-			active: true,
-		};
-
-		(selectedTable?.columns || []).forEach((col) => {
-			newRow[col.toLowerCase().replace(/\s+/g, '')] = '';
-		});
-
-		setRowEditorTableData([...rowEditorTableData, newRow]);
-	};
-
-	const handleChange = (id, key, value) => {
-		setRowEditorTableData(
-			rowEditorTableData.map((row) =>
-				row.id === id ? { ...row, [key]: value } : row
+	const handleChange = (rowKey, key, value) => {
+		dispatch(
+			setRowEditorTableData(
+				rowEditorTableData.map((row) => {
+					const identifier = row.id ?? row.localId;
+					return identifier === rowKey ? { ...row, [key]: value } : row;
+				})
 			)
 		);
 	};
 
 	const handleDeleteRow = (id) => {
-		setRowEditorTableData(rowEditorTableData.filter((row) => row.id !== id));
+		setRowEditorTableData(
+			rowEditorTableData.filter((row) => row.id ?? row?.localId !== id)
+		);
 	};
 
 	const selectedTable = lookupTablesData.find((t) => t.id === selectedTableId);
@@ -81,7 +73,6 @@ const MaintainLookupTables = () => {
 					title={selectedTable?.tableName?.split(' ')[0] || 'Rows'}
 					onChange={handleChange}
 					onDelete={handleDeleteRow}
-					onAdd={handleAddRow}
 					selectedTableId={selectedTableId}
 				/>
 			)}
