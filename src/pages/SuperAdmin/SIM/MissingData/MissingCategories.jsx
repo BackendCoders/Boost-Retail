@@ -18,7 +18,7 @@ const fakeCategories = [
 		category3: '',
 		shortDescription: `From hors catégorie climbs to rollers and flats, this WorldTour-level race bike is the pro choice for all-rounder performance.`,
 		longDescription: `**SYSTEM OPTIMISATION**\nThe frameset, wheels, cockpit and other parts are engineered, developed and tested together to perform best as a system. The all-new OverDrive Aero steerer tube technology is combined with a Contact SLR AeroLight stem and Contact SLR handlebar to incorporate internal cable routing that also integrates the top cap, cables and spacers in a more aerodynamic, user-friendly setup. Tube technology is combined with a Contact SLR AeroLight stem and Contact SLR handlebar to incorporate internal cable routing that also integrates the top cap, cables and spacers in a more aerodynamic, user-friendly setup`,
-		specifications: `Sizes: S, M, M/L, L, XL\nColours: Gloss Black, Lava/Isis\nFrame: Advanced SL-Grade Composite, 12x142mm thru-axle, integrated seatpost, disc\nHandlebar: Giant Contact SLR\nFork: OverDrive Aero, full-composite`,
+		specifications: `Sizes: S, M, M/L, L, XL\nColors: Gloss Black, Lava/Isis\nFrame: Advanced SL-Grade Composite, 12x142mm thru-axle, integrated seatpost, disc\nHandlebar: Giant Contact SLR\nFork: OverDrive Aero, full-composite`,
 	},
 	{
 		id: 2,
@@ -33,7 +33,7 @@ const fakeCategories = [
 		category3: '',
 		shortDescription: `Women's time-trial and race performance bike for ultimate speed.`,
 		longDescription: `**AERO FRAME DESIGN**\nLightweight and wind-cheating frame designed specifically for female athletes.`,
-		specifications: `Sizes: XS, S, M\nColours: Purple Rush\nFrame: ALUXX SL-Grade Aluminum, Aero tubes\nFork: Composite OverDrive`,
+		specifications: `Sizes: XS, S, M\nColors: Purple Rush\nFrame: ALUXX SL-Grade Aluminum, Aero tubes\nFork: Composite OverDrive`,
 	},
 	{
 		id: 3,
