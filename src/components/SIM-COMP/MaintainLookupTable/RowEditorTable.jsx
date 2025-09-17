@@ -15,6 +15,7 @@ import {
 import { deleteCategoryMaps } from '../../../services/operations/categoryApi';
 import toast from 'react-hot-toast';
 import SelectInput from '../../Ui/Input/SelectInput';
+import { useCategoryOptions } from './useCategoryOptions';
 
 const filterOptions = [
 	{ label: 'Contains', value: 'contains' },
@@ -25,6 +26,8 @@ const filterOptions = [
 	{ label: 'Not equal', value: 'notEqual' },
 ];
 
+const selectDropdownInput = ['category1', 'category2', 'category3'];
+
 export default function RowEditorTable({ title, onChange, selectedTableId }) {
 	const dispatch = useDispatch();
 	const { rowEditorTableData, lookupTablesData } = useSelector(
@@ -32,6 +35,9 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 	);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [perPage, setPerPage] = useState(10);
+
+	const { categoryOptions, setSelectedCategories, selectedCategories } =
+		useCategoryOptions();
 
 	const selectedTableColumnsForFilter = lookupTablesData
 		.find((t) => t.id === selectedTableId)
@@ -85,41 +91,64 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 						Cell: ({ row }) => {
 							const isSelectColumn =
 								selectedTableColumnsForFilter?.includes(key);
-							console.log('isSelectColumn:', isSelectColumn, key);
+							const isSelect = selectDropdownInput?.includes(key);
 							return (
 								<div className='flex justify-center w-full gap-2'>
 									{isSelectColumn && (
+										<>
+											<div className='min-w-[10rem] max-w-[12rem]'>
+												<SelectInput
+													options={filterOptions}
+													placeholder='Choose'
+													// value={
+													// 	filterOptions.find(
+													// 		(option) => option.value === field.value
+													// 	) || null
+													// }
+													// onChange={(selected) =>
+													// 	field.onChange(selected ? selected.value : null)
+													// }
+													// className='w-[20rem] min-w-[8rem]'
+													inTable={true}
+												/>
+											</div>
+										</>
+									)}
+									{isSelect ? (
 										<div className='min-w-[10rem] max-w-[12rem]'>
 											<SelectInput
-												options={filterOptions}
+												options={categoryOptions[key] || []}
+												value={
+													categoryOptions[key]?.find(
+														(opt) => opt.value === selectedCategories[key]
+													) || null
+												}
+												onChange={(selected) => {
+													setSelectedCategories((prev) => ({
+														...prev,
+														[key]: selected ? selected.value : null,
+													}));
+												}}
 												placeholder='Choose'
-												// value={
-												// 	filterOptions.find(
-												// 		(option) => option.value === field.value
-												// 	) || null
-												// }
-												// onChange={(selected) =>
-												// 	field.onChange(selected ? selected.value : null)
-												// }
-												// className='w-[20rem] min-w-[8rem]'
 												inTable={true}
 											/>
 										</div>
-									)}
-									<input
-										type='text'
-										className='border p-2 text-sm flex-1 rounded-md text-black group-hover:text-black'
-										value={row?.[key] ?? ''}
-										onChange={(e) =>
-											onChange(row.id ?? row?.localId, key, e.target.value)
-										}
-										onBlur={() => {
-											// last input Enter → call create API
-											if (idx === arr.length - 1 && !row.id) {
-												handleCreateRow(row);
+									) : (
+										<input
+											type='text'
+											className='border p-2 text-sm flex-1 rounded-md text-black group-hover:text-black'
+											value={row?.[key] ?? ''}
+											onChange={(e) =>
+												onChange(row.id ?? row?.localId, key, e.target.value)
 											}
-										}}
-									/>
+											onBlur={() => {
+												// last input Enter → call create API
+												if (idx === arr.length - 1 && !row.id) {
+													handleCreateRow(row);
+												}
+											}}
+										/>
+									)}
 								</div>
 							);
 						},
