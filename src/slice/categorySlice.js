@@ -31,6 +31,7 @@ const initialState = {
 	category: null,
 	parentCatOpts: [],
 	lookupTablesData: [],
+	lookupTableDataRow: null,
 	rowEditorTableData: [],
 };
 
@@ -52,6 +53,9 @@ const categorySlice = createSlice({
 		},
 		setLookupTablesData(state, action) {
 			state.lookupTablesData = action.payload;
+		},
+		setLookupTableDataRow(state, action) {
+			state.lookupTableDataRow = action.payload;
 		},
 		setRowEditorTableData(state, action) {
 			state.rowEditorTableData = action.payload;
@@ -107,5 +111,6 @@ export const {
 	setParentCatOpts,
 	setLookupTablesData,
 	setRowEditorTableData,
+	setLookupTableDataRow,
 } = categorySlice.actions;
 export default categorySlice.reducer;

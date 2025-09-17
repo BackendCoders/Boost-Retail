@@ -10,14 +10,7 @@ import Table from './Table';
 import TablePaginationBar from '../../Ui/Table/TablePaginationBar';
 import { setRowEditorTableData } from '../../../slice/categorySlice';
 
-export default function RowEditorTable({
-	title,
-	onChange,
-	onDelete,
-	// selectedRows,
-	// onRowSelect,
-	// onCheckboxToggle,
-}) {
+export default function RowEditorTable({ title, onChange }) {
 	const dispatch = useDispatch();
 	const { rowEditorTableData } = useSelector((state) => state.category);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -25,6 +18,15 @@ export default function RowEditorTable({
 
 	const handleCreateRow = (data) => {
 		console.log('new data to send to Api', data);
+	};
+
+	const handleDeleteRow = (id) => {
+		console.log('Delete row with id:', id);
+		// dispatch(
+		// 	setRowEditorTableData(
+		// 		rowEditorTableData.filter((row) => row.id ?? row?.localId !== id)
+		// 	)
+		// );
 	};
 
 	const dynamicCols =
@@ -122,13 +124,12 @@ export default function RowEditorTable({
 				<div className='flex justify-center'>
 					<Tooltip
 						content='Delete Row'
-						placement='left'
+						placement='bottom'
 						offset={[0, 10]}
 					>
-						<TrashIcon
-							className='w-4 h-4 cursor-pointer opacity-70 group-hover:text-light'
-							onClick={() => onDelete(row.id ?? row.localId)}
-						/>
+						<button onClick={() => handleDeleteRow(row.id ?? row.localId)}>
+							<TrashIcon className='w-4 h-4 cursor-pointer opacity-70 group-hover:text-light' />
+						</button>
 					</Tooltip>
 				</div>
 			),

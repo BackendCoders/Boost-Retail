@@ -26,7 +26,7 @@ export async function createCategory(data) {
 	// Fetch current user details using token
 	const response = await handlePostReq(CREATE_CATEGORY, data);
 	console.log('Create Category API RESPONSE.........', response);
-	return response.data;
+	return response;
 }
 
 export async function getCategories() {
@@ -44,13 +44,13 @@ export async function getCategoryParents(id) {
 export async function updateCategory(id, data) {
 	const response = await handlePutReq(UPDATE_CATEGORY(id), data);
 	console.log('Update Category API RESPONSE.........', response);
-	return response.data;
+	return response;
 }
 
 export async function deleteCategory(id) {
 	const response = await handleDeleteReq(DELETE_CATEGORY(id));
 	console.log('Delete Category API RESPONSE.........', response);
-	return response.data;
+	return response;
 }
 
 export async function getCategoryLookups() {
@@ -62,13 +62,13 @@ export async function getCategoryLookups() {
 export async function addCategoryLookupAsync(data) {
 	const response = await handlePostReq(ADD_CATEGORY_LOOKUP_ASYNC, data);
 	console.log('Add Category Lookup Async API RESPONSE.........', response);
-	return response.data;
+	return response;
 }
 
 export async function updateCategoryLookupAsync(id, data) {
 	const response = await handlePutReq(UPDATE_CATEGORY_LOOKUP_ASYNC(id), data);
 	console.log('Update Category Lookup Async API RESPONSE.........', response);
-	return response.data;
+	return response;
 }
 
 export async function deleteCategoryLookupAsync(id, data) {
@@ -77,7 +77,7 @@ export async function deleteCategoryLookupAsync(id, data) {
 		data
 	);
 	console.log('Delete Category Lookup Async API RESPONSE.........', response);
-	return response.data;
+	return response;
 }
 
 export async function getCategoryMaps(id) {

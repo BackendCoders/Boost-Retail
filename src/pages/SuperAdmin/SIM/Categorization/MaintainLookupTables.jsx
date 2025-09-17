@@ -28,12 +28,6 @@ const MaintainLookupTables = () => {
 		);
 	};
 
-	const handleDeleteRow = (id) => {
-		setRowEditorTableData(
-			rowEditorTableData.filter((row) => row.id ?? row?.localId !== id)
-		);
-	};
-
 	const selectedTable = lookupTablesData.find((t) => t.id === selectedTableId);
 
 	useEffect(() => {
@@ -72,7 +66,6 @@ const MaintainLookupTables = () => {
 				<RowEditorTable
 					title={selectedTable?.tableName?.split(' ')[0] || 'Rows'}
 					onChange={handleChange}
-					onDelete={handleDeleteRow}
 					selectedTableId={selectedTableId}
 				/>
 			)}

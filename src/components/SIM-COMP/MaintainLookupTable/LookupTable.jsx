@@ -9,6 +9,7 @@ import Tooltip from '../../Ui/Tooltip/Tooltip';
 import AddLookupModal from './AddLookupModal';
 import {
 	refreshAllLookupTablesData,
+	setLookupTableDataRow,
 	supplierFeedsOptions,
 } from '../../../slice/categorySlice';
 import { deleteCategoryLookupAsync } from '../../../services/operations/categoryApi';
@@ -41,8 +42,9 @@ export default function LookupTable({
 		}
 	};
 
-	const onEdit = async (id) => {
-		console.log('Edit row with id:', id);
+	const onEdit = async (row) => {
+		console.log('Edit row with id:', row);
+		dispatch(setLookupTableDataRow(row));
 	};
 
 	const columns = [
@@ -104,7 +106,13 @@ export default function LookupTable({
 							placement='bottom'
 							offset={[0, 10]}
 						>
-							<button onClick={() => onEdit(row.id)}>
+							<button
+								onClick={(e) => {
+									onEdit(row);
+									setShowModal(true);
+									e.stopPropagation();
+								}}
+							>
 								<EditIcon
 									className={`w-4 h-4 cursor-pointer ${
 										row.id === highLightRef?.current
@@ -120,7 +128,12 @@ export default function LookupTable({
 							placement='bottom'
 							offset={[0, 10]}
 						>
-							<button onClick={() => onDelete(row.id)}>
+							<button
+								onClick={(e) => {
+									onDelete(row.id);
+									e.stopPropagation();
+								}}
+							>
 								<TrashIcon
 									className={`w-4 h-4 cursor-pointer ${
 										row.id === highLightRef?.current

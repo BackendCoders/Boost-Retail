@@ -1,7 +1,7 @@
 /** @format */
 
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { Controller, useForm } from 'react-hook-form';
 import SelectInput from '../../Ui/Input/SelectInput';
@@ -16,6 +16,7 @@ import {
 } from '../../../slice/categorySlice';
 
 export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
+	const { lookupTableDataRow } = useSelector((state) => state.category);
 	const dispatch = useDispatch();
 	const { handleSubmit, control, watch, register, reset } = useForm({
 		defaultValues: {
@@ -102,9 +103,34 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 		return () => removeEventListener('resize', resize);
 	}, [isOpen, anchorRef]);
 
+	// when lookupTableDataRow changes, reset form with values
+	useEffect(() => {
+		if (lookupTableDataRow) {
+			reset({
+				supplierFeed: lookupTableDataRow.supplierFeed || null,
+				categorisation: lookupTableDataRow.categorisation || null,
+				tableName: lookupTableDataRow.tableName || '',
+				supplierColumns: null, // user can still add/remove from dropdown
+			});
+
+			// populate selectedColumnList if editing
+			if (lookupTableDataRow.supplierColumns) {
+				setSelectedColumnList(lookupTableDataRow.supplierColumns.split(', '));
+			}
+		} else {
+			reset({
+				supplierFeed: null,
+				categorisation: null,
+				tableName: '',
+				supplierColumns: null,
+			});
+			setSelectedColumnList([]);
+		}
+	}, [lookupTableDataRow, reset]);
+
 	const onSubmit = async (formData) => {
 		const payload = {
-			id: 0,
+			id: lookupTableDataRow ? lookupTableDataRow.id : 0,
 			supplierFeed: formData.supplierFeed,
 			tableName: formData.tableName,
 			supplierColumns: selectedColumnList.join(', '),
@@ -113,11 +139,13 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 		};
 		try {
 			const response = await addCategoryLookupAsync(payload);
-			if (response) {
+			if (response.status === 'success') {
 				dispatch(refreshAllLookupTablesData());
+				reset();
+				onClose();
+			} else {
+				console.error('Failed to add lookup table:', response.data);
 			}
-			reset();
-			onClose();
 		} catch (error) {
 			console.error('Error adding lookup table:', error);
 		}
@@ -271,7 +299,7 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 							CANCEL
 						</button>
 						<button className='bg-primary text-light px-4 py-1.5 rounded hover:bg-secondary transition text-sm'>
-							CREATE
+							{lookupTableDataRow ? 'UPDATE' : 'CREATE'}
 						</button>
 					</div>
 				</form>
@@ -280,5 +308,3 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 		document.body
 	);
 }
-
-
