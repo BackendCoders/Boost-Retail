@@ -17,6 +17,7 @@ const SelectInput = ({
 	value,
 	onChange,
 	isMulti = false,
+	inTable = false,
 }) => {
 	return (
 		<Select
@@ -39,6 +40,17 @@ const SelectInput = ({
 			}}
 			value={value}
 			onChange={onChange}
+			menuPortalTarget={inTable ? document.body : null}
+			styles={
+				inTable
+					? {
+							menuPortal: (base) => ({
+								...base,
+								zIndex: 9999,
+							}),
+					  }
+					: {}
+			}
 		/>
 	);
 };
