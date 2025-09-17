@@ -19,6 +19,7 @@ const {
 	UPDATE_CATEGORY_LOOKUP_ASYNC,
 	DELETE_CATEGORY_LOOKUP_ASYNC,
 	GET_CATEGORY_MAPS,
+	DELETE_CATEGORY_MAPS,
 	GET_SUPPLIER_COLUMNS,
 } = categoriesEndpoint;
 
@@ -84,6 +85,11 @@ export async function getCategoryMaps(id) {
 	const response = await handleGetReq(GET_CATEGORY_MAPS(id));
 	console.log('Get category map API RESPONSE.........', response);
 	return response.data;
+}
+export async function deleteCategoryMaps(id) {
+	const response = await handleDeleteReq(DELETE_CATEGORY_MAPS(id));
+	console.log('DELETE category map API RESPONSE.........', response);
+	return response;
 }
 
 export async function getSupplierColumns(id) {

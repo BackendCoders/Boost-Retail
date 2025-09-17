@@ -8,9 +8,14 @@ import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
 import Tooltip from '../../Ui/Tooltip/Tooltip';
 import Table from './Table';
 import TablePaginationBar from '../../Ui/Table/TablePaginationBar';
-import { setRowEditorTableData } from '../../../slice/categorySlice';
+import {
+	refreshAllRowEditorTableData,
+	setRowEditorTableData,
+} from '../../../slice/categorySlice';
+import { deleteCategoryMaps } from '../../../services/operations/categoryApi';
+import toast from 'react-hot-toast';
 
-export default function RowEditorTable({ title, onChange }) {
+export default function RowEditorTable({ title, onChange, selectedTableId }) {
 	const dispatch = useDispatch();
 	const { rowEditorTableData } = useSelector((state) => state.category);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -20,13 +25,18 @@ export default function RowEditorTable({ title, onChange }) {
 		console.log('new data to send to Api', data);
 	};
 
-	const handleDeleteRow = (id) => {
-		console.log('Delete row with id:', id);
-		// dispatch(
-		// 	setRowEditorTableData(
-		// 		rowEditorTableData.filter((row) => row.id ?? row?.localId !== id)
-		// 	)
-		// );
+	const handleDeleteRow = async (id) => {
+		try {
+			const response = await deleteCategoryMaps(id);
+			if (response.status === 'success') {
+				dispatch(refreshAllRowEditorTableData(selectedTableId));
+				toast.success('Row Deleted successfully');
+			} else {
+				toast.error('Failed to delete row');
+			}
+		} catch (error) {
+			console.log('Error deleting row:', error);
+		}
 	};
 
 	const dynamicCols =

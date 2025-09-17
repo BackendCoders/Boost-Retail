@@ -12,8 +12,10 @@ import {
 import CloseSmallestStandardIcon from '../../../assets/icons/standard/CloseSmallestStandardIcon';
 import {
 	refreshAllLookupTablesData,
+	setLookupTableDataRow,
 	supplierFeedsOptions,
 } from '../../../slice/categorySlice';
+import toast from 'react-hot-toast';
 
 export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 	const { lookupTableDataRow } = useSelector((state) => state.category);
@@ -141,13 +143,21 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 			const response = await addCategoryLookupAsync(payload);
 			if (response.status === 'success') {
 				dispatch(refreshAllLookupTablesData());
+				toast.success(
+					`Lookup table ${
+						lookupTableDataRow ? 'updated' : 'added'
+					} successfully`
+				);
+				dispatch(setLookupTableDataRow(null)); // clear after submit
 				reset();
 				onClose();
 			} else {
+				toast.error(response.data || 'Failed to add lookup table');
 				console.error('Failed to add lookup table:', response.data);
 			}
 		} catch (error) {
 			console.error('Error adding lookup table:', error);
+			dispatch(setLookupTableDataRow(null)); // clear after submit
 		}
 	};
 

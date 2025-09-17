@@ -13,6 +13,7 @@ import {
 	supplierFeedsOptions,
 } from '../../../slice/categorySlice';
 import { deleteCategoryLookupAsync } from '../../../services/operations/categoryApi';
+import toast from 'react-hot-toast';
 
 export default function LookupTable({
 	lookupTables,
@@ -30,15 +31,15 @@ export default function LookupTable({
 	};
 
 	const onDelete = async (id) => {
-		console.log('Delete row with id:', id);
 		try {
 			const response = await deleteCategoryLookupAsync(id);
-			console.log('Delete response:', response);
 			if (response) {
 				dispatch(refreshAllLookupTablesData());
+				toast.success('Lookup table deleted successfully');
 			}
 		} catch (error) {
 			console.error('Error deleting category lookup:', error);
+			toast.error('Failed to delete lookup table');
 		}
 	};
 
@@ -182,7 +183,10 @@ export default function LookupTable({
 			{/* Modal */}
 			<AddLookupModal
 				isOpen={showModal}
-				onClose={() => setShowModal(false)}
+				onClose={() => {
+					setShowModal(false);
+					dispatch(setLookupTableDataRow(null));
+				}}
 				anchorRef={plusButtonRef}
 			/>
 		</div>
