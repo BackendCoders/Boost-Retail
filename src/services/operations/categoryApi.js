@@ -19,6 +19,7 @@ const {
 	UPDATE_CATEGORY_LOOKUP_ASYNC,
 	DELETE_CATEGORY_LOOKUP_ASYNC,
 	GET_CATEGORY_MAPS,
+	SAVE_CATEGORY_MAPS,
 	DELETE_CATEGORY_MAPS,
 	GET_SUPPLIER_COLUMNS,
 	GET_CATEGORIES_BY_PARENT_ID,
@@ -90,6 +91,12 @@ export async function getCategoryMaps(id) {
 export async function deleteCategoryMaps(id) {
 	const response = await handleDeleteReq(DELETE_CATEGORY_MAPS(id));
 	console.log('DELETE category map API RESPONSE.........', response);
+	return response;
+}
+
+export async function saveCategoryMaps(data) {
+	const response = await handlePostReq(SAVE_CATEGORY_MAPS, data);
+	console.log('Save Category Map Async API RESPONSE.........', response);
 	return response;
 }
 

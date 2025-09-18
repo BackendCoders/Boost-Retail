@@ -46,7 +46,7 @@ export default function AddLookupModal({ isOpen, onClose, anchorRef }) {
 
 	useEffect(() => {
 		async function supplierColumns() {
-			if (selectedSupplierFeed) {
+			if (selectedSupplierFeed !== null && selectedSupplierFeed !== undefined) {
 				try {
 					const response = await getSupplierColumns(selectedSupplierFeed);
 					console.log('Fetch columns for supplier feed ID:', response);

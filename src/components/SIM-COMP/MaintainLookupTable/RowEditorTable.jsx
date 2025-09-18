@@ -12,7 +12,10 @@ import {
 	refreshAllRowEditorTableData,
 	setRowEditorTableData,
 } from '../../../slice/categorySlice';
-import { deleteCategoryMaps } from '../../../services/operations/categoryApi';
+import {
+	deleteCategoryMaps,
+	saveCategoryMaps,
+} from '../../../services/operations/categoryApi';
 import toast from 'react-hot-toast';
 import SelectInput from '../../Ui/Input/SelectInput';
 import { useCategoryOptions } from './useCategoryOptions';
@@ -35,6 +38,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 	);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [perPage, setPerPage] = useState(10);
+	const [selectedFilterOption, setSelectectedFilterOption] = useState(null);
 
 	const { categoryOptions, setSelectedCategories, selectedCategories } =
 		useCategoryOptions();
@@ -44,13 +48,42 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 		?.supplierColumns.split(',')
 		.map((col) => col.trim());
 
-	console.log(
-		'Selected Table Columns for Filter:',
-		selectedTableColumnsForFilter
-	);
+	const handleCreateRow = async (row) => {
+		const payload = {
+			id: row.id || null,
+			active: false,
+		};
 
-	const handleCreateRow = (data) => {
-		console.log('new data to send to Api', data);
+		// 1. Add normal columns (categories, brand, model)
+		Object.keys(row).forEach((key) => {
+			// Skip id, localId, active, filter columns
+			if (!['id', 'localId', 'active'].includes(key)) {
+				// If it's a category column
+				if (selectedCategories?.[key] !== undefined) {
+					payload[key] = selectedCategories[key];
+				}
+				// If it's a filter column
+				else if (selectedTableColumnsForFilter?.includes(key)) {
+					payload[key] = {
+						value: row[key] || null,
+						filter: selectedFilterOption[key] || null,
+					};
+				}
+				// Else, just copy value from row
+				else {
+					payload[key] = row[key];
+				}
+			}
+		});
+
+		console.log('Payload to send:', payload);
+
+		try {
+			const response = await saveCategoryMaps(payload);
+			console.log('Response from saveCategoryMaps:', response);
+		} catch (error) {
+			console.log('Error creating row:', error);
+		}
 	};
 
 	const handleDeleteRow = async (row) => {
@@ -100,16 +133,18 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 												<SelectInput
 													options={filterOptions}
 													placeholder='Choose'
-													// value={
-													// 	filterOptions.find(
-													// 		(option) => option.value === field.value
-													// 	) || null
-													// }
-													// onChange={(selected) =>
-													// 	field.onChange(selected ? selected.value : null)
-													// }
-													// className='w-[20rem] min-w-[8rem]'
 													inTable={true}
+													value={
+														filterOptions.find(
+															(opt) => opt.value === selectedFilterOption?.[key]
+														) || null
+													}
+													onChange={(selected) => {
+														setSelectectedFilterOption((prev) => ({
+															...prev,
+															[key]: selected ? selected.value : null,
+														}));
+													}}
 												/>
 											</div>
 										</>
@@ -142,8 +177,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 												onChange(row.id ?? row?.localId, key, e.target.value)
 											}
 											onBlur={() => {
-												// last input Enter → call create API
-												if (idx === arr.length - 1 && !row.id) {
+												if (idx === arr.length - 1) {
 													handleCreateRow(row);
 												}
 											}}
@@ -154,8 +188,6 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 						},
 					}))
 			: [];
-
-	console.log('Dynamic Columns:', dynamicCols);
 
 	const handleAddRow = () => {
 		if (!rowEditorTableData || rowEditorTableData.length === 0) {

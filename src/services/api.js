@@ -21,7 +21,8 @@ export const categoriesEndpoint = {
 	DELETE_CATEGORY_MAPS: (id) =>
 		`${BASE}/api/Category/DeleteCategoryMapAsync/${id}`,
 	GET_SUPPLIER_COLUMNS: (id) =>
-		`${BASE}/api/Category/GetSupplierColumns?supplier=${id}`,
+		`${BASE}/api/Category/GetSupplierColumns${id ? `?supplier=${id}` : ''}`,
 	GET_CATEGORIES_BY_PARENT_ID: (id) =>
 		`${BASE}/api/Category/GetCategoryByParentId${id ? `?parentId=${id}` : ''}`,
+	SAVE_CATEGORY_MAPS: `${BASE}/api/Category/SaveCategoryMap`,
 };
