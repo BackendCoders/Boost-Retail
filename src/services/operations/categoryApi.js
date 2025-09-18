@@ -101,7 +101,6 @@ export async function saveCategoryMaps(data) {
 }
 
 export async function getSupplierColumns(id) {
-	// Fetch current user details using token
 	const response = await handleGetReq(GET_SUPPLIER_COLUMNS(id));
 	console.log('Get List of Supplier Columns API RESPONSE.........', response);
 	return response.data;

@@ -21,8 +21,17 @@ export const categoriesEndpoint = {
 	DELETE_CATEGORY_MAPS: (id) =>
 		`${BASE}/api/Category/DeleteCategoryMapAsync/${id}`,
 	GET_SUPPLIER_COLUMNS: (id) =>
-		`${BASE}/api/Category/GetSupplierColumns${id ? `?supplier=${id}` : ''}`,
+		`${BASE}/api/Category/GetSupplierColumns${
+			id !== undefined || id !== null ? `?supplier=${id}` : ''
+		}`,
 	GET_CATEGORIES_BY_PARENT_ID: (id) =>
 		`${BASE}/api/Category/GetCategoryByParentId${id ? `?parentId=${id}` : ''}`,
 	SAVE_CATEGORY_MAPS: `${BASE}/api/Category/SaveCategoryMap`,
+};
+
+export const supplierFeedEndpoints = {
+	GET_SUPPLIER_FEEDS: `${BASE}`,
+	CREATE_SUPPLIER_FEED: `${BASE}`,
+	UPDATE_SUPPLIER_FEED: (id) => `${BASE}/${id}`,
+	DELETE_SUPPLIER_FEED: (id) => `${BASE}/${id}`,
 };

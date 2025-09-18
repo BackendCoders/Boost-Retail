@@ -22,7 +22,7 @@ export function useCategoryOptions() {
 				const data = await getCategoriesByParentId(null);
 				setCategoryOptions((prev) => ({
 					...prev,
-					category1: data.map((item) => ({ label: item.name, value: item.id })),
+					category1: data?.map((item) => ({ label: item.name, value: item.id })),
 				}));
 			} catch (err) {
 				console.error('Error fetching Category1', err);
@@ -41,7 +41,7 @@ export function useCategoryOptions() {
 				);
 				setCategoryOptions((prev) => ({
 					...prev,
-					category2: data.map((item) => ({ label: item.name, value: item.id })),
+					category2: data?.map((item) => ({ label: item.name, value: item.id })),
 				}));
 				setCategoryOptions((prev) => ({ ...prev, category3: [] })); // reset Category3
 				setSelectedCategories((prev) => ({
@@ -67,7 +67,7 @@ export function useCategoryOptions() {
 				);
 				setCategoryOptions((prev) => ({
 					...prev,
-					category3: data.map((item) => ({ label: item.name, value: item.id })),
+					category3: data?.map((item) => ({ label: item.name, value: item.id })),
 				}));
 				setSelectedCategories((prev) => ({ ...prev, category3: null }));
 			} catch (err) {

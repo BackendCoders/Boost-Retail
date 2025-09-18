@@ -38,7 +38,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 	);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [perPage, setPerPage] = useState(10);
-	const [selectedFilterOption, setSelectectedFilterOption] = useState(null);
+	const [selectedFilterOption, setSelectedFilterOption] = useState(null);
 
 	const { categoryOptions, setSelectedCategories, selectedCategories } =
 		useCategoryOptions();
@@ -112,6 +112,35 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 		}
 	};
 
+	const handleAddRow = () => {
+		if (!rowEditorTableData || rowEditorTableData.length === 0) {
+			// fallback empty row
+			const emptyRow = { localId: Date.now(), active: false };
+			dispatch(setRowEditorTableData([emptyRow]));
+			return;
+		}
+
+		// Get all keys dynamically from first row
+		const keys = Object.keys(rowEditorTableData[0]).filter(
+			(key) => key !== 'id' && key !== 'localId'
+		);
+
+		const newRow = keys.reduce(
+			(acc, key) => {
+				if (key === 'active') {
+					acc[key] = false;
+				} else {
+					acc[key] = '';
+				}
+				return acc;
+			},
+			{ localId: Date.now() } // generate unique ID
+		);
+
+		// Prepend the new row at the top
+		dispatch(setRowEditorTableData([newRow, ...rowEditorTableData]));
+	};
+
 	const dynamicCols =
 		Array.isArray(rowEditorTableData) && rowEditorTableData.length > 0
 			? Object.keys(rowEditorTableData[0])
@@ -140,7 +169,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 														) || null
 													}
 													onChange={(selected) => {
-														setSelectectedFilterOption((prev) => ({
+														setSelectedFilterOption((prev) => ({
 															...prev,
 															[key]: selected ? selected.value : null,
 														}));
@@ -188,35 +217,6 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 						},
 					}))
 			: [];
-
-	const handleAddRow = () => {
-		if (!rowEditorTableData || rowEditorTableData.length === 0) {
-			// fallback empty row
-			const emptyRow = { localId: Date.now(), active: false };
-			dispatch(setRowEditorTableData([emptyRow]));
-			return;
-		}
-
-		// Get all keys dynamically from first row
-		const keys = Object.keys(rowEditorTableData[0]).filter(
-			(key) => key !== 'id' && key !== 'localId'
-		);
-
-		const newRow = keys.reduce(
-			(acc, key) => {
-				if (key === 'active') {
-					acc[key] = false;
-				} else {
-					acc[key] = '';
-				}
-				return acc;
-			},
-			{ localId: Date.now() } // generate unique ID
-		);
-
-		// Prepend the new row at the top
-		dispatch(setRowEditorTableData([newRow, ...rowEditorTableData]));
-	};
 
 	const columns = [
 		{
