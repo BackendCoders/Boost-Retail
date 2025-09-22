@@ -132,10 +132,16 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 							// Value for text, category, or filter
 							const currentValue = prop?.value ?? '';
 							const currentFilter = prop?.filter ?? '';
+							const currentColumnType = prop?.columnType ?? 0;
 							const isSelectColumn =
 								selectedTableColumnsForFilter?.includes(rawKey);
 							const isSelect = selectDropdownInput?.includes(normalizedKey);
-							console.log('Category Is Select', categoryOptions, normalizedKey);
+							console.log(
+								'Category Is Select',
+								categoryOptions,
+								normalizedKey,
+								currentColumnType
+							);
 							return (
 								<div className='flex justify-center w-full gap-2'>
 									{isSelectColumn && (
@@ -183,6 +189,23 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 												inTable={true}
 											/>
 										</div>
+									) : currentColumnType === 2 ? (
+										<input
+											type='checkbox'
+											className='accent-primary group-hover:accent-light transition-colors'
+											checked={currentValue}
+											onChange={(e) =>
+												onChange(row.id ?? row?.localId, rawKey, {
+													...prop,
+													value: e.target.value,
+												})
+											}
+											onBlur={() => {
+												if (idx === arr.length - 1) {
+													handleCreateRow(row);
+												}
+											}}
+										/>
 									) : (
 										<input
 											type='text'

@@ -255,7 +255,7 @@ const Table = ({
 													ref={provided.innerRef}
 													{...provided.draggableProps}
 													{...provided.dragHandleProps}
-													className={`p-4 text-left border lightspace-nowrap ${
+													className={`p-4 text-left border whitespace-nowrap ${
 														snapshot.isDragging ? 'shadow-md' : ''
 													}`}
 												>
