@@ -39,7 +39,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [perPage, setPerPage] = useState(10);
 
-	const { categoryOptions } = useCategoryOptions();
+	const { categoryOptions, setSelectedCategories } = useCategoryOptions();
 
 	const selectedTableColumnsForFilter = lookupTablesData
 		.find((t) => t.id === selectedTableId)
@@ -48,8 +48,9 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 
 	const handleCreateRow = async (row) => {
 		console.log('Payload to send:', row);
+		// let tableId = 0;
 		try {
-			const response = await saveCategoryMaps(row);
+			const response = await saveCategoryMaps(row, selectedTableId);
 			console.log('Response from saveCategoryMaps:', response);
 		} catch (error) {
 			console.log('Error creating row:', error);
@@ -84,30 +85,31 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 
 	const handleAddRow = () => {
 		if (!rowEditorTableData || rowEditorTableData.length === 0) {
-			// fallback empty row
-			const emptyRow = { localId: Date.now(), active: false };
+			// fallback empty row with no dynamicProperties
+			const emptyRow = {
+				localId: Date.now(),
+				dynamicProperties: [],
+			};
 			dispatch(setRowEditorTableData([emptyRow]));
 			return;
 		}
 
-		// Get all keys dynamically from first row
-		const keys = Object.keys(rowEditorTableData[0]).filter(
-			(key) => key !== 'id' && key !== 'localId'
-		);
+		// Take dynamicProperties definition from the first row
+		const templateProps = rowEditorTableData[0]?.dynamicProperties || [];
 
-		const newRow = keys.reduce(
-			(acc, key) => {
-				if (key === 'active') {
-					acc[key] = false;
-				} else {
-					acc[key] = '';
-				}
-				return acc;
-			},
-			{ localId: Date.now() } // generate unique ID
-		);
+		// Build new dynamicProperties with empty/default values
+		const newDynamicProperties = templateProps?.map((prop) => ({
+			...prop,
+			value: prop.columnType === 2 ? false : '', // default boolean -> false, else empty string
+			filter: '',
+		}));
 
-		// Prepend the new row at the top
+		const newRow = {
+			localId: Date.now(), // unique local ID
+			dynamicProperties: newDynamicProperties,
+		};
+
+		// Prepend new row at top
 		dispatch(setRowEditorTableData([newRow, ...rowEditorTableData]));
 	};
 
@@ -115,22 +117,25 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 
 	const dynamicCols =
 		Array.isArray(rowEditorTableData) && rowEditorTableData.length > 0
-			? rowEditorTableData[0].dynamicProperties.map((prop, idx, arr) => {
-					const key = prop.columnName.trim();
+			? rowEditorTableData[0]?.dynamicProperties?.map((prop, idx, arr) => {
+					const rawKey = prop.columnName.trim();
+					const formattedKey = rawKey.charAt(0).toUpperCase() + rawKey.slice(1);
+					const normalizedKey = rawKey.toLowerCase().replace(/\s+/g, '');
 					return {
-						label: key.charAt(0).toUpperCase() + key.slice(1),
-						key,
+						label: formattedKey,
+						rawKey,
 						Cell: ({ row }) => {
 							const prop = row.dynamicProperties.find(
-								(p) => p.columnName.trim() === key
+								(p) => p.columnName.trim() === rawKey
 							);
 
 							// Value for text, category, or filter
 							const currentValue = prop?.value ?? '';
 							const currentFilter = prop?.filter ?? '';
 							const isSelectColumn =
-								selectedTableColumnsForFilter?.includes(key);
-							const isSelect = selectDropdownInput?.includes(key);
+								selectedTableColumnsForFilter?.includes(rawKey);
+							const isSelect = selectDropdownInput?.includes(normalizedKey);
+							console.log('Category Is Select', categoryOptions, normalizedKey);
 							return (
 								<div className='flex justify-center w-full gap-2'>
 									{isSelectColumn && (
@@ -147,7 +152,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 													}
 													onChange={(selected) => {
 														// update filter value in that property
-														onChange(row.id ?? row?.localId, key, {
+														onChange(row.id ?? row?.localId, rawKey, {
 															...prop,
 															filter: selected ? selected.value : null,
 														});
@@ -159,16 +164,19 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 									{isSelect ? (
 										<div className='min-w-[10rem] max-w-[12rem]'>
 											<SelectInput
-												options={categoryOptions[key] || []}
+												options={categoryOptions[normalizedKey] || []}
 												value={
-													categoryOptions[key]?.find(
+													categoryOptions[normalizedKey]?.find(
 														(opt) => opt.value === currentValue
 													) || null
 												}
 												onChange={(selected) => {
-													onChange(row.id ?? row?.localId, key, {
+													onChange(row.id ?? row?.localId, rawKey, {
 														...prop,
 														value: selected ? selected.value : null,
+													});
+													setSelectedCategories({
+														[normalizedKey]: selected.value,
 													});
 												}}
 												placeholder='Choose'
@@ -181,7 +189,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 											className='border p-2 text-sm flex-1 rounded-md text-black group-hover:text-black'
 											value={currentValue}
 											onChange={(e) =>
-												onChange(row.id ?? row?.localId, key, {
+												onChange(row.id ?? row?.localId, rawKey, {
 													...prop,
 													value: e.target.value,
 												})

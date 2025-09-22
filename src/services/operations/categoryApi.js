@@ -94,8 +94,8 @@ export async function deleteCategoryMaps(id) {
 	return response;
 }
 
-export async function saveCategoryMaps(data) {
-	const response = await handlePostReq(SAVE_CATEGORY_MAPS, data);
+export async function saveCategoryMaps(data, tableId) {
+	const response = await handlePostReq(SAVE_CATEGORY_MAPS(tableId), data);
 	console.log('Save Category Map Async API RESPONSE.........', response);
 	return response;
 }
