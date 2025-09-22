@@ -39,7 +39,8 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [perPage, setPerPage] = useState(10);
 
-	const { categoryOptions, setSelectedCategories } = useCategoryOptions();
+	const { categoryOptions, setSelectedCategories, selectedCategories } =
+		useCategoryOptions();
 
 	const selectedTableColumnsForFilter = lookupTablesData
 		.find((t) => t.id === selectedTableId)
@@ -47,10 +48,10 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 		.map((col) => col.trim());
 
 	const handleCreateRow = async (row) => {
-		console.log('Payload to send:', row);
-		// let tableId = 0;
+		const payload = { id: 0, ...row };
+		delete payload.localId;
 		try {
-			const response = await saveCategoryMaps(row, selectedTableId);
+			const response = await saveCategoryMaps(payload, selectedTableId);
 			console.log('Response from saveCategoryMaps:', response);
 		} catch (error) {
 			console.log('Error creating row:', error);
@@ -167,7 +168,10 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 												options={categoryOptions[normalizedKey] || []}
 												value={
 													categoryOptions[normalizedKey]?.find(
-														(opt) => opt.value === currentValue
+														(opt) =>
+															opt.value ===
+															(selectedCategories[normalizedKey] ??
+																currentValue)
 													) || null
 												}
 												onChange={(selected) => {
@@ -177,7 +181,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 													});
 													setSelectedCategories((prev) => ({
 														...prev,
-														[normalizedKey]: selected?.value ?? '',
+														[normalizedKey]: selected?.value ?? null,
 													}));
 												}}
 												placeholder='Choose'
