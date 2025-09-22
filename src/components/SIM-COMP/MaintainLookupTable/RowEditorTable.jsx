@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 
 import PlusIcon from '../../../assets/icons/thin/PlusLargeThinIcon';
 import TrashIcon from '../../../assets/icons/thin/DeleteBinThinIcon';
@@ -16,7 +17,6 @@ import {
 	deleteCategoryMaps,
 	saveCategoryMaps,
 } from '../../../services/operations/categoryApi';
-import toast from 'react-hot-toast';
 import SelectInput from '../../Ui/Input/SelectInput';
 import { useCategoryOptions } from './useCategoryOptions';
 
@@ -38,10 +38,8 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 	);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [perPage, setPerPage] = useState(10);
-	const [selectedFilterOption, setSelectedFilterOption] = useState(null);
 
-	const { categoryOptions, setSelectedCategories, selectedCategories } =
-		useCategoryOptions();
+	const { categoryOptions } = useCategoryOptions();
 
 	const selectedTableColumnsForFilter = lookupTablesData
 		.find((t) => t.id === selectedTableId)
@@ -49,37 +47,9 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 		.map((col) => col.trim());
 
 	const handleCreateRow = async (row) => {
-		const payload = {
-			id: row.id || null,
-			active: false,
-		};
-
-		// 1. Add normal columns (categories, brand, model)
-		Object.keys(row).forEach((key) => {
-			// Skip id, localId, active, filter columns
-			if (!['id', 'localId', 'active'].includes(key)) {
-				// If it's a category column
-				if (selectedCategories?.[key] !== undefined) {
-					payload[key] = selectedCategories[key];
-				}
-				// If it's a filter column
-				else if (selectedTableColumnsForFilter?.includes(key)) {
-					payload[key] = {
-						value: row[key] || null,
-						filter: selectedFilterOption[key] || null,
-					};
-				}
-				// Else, just copy value from row
-				else {
-					payload[key] = row[key];
-				}
-			}
-		});
-
-		console.log('Payload to send:', payload);
-
+		console.log('Payload to send:', row);
 		try {
-			const response = await saveCategoryMaps(payload);
+			const response = await saveCategoryMaps(row);
 			console.log('Response from saveCategoryMaps:', response);
 		} catch (error) {
 			console.log('Error creating row:', error);
@@ -141,16 +111,23 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 		dispatch(setRowEditorTableData([newRow, ...rowEditorTableData]));
 	};
 
+	console.log('Row Editor Table Data:', rowEditorTableData);
+
 	const dynamicCols =
 		Array.isArray(rowEditorTableData) && rowEditorTableData.length > 0
-			? Object.keys(rowEditorTableData[0])
-					.filter(
-						(key) => key !== 'id' && key !== 'active' && key !== 'localId'
-					) // keep brand, model, category...
-					.map((key, idx, arr) => ({
+			? rowEditorTableData[0].dynamicProperties.map((prop, idx, arr) => {
+					const key = prop.columnName.trim();
+					return {
 						label: key.charAt(0).toUpperCase() + key.slice(1),
 						key,
 						Cell: ({ row }) => {
+							const prop = row.dynamicProperties.find(
+								(p) => p.columnName.trim() === key
+							);
+
+							// Value for text, category, or filter
+							const currentValue = prop?.value ?? '';
+							const currentFilter = prop?.filter ?? '';
 							const isSelectColumn =
 								selectedTableColumnsForFilter?.includes(key);
 							const isSelect = selectDropdownInput?.includes(key);
@@ -165,14 +142,15 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 													inTable={true}
 													value={
 														filterOptions.find(
-															(opt) => opt.value === selectedFilterOption?.[key]
+															(opt) => opt.value === currentFilter || null
 														) || null
 													}
 													onChange={(selected) => {
-														setSelectedFilterOption((prev) => ({
-															...prev,
-															[key]: selected ? selected.value : null,
-														}));
+														// update filter value in that property
+														onChange(row.id ?? row?.localId, key, {
+															...prop,
+															filter: selected ? selected.value : null,
+														});
 													}}
 												/>
 											</div>
@@ -184,14 +162,14 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 												options={categoryOptions[key] || []}
 												value={
 													categoryOptions[key]?.find(
-														(opt) => opt.value === selectedCategories[key]
+														(opt) => opt.value === currentValue
 													) || null
 												}
 												onChange={(selected) => {
-													setSelectedCategories((prev) => ({
-														...prev,
-														[key]: selected ? selected.value : null,
-													}));
+													onChange(row.id ?? row?.localId, key, {
+														...prop,
+														value: selected ? selected.value : null,
+													});
 												}}
 												placeholder='Choose'
 												inTable={true}
@@ -201,9 +179,12 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 										<input
 											type='text'
 											className='border p-2 text-sm flex-1 rounded-md text-black group-hover:text-black'
-											value={row?.[key] ?? ''}
+											value={currentValue}
 											onChange={(e) =>
-												onChange(row.id ?? row?.localId, key, e.target.value)
+												onChange(row.id ?? row?.localId, key, {
+													...prop,
+													value: e.target.value,
+												})
 											}
 											onBlur={() => {
 												if (idx === arr.length - 1) {
@@ -215,7 +196,8 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 								</div>
 							);
 						},
-					}))
+					};
+			  })
 			: [];
 
 	const columns = [
@@ -224,24 +206,24 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 			key: 'id',
 		},
 		...dynamicCols,
-		{
-			label: 'Active',
-			key: 'active',
-			type: 'checkbox',
-			Cell: ({ row }) => (
-				<div className='flex justify-center'>
-					<input
-						type='checkbox'
-						checked={row?.active}
-						defaultValue={true}
-						onChange={(e) =>
-							onChange(row.id ?? row.localId, 'active', e.target.checked)
-						}
-						className='accent-primary group-hover:accent-light transition-colors'
-					/>
-				</div>
-			),
-		},
+		// {
+		// 	label: 'Active',
+		// 	key: 'active',
+		// 	type: 'checkbox',
+		// 	Cell: ({ row }) => (
+		// 		<div className='flex justify-center'>
+		// 			<input
+		// 				type='checkbox'
+		// 				checked={row?.active}
+		// 				defaultValue={true}
+		// 				onChange={(e) =>
+		// 					onChange(row.id ?? row.localId, 'active', e.target.checked)
+		// 				}
+		// 				className='accent-primary group-hover:accent-light transition-colors'
+		// 			/>
+		// 		</div>
+		// 	),
+		// },
 		{
 			label: 'Delete',
 			key: 'delete',

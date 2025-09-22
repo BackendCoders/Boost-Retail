@@ -17,12 +17,36 @@ const MaintainLookupTables = () => {
 	);
 	const [selectedTableId, setSelectedTableId] = useState(null);
 
-	const handleChange = (rowKey, key, value) => {
+	// const handleChange = (rowKey, key, value) => {
+	// 	dispatch(
+	// 		setRowEditorTableData(
+	// 			rowEditorTableData.map((row) => {
+	// 				const identifier = row.id ?? row.localId;
+	// 				return identifier === rowKey ? { ...row, [key]: value } : row;
+	// 			})
+	// 		)
+	// 	);
+	// };
+	const handleChange = (rowKey, key, newValue) => {
 		dispatch(
 			setRowEditorTableData(
 				rowEditorTableData.map((row) => {
 					const identifier = row.id ?? row.localId;
-					return identifier === rowKey ? { ...row, [key]: value } : row;
+
+					if (identifier !== rowKey) return row;
+
+					// Update the correct property inside dynamicProperties
+					const updatedProps = row.dynamicProperties.map((prop) =>
+						prop.columnName.trim() === key
+							? {
+									...prop,
+									value: newValue.value ?? newValue,
+									filter: newValue.filter ?? prop.filter,
+							  }
+							: prop
+					);
+
+					return { ...row, dynamicProperties: updatedProps };
 				})
 			)
 		);
