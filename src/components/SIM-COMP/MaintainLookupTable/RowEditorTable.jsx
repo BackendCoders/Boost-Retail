@@ -136,12 +136,6 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 							const isSelectColumn =
 								selectedTableColumnsForFilter?.includes(rawKey);
 							const isSelect = selectDropdownInput?.includes(normalizedKey);
-							console.log(
-								'Category Is Select',
-								categoryOptions,
-								normalizedKey,
-								currentColumnType
-							);
 							return (
 								<div className='flex justify-center w-full gap-2'>
 									{isSelectColumn && (
@@ -181,9 +175,10 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 														...prop,
 														value: selected ? selected.value : null,
 													});
-													setSelectedCategories({
-														[normalizedKey]: selected.value,
-													});
+													setSelectedCategories((prev) => ({
+														...prev,
+														[normalizedKey]: selected?.value ?? '',
+													}));
 												}}
 												placeholder='Choose'
 												inTable={true}
@@ -197,7 +192,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 											onChange={(e) =>
 												onChange(row.id ?? row?.localId, rawKey, {
 													...prop,
-													value: e.target.value,
+													value: e.target.checked,
 												})
 											}
 											onBlur={() => {
