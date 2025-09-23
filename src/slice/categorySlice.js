@@ -3,6 +3,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
 	getCategories,
+	getCategory,
 	getCategoryLookups,
 	getCategoryMaps,
 } from '../services/operations/categoryApi';
@@ -33,6 +34,7 @@ const initialState = {
 	lookupTablesData: [],
 	lookupTableDataRow: null,
 	rowEditorTableData: [],
+	categoriesOptions: [],
 };
 
 const categorySlice = createSlice({
@@ -60,6 +62,9 @@ const categorySlice = createSlice({
 		setRowEditorTableData(state, action) {
 			state.rowEditorTableData = action.payload;
 		},
+		setCategoriesOptions(state, action) {
+			state.categoriesOptions = action.payload;
+		},
 	},
 });
 
@@ -69,6 +74,20 @@ export function refreshAllCategories() {
 			dispatch(setLoading(true));
 			const response = await getCategories();
 			dispatch(setCategories(response));
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch(setLoading(false));
+		}
+	};
+}
+
+export function refreshCategoriesOptions() {
+	return async (dispatch) => {
+		try {
+			dispatch(setLoading(true));
+			const response = await getCategory();
+			dispatch(setCategoriesOptions(response));
 		} catch (error) {
 			console.log(error);
 		} finally {
@@ -112,5 +131,6 @@ export const {
 	setLookupTablesData,
 	setRowEditorTableData,
 	setLookupTableDataRow,
+	setCategoriesOptions,
 } = categorySlice.actions;
 export default categorySlice.reducer;

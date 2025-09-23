@@ -23,6 +23,7 @@ const {
 	DELETE_CATEGORY_MAPS,
 	GET_SUPPLIER_COLUMNS,
 	GET_CATEGORIES_BY_PARENT_ID,
+	GET_CATEGORY,
 } = categoriesEndpoint;
 
 export async function createCategory(data) {
@@ -35,6 +36,12 @@ export async function createCategory(data) {
 export async function getCategories() {
 	const response = await handleGetReq(GET_CATEGORIES);
 	console.log('Get List Categories API RESPONSE.........', response);
+	return response.data;
+}
+
+export async function getCategory() {
+	const response = await handleGetReq(GET_CATEGORY);
+	console.log('Get List Category API RESPONSE.........', response);
 	return response.data;
 }
 

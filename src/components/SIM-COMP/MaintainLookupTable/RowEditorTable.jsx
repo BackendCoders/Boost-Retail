@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
@@ -11,6 +11,7 @@ import Table from './Table';
 import TablePaginationBar from '../../Ui/Table/TablePaginationBar';
 import {
 	refreshAllRowEditorTableData,
+	refreshCategoriesOptions,
 	setRowEditorTableData,
 } from '../../../slice/categorySlice';
 import {
@@ -18,7 +19,7 @@ import {
 	saveCategoryMaps,
 } from '../../../services/operations/categoryApi';
 import SelectInput from '../../Ui/Input/SelectInput';
-import { useCategoryOptions } from './useCategoryOptions';
+import CategoryCell from './CategoryCell';
 
 const filterOptions = [
 	{ label: 'Contains', value: 'contains' },
@@ -38,9 +39,6 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 	);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [perPage, setPerPage] = useState(10);
-
-	const { categoryOptions, setSelectedCategories, selectedCategories } =
-		useCategoryOptions();
 
 	const selectedTableColumnsForFilter = lookupTablesData
 		.find((t) => t.id === selectedTableId)
@@ -114,14 +112,13 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 		dispatch(setRowEditorTableData([newRow, ...rowEditorTableData]));
 	};
 
-	console.log('Row Editor Table Data:', rowEditorTableData);
-
 	const dynamicCols =
 		Array.isArray(rowEditorTableData) && rowEditorTableData.length > 0
 			? rowEditorTableData[0]?.dynamicProperties?.map((prop, idx, arr) => {
 					const rawKey = prop.columnName.trim();
 					const formattedKey = rawKey.charAt(0).toUpperCase() + rawKey.slice(1);
 					const normalizedKey = rawKey.toLowerCase().replace(/\s+/g, '');
+
 					return {
 						label: formattedKey,
 						rawKey,
@@ -129,7 +126,6 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 							const prop = row.dynamicProperties.find(
 								(p) => p.columnName.trim() === rawKey
 							);
-
 							// Value for text, category, or filter
 							const currentValue = prop?.value ?? '';
 							const currentFilter = prop?.filter ?? '';
@@ -137,6 +133,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 							const isSelectColumn =
 								selectedTableColumnsForFilter?.includes(rawKey);
 							const isSelect = selectDropdownInput?.includes(normalizedKey);
+
 							return (
 								<div className='flex justify-center w-full gap-2'>
 									{isSelectColumn && (
@@ -163,31 +160,13 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 										</>
 									)}
 									{isSelect ? (
-										<div className='min-w-[10rem] max-w-[12rem]'>
-											<SelectInput
-												options={categoryOptions[normalizedKey] || []}
-												value={
-													categoryOptions[normalizedKey]?.find(
-														(opt) =>
-															opt.value ===
-															(selectedCategories[normalizedKey] ??
-																currentValue)
-													) || null
-												}
-												onChange={(selected) => {
-													onChange(row.id ?? row?.localId, rawKey, {
-														...prop,
-														value: selected ? selected.value : null,
-													});
-													setSelectedCategories((prev) => ({
-														...prev,
-														[normalizedKey]: selected?.value ?? null,
-													}));
-												}}
-												placeholder='Choose'
-												inTable={true}
-											/>
-										</div>
+										<CategoryCell
+											row={row}
+											rawKey={rawKey}
+											normalizedKey={normalizedKey}
+											prop={prop}
+											onChange={onChange}
+										/>
 									) : currentColumnType === 2 ? (
 										<input
 											type='checkbox'
@@ -282,6 +261,10 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 			),
 		},
 	];
+
+	useEffect(() => {
+		dispatch(refreshCategoriesOptions());
+	}, [dispatch]);
 
 	return (
 		<div>

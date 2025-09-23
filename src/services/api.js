@@ -28,6 +28,7 @@ export const categoriesEndpoint = {
 		`${BASE}/api/Category/GetCategoryByParentId${id ? `?parentId=${id}` : ''}`,
 	SAVE_CATEGORY_MAPS: (tableId) =>
 		`${BASE}/api/Category/SaveCategoryMapAsync?Tableid=${tableId}`,
+	GET_CATEGORY: `${BASE}/api/Category/GetCategory`,
 };
 
 export const supplierFeedEndpoints = {
