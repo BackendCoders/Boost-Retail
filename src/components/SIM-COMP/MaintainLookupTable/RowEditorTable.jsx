@@ -66,7 +66,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 			return;
 		}
 		if (rowEditorTableData.length === 1) {
-			toast.error('Atleast one row must be present');
+			toast.error('At least one row must be present');
 			return;
 		}
 		try {
@@ -115,7 +115,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 
 	const dynamicCols =
 		Array.isArray(rowEditorTableData) && rowEditorTableData.length > 0
-			? rowEditorTableData[0]?.dynamicProperties?.map((prop, idx, arr) => {
+			? rowEditorTableData[0]?.dynamicProperties?.map((prop) => {
 					const rawKey = prop.columnName.trim();
 					const formattedKey = rawKey.charAt(0).toUpperCase() + rawKey.slice(1);
 					const normalizedKey = rawKey.toLowerCase().replace(/\s+/g, '');
@@ -196,7 +196,6 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 											}
 											onBlur={() => {
 												handleCreateRow(row);
-												
 											}}
 										/>
 									)}

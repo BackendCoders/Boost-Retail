@@ -37,7 +37,7 @@ export default function CategoryCell({
 	useEffect(() => {
 		const cat1Val = getValueFromRow('Category 1');
 		const cat2Val = getValueFromRow('Category 2');
-		// const cat3Val = getValueFromRow('Category 3');
+		const cat3Val = getValueFromRow('Category 3');
 
 		const newOptions = {
 			category1: buildOptions(null),
