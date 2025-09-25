@@ -26,14 +26,15 @@ const MaintainLookupTables = () => {
 					if (identifier !== rowKey) return row;
 
 					// Update the correct property inside dynamicProperties
-					const updatedProps = row.dynamicProperties.map((prop) =>
-						prop.columnName.trim() === key
-							? {
-									...prop,
-									value: newValue.value ?? newValue,
-									filter: newValue.filter ?? prop.filter,
-							  }
-							: prop
+					const updatedProps = row.dynamicProperties.map(
+						(prop) =>
+							prop.columnName.trim().toLowerCase() === key.trim().toLowerCase()
+								? {
+										...prop,
+										value: newValue.value ?? newValue,
+										filter: newValue.filter ?? prop.filter,
+								  }
+								: { ...prop } // Spread to ensure new reference
 					);
 
 					return { ...row, dynamicProperties: updatedProps };

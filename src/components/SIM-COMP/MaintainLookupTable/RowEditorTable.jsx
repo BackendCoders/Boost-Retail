@@ -99,6 +99,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 		// Build new dynamicProperties with empty/default values
 		const newDynamicProperties = templateProps?.map((prop) => ({
 			...prop,
+			columnName: prop.columnName.trim(),
 			value: prop.columnType === 2 ? false : '', // default boolean -> false, else empty string
 			filter: '',
 		}));
@@ -149,7 +150,6 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 														) || null
 													}
 													onChange={(selected) => {
-														// update filter value in that property
 														onChange(row.id ?? row?.localId, rawKey, {
 															...prop,
 															filter: selected ? selected.value : null,
@@ -166,6 +166,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 											normalizedKey={normalizedKey}
 											prop={prop}
 											onChange={onChange}
+											onBlur={() => handleCreateRow(row)}
 										/>
 									) : currentColumnType === 2 ? (
 										<input
@@ -179,9 +180,7 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 												})
 											}
 											onBlur={() => {
-												if (idx === arr.length - 1) {
-													handleCreateRow(row);
-												}
+												handleCreateRow(row);
 											}}
 										/>
 									) : (
@@ -196,9 +195,8 @@ export default function RowEditorTable({ title, onChange, selectedTableId }) {
 												})
 											}
 											onBlur={() => {
-												if (idx === arr.length - 1) {
-													handleCreateRow(row);
-												}
+												handleCreateRow(row);
+												
 											}}
 										/>
 									)}

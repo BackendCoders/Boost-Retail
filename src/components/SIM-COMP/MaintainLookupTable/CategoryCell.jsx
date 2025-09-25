@@ -1,127 +1,98 @@
 /** @format */
-
 import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import SelectInput from '../../Ui/Input/SelectInput';
-import { useEffect, useMemo, useState } from 'react';
 
 export default function CategoryCell({
 	row,
-	rawKey,
 	normalizedKey,
 	prop,
 	onChange,
+	onBlur,
 }) {
 	const { categoriesOptions } = useSelector((state) => state.category);
-	const [localValue, setLocalValue] = useState(prop?.value ?? null);
 
-	// 🔹 SYNC local value when prop changes
+	const [categoryOptions, setCategoryOptions] = useState({
+		category1: [],
+		category2: [],
+		category3: [],
+	});
+
+	const [selectedOption, setSelectedOption] = useState(null);
+
+	const getValueFromRow = (columnName) =>
+		row.dynamicProperties?.find(
+			(d) => d.columnName.toLowerCase() === columnName.toLowerCase()
+		)?.value ?? null;
+
+	const mapValueToOption = (val, opts) =>
+		val ? opts.find((o) => o.value === val) || null : null;
+
+	const buildOptions = (parentId) =>
+		categoriesOptions
+			.filter((opt) => opt.parentId === parentId)
+			.map((opt) => ({ value: opt.id, label: opt.name }));
+
+	// --- INITIAL LOAD ---
 	useEffect(() => {
-		setLocalValue(prop?.value ?? null);
-	}, [prop?.value]);
+		const cat1Val = getValueFromRow('Category 1');
+		const cat2Val = getValueFromRow('Category 2');
+		// const cat3Val = getValueFromRow('Category 3');
 
-	console.log('----', localValue);
-
-	// 🔹 Get CURRENT values from row (not stale values) - USE useMemo
-	const categoryValues = useMemo(() => {
-		return {
-			category1: row.dynamicProperties.find(
-				(p) => p.columnName === 'Category 1'
-			)?.value,
-			category2: row.dynamicProperties.find(
-				(p) => p.columnName === 'Category 2'
-			)?.value,
-			category3: row.dynamicProperties.find(
-				(p) => p.columnName === 'Category 3'
-			)?.value,
+		const newOptions = {
+			category1: buildOptions(null),
+			category2: cat1Val ? buildOptions(cat1Val) : [],
+			category3: cat2Val ? buildOptions(cat2Val) : [],
 		};
-	}, [row.dynamicProperties]); // 🔹 Re-calculate when dynamicProperties change
 
-	console.log('categoryValue', categoryValues);
+		setCategoryOptions(newOptions);
 
-	// 🔹 Dynamically calculate options based on the parent selection - USE useMemo
-	const options = useMemo(() => {
+		// Set selected option based on current prop value
+		const initialOption = mapValueToOption(
+			prop?.value,
+			newOptions[normalizedKey]
+		);
+		setSelectedOption(initialOption);
+	}, [categoriesOptions, row, prop?.value, normalizedKey]);
+
+	const handleSelection = (option) => {
+		setSelectedOption(option);
+
 		if (normalizedKey === 'category1') {
-			return categoriesOptions
-				.filter((c) => c.parentId === null)
-				.map((c) => ({ value: c.id, label: c.name }));
+			const children2 = buildOptions(option.value);
+			setCategoryOptions((prev) => ({
+				...prev,
+				category2: children2,
+				category3: [],
+			}));
+
+			onChange?.(row.id ?? row.localId, 'Category 1', option);
+			onChange?.(row.id ?? row.localId, 'Category 2', null);
+			onChange?.(row.id ?? row.localId, 'Category 3', null);
 		} else if (normalizedKey === 'category2') {
-			if (!categoryValues.category1) return []; // No options if parent not selected
-			return categoriesOptions
-				.filter((c) => c.parentId === categoryValues.category1)
-				.map((c) => ({ value: c.id, label: c.name }));
+			const children3 = buildOptions(option.value);
+			setCategoryOptions((prev) => ({
+				...prev,
+				category3: children3,
+			}));
+
+			onChange?.(row.id ?? row.localId, 'Category 2', option);
+			onChange?.(row.id ?? row.localId, 'Category 3', null);
 		} else if (normalizedKey === 'category3') {
-			if (!categoryValues.category2) return []; // No options if parent not selected
-			return categoriesOptions
-				.filter((c) => c.parentId === categoryValues.category2)
-				.map((c) => ({ value: c.id, label: c.name }));
+			onChange?.(row.id ?? row.localId, 'Category 3', option);
 		}
-		return [];
-	}, [
-		normalizedKey,
-		categoryValues.category1,
-		categoryValues.category2,
-		categoriesOptions,
-	]); // 🔹 ADD DEPENDENCIES
-
-	const handleChange = (selected) => {
-		console.log('selected----', selected);
-		const newValue = selected ? selected.value : null;
-
-		// 🔹 Update local state immediately
-		setLocalValue(newValue);
-
-		console.log('handleChange new Value', newValue);
-
-		// 🔹 Update this column's value
-		onChange(row.id ?? row.localId, rawKey, {
-			...prop,
-			value: newValue,
-		});
-
-		// 🔹 Reset child categories if parent changes
-		const resetCategory = (categoryName) => {
-			// 🔹 Find the prop with exact match (case insensitive, trimmed)
-			const categoryProp = row.dynamicProperties.find(
-				(p) => p.columnName.trim().toLowerCase() === categoryName.toLowerCase()
-			);
-
-			console.log('categoryProp', { categoryProp, categoryName });
-
-			if (categoryProp) {
-				onChange(row.id ?? row.localId, categoryName, {
-					...categoryProp,
-					value: null,
-				});
-				console.log(`✅ onChange called for ${categoryName}`);
-			} else {
-				// 🔹 Create new prop if not found
-				onChange(row.id ?? row.localId, categoryName, {
-					columnName: categoryName,
-					value: null,
-					columnType: 0, // Adjust as per your needs
-				});
-			}
-		};
-
-		if (normalizedKey === 'category1') {
-			console.log('Resetting Category 2 and Category 3');
-			resetCategory('Category 2');
-			resetCategory('Category 3');
-		} else if (normalizedKey === 'category2') {
-			console.log('Resetting Category 3');
-			resetCategory('Category 3');
-		}
+		onBlur?.();
 	};
 
 	return (
 		<div className='min-w-[10rem] max-w-[12rem]'>
 			<SelectInput
-				options={options}
-				value={options.find((o) => o.value === localValue) || null}
+				options={categoryOptions[normalizedKey] ?? []}
+				value={selectedOption}
 				placeholder='Select'
 				inTable
-				onChange={handleChange}
-				key={localValue}
+				onChange={handleSelection}
+				key={`${normalizedKey}-${row.id ?? row.localId}`}
 			/>
 		</div>
 	);
